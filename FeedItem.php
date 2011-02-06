@@ -1,10 +1,10 @@
 <?php
  /**
- * Univarsel Feed Writer
+ * Universal Feed Writer
  * 
  * FeedItem class - Used as feed element in FeedWriter class
  *
- * @package         UnivarselFeedWriter
+ * @package         UniversalFeedWriter
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
  * @link            http://www.ajaxray.com/projects/rss
  */
@@ -45,7 +45,7 @@
 	}
 	
 	/**
-	* Set multiple feed elements from an array. 
+	* Set multiple feed elements from an array.
 	* Elements which have attributes cannot be added by this method
 	* 
 	* @access   public
@@ -78,10 +78,10 @@
 	* Set the 'dscription' element of feed item
 	* 
 	* @access   public
-	* @param    string  The content of 'description' element
+	* @param    string  The content of 'description' or 'summary' element
 	* @return   void
 	*/
-	public function setDescription($description) 
+	public function setDescription($description)
 	{
 		$tag = ($this->version == ATOM) ? 'summary' : 'description'; 
 		$this->addElement($tag, $description);
@@ -93,7 +93,7 @@
 	* @param    string  The content of 'title' element
 	* @return   void
 	*/
-	public function setTitle($title) 
+	public function setTitle($title)
 	{
 		$this->addElement('title', $title);
 	}
@@ -105,7 +105,7 @@
 	* @param    string  The content of 'date' element
 	* @return   void
 	*/
-	public function setDate($date) 
+	public function setDate($date)
 	{
 		if(!is_numeric($date))
 		{
@@ -136,7 +136,7 @@
 			$value  = date("Y-m-d", $date);
 		}
 		
-		$this->addElement($tag, $value);    
+		$this->addElement($tag, $value);
 	}
 	
 	/**
@@ -146,7 +146,7 @@
 	* @param    string  The content of 'link' element
 	* @return   void
 	*/
-	public function setLink($link) 
+	public function setLink($link)
 	{
 		if($this->version == RSS2 || $this->version == RSS1)
 		{
@@ -156,8 +156,7 @@
 		{
 			$this->addElement('link','',array('href'=>$link));
 			$this->addElement('id', FeedWriter::uuid($link,'urn:uuid:'));
-		} 
-		
+		}
 	}
 	
 	/**

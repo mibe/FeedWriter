@@ -8,11 +8,11 @@
 	define('ATOM', 'ATOM', true);
 
  /**
- * Univarsel Feed Writer class
+ * Universal Feed Writer class
  *
- * Genarate RSS 1.0, RSS2.0 and ATOM Feed
- *                             
- * @package     UnivarselFeedWriter
+ * Generate RSS 1.0, RSS2.0 and ATOM Feeds
+ *
+ * @package     UniversalFeedWriter
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
  */
@@ -34,7 +34,7 @@
 	{	
 		$this->version = $version;
 			
-		// Setting default value for assential channel elements
+		// Setting default value for essential channel elements
 		$this->channels['title']        = $version . ' Feed';
 		$this->channels['link']         = 'http://www.ajaxray.com/blog';
 				
@@ -53,11 +53,11 @@
 	*/
 	public function setChannelElement($elementName, $content)
 	{
-		$this->channels[$elementName] = $content ;
+		$this->channels[$elementName] = $content;
 	}
 	
 	/**
-	* Set multiple channel elements from an array. Array elements 
+	* Set multiple channel elements from an array. Array elements
 	* should be 'channelName' => 'channelContent' format.
 	* 
 	* @access   public
@@ -77,8 +77,9 @@
 	* Genarate the actual RSS/ATOM file
 	* 
 	* @access   public
+	* @param    bool  FALSE if the specific feed media type should be send.
 	* @return   void
-	*/ 
+	*/
 	public function generateFeed($useGenericContentType = FALSE)
 	{
 		$contentType = "text/xml";
@@ -162,7 +163,7 @@
 		else
 			$date = date(DATE_ATOM, strtotime($date));
 
-		$this->setChannelelement('updated', $date);
+		$this->setChannelElement('updated', $date);
 	}
 	
 	/**
@@ -195,7 +196,7 @@
 	* 
 	* @access   public
 	* @param    string  title of image
-	* @param    string  link url of the imahe
+	* @param    string  link url of the image
 	* @param    string  path url of the image
 	* @return   void
 	*/
@@ -424,7 +425,7 @@
 		{
 			echo '<item>' . PHP_EOL; 
 		}
-		elseif($this->version == RSS1)
+		else if($this->version == RSS1)
 		{
 			if($about)
 			{
