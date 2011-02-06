@@ -14,7 +14,7 @@
   //Image title and link must match with the 'title' and 'link' channel elements for valid RSS 2.0
   $TestFeed->setImage('Testing the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/images/logo.gif');
   
-	//Detriving informations from database addin feeds
+	//Retriving informations from database addin feeds
 	$db->query($query);
 	$result = $db->result;
 
