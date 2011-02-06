@@ -102,16 +102,17 @@
 	*/
 	public function setDate($date) 
 	{
-		if(! is_numeric($date))
+		if(!is_numeric($date))
 		{
-			$date = strtotime($date);
-		}
-		else if ($date instanceof DateTime)
-		{
-			if (version_compare(PHP_VERSION, '5.3.0', '>='))
-				$date = $date->getTimestamp();
+			if ($date instanceof DateTime)
+			{
+				if (version_compare(PHP_VERSION, '5.3.0', '>='))
+					$date = $date->getTimestamp();
+				else
+					$date = strtotime($date->format('r'));
+			}
 			else
-				$date = strtotime($date->format('r'));
+				$date = strtotime($date);
 		}
 		
 		if($this->version == ATOM)

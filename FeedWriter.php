@@ -79,9 +79,24 @@
 	* @access   public
 	* @return   void
 	*/ 
-	public function genarateFeed()
+	public function generateFeed($useGenericContentType = FALSE)
 	{
-		header("Content-type: text/xml");
+		$contentType = "text/xml";
+
+		if (!$useGenericContentType)
+		{
+			switch($this->version)
+			{
+				case RSS2 : $contentType = "application/rss+xml";
+					break;
+				case RSS1 : $contentType = "application/rdf+xml";
+					break;
+				case ATOM : $contentType = "application/atom+xml";
+					break;
+			}
+		}
+
+		header("Content-type: " . $contentType);
 		
 		$this->printHead();
 		$this->printChannels();
@@ -178,24 +193,24 @@
 		$this->data['ChannelAbout'] = $url;    
 	}
 	
-  /**
-  * Genarates an UUID
-  * @author     Anis uddin Ahmad <admin@ajaxray.com>
-  * @param      string  an optional prefix
-  * @return     string  the formated uuid
-  */
-  public function uuid($key = null, $prefix = '') 
-  {
-	$key = ($key == null)? uniqid(rand()) : $key;
-	$chars = md5($key);
-	$uuid  = substr($chars,0,8) . '-';
-	$uuid .= substr($chars,8,4) . '-';
-	$uuid .= substr($chars,12,4) . '-';
-	$uuid .= substr($chars,16,4) . '-';
-	$uuid .= substr($chars,20,12);
+	/**
+	* Genarates an UUID
+	* @author     Anis uddin Ahmad <admin@ajaxray.com>
+	* @param      string  an optional prefix
+	* @return     string  the formated uuid
+	*/
+	public function uuid($key = null, $prefix = '') 
+	{
+		$key = ($key == null)? uniqid(rand()) : $key;
+		$chars = md5($key);
+		$uuid  = substr($chars,0,8) . '-';
+		$uuid .= substr($chars,8,4) . '-';
+		$uuid .= substr($chars,12,4) . '-';
+		$uuid .= substr($chars,16,4) . '-';
+		$uuid .= substr($chars,20,12);
 
-	return $prefix . $uuid;
-  }
+		return $prefix . $uuid;
+	}
 	// End # public functions ----------------------------------------------
 	
 	// Start # private functions ----------------------------------------------
@@ -212,23 +227,19 @@
 		
 		if($this->version == RSS2)
 		{
-			$out .= '<rss version="2.0"
-					xmlns:content="http://purl.org/rss/1.0/modules/content/"
-					xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-				  >' . PHP_EOL;
-		}    
+			$out .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/">';
+		}
 		elseif($this->version == RSS1)
 		{
-			$out .= '<rdf:RDF 
-					 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-					 xmlns="http://purl.org/rss/1.0/"
-					 xmlns:dc="http://purl.org/dc/elements/1.1/"
-					>' . PHP_EOL;;
+			$out .= '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/">';
 		}
 		else if($this->version == ATOM)
 		{
-			$out .= '<feed xmlns="http://www.w3.org/2005/Atom">' . PHP_EOL;;
+			$out .= '<feed xmlns="http://www.w3.org/2005/Atom">';
 		}
+
+		$out .= "\n";
+
 		echo $out;
 	}
 	
@@ -265,16 +276,19 @@
 	* @return   string  formatted xml tag
 	*/
 	private function makeNode($tagName, $tagContent, $attributes = null)
-	{        
+	{
 		$nodeText = '';
 		$attrText = '';
 
-		if(is_array($attributes))
+		if(is_array($attributes) && count($attributes) > 0)
 		{
 			foreach ($attributes as $key => $value) 
 			{
 				$attrText .= " $key=\"$value\" ";
 			}
+
+			// Get rid of the last whitespace
+			$attrText = substr($attrText, 0, strlen($attrText) - 1);
 		}
 		
 		if(is_array($tagContent) && $this->version == RSS1)
@@ -285,9 +299,9 @@
 		
 		$attrText .= (in_array($tagName, $this->CDATAEncoding) && $this->version == ATOM)? ' type="html" ' : '';
 		$nodeText .= (in_array($tagName, $this->CDATAEncoding))? "<{$tagName}{$attrText}><![CDATA[" : "<{$tagName}{$attrText}>";
-		 
+		
 		if(is_array($tagContent))
-		{ 
+		{
 			foreach ($tagContent as $key => $value) 
 			{
 				$nodeText .= $this->makeNode($key, $value);
@@ -295,8 +309,9 @@
 		}
 		else
 		{
-			$nodeText .= (in_array($tagName, $this->CDATAEncoding))? $tagContent : htmlentities($tagContent);
-		}           
+			#$nodeText .= (in_array($tagName, $this->CDATAEncoding))? $tagContent : htmlentities($tagContent);
+			$nodeText .= $tagContent;
+		}
 			
 		$nodeText .= (in_array($tagName, $this->CDATAEncoding))? "]]></$tagName>" : "</$tagName>";
 
@@ -313,10 +328,10 @@
 		//Start channel tag
 		switch ($this->version) 
 		{
-		   case RSS2: 
-				echo '<channel>' . PHP_EOL;        
+			case RSS2: 
+				echo '<channel>' . PHP_EOL;
 				break;
-		   case RSS1: 
+			case RSS1: 
 				echo (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">";
 				break;
 		}
@@ -334,7 +349,7 @@
 			else
 			{
 				echo $this->makeNode($key, $value);
-			}    
+			}
 			
 		}
 		
