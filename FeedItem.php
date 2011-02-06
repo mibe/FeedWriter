@@ -27,13 +27,18 @@
 	* Add an element to elements array
 	* 
 	* @access   public
-	* @param    srting  The tag name of an element
-	* @param    srting  The content of tag
+	* @param    string  The tag name of an element
+	* @param    string  The content of tag
 	* @param    array   Attributes(if any) in 'attrName' => 'attrValue' format
+	* @param    boolean Specifies, if an already existing element is overwritten.
 	* @return   void
 	*/
-	public function addElement($elementName, $content, $attributes = null)
+	public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE)
 	{
+		// return if element already exists & if overwriting is disabled.
+		if (isset($this->elements[$elementName]) && !$overwrite)
+			return;
+
 		$this->elements[$elementName]['name']       = $elementName;
 		$this->elements[$elementName]['content']    = $content;
 		$this->elements[$elementName]['attributes'] = $attributes;
@@ -78,7 +83,7 @@
 	*/
 	public function setDescription($description) 
 	{
-		$tag = ($this->version == ATOM)? 'summary' : 'description'; 
+		$tag = ($this->version == ATOM) ? 'summary' : 'description'; 
 		$this->addElement($tag, $description);
 	}
 	
@@ -90,7 +95,7 @@
 	*/
 	public function setTitle($title) 
 	{
-		$this->addElement('title', $title);  	
+		$this->addElement('title', $title);
 	}
 	
 	/**
@@ -167,8 +172,46 @@
 	*/
 	public function setEncloser($url, $length, $type)
 	{
+		if ($this->version != RSS2)
+			return;
+
 		$attributes = array('url'=>$url, 'length'=>$length, 'type'=>$type);
 		$this->addElement('enclosure','',$attributes);
+	}
+
+	/**
+	* Set the 'author' element of feed item
+	* For ATOM only
+	* 
+	* @access   public
+	* @param    string  The author of this item
+	* @return   void
+	*/
+	public function setAuthor($author)
+	{
+		if ($this->version != ATOM)
+			return;
+
+		$this->addElement('author', '<name>' . $author . '</name>');
+	}
+
+	/**
+	* Set the unique identifier of the feed item
+	* 
+	* @access   public
+	* @param    string  The unique identifier of this item
+	* @return   void
+	*/
+	public function setId($id)
+	{
+		if ($this->version == RSS2)
+		{
+			$this->addElement('guid', $id, array('isPermaLink' => 'false'));
+		}
+		else if ($this->version == ATOM)
+		{
+			$this->addElement('id', FeedWriter::uuid($id,'urn:uuid:'), NULL, TRUE);
+		}
 	}
 	
  } // end of class FeedItem

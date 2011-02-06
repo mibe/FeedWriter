@@ -152,7 +152,8 @@
 	*/
 	public function setDescription($desciption)
 	{
-		$this->setChannelElement('description', $desciption);
+		if ($this->version != ATOM)
+			$this->setChannelElement('description', $desciption);
 	}
 	
 	/**
@@ -254,7 +255,7 @@
 		if($this->version == RSS2)
 		{
 			echo '</channel>' . PHP_EOL . '</rss>'; 
-		}    
+		}
 		elseif($this->version == RSS1)
 		{
 			echo '</rdf:RDF>';
@@ -263,7 +264,6 @@
 		{
 			echo '</feed>';
 		}
-	  
 	}
 
 	/**
