@@ -97,7 +97,7 @@
 			}
 		}
 
-		header("Content-type: " . $contentType);
+		header("Content-Type: " . $contentType);
 		
 		$this->printHead();
 		$this->printChannels();
