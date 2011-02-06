@@ -19,7 +19,7 @@
 	* @param    contant     (RSS1/RSS2/ATOM) RSS2 is default. 
 	*/ 
 	function __construct($version = RSS2)
-	{    
+	{
 		$this->version = $version;
 	}
 	
@@ -106,18 +106,25 @@
 		{
 			$date = strtotime($date);
 		}
+		else if ($date instanceof DateTime)
+		{
+			if (version_compare(PHP_VERSION, '5.3.0', '>='))
+				$date = $date->getTimestamp();
+			else
+				$date = strtotime($date->format('r'));
+		}
 		
 		if($this->version == ATOM)
 		{
 			$tag    = 'updated';
 			$value  = date(DATE_ATOM, $date);
-		}        
+		}
 		elseif($this->version == RSS2) 
 		{
 			$tag    = 'pubDate';
 			$value  = date(DATE_RSS, $date);
 		}
-		else                                
+		else
 		{
 			$tag    = 'dc:date';
 			$value  = date("Y-m-d", $date);
