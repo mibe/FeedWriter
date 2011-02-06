@@ -47,7 +47,7 @@
 	/**
 	* Set a channel element
 	* @access   public
-	* @param    srting  name of the channel tag
+	* @param    string  name of the channel tag
 	* @param    string  content of the channel tag
 	* @return   void
 	*/
@@ -135,19 +135,41 @@
 	* Set the 'title' channel element
 	* 
 	* @access   public
-	* @param    srting  value of 'title' channel tag
+	* @param    string  value of 'title' channel tag
 	* @return   void
 	*/
 	public function setTitle($title)
 	{
 		$this->setChannelElement('title', $title);
 	}
+
+	/**
+	* Set the 'updated' channel element of an ATOM feed
+	* 
+	* @access   public
+	* @param    string  value of 'updated' channel tag
+	* @return   void
+	*/
+	public function setDate($date)
+	{
+		if ($this->version != ATOM)
+			return;
+
+		if ($date instanceof DateTime)
+			$date = $date->format(DateTime::ATOM);
+		else if(is_numeric($date))
+			$date = date(DATE_ATOM, $date);
+		else
+			$date = date(DATE_ATOM, strtotime($date));
+
+		$this->setChannelelement('updated', $date);
+	}
 	
 	/**
 	* Set the 'description' channel element
 	* 
 	* @access   public
-	* @param    srting  value of 'description' channel tag
+	* @param    string  value of 'description' channel tag
 	* @return   void
 	*/
 	public function setDescription($desciption)
@@ -160,7 +182,7 @@
 	* Set the 'link' channel element
 	* 
 	* @access   public
-	* @param    srting  value of 'link' channel tag
+	* @param    string  value of 'link' channel tag
 	* @return   void
 	*/
 	public function setLink($link)
@@ -172,9 +194,9 @@
 	* Set the 'image' channel element
 	* 
 	* @access   public
-	* @param    srting  title of image
-	* @param    srting  link url of the imahe
-	* @param    srting  path url of the image
+	* @param    string  title of image
+	* @param    string  link url of the imahe
+	* @param    string  path url of the image
 	* @return   void
 	*/
 	public function setImage($title, $link, $url)
@@ -186,7 +208,7 @@
 	* Set the 'about' channel element. Only for RSS 1.0
 	* 
 	* @access   public
-	* @param    srting  value of 'about' channel tag
+	* @param    string  value of 'about' channel tag
 	* @return   void
 	*/
 	public function setChannelAbout($url)
@@ -270,7 +292,7 @@
 	* Creates a single node as xml format
 	* 
 	* @access   private
-	* @param    srting  name of the tag
+	* @param    string  name of the tag
 	* @param    mixed   tag value as string or array of nested tags in 'tagName' => 'tagValue' format
 	* @param    array   Attributes(if any) in 'attrName' => 'attrValue' format
 	* @return   string  formatted xml tag
@@ -393,7 +415,7 @@
 	* Make the starting tag of channels
 	* 
 	* @access   private
-	* @param    srting  The vale of about tag which is used for only RSS 1.0
+	* @param    string  The vale of about tag which is used for only RSS 1.0
 	* @return   void
 	*/
 	private function startItem($about = false)
