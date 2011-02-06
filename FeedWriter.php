@@ -199,7 +199,7 @@
 	* @param      string  an optional prefix
 	* @return     string  the formated uuid
 	*/
-	public function uuid($key = null, $prefix = '') 
+	public static function uuid($key = null, $prefix = '') 
 	{
 		$key = ($key == null)? uniqid(rand()) : $key;
 		$chars = md5($key);
@@ -342,9 +342,9 @@
 			if($this->version == ATOM && $key == 'link') 
 			{
 				// ATOM prints link element as href attribute
-				echo $this->makeNode($key,'',array('href'=>$value));
+				echo $this->makeNode($key,'', array('href' => $value));
 				//Add the id for ATOM
-				echo $this->makeNode('id',$this->uuid($value,'urn:uuid:'));
+				echo $this->makeNode('id', FeedWriter::uuid($value, 'urn:uuid:'));
 			}
 			else
 			{
@@ -373,7 +373,7 @@
 	* @return   void
 	*/
 	private function printItems()
-	{    
+	{
 		foreach ($this->items as $item) 
 		{
 			$thisItems = $item->getElements();
@@ -401,7 +401,7 @@
 		if($this->version == RSS2)
 		{
 			echo '<item>' . PHP_EOL; 
-		}    
+		}
 		elseif($this->version == RSS1)
 		{
 			if($about)
@@ -430,7 +430,7 @@
 		if($this->version == RSS2 || $this->version == RSS1)
 		{
 			echo '</item>' . PHP_EOL; 
-		}    
+		}
 		else if($this->version == ATOM)
 		{
 			echo "</entry>" . PHP_EOL;
