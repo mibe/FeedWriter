@@ -20,7 +20,7 @@
  */
 
   
-  include("FeedWriter.php");
+  include("../FeedWriter.php");
   
   //Creating an instance of FeedWriter class. 
   //The constant RSS1 is passed to mention the version

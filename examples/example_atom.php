@@ -19,8 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-	 
-	include("FeedWriter.php");
+
+	include("../FeedWriter.php");
 	
 	// IMPORTANT : No need to add id for feed or channel. It will be automatically created from link.
 

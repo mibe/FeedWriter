@@ -20,7 +20,7 @@
  */
 
   // This is a minimum example of using the class
-  include("FeedWriter.php");
+  include("../FeedWriter.php");
   
   //Creating an instance of FeedWriter class. 
   $TestFeed = new FeedWriter(RSS2);
