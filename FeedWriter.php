@@ -24,9 +24,11 @@
 // RSS 0.91, 0.92, 0.93 and 0.94  Officially obsoleted by 2.0
 // So, define constants for RSS 1.0, RSS 2.0 and ATOM 	
 
-	define('RSS1', 'RSS 1.0', true);
-	define('RSS2', 'RSS 2.0', true);
-	define('ATOM', 'ATOM', true);
+define('RSS1', 'RSS 1.0', true);
+define('RSS2', 'RSS 2.0', true);
+define('ATOM', 'ATOM', true);
+
+require_once("FeedItem.php");
 
  /**
  * Universal Feed Writer class
