@@ -46,7 +46,7 @@ require_once("FeedItem.php");
 	 private $data          = array();  // Store some other version wise data
 	 private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
 	 
-	 private $version   = null; 
+	 private $version   = null;
 	
 	/**
 	* Constructor
@@ -149,7 +149,7 @@ require_once("FeedItem.php");
 	*/
 	public function addItem($feedItem)
 	{
-		$this->items[] = $feedItem;    
+		$this->items[] = $feedItem;
 	}
 	
 	
@@ -237,7 +237,7 @@ require_once("FeedItem.php");
 	*/
 	public function setChannelAbout($url)
 	{
-		$this->data['ChannelAbout'] = $url;    
+		$this->data['ChannelAbout'] = $url;
 	}
 	
 	/**
@@ -300,7 +300,7 @@ require_once("FeedItem.php");
 	{
 		if($this->version == RSS2)
 		{
-			echo '</channel>' . PHP_EOL . '</rss>'; 
+			echo '</channel>' . PHP_EOL . '</rss>';
 		}
 		elseif($this->version == RSS1)
 		{
@@ -418,7 +418,7 @@ require_once("FeedItem.php");
 	*/
 	private function printItems()
 	{
-		foreach ($this->items as $item) 
+		foreach ($this->items as $item)
 		{
 			$thisItems = $item->getElements();
 			
@@ -427,7 +427,7 @@ require_once("FeedItem.php");
 			
 			foreach ($thisItems as $feedItem ) 
 			{
-				echo $this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']); 
+				echo $this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']);
 			}
 			echo $this->endItem();
 		}
@@ -444,7 +444,7 @@ require_once("FeedItem.php");
 	{
 		if($this->version == RSS2)
 		{
-			echo '<item>' . PHP_EOL; 
+			echo '<item>' . PHP_EOL;
 		}
 		else if($this->version == RSS1)
 		{
@@ -473,7 +473,7 @@ require_once("FeedItem.php");
 	{
 		if($this->version == RSS2 || $this->version == RSS1)
 		{
-			echo '</item>' . PHP_EOL; 
+			echo '</item>' . PHP_EOL;
 		}
 		else if($this->version == ATOM)
 		{

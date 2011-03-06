@@ -104,7 +104,7 @@
 	*/
 	public function setDescription($description)
 	{
-		$tag = ($this->version == ATOM) ? 'summary' : 'description'; 
+		$tag = ($this->version == ATOM) ? 'summary' : 'description';
 		$this->addElement($tag, $description);
 	}
 	
