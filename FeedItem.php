@@ -29,8 +29,8 @@
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
  * @link            http://www.ajaxray.com/projects/rss
  */
- class FeedItem
- {
+class FeedItem
+{
 	private $elements = array();    //Collection of feed elements
 	private $version;
 	
@@ -235,4 +235,3 @@
 	}
 	
  } // end of class FeedItem
-?>

@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-* 
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,7 +30,7 @@ define('ATOM', 'ATOM', true);
 
 require_once("FeedItem.php");
 
- /**
+/**
  * Universal Feed Writer class
  *
  * Generate RSS 1.0, RSS2.0 and ATOM Feeds
@@ -39,14 +39,14 @@ require_once("FeedItem.php");
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
  */
- class FeedWriter
- {
-	 private $channels      = array();  // Collection of channel elements
-	 private $items         = array();  // Collection of items as object of FeedItem class.
-	 private $data          = array();  // Store some other version wise data
-	 private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
-	 
-	 private $version   = null;
+class FeedWriter
+{
+	private $channels      = array();  // Collection of channel elements
+	private $items         = array();  // Collection of items as object of FeedItem class.
+	private $data          = array();  // Store some other version wise data
+	private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
+
+	private $version   = null;
 	
 	/**
 	* Constructor
@@ -503,4 +503,4 @@ require_once("FeedItem.php");
 	
 	// End # private functions ----------------------------------------------
 	
- } // end of class FeedWriter
+} // end of class FeedWriter
