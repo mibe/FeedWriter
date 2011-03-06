@@ -51,7 +51,7 @@ require_once("FeedItem.php");
 	/**
 	* Constructor
 	* 
-	* @param    constant    the version constant (RSS1/RSS2/ATOM).       
+	* @param    constant    the version constant (RSS1/RSS2/ATOM).
 	*/ 
 	function __construct($version = RSS2)
 	{	
@@ -90,7 +90,7 @@ require_once("FeedItem.php");
 	public function setChannelElementsFromArray($elementArray)
 	{
 		if(! is_array($elementArray)) return;
-		foreach ($elementArray as $elementName => $content) 
+		foreach ($elementArray as $elementName => $content)
 		{
 			$this->setChannelElement($elementName, $content);
 		}
@@ -246,7 +246,7 @@ require_once("FeedItem.php");
 	* @param      string  an optional prefix
 	* @return     string  the formated uuid
 	*/
-	public static function uuid($key = null, $prefix = '') 
+	public static function uuid($key = null, $prefix = '')
 	{
 		$key = ($key == null)? uniqid(rand()) : $key;
 		$chars = md5($key);
@@ -372,20 +372,20 @@ require_once("FeedItem.php");
 	private function printChannels()
 	{
 		//Start channel tag
-		switch ($this->version) 
+		switch ($this->version)
 		{
-			case RSS2: 
+			case RSS2:
 				echo '<channel>' . PHP_EOL;
 				break;
-			case RSS1: 
+			case RSS1:
 				echo (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">";
 				break;
 		}
 		
 		//Print Items of channel
-		foreach ($this->channels as $key => $value) 
+		foreach ($this->channels as $key => $value)
 		{
-			if($this->version == ATOM && $key == 'link') 
+			if($this->version == ATOM && $key == 'link')
 			{
 				// ATOM prints link element as href attribute
 				echo $this->makeNode($key,'', array('href' => $value));
@@ -399,11 +399,11 @@ require_once("FeedItem.php");
 			
 		}
 		
-		//RSS 1.0 have special tag <rdf:Seq> with channel 
+		//RSS 1.0 have special tag <rdf:Seq> with channel
 		if($this->version == RSS1)
 		{
 			echo "<items>" . PHP_EOL . "<rdf:Seq>" . PHP_EOL;
-			foreach ($this->items as $item) 
+			foreach ($this->items as $item)
 			{
 				$thisItems = $item->getElements();
 				echo "<rdf:li resource=\"{$thisItems['link']['content']}\"/>" . PHP_EOL;
@@ -424,10 +424,10 @@ require_once("FeedItem.php");
 		{
 			$thisItems = $item->getElements();
 			
-			//the argument is printed as rdf:about attribute of item in rss 1.0 
+			//the argument is printed as rdf:about attribute of item in rss 1.0
 			echo $this->startItem($thisItems['link']['content']);
 			
-			foreach ($thisItems as $feedItem ) 
+			foreach ($thisItems as $feedItem)
 			{
 				echo $this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']);
 			}

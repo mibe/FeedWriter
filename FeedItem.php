@@ -35,9 +35,9 @@
 	private $version;
 	
 	/**
-	* Constructor 
+	* Constructor
 	* 
-	* @param    contant     (RSS1/RSS2/ATOM) RSS2 is default. 
+	* @param    contant     (RSS1/RSS2/ATOM) RSS2 is default.
 	*/ 
 	function __construct($version = RSS2)
 	{
@@ -76,7 +76,7 @@
 	public function addElementArray($elementArray)
 	{
 		if(! is_array($elementArray)) return;
-		foreach ($elementArray as $elementName => $content) 
+		foreach ($elementArray as $elementName => $content)
 		{
 			$this->addElement($elementName, $content);
 		}
@@ -146,7 +146,7 @@
 			$tag    = 'updated';
 			$value  = date(DATE_ATOM, $date);
 		}
-		elseif($this->version == RSS2) 
+		elseif($this->version == RSS2)
 		{
 			$tag    = 'pubDate';
 			$value  = date(DATE_RSS, $date);
