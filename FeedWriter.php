@@ -437,7 +437,7 @@ require_once("FeedItem.php");
 	* Make the starting tag of channels
 	* 
 	* @access   private
-	* @param    string  The vale of about tag which is used for only RSS 1.0
+	* @param    string  The vale of about tag which is used for RSS 1.0 only.
 	* @return   void
 	*/
 	private function startItem($about = false)
@@ -454,7 +454,7 @@ require_once("FeedItem.php");
 			}
 			else
 			{
-				die('link element is not set .\n It\'s required for RSS 1.0 to be used as about attribute of item');
+				die("link element is not set.\nIt's required for RSS 1.0 to be used as the about attribute of the item tag.");
 			}
 		}
 		else if($this->version == ATOM)
