@@ -328,7 +328,7 @@ require_once("FeedItem.php");
 
 		if(is_array($attributes) && count($attributes) > 0)
 		{
-			foreach ($attributes as $key => $value) 
+			foreach ($attributes as $key => $value)
 			{
 				$attrText .= " $key=\"$value\" ";
 			}
@@ -342,12 +342,13 @@ require_once("FeedItem.php");
 			$attrText = ' rdf:parseType="Resource"';
 		}
 		
-		$attrText .= (in_array($tagName, $this->CDATAEncoding) && $this->version == ATOM)? ' type="html" ' : '';
-		$nodeText .= (in_array($tagName, $this->CDATAEncoding))? "<{$tagName}{$attrText}><![CDATA[" : "<{$tagName}{$attrText}>";
+		$attrText .= (in_array($tagName, $this->CDATAEncoding) && $this->version == ATOM) ? ' type="html"' : '';
+		$nodeText .= "<{$tagName}{$attrText}>";
+		$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? '<![CDATA[' : '';
 		
 		if(is_array($tagContent))
 		{
-			foreach ($tagContent as $key => $value) 
+			foreach ($tagContent as $key => $value)
 			{
 				$nodeText .= $this->makeNode($key, $value);
 			}
@@ -356,10 +357,11 @@ require_once("FeedItem.php");
 		{
 			$nodeText .= (in_array($tagName, $this->CDATAEncoding))? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
 		}
-			
-		$nodeText .= (in_array($tagName, $this->CDATAEncoding))? "]]></$tagName>" : "</$tagName>";
+		
+		$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? ']]>' : '';
+		$nodeText .= "</$tagName>" . PHP_EOL;
 
-		return $nodeText . PHP_EOL;
+		return $nodeText;
 	}
 	
 	/**
