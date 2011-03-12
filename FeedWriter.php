@@ -330,6 +330,7 @@ class FeedWriter
 		{
 			foreach ($attributes as $key => $value)
 			{
+				$value = htmlspecialchars($value);
 				$attrText .= " $key=\"$value\" ";
 			}
 
