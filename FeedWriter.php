@@ -28,7 +28,8 @@ define('RSS1', 'RSS 1.0', true);
 define('RSS2', 'RSS 2.0', true);
 define('ATOM', 'ATOM', true);
 
-require_once("FeedItem.php");
+if (!class_exists('FeedItem'))
+	require __DIR__.'/FeedItem.php';
 
 /**
  * Universal Feed Writer class
