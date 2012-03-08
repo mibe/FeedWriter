@@ -2,7 +2,7 @@
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010, 2011 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2012 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -90,7 +90,9 @@ class FeedWriter
 	*/
 	public function setChannelElementsFromArray($elementArray)
 	{
-		if(! is_array($elementArray)) return;
+		if (!is_array($elementArray))
+			return;
+
 		foreach ($elementArray as $elementName => $content)
 		{
 			$this->setChannelElement($elementName, $content);
@@ -123,10 +125,10 @@ class FeedWriter
 
 		header("Content-Type: " . $contentType);
 		
-		$this->printHead();
+		$this->printHeader();
 		$this->printChannels();
 		$this->printItems();
-		$this->printTale();
+		$this->printFooter();
 	}
 	
 	/**
@@ -148,8 +150,11 @@ class FeedWriter
 	* @param    object  instance of FeedItem class
 	* @return   void
 	*/
-	public function addItem($feedItem)
+	public function addItem(FeedItem $feedItem)
 	{
+		if ($feedItem->getVersion() != $this->version)
+			die('Feed type mismatch: This instance can handle ' . $this->version . ' feeds only, but item with type ' . $feedItem->getVersion() . ' given.');
+
 		$this->items[] = $feedItem;
 	}
 	
@@ -269,7 +274,7 @@ class FeedWriter
 	* @access   private
 	* @return   void
 	*/
-	private function printHead()
+	private function printHeader()
 	{
 		$out  = '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL;
 		
@@ -297,7 +302,7 @@ class FeedWriter
 	* @access   private
 	* @return   void
 	*/
-	private function printTale()
+	private function printFooter()
 	{
 		if($this->version == RSS2)
 		{

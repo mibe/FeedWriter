@@ -75,7 +75,9 @@ class FeedItem
 	*/
 	public function addElementArray($elementArray)
 	{
-		if(! is_array($elementArray)) return;
+		if (!is_array($elementArray))
+			return;
+
 		foreach ($elementArray as $elementName => $content)
 		{
 			$this->addElement($elementName, $content);
@@ -91,6 +93,17 @@ class FeedItem
 	public function getElements()
 	{
 		return $this->elements;
+	}
+
+	/**
+	* Return the type of this feed item
+	* 
+	* @access   public
+	* @return   string  The feed type, as defined in FeedWriter.php
+	*/
+	public function getVersion()
+	{
+		return $this->version;
 	}
 	
 	// Wrapper functions ------------------------------------------------------
