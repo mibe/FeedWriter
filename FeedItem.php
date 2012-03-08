@@ -2,7 +2,7 @@
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010, 2011 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2012 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *

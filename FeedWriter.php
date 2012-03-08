@@ -29,7 +29,7 @@ define('RSS2', 'RSS 2.0', true);
 define('ATOM', 'ATOM', true);
 
 if (!class_exists('FeedItem'))
-	require __DIR__.'/FeedItem.php';
+	require dirname(__FILE__) . '/FeedItem.php';
 
 /**
  * Universal Feed Writer class

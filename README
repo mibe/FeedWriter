@@ -11,3 +11,9 @@ the feed.
 Once a feed is fully composed with its items, the feed writer class can generate
 the necessary XML structure to describe the feed in the RSS or Atom formats.
 The feed is generated as part of the current feed output.
+
+
+Requirements
+============
+
+PHP >= 5.0
