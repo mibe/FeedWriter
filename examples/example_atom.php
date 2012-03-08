@@ -48,7 +48,7 @@
 	$newItem->setLink('http://www.yahoo.com');
 	$newItem->setDate(time());
 	//Internally changed to "summary" tag for ATOM feed
-	$newItem->setDescription('This is test of adding CDATA Encoded description by the php <b>Universal Feed Writer</b> class');
+	$newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
 
 	//Now add the feed item	
 	$TestFeed->addItem($newItem);

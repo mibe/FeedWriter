@@ -242,7 +242,7 @@ class FeedWriter
 	}
 	
 	/**
-	* Genarates an UUID
+	* Generates an UUID
 	* @author     Anis uddin Ahmad <admin@ajaxray.com>
 	* @param      string  an optional prefix
 	* @return     string  the formated uuid
@@ -271,7 +271,7 @@ class FeedWriter
 	*/
 	private function printHead()
 	{
-		$out  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+		$out  = '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL;
 		
 		if($this->version == RSS2)
 		{
@@ -286,7 +286,7 @@ class FeedWriter
 			$out .= '<feed xmlns="http://www.w3.org/2005/Atom">';
 		}
 
-		$out .= "\n";
+		$out .= PHP_EOL;
 
 		echo $out;
 	}
@@ -458,7 +458,7 @@ class FeedWriter
 			}
 			else
 			{
-				die("link element is not set.\nIt's required for RSS 1.0 to be used as the about attribute of the item tag.");
+				die("link element is not set." . PHP_EOL . "It's required for RSS 1.0 to be used as the about attribute of the item tag.");
 			}
 		}
 		else if($this->version == ATOM)
@@ -489,7 +489,7 @@ class FeedWriter
 	* Sanitizes data which will be later on returned as CDATA in the feed.
 	*
 	* A "]]>" respectively "<![CDATA" in the data would break the CDATA in the
-	* XML, so the brakets are converted to a HTML entity.
+	* XML, so the brackets are converted to a HTML entity.
 	*
 	* @access   private
 	* @param    string  Data to be sanitized

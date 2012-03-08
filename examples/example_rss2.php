@@ -30,7 +30,7 @@
   //Use wrapper functions for common channel elements
   $TestFeed->setTitle('Testing & Checking the RSS writer class');
   $TestFeed->setLink('http://www.ajaxray.com/projects/rss');
-  $TestFeed->setDescription('This is test of creating a RSS 2.0 feed Universal Feed Writer');
+  $TestFeed->setDescription('This is a test of creating a RSS 2.0 feed with Universal Feed Writer');
   
   //Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0
   $TestFeed->setImage('Testing the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
@@ -50,7 +50,7 @@
   $newItem->setLink('http://www.yahoo.com');
   //The parameter is a timestamp for setDate() function
   $newItem->setDate(time());
-  $newItem->setDescription('This is test of adding CDATA Encoded description by the php <b>Universal Feed Writer</b> class');
+  $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
   $newItem->setEncloser('http://www.attrtest.com', '1283629', 'audio/mpeg');
   //Use core addElement() function for other supported optional elements
   $newItem->addElement('author', 'admin@ajaxray.com (Anis uddin Ahmad)');
@@ -63,7 +63,7 @@
   //Another method to add feeds from array()
   //Elements which have attribute cannot be added by this way
   $newItem = $TestFeed->createNewItem();
-  $newItem->addElementArray(array('title'=>'The 2nd feed', 'link'=>'http://www.google.com', 'description'=>'This is test of feedwriter class'));
+  $newItem->addElementArray(array('title'=>'The 2nd feed', 'link'=>'http://www.google.com', 'description'=>'This is a test of the FeedWriter class'));
   $TestFeed->addItem($newItem);
   
   //OK. Everything is done. Now genarate the feed.

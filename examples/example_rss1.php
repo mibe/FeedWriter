@@ -47,7 +47,7 @@
   $newItem->setLink('http://www.yahoo.com');
   //The parameter is a timestamp for setDate() function
   $newItem->setDate(time());
-  $newItem->setDescription('This is test of adding CDATA Encoded description by the php <b>Universal Feed Writer</b> class');
+  $newItem->setDescription('This is test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
   //Use core addElement() function for other supported optional elements
   $newItem->addElement('dc:subject', 'Nothing but test');
   
@@ -57,7 +57,7 @@
   //Adding multiple elements from array
   //Elements which have an attribute cannot be added by this way
   $newItem = $TestFeed->createNewItem();
-  $newItem->addElementArray(array('title'=>'The 2nd feed', 'link'=>'http://www.google.com', 'description'=>'This is test of feedwriter class'));
+  $newItem->addElementArray(array('title'=>'The 2nd feed', 'link'=>'http://www.google.com', 'description'=>'This is a test of the FeedWriter class'));
   $TestFeed->addItem($newItem);
   
   //OK. Everything is done. Now genarate the feed.
