@@ -20,13 +20,13 @@
  */
 
 
-	include("../FeedWriter.php");
+	include("../FeedTypes.php");
 	
 	// IMPORTANT : No need to add id for feed or channel. It will be automatically created from link.
 
-	//Creating an instance of FeedWriter class. 
+	//Creating an instance of ATOMFeedWriter class. 
 	//The constant ATOM is passed to mention the version
-	$TestFeed = new FeedWriter(ATOM);
+	$TestFeed = new ATOMFeedWriter();
 
 	//Setting the channel elements
 	//Use wrapper functions for common elements

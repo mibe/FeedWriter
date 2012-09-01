@@ -20,10 +20,10 @@
  */
 
   // This is a minimum example of using the class
-  include("../FeedWriter.php");
+  include("../FeedTypes.php");
   
-  //Creating an instance of FeedWriter class. 
-  $TestFeed = new FeedWriter(RSS2);
+  //Creating an instance of RSS2FeedWriter class. 
+  $TestFeed = new RSS2FeedWriter();
   
   //Setting the channel elements
   //Use wrapper functions for common channel elements

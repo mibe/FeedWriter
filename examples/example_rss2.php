@@ -20,11 +20,11 @@
  */
 
   
-  include("../FeedWriter.php");
+  include("../FeedTypes.php");
   
-  //Creating an instance of FeedWriter class. 
+  //Creating an instance of RSS2FeedWriter class. 
   //The constant RSS2 is passed to mention the version
-  $TestFeed = new FeedWriter(RSS2);
+  $TestFeed = new RSS2FeedWriter();
   
   //Setting the channel elements
   //Use wrapper functions for common channel elements
