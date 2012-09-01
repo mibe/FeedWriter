@@ -23,15 +23,10 @@ if (!class_exists('FeedWriter'))
 	require dirname(__FILE__) . '/FeedWriter.php';
 
 /**
- * Universal Feed Writer class
- *
- * Generate RSS 1.0, RSS2.0 and ATOM Feeds
+ * Wrapper for creating RSS1 feeds
  *
  * @package     UniversalFeedWriter
- * @author      Anis uddin Ahmad <anisniit@gmail.com>
- * @link        http://www.ajaxray.com/projects/rss
  */
-
 class RSS1FeedWriter extends FeedWriter
 {
 	function __construct()
@@ -40,6 +35,11 @@ class RSS1FeedWriter extends FeedWriter
 	}
 }
 
+/**
+ * Wrapper for creating RSS2 feeds
+ *
+ * @package     UniversalFeedWriter
+ */
 class RSS2FeedWriter extends FeedWriter
 {
 	function __construct()
@@ -48,6 +48,11 @@ class RSS2FeedWriter extends FeedWriter
 	}
 }
 
+/**
+ * Wrapper for creating ATOM feeds
+ *
+ * @package     UniversalFeedWriter
+ */
 class ATOMFeedWriter extends FeedWriter
 {
 	function __construct()
