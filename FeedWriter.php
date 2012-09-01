@@ -40,7 +40,7 @@ if (!class_exists('FeedItem'))
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
  */
-class FeedWriter
+abstract class FeedWriter
 {
 	private $channels      = array();  // Collection of channel elements
 	private $items         = array();  // Collection of items as object of FeedItem class.
@@ -54,7 +54,7 @@ class FeedWriter
 	* 
 	* @param    constant    the version constant (RSS1/RSS2/ATOM).
 	*/ 
-	function __construct($version = RSS2)
+	protected function __construct($version = RSS2)
 	{	
 		$this->version = $version;
 			
