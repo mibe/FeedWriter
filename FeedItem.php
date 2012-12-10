@@ -225,7 +225,7 @@ class FeedItem
 		if ($this->version != ATOM)
 			return;
 
-		$this->addElement('author', '<name>' . $author . '</name>');
+		$this->addElement('author', array('name' => $author));
 	}
 
 	/**
