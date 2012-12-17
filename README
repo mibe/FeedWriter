@@ -12,7 +12,10 @@ Once a feed is fully composed with its items, the feed writer class can generate
 the necessary XML structure to describe the feed in the RSS or ATOM formats.
 The feed is generated as part of the current feed output.
 
-Originally posted on : http://ajaxray.com/blog/php-universal-feed-generator-supports-rss-10-rss-20-and-atom
+Origin
+============
+Written by: Anis uddin Ahmad <anisniit@gmail.com>
+Posted on:  http://ajaxray.com/blog/php-universal-feed-generator-supports-rss-10-rss-20-and-atom
 
 Requirements
 ============
