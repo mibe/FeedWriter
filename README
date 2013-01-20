@@ -1,7 +1,7 @@
 This package can be used to generate feeds in either RSS 1.0, RSS 2.0 or ATOM
 formats.
 
-There are three main classes that abstracts the feed information and another to
+There are three main classes that abstract the feed information and another to
 encapsulate the feed items information.
 
 Applications can create feed writer object, several feed item objects, set
@@ -16,4 +16,4 @@ The feed is generated as part of the current feed output.
 Requirements
 ============
 
-PHP >= 5.0
+PHP >= 5.3

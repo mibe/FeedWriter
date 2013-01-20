@@ -1,4 +1,5 @@
 <?php
+namespace FeedWriter;
 
 /* 
  * Copyright (C) 2012 Michael Bemmerl <mail@mx-server.de>
@@ -19,44 +20,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!class_exists('FeedWriter'))
-	require dirname(__FILE__) . '/FeedWriter.php';
-
 /**
  * Wrapper for creating RSS1 feeds
  *
  * @package     UniversalFeedWriter
  */
-class RSS1FeedWriter extends FeedWriter
+class RSS1 extends Feed
 {
 	function __construct()
 	{
-		parent::__construct(RSS1);
-	}
-}
-
-/**
- * Wrapper for creating RSS2 feeds
- *
- * @package     UniversalFeedWriter
- */
-class RSS2FeedWriter extends FeedWriter
-{
-	function __construct()
-	{
-		parent::__construct(RSS2);
-	}
-}
-
-/**
- * Wrapper for creating ATOM feeds
- *
- * @package     UniversalFeedWriter
- */
-class ATOMFeedWriter extends FeedWriter
-{
-	function __construct()
-	{
-		parent::__construct(ATOM);
+		parent::__construct(Feed::RSS1);
 	}
 }
