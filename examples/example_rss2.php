@@ -1,4 +1,9 @@
 <?php
+
+include('../Item.php');
+include('../Feed.php');
+include('../RSS2.php');
+
 use \FeedWriter\RSS2;
 
 /* 

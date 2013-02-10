@@ -1,4 +1,9 @@
 <?php
+
+include('../Item.php');
+include('../Feed.php');
+include('../RSS2.php');
+
 use \FeedWriter\RSS2;
 
 /* 
@@ -52,4 +57,4 @@ $TestFeed->addItem($itemOne);
 $TestFeed->addItem($itemTwo);
 
 //OK. Everything is done. Now generate the feed.
-$TestFeed->generateFeed();
+$TestFeed->printFeed();

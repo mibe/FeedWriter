@@ -1,4 +1,9 @@
 <?php
+
+include('../Item.php');
+include('../Feed.php');
+include('../Atom.php');
+
 use \FeedWriter\ATOM;
 
 /*
