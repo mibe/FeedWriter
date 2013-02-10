@@ -52,4 +52,4 @@ $TestFeed->addItem($itemOne);
 $TestFeed->addItem($itemTwo);
 
 //OK. Everything is done. Now generate the feed.
-$TestFeed->generateFeed();
+$TestFeed->printFeed();
