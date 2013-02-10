@@ -1,4 +1,7 @@
 <?php
+namespace FeedWriter;
+
+use \DateTime;
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
@@ -15,21 +18,21 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-* 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- /**
+/**
  * Universal Feed Writer
- * 
+ *
  * FeedItem class - Used as feed element in FeedWriter class
  *
  * @package         UniversalFeedWriter
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
  * @link            http://www.ajaxray.com/projects/rss
  */
-class FeedItem
+class Item
 {
 	private $elements = array();    //Collection of feed elements
 	private $version;
@@ -37,16 +40,16 @@ class FeedItem
 	/**
 	* Constructor
 	* 
-	* @param    contant     (RSS1/RSS2/ATOM) RSS2 is default.
+	* @param    constant     (RSS1/RSS2/ATOM) RSS2 is default.
 	*/ 
-	function __construct($version = RSS2)
+	function __construct($version = Feed::RSS2)
 	{
 		$this->version = $version;
 	}
 	
 	/**
 	* Add an element to elements array
-	* 
+	*
 	* @access   public
 	* @param    string  The tag name of an element
 	* @param    string  The content of tag
@@ -68,7 +71,7 @@ class FeedItem
 	/**
 	* Set multiple feed elements from an array.
 	* Elements which have attributes cannot be added by this method
-	* 
+	*
 	* @access   public
 	* @param    array   array of elements in 'tagName' => 'tagContent' format.
 	* @return   void
@@ -86,7 +89,7 @@ class FeedItem
 	
 	/**
 	* Return the collection of elements in this feed item
-	* 
+	*
 	* @access   public
 	* @return   array
 	*/
@@ -109,7 +112,7 @@ class FeedItem
 	// Wrapper functions ------------------------------------------------------
 	
 	/**
-	* Set the 'dscription' element of feed item
+	* Set the 'description' element of feed item
 	* 
 	* @access   public
 	* @param    string  The content of 'description' or 'summary' element
@@ -117,7 +120,7 @@ class FeedItem
 	*/
 	public function setDescription($description)
 	{
-		$tag = ($this->version == ATOM) ? 'summary' : 'description';
+		$tag = ($this->version == Feed::ATOM) ? 'summary' : 'description';
 		$this->addElement($tag, $description);
 	}
 	
@@ -145,7 +148,7 @@ class FeedItem
 		{
 			if ($date instanceof DateTime)
 			{
-				if (version_compare(PHP_VERSION, '5.3.0', '>='))
+				if (version_compare(\PHP_VERSION, '5.3.0', '>='))
 					$date = $date->getTimestamp();
 				else
 					$date = strtotime($date->format('r'));
@@ -154,15 +157,15 @@ class FeedItem
 				$date = strtotime($date);
 		}
 		
-		if($this->version == ATOM)
+		if($this->version == Feed::ATOM)
 		{
 			$tag    = 'updated';
-			$value  = date(DATE_ATOM, $date);
+			$value  = date(\DATE_ATOM, $date);
 		}
-		elseif($this->version == RSS2)
+		elseif($this->version == Feed::RSS2)
 		{
 			$tag    = 'pubDate';
-			$value  = date(DATE_RSS, $date);
+			$value  = date(\DATE_RSS, $date);
 		}
 		else
 		{
@@ -182,14 +185,14 @@ class FeedItem
 	*/
 	public function setLink($link)
 	{
-		if($this->version == RSS2 || $this->version == RSS1)
+		if($this->version == Feed::RSS2 || $this->version == Feed::RSS1)
 		{
 			$this->addElement('link', $link);
 		}
 		else
 		{
 			$this->addElement('link','',array('href'=>$link));
-			$this->addElement('id', FeedWriter::uuid($link,'urn:uuid:'));
+			$this->addElement('id', Feed::uuid($link,'urn:uuid:'));
 		}
 	}
 	
@@ -205,7 +208,7 @@ class FeedItem
 	*/
 	public function setEncloser($url, $length, $type)
 	{
-		if ($this->version != RSS2)
+		if ($this->version != Feed::RSS2)
 			return;
 
 		$attributes = array('url'=>$url, 'length'=>$length, 'type'=>$type);
@@ -222,7 +225,7 @@ class FeedItem
 	*/
 	public function setAuthor($author)
 	{
-		if ($this->version != ATOM)
+		if ($this->version != Feed::ATOM)
 			return;
 
 		$this->addElement('author', array('name' => $author));
@@ -237,13 +240,13 @@ class FeedItem
 	*/
 	public function setId($id)
 	{
-		if ($this->version == RSS2)
+		if ($this->version == Feed::RSS2)
 		{
 			$this->addElement('guid', $id, array('isPermaLink' => 'false'));
 		}
-		else if ($this->version == ATOM)
+		else if ($this->version == Feed::ATOM)
 		{
-			$this->addElement('id', FeedWriter::uuid($id,'urn:uuid:'), NULL, TRUE);
+			$this->addElement('id', Feed::uuid($id,'urn:uuid:'), NULL, TRUE);
 		}
 	}
 	
