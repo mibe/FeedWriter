@@ -366,11 +366,8 @@ abstract class Feed
 			foreach ($attributes as $key => $value)
 			{
 				$value = htmlspecialchars($value);
-				$attrText .= " $key=\"$value\" ";
+				$attrText .= " $key=\"$value\"";
 			}
-
-			// Get rid of the last whitespace
-			$attrText = substr($attrText, 0, strlen($attrText) - 1);
 		}
 		
 		if(is_array($tagContent) && $this->version == Feed::RSS1)
