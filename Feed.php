@@ -100,25 +100,25 @@ abstract class Feed
 	}
 
 	/**
-	* Get an appropriate Content-Type string for the current feed.
+	* Get the appropriate MIME type string for the current feed.
 	*
 	* @access public
 	* @return string
 	*/
-	public function getContentType()
+	public function getMIMEType()
 	{
 		switch($this->version)
 		{
-			case Feed::RSS2 : $contentType = "application/rss+xml";
+			case Feed::RSS2 : $mimeType = "application/rss+xml";
 				break;
-			case Feed::RSS1 : $contentType = "application/rdf+xml";
+			case Feed::RSS1 : $mimeType = "application/rdf+xml";
 				break;
-			case Feed::ATOM : $contentType = "application/atom+xml";
+			case Feed::ATOM : $mimeType = "application/atom+xml";
 				break;
-			default : $contentType = "text/xml";
+			default : $mimeType = "text/xml";
 		}
 
-		return $contentType;
+		return $mimeType;
 	}
 	
 	/**
@@ -138,7 +138,7 @@ abstract class Feed
 
 		if (!$useGenericContentType)
 		{
-			$contentType = $this->getContentType();
+			$contentType = $this->getMIMEType();
 		}
 
 		header("Content-Type: " . $contentType);
