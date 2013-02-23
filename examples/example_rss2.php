@@ -1,4 +1,11 @@
 <?php
+
+// You should use an autoloader instead of including the files directly.
+// This is done here only to make the examples work out of the box.
+include('../Item.php');
+include('../Feed.php');
+include('../RSS2.php');
+
 use \FeedWriter\RSS2;
 
 /* 
@@ -15,7 +22,7 @@ use \FeedWriter\RSS2;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-* 
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,7 +37,7 @@ $TestFeed->setLink('http://www.ajaxray.com/projects/rss');
 $TestFeed->setDescription('This is a test of creating a RSS 2.0 feed with Universal Feed Writer');
 
 //Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0
-$TestFeed->setImage('Testing the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
+$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
 
 //Use core setChannelElement() function for other optional channel elements
 $TestFeed->setChannelElement('language', 'en-us');

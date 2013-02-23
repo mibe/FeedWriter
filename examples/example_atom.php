@@ -1,4 +1,11 @@
 <?php
+
+// You should use an autoloader instead of including the files directly.
+// This is done here only to make the examples work out of the box.
+include('../Item.php');
+include('../Feed.php');
+include('../Atom.php');
+
 use \FeedWriter\ATOM;
 
 /*
