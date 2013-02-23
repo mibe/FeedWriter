@@ -37,7 +37,7 @@ $TestFeed->setLink('http://www.ajaxray.com/projects/rss');
 $TestFeed->setDescription('This is a test of creating a RSS 2.0 feed with Universal Feed Writer');
 
 //Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0
-$TestFeed->setImage('Testing the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
+$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
 
 //Use core setChannelElement() function for other optional channels
 $TestFeed->setChannelElement('language', 'en-us');
