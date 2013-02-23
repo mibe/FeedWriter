@@ -248,6 +248,21 @@ abstract class Feed
 	{
 		$this->setChannelElement('link', $link);
 	}
+
+	/**
+	* Set an 'atom:link' channel element with relation=self attribute.
+	* Needs the full URL to this feed.
+	*
+	* @link     http://www.rssboard.org/rss-profile#namespace-elements-atom-link
+	* @access   public
+	* @param    string  URL to this feed
+	* @return   void
+	*/
+	public function setSelfLink($url)
+	{
+		$data = array('href' => $url, 'rel' => 'self', 'type' => $this->getMIMEType());
+		$this->setChannelElement('atom:link', $data);
+	}
 	
 	/**
 	* Set the 'image' channel element
@@ -309,7 +324,7 @@ abstract class Feed
 		
 		if($this->version == Feed::RSS2)
 		{
-			$out .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/">';
+			$out .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:atom="http://www.w3.org/2005/Atom">';
 		}
 		elseif($this->version == Feed::RSS1)
 		{
@@ -421,12 +436,21 @@ abstract class Feed
 		//Print Items of channel
 		foreach ($this->channels as $key => $value)
 		{
-			if($this->version == Feed::ATOM && $key == 'link')
+			if ($this->version == Feed::ATOM && $key == 'link')
 			{
 				// ATOM prints link element as href attribute
-				$out .= $this->makeNode($key,'', array('href' => $value));
+				$out .= $this->makeNode($key, '', array('href' => $value));
 				//Add the id for ATOM
 				$out .= $this->makeNode('id', Feed::uuid($value, 'urn:uuid:'));
+			}
+			else if ($key == 'atom:link')
+			{
+				// Special case if feed is ATOM: No need for atom namespace
+				if ($this->version == Feed::ATOM)
+					$key = 'link';
+
+				// $value contains actually the node attributes, not the value.
+				$out .= $this->makeNode($key, '', $value);
 			}
 			else
 			{

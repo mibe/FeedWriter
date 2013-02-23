@@ -33,6 +33,7 @@ $TestFeed->setLink('http://www.ajaxray.com/rss2/channel/about');
 //For other channel elements, use setChannelElement() function
 $TestFeed->setChannelElement('updated', date(\DATE_ATOM , time()));
 $TestFeed->setChannelElement('author', array('name'=>'Anis uddin Ahmad'));
+$TestFeed->setSelfLink('http://example.com/myfeed');
 
 //Adding a feed. Generally this portion will be in a loop and add all feeds.
 
