@@ -17,3 +17,16 @@ Requirements
 ============
 
 PHP >= 5.3
+
+If you don't have 5.3 available on your system, there's a version supporting
+PHP >= 5.0 in the "legacy-php-50" branch.
+
+
+Authors
+=======
+
+Anis uddin Ahmad
+Michael Bemmerl
+Phil Freo
+Paul Ferrett
+Brennen Bearnes
