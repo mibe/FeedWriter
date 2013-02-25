@@ -44,6 +44,10 @@ $TestFeed->setChannelElement('language', 'en-us');
 $TestFeed->setChannelElement('pubDate', date(DATE_RSS, time()));
 $TestFeed->setSelfLink('http://example.com/myfeed');
 
+// You can add more XML namespaces for your custom channel elements
+$TestFeed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
+$TestFeed->setChannelElement('creativeCommons:license', 'http://www.creativecommons.org/licenses/by/1.0');
+
 //Adding a feed. Genarally this portion will be in a loop and add all feeds.
 
 //Create an empty FeedItem

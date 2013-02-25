@@ -5,7 +5,7 @@ use \DateTime;
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2012 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -46,6 +46,7 @@ abstract class Feed
 	private $items         = array();  // Collection of items as object of \FeedWriter\Item class.
 	private $data          = array();  // Store some other version wise data
 	private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
+	private $namespaces    = array();  // Collection of XML namespaces
 
 	private $version   = null;
 	
@@ -62,14 +63,39 @@ abstract class Feed
 		$this->channels['title'] = $version . ' Feed';
 		$this->channels['link']  = 'http://www.ajaxray.com/blog';
 
+		// Add some default XML namespaces
+		$this->namespaces['content'] = 'http://purl.org/rss/1.0/modules/content/';
+		$this->namespaces['wfw'] = 'http://wellformedweb.org/CommentAPI/';
+		$this->namespaces['atom'] = 'http://www.w3.org/2005/Atom';
+		$this->namespaces['rdf'] = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+		$this->namespaces['rss1'] = 'http://purl.org/rss/1.0/';
+		$this->namespaces['dc'] = 'http://purl.org/dc/elements/1.1/';
+		$this->namespaces['sy'] = 'http://purl.org/rss/1.0/modules/syndication/';
+
 		//Tag names to encode in CDATA
 		$this->CDATAEncoding = array('description', 'content:encoded', 'summary');
 	}
 
 	// Start # public functions ---------------------------------------------
+
+	/**
+	* Add a XML namespace to the internal list of namespaces. After that,
+	* custom channel elements can be used properly to generate a valid feed.
+	* 
+	* @access   public
+	* @param    string  namespace prefix
+	* @param    string  namespace name (URI)
+	* @return   void
+	* @link     http://www.w3.org/TR/REC-xml-names/
+	*/
+	public function addNamespace($prefix, $uri)
+	{
+		$this->namespaces[$prefix] = $uri;
+	}
 	
 	/**
 	* Set a channel element
+	* 
 	* @access   public
 	* @param    string  name of the channel tag
 	* @param    string  content of the channel tag
@@ -252,7 +278,7 @@ abstract class Feed
 	/**
 	* Set an 'atom:link' channel element with relation=self attribute.
 	* Needs the full URL to this feed.
-	*
+	* 
 	* @link     http://www.rssboard.org/rss-profile#namespace-elements-atom-link
 	* @access   public
 	* @param    string  URL to this feed
@@ -292,6 +318,7 @@ abstract class Feed
 	
 	/**
 	* Generates an UUID
+	* 
 	* @author     Anis uddin Ahmad <admin@ajaxray.com>
 	* @param      string  an optional prefix
 	* @return     string  the formated uuid
@@ -311,31 +338,92 @@ abstract class Feed
 	// End # public functions ----------------------------------------------
 	
 	// Start # private functions ----------------------------------------------
+
+	/**
+	* Returns all used XML namespace prefixes in this instance.
+	* This includes all channel elements and feed items.
+	* Unfortunately some namespace prefixes are not included,
+	* because they are hardcoded, e.g. rdf.
+	* 
+	* @access   private
+	* @return   array    Array with namespace prefix as value.
+	*/
+	private function getNamespacePrefixes()
+	{
+		$prefixes = array();
+
+		// Get all tag names from channel elements...
+		$tags = array_keys($this->channels);
+
+		// ... and now all names from feed items
+		foreach ($this->items as $item)
+			$tags = array_merge($tags, array_keys($item->getElements()));
+
+		// Look for prefixes in those tag names
+		foreach($tags as $tag)
+		{
+			$elements = explode(':', $tag);
+
+			if (count($elements) != 2)
+				continue;
+
+			$prefixes[] = $elements[0];
+		}
+
+		return array_unique($prefixes);
+	}
 	
 	/**
-	* Returns the xml and rss namespace
+	* Returns the XML header and root element, depending on the feed type.
 	* 
 	* @access   private
 	* @return   void
 	*/
 	private function makeHeader()
 	{
-		$out  = '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL;
-		
+		$out = '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL;
+
+		$prefixes = $this->getNamespacePrefixes();
+		$attributes = array();
+		$tagName = '';
+		$defaultNamespace = '';
+
 		if($this->version == Feed::RSS2)
 		{
-			$out .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:atom="http://www.w3.org/2005/Atom">';
+			$tagName = 'rss';
+			$attributes['version'] = '2.0';
 		}
 		elseif($this->version == Feed::RSS1)
 		{
-			$out .= '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/">';
+			$tagName = 'rdf:RDF';
+			$prefixes[] = 'rdf';
+			$defaultNamespace = $this->namespaces['rss1'];
 		}
 		else if($this->version == Feed::ATOM)
 		{
-			$out .= '<feed xmlns="http://www.w3.org/2005/Atom">';
+			$tagName = 'feed';
+			$defaultNamespace = $this->namespaces['atom'];
+
+			// Ugly hack to remove the 'atom' value from the prefixes array.
+			$prefixes = array_flip($prefixes);
+			unset($prefixes['atom']);
+			$prefixes = array_flip($prefixes);
 		}
 
-		$out .= PHP_EOL;
+		// Iterate through every namespace prefix and add it to the element attributes.
+		foreach($prefixes as $prefix)
+		{
+			if (!isset($this->namespaces[$prefix]))
+				die('Unknown XML namespace prefix: \'' . $prefix . '\'. Use the addNamespace method to add support for this prefix.');
+			else
+				$attributes['xmlns:' . $prefix] = $this->namespaces[$prefix];
+		}
+
+		// Include default namepsace, if required
+		if (!empty($defaultNamespace))
+			$attributes['xmlns'] = $defaultNamespace;
+
+		$out .= $this->makeNode($tagName, '', $attributes, true);
 
 		return $out;
 	}
@@ -363,15 +451,16 @@ abstract class Feed
 	}
 
 	/**
-	* Creates a single node as xml format
+	* Creates a single node in XML format
 	*
 	* @access   private
 	* @param    string  name of the tag
 	* @param    mixed   tag value as string or array of nested tags in 'tagName' => 'tagValue' format
-	* @param    array   Attributes(if any) in 'attrName' => 'attrValue' format
+	* @param    array   Attributes (if any) in 'attrName' => 'attrValue' format
+	* @param    string  True if the end tag should be omitted. Defaults to false.
 	* @return   string  formatted xml tag
 	*/
-	private function makeNode($tagName, $tagContent, $attributes = null)
+	private function makeNode($tagName, $tagContent, $attributes = null, $omitEndTag = false)
 	{
 		$nodeText = '';
 		$attrText = '';
@@ -407,7 +496,11 @@ abstract class Feed
 		}
 		
 		$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? ']]>' : '';
-		$nodeText .= "</$tagName>" . PHP_EOL;
+
+		if (!$omitEndTag)
+			$nodeText .= "</$tagName>";
+
+		$nodeText .= PHP_EOL;
 
 		return $nodeText;
 	}
@@ -436,25 +529,43 @@ abstract class Feed
 		//Print Items of channel
 		foreach ($this->channels as $key => $value)
 		{
-			if ($this->version == Feed::ATOM && $key == 'link')
+			// ATOM feed needs some special handling
+			if ($this->version == Feed::ATOM)
 			{
-				// ATOM prints link element as href attribute
-				$out .= $this->makeNode($key, '', array('href' => $value));
-				//Add the id for ATOM
-				$out .= $this->makeNode('id', Feed::uuid($value, 'urn:uuid:'));
-			}
-			else if ($key == 'atom:link')
-			{
-				// Special case if feed is ATOM: No need for atom namespace
-				if ($this->version == Feed::ATOM)
-					$key = 'link';
+				// Strip all ATOM namespace prefixes from tags. Not needed here, because the ATOM namespace name is
+				// used as default namespace.
+				if (strncmp($key, 'atom', 4) == 0)
+					$key = substr($key, 5);
 
-				// $value contains actually the node attributes, not the value.
-				$out .= $this->makeNode($key, '', $value);
+				if ($key == 'link')
+				{
+					if (is_array($value))
+					{
+						// $value contains actually the node attributes, not the value.
+						$out .= $this->makeNode($key, '', $value);
+					}
+					else
+					{
+						// ATOM prints link element as href attribute
+						$out .= $this->makeNode($key, '', array('href' => $value));
+						//Add the id for ATOM
+						$out .= $this->makeNode('id', Feed::uuid($value, 'urn:uuid:'));
+					}
+				}
+				else
+					$out .= $this->makeNode($key, $value);
 			}
 			else
 			{
-				$out .= $this->makeNode($key, $value);
+				if ($key == 'atom:link')
+				{
+					// $value contains actually the node attributes, not the value.
+					$out .= $this->makeNode($key, '', $value);
+				}
+				else
+				{
+					$out .= $this->makeNode($key, $value);
+				}
 			}
 			
 		}
@@ -537,7 +648,7 @@ abstract class Feed
 	
 	/**
 	* Closes feed item tag
-	*
+	* 
 	* @access   private
 	* @return   void
 	*/
@@ -555,10 +666,10 @@ abstract class Feed
 	
 	/**
 	* Sanitizes data which will be later on returned as CDATA in the feed.
-	*
+	* 
 	* A "]]>" respectively "<![CDATA" in the data would break the CDATA in the
 	* XML, so the brackets are converted to a HTML entity.
-	*
+	* 
 	* @access   private
 	* @param    string  Data to be sanitized
 	* @return   string  Sanitized data
