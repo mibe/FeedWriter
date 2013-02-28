@@ -291,6 +291,20 @@ abstract class Feed
 	}
 	
 	/**
+	* Set an 'atom:link' channel element with relation=hub attribute.
+	* Needs the full URL for PubSubHubbub Discovery of this feed.
+	* 
+	* @access   public
+	* @param    string URL for PubSubHubbub Discovery
+	* @return   void
+	*/
+	public function setHubLink($url)
+	{
+		$data = array('href' => $url, 'rel' => 'hub');
+		$this->setChannelElement('atom:link-hub', $data);
+	}
+	
+	/**
 	* Set the 'image' channel element
 	* 
 	* @access   public
@@ -529,6 +543,10 @@ abstract class Feed
 		//Print Items of channel
 		foreach ($this->channels as $key => $value)
 		{
+			// Strip -hub from PubSubHubBub link tag
+			if (substr($key, -strlen("-hub"))==="-hub")
+				$key = substr($key, 0, -strlen("-hub"));
+			
 			// ATOM feed needs some special handling
 			if ($this->version == Feed::ATOM)
 			{
