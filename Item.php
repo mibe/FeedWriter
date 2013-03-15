@@ -123,6 +123,19 @@ class Item
 		$tag = ($this->version == Feed::ATOM) ? 'summary' : 'description';
 		$this->addElement($tag, $description);
 	}
+
+	/**
+	 * Set the 'content' element of the feed item
+	 *
+	 * @access public
+	 * @param string Content for the item (i.e., the body of a blog post).
+	 * @return void
+	 */
+	function setContent($content)
+	{
+		$this->addElement('content', $content, array('type' => 'html'));
+	}
+
 	
 	/**
 	* @desc     Set the 'title' element of feed item
@@ -197,7 +210,7 @@ class Item
 	}
 	
 	/**
-	* Set the 'encloser' element of feed item
+	* Set the 'enclosure' element of feed item
 	* For RSS 2.0 only
 	* 
 	* @access   public
@@ -206,7 +219,7 @@ class Item
 	* @param    string  The type attribute of encloser tag
 	* @return   void
 	*/
-	public function setEncloser($url, $length, $type)
+	public function setEnclosure($url, $length, $type)
 	{
 		if ($this->version != Feed::RSS2)
 			return;

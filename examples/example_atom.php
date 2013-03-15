@@ -4,7 +4,9 @@
 // This is done here only to make the examples work out of the box.
 include('../Item.php');
 include('../Feed.php');
-include('../Atom.php');
+include('../ATOM.php');
+
+date_default_timezone_set('UTC');
 
 use \FeedWriter\ATOM;
 
@@ -54,6 +56,7 @@ $newItem->setLink('http://www.yahoo.com');
 $newItem->setDate(time());
 //Internally changed to "summary" tag for ATOM feed
 $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
+$newItem->setContent('<h1>hi.</h1> <p>This is the content for the entry.</p>');
 
 //Now add the feed item	
 $TestFeed->addItem($newItem);
