@@ -31,4 +31,5 @@ class Atom extends Feed
 	{
 		parent::__construct(Feed::ATOM);
 	}
+
 }

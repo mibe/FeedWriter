@@ -6,6 +6,8 @@ include('../Item.php');
 include('../Feed.php');
 include('../RSS1.php');
 
+date_default_timezone_set('UTC');
+
 use \FeedWriter\RSS1;
 
 /* 
