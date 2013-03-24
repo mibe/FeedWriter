@@ -94,16 +94,20 @@ abstract class Feed
 	}
 	
 	/**
-	* Set a channel element
+	* Adds a channel element to the feed.
 	* 
 	* @access   public
 	* @param    string  name of the channel tag
 	* @param    string  content of the channel tag
+	* @param    bool    TRUE if this element can appear multiple times
 	* @return   void
 	*/
-	public function setChannelElement($elementName, $content)
+	public function setChannelElement($elementName, $content, $multiple = false)
 	{
-		$this->channels[$elementName] = $content;
+		if ($multiple === TRUE)
+			$this->channels[$elementName][] = $content;
+		else
+			$this->channels[$elementName] = $content;
 	}
 	
 	/**
@@ -276,6 +280,61 @@ abstract class Feed
 	}
 
 	/**
+	* @access   public
+	* @param    string  URI of this link
+	* @param    string  relation type of the resource
+	* @param    string  media type of the target resource
+	* @param    string  language of the resource
+	* @param    string  human-readable information about the resource
+	* @param    int     length of the resource in bytes
+	* @link     https://www.iana.org/assignments/link-relations/link-relations.xml
+	*/
+	public function setAtomLink($href, $rel = null, $type = null, $hreflang = null, $title = null, $length = null)
+	{
+		$data = array('href' => $href);
+
+		if ($rel != null)
+		{
+			if (!is_string($rel) || empty($rel))
+				die('rel parameter must be a string and a valid relation identifier.');
+
+			$data['rel'] = $rel;
+		}
+		if ($type != null)
+		{
+			// Regex used from RFC 4287, page 41
+			if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
+				die('type parameter must be a string and a MIME type.');
+
+			$data['type'] = $type;
+		}
+		if ($hreflang != null)
+		{
+			// Regex used from RFC 4287, page 41
+			if (!is_string($hreflang) || preg_match('/[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*/', $hreflang) != 1)
+				die ('hreflang parameter must be a string and a valid language code.');
+
+			$data['hreflang'] = $hreflang;
+		}
+		if ($title != null)
+		{
+			if (!is_string($title) || empty($title))
+				die('title parameter must be a string and not empty.');
+
+			$data['title'] = $title;
+		}
+		if ($length != null)
+		{
+			if (!is_int($length) || $length < 0)
+				die('length parameter must be a positive integer.');
+
+			$data['length'] = (string)$length;
+		}
+
+		$this->setChannelElement('atom:link', $data, true);
+	}
+
+	/**
 	* Set an 'atom:link' channel element with relation=self attribute.
 	* Needs the full URL to this feed.
 	* 
@@ -286,8 +345,7 @@ abstract class Feed
 	*/
 	public function setSelfLink($url)
 	{
-		$data = array('href' => $url, 'rel' => 'self', 'type' => $this->getMIMEType());
-		$this->setChannelElement('atom:link', $data);
+		$this->setAtomLink($url, 'self', $this->getMIMEType());
 	}
 	
 	/**
@@ -541,8 +599,12 @@ abstract class Feed
 				{
 					if (is_array($value))
 					{
-						// $value contains actually the node attributes, not the value.
-						$out .= $this->makeNode($key, '', $value);
+						// $value is an array containing multiple atom:link element attributes
+						foreach($value as $attributes)
+						{
+							// $attributes contains actually the node attributes, not the value.
+							$out .= $this->makeNode($key, '', $attributes);
+						}
 					}
 					else
 					{
@@ -559,8 +621,12 @@ abstract class Feed
 			{
 				if ($key == 'atom:link')
 				{
-					// $value contains actually the node attributes, not the value.
-					$out .= $this->makeNode($key, '', $value);
+					// $value is an array containing multiple atom:link element attributes
+					foreach($value as $attributes)
+					{
+						// $attributes contains actually the node attributes, not the value.
+						$out .= $this->makeNode($key, '', $attributes);
+					}
 				}
 				else
 				{

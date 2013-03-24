@@ -40,7 +40,10 @@ $TestFeed->setLink('http://www.ajaxray.com/rss2/channel/about');
 //For other channel elements, use setChannelElement() function
 $TestFeed->setChannelElement('updated', date(\DATE_ATOM , time()));
 $TestFeed->setChannelElement('author', array('name'=>'Anis uddin Ahmad'));
+
+//You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
 $TestFeed->setSelfLink('http://example.com/myfeed');
+$TestFeed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
 //Adding a feed. Generally this portion will be in a loop and add all feeds.
 

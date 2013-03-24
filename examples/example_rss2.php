@@ -42,7 +42,10 @@ $TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxra
 //Use core setChannelElement() function for other optional channel elements
 $TestFeed->setChannelElement('language', 'en-us');
 $TestFeed->setChannelElement('pubDate', date(DATE_RSS, time()));
+
+//You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
 $TestFeed->setSelfLink('http://example.com/myfeed');
+$TestFeed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
 // You can add more XML namespaces for your custom channel elements
 $TestFeed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
