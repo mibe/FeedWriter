@@ -5,7 +5,7 @@ use \DateTime;
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2012 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -126,6 +126,7 @@ class Item
 
 	/**
 	 * Set the 'content' element of the feed item
+	 * For ATOM feeds only
 	 *
 	 * @access public
 	 * @param string Content for the item (i.e., the body of a blog post).
@@ -217,15 +218,19 @@ class Item
 	* For RSS 2.0 only
 	* 
 	* @access   public
-	* @param    string  The url attribute of encloser tag
-	* @param    string  The length attribute of encloser tag
-	* @param    string  The type attribute of encloser tag
+	* @param    string  The url attribute of enclosure tag
+	* @param    string  The length attribute of enclosure tag
+	* @param    string  The type attribute of enclosure tag
 	* @return   void
 	*/
 	public function setEnclosure($url, $length, $type)
 	{
 		if ($this->version != Feed::RSS2)
-			return;
+			die('The enclosure element is supported in RSS2 feeds only.');
+
+		// Regex used from RFC 4287, page 41
+		if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
+			die('type parameter must be a string and a MIME type.');
 
 		$attributes = array('url'=>$url, 'length'=>$length, 'type'=>$type);
 		$this->addElement('enclosure','',$attributes);
