@@ -1,0 +1,710 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \FeedWriter\Feed</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/UniversalFeedWriter.html"><i class="icon-folder-open"></i> UniversalFeedWriter</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">9</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_addItem" title="addItem :: Add a FeedItem to the main class"><span class="description">Add a FeedItem to the main class</span><pre>addItem()</pre></a></li>
+<li class="method public "><a href="#method_addNamespace" title="addNamespace :: Add a XML namespace to the internal list of namespaces."><span class="description">Add a XML namespace to the internal list of namespaces.</span><pre>addNamespace()</pre></a></li>
+<li class="method public "><a href="#method_createNewItem" title="createNewItem :: Create a new Item."><span class="description">Create a new Item.</span><pre>createNewItem()</pre></a></li>
+<li class="method public "><a href="#method_generateFeed" title="generateFeed :: Generate the feed."><span class="description">Generate the feed.</span><pre>generateFeed()</pre></a></li>
+<li class="method public "><a href="#method_getMIMEType" title="getMIMEType :: Get the appropriate MIME type string for the current feed."><span class="description">Get the appropriate MIME type string for the current feed.</span><pre>getMIMEType()</pre></a></li>
+<li class="method public "><a href="#method_printFeed" title="printFeed :: Print the actual RSS/ATOM file"><span class="description">Print the actual RSS/ATOM file</span><pre>printFeed()</pre></a></li>
+<li class="method public "><a href="#method_setAtomLink" title="setAtomLink :: Set custom 'link' channel elements."><span class="description">Set custom 'link' channel elements.</span><pre>setAtomLink()</pre></a></li>
+<li class="method public "><a href="#method_setChannelAbout" title="setChannelAbout :: Set the 'about' channel element."><span class="description">Set the 'about' channel element.</span><pre>setChannelAbout()</pre></a></li>
+<li class="method public "><a href="#method_setChannelElement" title="setChannelElement :: Add a channel element to the feed."><span class="description">Add a channel element to the feed.</span><pre>setChannelElement()</pre></a></li>
+<li class="method public "><a href="#method_setChannelElementsFromArray" title="setChannelElementsFromArray :: Set multiple channel elements from an array."><span class="description">Set multiple channel elements from an array.</span><pre>setChannelElementsFromArray()</pre></a></li>
+<li class="method public "><a href="#method_setDate" title="setDate :: Set the 'updated' channel element of an ATOM feed"><span class="description">Set the 'updated' channel element of an ATOM feed</span><pre>setDate()</pre></a></li>
+<li class="method public "><a href="#method_setDescription" title="setDescription :: Set the 'description' channel element"><span class="description">Set the 'description' channel element</span><pre>setDescription()</pre></a></li>
+<li class="method public "><a href="#method_setImage" title="setImage :: Set the 'image' channel element"><span class="description">Set the 'image' channel element</span><pre>setImage()</pre></a></li>
+<li class="method public "><a href="#method_setLink" title="setLink :: Set the 'link' channel element"><span class="description">Set the 'link' channel element</span><pre>setLink()</pre></a></li>
+<li class="method public "><a href="#method_setSelfLink" title="setSelfLink :: Set an 'atom:link' channel element with relation=self attribute."><span class="description">Set an 'atom:link' channel element with relation=self attribute.</span><pre>setSelfLink()</pre></a></li>
+<li class="method public "><a href="#method_setTitle" title="setTitle :: Set the 'title' channel element"><span class="description">Set the 'title' channel element</span><pre>setTitle()</pre></a></li>
+<li class="method public "><a href="#method_uuid" title="uuid :: Generate an UUID."><span class="description">Generate an UUID.</span><pre>uuid()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private "><a href="#method_endItem" title="endItem :: Closes feed item tag"><span class="description">Closes feed item tag</span><pre>endItem()</pre></a></li>
+<li class="method private "><a href="#method_getNamespacePrefixes" title="getNamespacePrefixes :: Returns all used XML namespace prefixes in this instance."><span class="description">Returns all used XML namespace prefixes in this instance.</span><pre>getNamespacePrefixes()</pre></a></li>
+<li class="method private "><a href="#method_makeChannels" title="makeChannels :: Make the channels."><span class="description">Make the channels.</span><pre>makeChannels()</pre></a></li>
+<li class="method private "><a href="#method_makeFooter" title="makeFooter :: Closes the open tags at the end of file"><span class="description">Closes the open tags at the end of file</span><pre>makeFooter()</pre></a></li>
+<li class="method private "><a href="#method_makeHeader" title="makeHeader :: Returns the XML header and root element, depending on the feed type."><span class="description">Returns the XML header and root element, depending on the feed type.</span><pre>makeHeader()</pre></a></li>
+<li class="method private "><a href="#method_makeItems" title="makeItems :: Prints formatted feed items"><span class="description">Prints formatted feed items</span><pre>makeItems()</pre></a></li>
+<li class="method private "><a href="#method_makeNode" title="makeNode :: Creates a single node in XML format"><span class="description">Creates a single node in XML format</span><pre>makeNode()</pre></a></li>
+<li class="method private "><a href="#method_sanitizeCDATA" title="sanitizeCDATA :: Sanitizes data which will be later on returned as CDATA in the feed."><span class="description">Sanitizes data which will be later on returned as CDATA in the feed.</span><pre>sanitizeCDATA()</pre></a></li>
+<li class="method private "><a href="#method_startItem" title="startItem :: Make the starting tag of channels"><span class="description">Make the starting tag of channels</span><pre>startItem()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_CDATAEncoding" title="$CDATAEncoding :: The tag names which have to encoded as CDATA"><span class="description"></span><pre>$CDATAEncoding</pre></a></li>
+<li class="property private "><a href="#property_channels" title="$channels :: Collection of all channel elements"><span class="description"></span><pre>$channels</pre></a></li>
+<li class="property private "><a href="#property_data" title="$data :: Store some other version wise data"><span class="description"></span><pre>$data</pre></a></li>
+<li class="property private "><a href="#property_items" title="$items :: Collection of items as object of \FeedWriter\Item class."><span class="description"></span><pre>$items</pre></a></li>
+<li class="property private "><a href="#property_namespaces" title="$namespaces :: Collection of XML namespaces"><span class="description"></span><pre>$namespaces</pre></a></li>
+<li class="property private "><a href="#property_version" title="$version :: Contains the format of this feed."><span class="description"></span><pre>$version</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_ATOM" title="ATOM :: "><span class="description">ATOM</span><pre>ATOM</pre></a></li>
+<li class="constant  "><a href="#constant_RSS1" title="RSS1 :: "><span class="description">RSS1</span><pre>RSS1</pre></a></li>
+<li class="constant  "><a href="#constant_RSS2" title="RSS2 :: "><span class="description">RSS2</span><pre>RSS2</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\FeedWriter\Feed"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/FeedWriter.html">FeedWriter</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/FeedWriter.Feed.html">Feed</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Universal Feed Writer class</p>
+<div class="details">
+<div class="long_description"><p>Generate RSS 1.0, RSS2.0 and ATOM Feeds</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/UniversalFeedWriter.html">UniversalFeedWriter</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:anisniit@gmail.com">Anis uddin Ahmad</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.ajaxray.com/projects/rss">http://www.ajaxray.com/projects/rss</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_addItem"></a><div class="element clickable method public method_addItem" data-toggle="collapse" data-target=".method_addItem .collapse">
+<h2>Add a FeedItem to the main class</h2>
+<pre>addItem(\FeedWriter\Item $feedItem) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$feedItem</h4>
+<code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code><p>instance of Item class</p></div>
+</div></div>
+</div>
+<a id="method_addNamespace"></a><div class="element clickable method public method_addNamespace" data-toggle="collapse" data-target=".method_addNamespace .collapse">
+<h2>Add a XML namespace to the internal list of namespaces.</h2>
+<pre>addNamespace(string $prefix, string $uri) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>After that,
+custom channel elements can be used properly to generate a valid feed.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.w3.org/TR/REC-xml-names/">http://www.w3.org/TR/REC-xml-names/</a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$prefix</h4>
+<code>string</code><p>namespace prefix</p></div>
+<div class="subelement argument">
+<h4>$uri</h4>
+<code>string</code><p>namespace name (URI)</p>
+</div>
+</div></div>
+</div>
+<a id="method_createNewItem"></a><div class="element clickable method public method_createNewItem" data-toggle="collapse" data-target=".method_createNewItem .collapse">
+<h2>Create a new Item.</h2>
+<pre>createNewItem() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>instance of Item class</div>
+</div></div>
+</div>
+<a id="method_generateFeed"></a><div class="element clickable method public method_generateFeed" data-toggle="collapse" data-target=".method_generateFeed .collapse">
+<h2>Generate the feed.</h2>
+<pre>generateFeed() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getMIMEType"></a><div class="element clickable method public method_getMIMEType" data-toggle="collapse" data-target=".method_getMIMEType .collapse">
+<h2>Get the appropriate MIME type string for the current feed.</h2>
+<pre>getMIMEType() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_printFeed"></a><div class="element clickable method public method_printFeed" data-toggle="collapse" data-target=".method_printFeed .collapse">
+<h2>Print the actual RSS/ATOM file</h2>
+<pre>printFeed(bool $useGenericContentType) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Sets a Content-Type header and echoes the contents of the feed.
+Should only be used in situations where direct output is desired;
+if you need to pass a string around, use generateFeed() instead.</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$useGenericContentType</h4>
+<code>bool</code><p>FALSE if the specific feed media type should be sent.</p></div>
+</div></div>
+</div>
+<a id="method_setAtomLink"></a><div class="element clickable method public method_setAtomLink" data-toggle="collapse" data-target=".method_setAtomLink .collapse">
+<h2>Set custom 'link' channel elements.</h2>
+<pre>setAtomLink(string $href, string $rel, string $type, string $hreflang, string $title, int $length) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>In ATOM feeds, only one link with alternate relation and the same combination of
+type and hreflang values.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://www.iana.org/assignments/link-relations/link-relations.xml">https://www.iana.org/assignments/link-relations/link-relations.xml</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://tools.ietf.org/html/rfc4287#section-4.1.1">https://tools.ietf.org/html/rfc4287#section-4.1.1</a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$href</h4>
+<code>string</code><p>URI of this link</p></div>
+<div class="subelement argument">
+<h4>$rel</h4>
+<code>string</code><p>relation type of the resource</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>media type of the target resource</p></div>
+<div class="subelement argument">
+<h4>$hreflang</h4>
+<code>string</code><p>language of the resource</p></div>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>human-readable information about the resource</p>
+</div>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>int</code><p>length of the resource in bytes</p></div>
+</div></div>
+</div>
+<a id="method_setChannelAbout"></a><div class="element clickable method public method_setChannelAbout" data-toggle="collapse" data-target=".method_setChannelAbout .collapse">
+<h2>Set the 'about' channel element.</h2>
+<pre>setChannelAbout(string $url) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Only for RSS 1.0</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>value of 'about' channel tag</p>
+</div>
+</div></div>
+</div>
+<a id="method_setChannelElement"></a><div class="element clickable method public method_setChannelElement" data-toggle="collapse" data-target=".method_setChannelElement .collapse">
+<h2>Add a channel element to the feed.</h2>
+<pre>setChannelElement(string $elementName, string $content, bool $multiple) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$elementName</h4>
+<code>string</code><p>name of the channel tag</p></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>content of the channel tag</p></div>
+<div class="subelement argument">
+<h4>$multiple</h4>
+<code>bool</code><p>TRUE if this element can appear multiple times</p></div>
+</div></div>
+</div>
+<a id="method_setChannelElementsFromArray"></a><div class="element clickable method public method_setChannelElementsFromArray" data-toggle="collapse" data-target=".method_setChannelElementsFromArray .collapse">
+<h2>Set multiple channel elements from an array.</h2>
+<pre>setChannelElementsFromArray(array $elementArray) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Array elements
+should be 'channelName' => 'channelContent' format.</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$elementArray</h4>
+<code>array</code><p>array of channels</p></div>
+</div></div>
+</div>
+<a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
+<h2>Set the 'updated' channel element of an ATOM feed</h2>
+<pre>setDate(string $date) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>string</code><p>value of 'updated' channel tag</p>
+</div>
+</div></div>
+</div>
+<a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
+<h2>Set the 'description' channel element</h2>
+<pre>setDescription(string $description) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>value of 'description' channel tag</p>
+</div>
+</div></div>
+</div>
+<a id="method_setImage"></a><div class="element clickable method public method_setImage" data-toggle="collapse" data-target=".method_setImage .collapse">
+<h2>Set the 'image' channel element</h2>
+<pre>setImage(string $title, string $link, string $url) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>title of image</p></div>
+<div class="subelement argument">
+<h4>$link</h4>
+<code>string</code><p>link url of the image</p></div>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>path url of the image</p></div>
+</div></div>
+</div>
+<a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
+<h2>Set the 'link' channel element</h2>
+<pre>setLink(string $link) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$link</h4>
+<code>string</code><p>value of 'link' channel tag</p>
+</div>
+</div></div>
+</div>
+<a id="method_setSelfLink"></a><div class="element clickable method public method_setSelfLink" data-toggle="collapse" data-target=".method_setSelfLink .collapse">
+<h2>Set an 'atom:link' channel element with relation=self attribute.</h2>
+<pre>setSelfLink(string $url) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Needs the full URL to this feed.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">http://www.rssboard.org/rss-profile#namespace-elements-atom-link</a></td>
+</tr>
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>URL to this feed</p></div>
+</div></div>
+</div>
+<a id="method_setTitle"></a><div class="element clickable method public method_setTitle" data-toggle="collapse" data-target=".method_setTitle .collapse">
+<h2>Set the 'title' channel element</h2>
+<pre>setTitle(string $title) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>value of 'title' channel tag</p>
+</div>
+</div></div>
+</div>
+<a id="method_uuid"></a><div class="element clickable method public method_uuid" data-toggle="collapse" data-target=".method_uuid .collapse">
+<h2>Generate an UUID.</h2>
+<pre>uuid(string $key, string $prefix) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
+for the MD5 hash is generated.</p></div>
+<table class="table table-bordered"><tr>
+<th>author</th>
+<td><a href="mailto:admin@ajaxray.com">Anis uddin Ahmad</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>optional key on which the UUID is generated</p></div>
+<div class="subelement argument">
+<h4>$prefix</h4>
+<code>string</code><p>an optional prefix</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the formated UUID</div>
+</div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(\FeedWriter\constant $version) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If no version is given, a feed in RSS 2.0 format will be generated.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$version</h4>
+<code>\FeedWriter\constant</code><p>the version constant (RSS1/RSS2/ATOM).</p>
+</div>
+</div></div>
+</div>
+<a id="method_endItem"></a><div class="element clickable method private method_endItem" data-toggle="collapse" data-target=".method_endItem .collapse">
+<h2>Closes feed item tag</h2>
+<pre>endItem() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getNamespacePrefixes"></a><div class="element clickable method private method_getNamespacePrefixes" data-toggle="collapse" data-target=".method_getNamespacePrefixes .collapse">
+<h2>Returns all used XML namespace prefixes in this instance.</h2>
+<pre>getNamespacePrefixes() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This includes all channel elements and feed items.
+Unfortunately some namespace prefixes are not included,
+because they are hardcoded, e.g. rdf.</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Array with namespace prefix as value.</div>
+</div></div>
+</div>
+<a id="method_makeChannels"></a><div class="element clickable method private method_makeChannels" data-toggle="collapse" data-target=".method_makeChannels .collapse">
+<h2>Make the channels.</h2>
+<pre>makeChannels() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeFooter"></a><div class="element clickable method private method_makeFooter" data-toggle="collapse" data-target=".method_makeFooter .collapse">
+<h2>Closes the open tags at the end of file</h2>
+<pre>makeFooter() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeHeader"></a><div class="element clickable method private method_makeHeader" data-toggle="collapse" data-target=".method_makeHeader .collapse">
+<h2>Returns the XML header and root element, depending on the feed type.</h2>
+<pre>makeHeader() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeItems"></a><div class="element clickable method private method_makeItems" data-toggle="collapse" data-target=".method_makeItems .collapse">
+<h2>Prints formatted feed items</h2>
+<pre>makeItems() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeNode"></a><div class="element clickable method private method_makeNode" data-toggle="collapse" data-target=".method_makeNode .collapse">
+<h2>Creates a single node in XML format</h2>
+<pre>makeNode(string $tagName, mixed $tagContent, array $attributes, string $omitEndTag) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tagName</h4>
+<code>string</code><p>name of the tag</p></div>
+<div class="subelement argument">
+<h4>$tagContent</h4>
+<code>mixed</code><p>tag value as string or array of nested tags in 'tagName' => 'tagValue' format</p>
+</div>
+<div class="subelement argument">
+<h4>$attributes</h4>
+<code>array</code><p>Attributes (if any) in 'attrName' => 'attrValue' format</p>
+</div>
+<div class="subelement argument">
+<h4>$omitEndTag</h4>
+<code>string</code><p>True if the end tag should be omitted. Defaults to false.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>formatted xml tag</div>
+</div></div>
+</div>
+<a id="method_sanitizeCDATA"></a><div class="element clickable method private method_sanitizeCDATA" data-toggle="collapse" data-target=".method_sanitizeCDATA .collapse">
+<h2>Sanitizes data which will be later on returned as CDATA in the feed.</h2>
+<pre>sanitizeCDATA(string $text) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>A "]]>" respectively "&lt;![CDATA" in the data would break the CDATA in the
+XML, so the brackets are converted to a HTML entity.</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$text</h4>
+<code>string</code><p>Data to be sanitized</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Sanitized data</div>
+</div></div>
+</div>
+<a id="method_startItem"></a><div class="element clickable method private method_startItem" data-toggle="collapse" data-target=".method_startItem .collapse">
+<h2>Make the starting tag of channels</h2>
+<pre>startItem(string $about) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$about</h4>
+<code>string</code><p>The vale of about tag which is used for RSS 1.0 only.</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_CDATAEncoding"> </a><div class="element clickable property private property_CDATAEncoding" data-toggle="collapse" data-target=".property_CDATAEncoding .collapse">
+<h2></h2>
+<pre>$CDATAEncoding </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_channels"> </a><div class="element clickable property private property_channels" data-toggle="collapse" data-target=".property_channels .collapse">
+<h2></h2>
+<pre>$channels </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_data"> </a><div class="element clickable property private property_data" data-toggle="collapse" data-target=".property_data .collapse">
+<h2></h2>
+<pre>$data </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_items"> </a><div class="element clickable property private property_items" data-toggle="collapse" data-target=".property_items .collapse">
+<h2></h2>
+<pre>$items </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_namespaces"> </a><div class="element clickable property private property_namespaces" data-toggle="collapse" data-target=".property_namespaces .collapse">
+<h2></h2>
+<pre>$namespaces </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_version"> </a><div class="element clickable property private property_version" data-toggle="collapse" data-target=".property_version .collapse">
+<h2></h2>
+<pre>$version </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_ATOM"> </a><div class="element clickable constant  constant_ATOM" data-toggle="collapse" data-target=".constant_ATOM .collapse">
+<h2>ATOM</h2>
+<pre>ATOM </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_RSS1"> </a><div class="element clickable constant  constant_RSS1" data-toggle="collapse" data-target=".constant_RSS1 .collapse">
+<h2>RSS1</h2>
+<pre>RSS1 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_RSS2"> </a><div class="element clickable constant  constant_RSS2" data-toggle="collapse" data-target=".constant_RSS2 .collapse">
+<h2>RSS2</h2>
+<pre>RSS2 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-03-31T03:44:09+02:00.<br></footer></div>
+</div>
+</body>
+</html>

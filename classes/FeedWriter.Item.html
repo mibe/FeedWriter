@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \FeedWriter\Item</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/UniversalFeedWriter.html"><i class="icon-folder-open"></i> UniversalFeedWriter</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">9</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_addElement" title="addElement :: Add an element to elements array"><span class="description">Add an element to elements array</span><pre>addElement()</pre></a></li>
+<li class="method public "><a href="#method_addElementArray" title="addElementArray :: Set multiple feed elements from an array."><span class="description">Set multiple feed elements from an array.</span><pre>addElementArray()</pre></a></li>
+<li class="method public "><a href="#method_getElements" title="getElements :: Return the collection of elements in this feed item"><span class="description">Return the collection of elements in this feed item</span><pre>getElements()</pre></a></li>
+<li class="method public "><a href="#method_getVersion" title="getVersion :: Return the type of this feed item"><span class="description">Return the type of this feed item</span><pre>getVersion()</pre></a></li>
+<li class="method public "><a href="#method_setAuthor" title="setAuthor :: Set the 'author' element of feed item."><span class="description">Set the 'author' element of feed item.</span><pre>setAuthor()</pre></a></li>
+<li class="method public "><a href="#method_setContent" title="setContent :: Set the 'content' element of the feed item
+For ATOM feeds only"><span class="description">Set the 'content' element of the feed item
+For ATOM feeds only</span><pre>setContent()</pre></a></li>
+<li class="method public "><a href="#method_setDate" title="setDate :: Set the 'date' element of feed item"><span class="description">Set the 'date' element of feed item</span><pre>setDate()</pre></a></li>
+<li class="method public "><a href="#method_setDescription" title="setDescription :: Set the 'description' element of feed item"><span class="description">Set the 'description' element of feed item</span><pre>setDescription()</pre></a></li>
+<li class="method public "><a href="#method_setEnclosure" title="setEnclosure :: Set the 'enclosure' element of feed item
+For RSS 2.0 only"><span class="description">Set the 'enclosure' element of feed item
+For RSS 2.0 only</span><pre>setEnclosure()</pre></a></li>
+<li class="method public "><a href="#method_setId" title="setId :: Set the unique identifier of the feed item"><span class="description">Set the unique identifier of the feed item</span><pre>setId()</pre></a></li>
+<li class="method public "><a href="#method_setLink" title="setLink :: Set the 'link' element of feed item"><span class="description">Set the 'link' element of feed item</span><pre>setLink()</pre></a></li>
+<li class="method public "><a href="#method_setTitle" title="setTitle :: Set the 'title' element of feed item"><span class="description">Set the 'title' element of feed item</span><pre>setTitle()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_elements" title="$elements :: Collection of feed item elements"><span class="description"></span><pre>$elements</pre></a></li>
+<li class="property private "><a href="#property_version" title="$version :: Contains the format of this feed."><span class="description"></span><pre>$version</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\FeedWriter\Item"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/FeedWriter.html">FeedWriter</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/FeedWriter.Item.html">Item</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Universal Feed Writer</p>
+<div class="details">
+<div class="long_description"><p>Item class - Used as feed element in Feed class</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/UniversalFeedWriter.html">UniversalFeedWriter</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:anisniit@gmail.com">Anis uddin Ahmad</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.ajaxray.com/projects/rss">http://www.ajaxray.com/projects/rss</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(\FeedWriter\constant $version) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$version</h4>
+<code>\FeedWriter\constant</code><p>(RSS1/RSS2/ATOM) RSS2 is default.</p>
+</div>
+</div></div>
+</div>
+<a id="method_addElement"></a><div class="element clickable method public method_addElement" data-toggle="collapse" data-target=".method_addElement .collapse">
+<h2>Add an element to elements array</h2>
+<pre>addElement(string $elementName, string $content, array $attributes, boolean $overwrite) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$elementName</h4>
+<code>string</code><p>The tag name of an element</p></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>The content of tag</p></div>
+<div class="subelement argument">
+<h4>$attributes</h4>
+<code>array</code><p>Attributes(if any) in 'attrName' => 'attrValue' format</p>
+</div>
+<div class="subelement argument">
+<h4>$overwrite</h4>
+<code>boolean</code><p>Specifies, if an already existing element is overwritten.</p></div>
+</div></div>
+</div>
+<a id="method_addElementArray"></a><div class="element clickable method public method_addElementArray" data-toggle="collapse" data-target=".method_addElementArray .collapse">
+<h2>Set multiple feed elements from an array.</h2>
+<pre>addElementArray(array $elementArray) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Elements which have attributes cannot be added by this method</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$elementArray</h4>
+<code>array</code><p>array of elements in 'tagName' => 'tagContent' format.</p>
+</div>
+</div></div>
+</div>
+<a id="method_getElements"></a><div class="element clickable method public method_getElements" data-toggle="collapse" data-target=".method_getElements .collapse">
+<h2>Return the collection of elements in this feed item</h2>
+<pre>getElements() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getVersion"></a><div class="element clickable method public method_getVersion" data-toggle="collapse" data-target=".method_getVersion .collapse">
+<h2>Return the type of this feed item</h2>
+<pre>getVersion() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The feed type, as defined in Feed.php</div>
+</div></div>
+</div>
+<a id="method_setAuthor"></a><div class="element clickable method public method_setAuthor" data-toggle="collapse" data-target=".method_setAuthor .collapse">
+<h2>Set the 'author' element of feed item.</h2>
+<pre>setAuthor(string $author, string $email, string $uri) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Not supported in RSS 1.0 feeds.</p></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$author</h4>
+<code>string</code><p>The author of this item</p></div>
+<div class="subelement argument">
+<h4>$email</h4>
+<code>string</code><p>Optional email address of the author</p></div>
+<div class="subelement argument">
+<h4>$uri</h4>
+<code>string</code><p>Optional URI related to the author</p></div>
+</div></div>
+</div>
+<a id="method_setContent"></a><div class="element clickable method public method_setContent" data-toggle="collapse" data-target=".method_setContent .collapse">
+<h2>Set the 'content' element of the feed item
+For ATOM feeds only</h2>
+<pre>setContent(string $content) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>Content for the item (i.e., the body of a blog post).</p>
+</div>
+</div></div>
+</div>
+<a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
+<h2>Set the 'date' element of feed item</h2>
+<pre>setDate(string $date) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>string</code><p>The content of 'date' element</p>
+</div>
+</div></div>
+</div>
+<a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
+<h2>Set the 'description' element of feed item</h2>
+<pre>setDescription(string $description) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>The content of 'description' or 'summary' element</p>
+</div>
+</div></div>
+</div>
+<a id="method_setEnclosure"></a><div class="element clickable method public method_setEnclosure" data-toggle="collapse" data-target=".method_setEnclosure .collapse">
+<h2>Set the 'enclosure' element of feed item
+For RSS 2.0 only</h2>
+<pre>setEnclosure(string $url, string $length, string $type) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The url attribute of enclosure tag</p></div>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>string</code><p>The length attribute of enclosure tag</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The type attribute of enclosure tag</p></div>
+</div></div>
+</div>
+<a id="method_setId"></a><div class="element clickable method public method_setId" data-toggle="collapse" data-target=".method_setId .collapse">
+<h2>Set the unique identifier of the feed item</h2>
+<pre>setId(string $id) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>The unique identifier of this item</p></div>
+</div></div>
+</div>
+<a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
+<h2>Set the 'link' element of feed item</h2>
+<pre>setLink(string $link) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$link</h4>
+<code>string</code><p>The content of 'link' element</p>
+</div>
+</div></div>
+</div>
+<a id="method_setTitle"></a><div class="element clickable method public method_setTitle" data-toggle="collapse" data-target=".method_setTitle .collapse">
+<h2>Set the 'title' element of feed item</h2>
+<pre>setTitle(string $title) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The content of 'title' element</p>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_elements"> </a><div class="element clickable property private property_elements" data-toggle="collapse" data-target=".property_elements .collapse">
+<h2></h2>
+<pre>$elements </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_version"> </a><div class="element clickable property private property_version" data-toggle="collapse" data-target=".property_version .collapse">
+<h2></h2>
+<pre>$version </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-03-31T03:44:09+02:00.<br></footer></div>
+</div>
+</body>
+</html>

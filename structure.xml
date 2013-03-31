@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a12" title="">
+  <file path="ATOM.php" hash="a434e53348cb53da04168cbbf0c7dbc4" package="Default">
+    <class final="false" abstract="false" namespace="FeedWriter" line="28" package="UniversalFeedWriter">
+      <extends>\FeedWriter\Feed</extends>
+      <name>Atom</name>
+      <full_name>\FeedWriter\Atom</full_name>
+      <docblock line="23">
+        <description>Wrapper for creating ATOM feeds</description>
+        <long-description></long-description>
+        <tag line="23" name="package" description="UniversalFeedWriter"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="33" package="UniversalFeedWriter">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="30">
+          <description>{@inheritdoc}</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file ATOM.php</error>
+    </parse_markers>
+  </file>
+  <file path="examples/example_atom.php" hash="d59bd9f1b2b7699383aed50637bcc38e" package="Default">
+    <include line="5" type="Include" package="Default">
+      <name>../Item.php</name>
+    </include>
+    <include line="6" type="Include" package="Default">
+      <name>../Feed.php</name>
+    </include>
+    <include line="7" type="Include" package="Default">
+      <name>../ATOM.php</name>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file examples/example_atom.php</error>
+    </parse_markers>
+  </file>
+  <file path="examples/example_minimum.php" hash="de59a00e9a062c007c21cbd22dfd0834" package="Default">
+    <include line="5" type="Include" package="Default">
+      <name>../Item.php</name>
+    </include>
+    <include line="6" type="Include" package="Default">
+      <name>../Feed.php</name>
+    </include>
+    <include line="7" type="Include" package="Default">
+      <name>../RSS2.php</name>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file examples/example_minimum.php</error>
+    </parse_markers>
+  </file>
+  <file path="examples/example_rss1.php" hash="b841d21158d36175b469e7ec1d98f269" package="Default">
+    <include line="5" type="Include" package="Default">
+      <name>../Item.php</name>
+    </include>
+    <include line="6" type="Include" package="Default">
+      <name>../Feed.php</name>
+    </include>
+    <include line="7" type="Include" package="Default">
+      <name>../RSS1.php</name>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file examples/example_rss1.php</error>
+    </parse_markers>
+  </file>
+  <file path="examples/example_rss2.php" hash="24c84b3601bd89904382a8c1ea11e31f" package="Default">
+    <include line="5" type="Include" package="Default">
+      <name>../Item.php</name>
+    </include>
+    <include line="6" type="Include" package="Default">
+      <name>../Feed.php</name>
+    </include>
+    <include line="7" type="Include" package="Default">
+      <name>../RSS2.php</name>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file examples/example_rss2.php</error>
+    </parse_markers>
+  </file>
+  <file path="Feed.php" hash="0a65cfeefaf7b02faa533f3a8dde1a13" package="Default">
+    <class final="false" abstract="true" namespace="FeedWriter" line="39" package="UniversalFeedWriter">
+      <extends/>
+      <name>Feed</name>
+      <full_name>\FeedWriter\Feed</full_name>
+      <docblock line="30">
+        <description>Universal Feed Writer class</description>
+        <long-description>&lt;p&gt;Generate RSS 1.0, RSS2.0 and ATOM Feeds&lt;/p&gt;</long-description>
+        <tag line="30" name="package" description="UniversalFeedWriter"/>
+        <tag line="30" name="author" description="Anis uddin Ahmad &lt;anisniit@gmail.com&gt;"/>
+        <tag line="30" name="link" description="http://www.ajaxray.com/projects/rss" link="http://www.ajaxray.com/projects/rss"/>
+      </docblock>
+      <constant namespace="FeedWriter" line="41" package="UniversalFeedWriter">
+        <name>RSS1</name>
+        <full_name>RSS1</full_name>
+        <value>'RSS 1.0'</value>
+      </constant>
+      <constant namespace="FeedWriter" line="42" package="UniversalFeedWriter">
+        <name>RSS2</name>
+        <full_name>RSS2</full_name>
+        <value>'RSS 2.0'</value>
+      </constant>
+      <constant namespace="FeedWriter" line="43" package="UniversalFeedWriter">
+        <name>ATOM</name>
+        <full_name>ATOM</full_name>
+        <value>'ATOM'</value>
+      </constant>
+      <property final="false" static="false" visibility="private" line="48" namespace="FeedWriter" package="Default">
+        <name>$channels</name>
+        <default>array()</default>
+        <docblock line="45">
+          <description>Collection of all channel elements</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="53" namespace="FeedWriter" package="Default">
+        <name>$items</name>
+        <default>array()</default>
+        <docblock line="50">
+          <description>Collection of items as object of \FeedWriter\Item class.</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="58" namespace="FeedWriter" package="Default">
+        <name>$data</name>
+        <default>array()</default>
+        <docblock line="55">
+          <description>Store some other version wise data</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="63" namespace="FeedWriter" package="Default">
+        <name>$CDATAEncoding</name>
+        <default>array()</default>
+        <docblock line="60">
+          <description>The tag names which have to encoded as CDATA</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="68" namespace="FeedWriter" package="Default">
+        <name>$namespaces</name>
+        <default>array()</default>
+        <docblock line="65">
+          <description>Collection of XML namespaces</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="73" namespace="FeedWriter" package="Default">
+        <name>$version</name>
+        <default>null</default>
+        <docblock line="70">
+          <description>Contains the format of this feed.</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="FeedWriter" line="82" package="UniversalFeedWriter">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="75">
+          <description>Constructor</description>
+          <long-description>&lt;p&gt;If no version is given, a feed in RSS 2.0 format will be generated.&lt;/p&gt;</long-description>
+          <tag line="75" name="param" description="the version constant (RSS1/RSS2/ATOM)." type="\FeedWriter\constant" variable="$version">
+            <type by_reference="false">\FeedWriter\constant</type>
+          </tag>
+        </docblock>
+        <argument line="82">
+          <name>$version</name>
+          <default>\FeedWriter\FeedWriter::RSS2</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="115" package="UniversalFeedWriter">
+        <name>addNamespace</name>
+        <full_name>addNamespace</full_name>
+        <docblock line="105">
+          <description>Add a XML namespace to the internal list of namespaces.</description>
+          <long-description>&lt;p&gt;After that,
+custom channel elements can be used properly to generate a valid feed.&lt;/p&gt;</long-description>
+          <tag line="105" name="access" description="public"/>
+          <tag line="105" name="param" description="namespace prefix" type="string" variable="$prefix">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="105" name="param" description="namespace name (URI)" type="string" variable="$uri">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="105" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+          <tag line="105" name="link" description="http://www.w3.org/TR/REC-xml-names/" link="http://www.w3.org/TR/REC-xml-names/"/>
+        </docblock>
+        <argument line="115">
+          <name>$prefix</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="115">
+          <name>$uri</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="129" package="UniversalFeedWriter">
+        <name>setChannelElement</name>
+        <full_name>setChannelElement</full_name>
+        <docblock line="120">
+          <description>Add a channel element to the feed.</description>
+          <long-description></long-description>
+          <tag line="120" name="access" description="public"/>
+          <tag line="120" name="param" description="name of the channel tag" type="string" variable="$elementName">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="120" name="param" description="content of the channel tag" type="string" variable="$content">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="120" name="param" description="TRUE if this element can appear multiple times" type="bool" variable="$multiple">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="120" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="129">
+          <name>$elementName</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$content</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$multiple</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="145" package="UniversalFeedWriter">
+        <name>setChannelElementsFromArray</name>
+        <full_name>setChannelElementsFromArray</full_name>
+        <docblock line="137">
+          <description>Set multiple channel elements from an array.</description>
+          <long-description>&lt;p&gt;Array elements
+should be 'channelName' =&gt; 'channelContent' format.&lt;/p&gt;</long-description>
+          <tag line="137" name="access" description="public"/>
+          <tag line="137" name="param" description="array of channels" type="array" variable="$elementArray">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="137" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="145">
+          <name>$elementArray</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="162" package="UniversalFeedWriter">
+        <name>getMIMEType</name>
+        <full_name>getMIMEType</full_name>
+        <docblock line="156">
+          <description>Get the appropriate MIME type string for the current feed.</description>
+          <long-description></long-description>
+          <tag line="156" name="access" description="public"/>
+          <tag line="156" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="189" package="UniversalFeedWriter">
+        <name>printFeed</name>
+        <full_name>printFeed</full_name>
+        <docblock line="178">
+          <description>Print the actual RSS/ATOM file</description>
+          <long-description>&lt;p&gt;Sets a Content-Type header and echoes the contents of the feed.
+Should only be used in situations where direct output is desired;
+if you need to pass a string around, use generateFeed() instead.&lt;/p&gt;</long-description>
+          <tag line="178" name="access" description="public"/>
+          <tag line="178" name="param" description="FALSE if the specific feed media type should be sent." type="bool" variable="$useGenericContentType">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="178" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="189">
+          <name>$useGenericContentType</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="208" package="UniversalFeedWriter">
+        <name>generateFeed</name>
+        <full_name>generateFeed</full_name>
+        <docblock line="202">
+          <description>Generate the feed.</description>
+          <long-description></long-description>
+          <tag line="202" name="access" description="public"/>
+          <tag line="202" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="222" package="UniversalFeedWriter">
+        <name>createNewItem</name>
+        <full_name>createNewItem</full_name>
+        <docblock line="216">
+          <description>Create a new Item.</description>
+          <long-description></long-description>
+          <tag line="216" name="access" description="public"/>
+          <tag line="216" name="return" description="instance of Item class" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="235" package="UniversalFeedWriter">
+        <name>addItem</name>
+        <full_name>addItem</full_name>
+        <docblock line="228">
+          <description>Add a FeedItem to the main class</description>
+          <long-description></long-description>
+          <tag line="228" name="access" description="public"/>
+          <tag line="228" name="param" description="instance of Item class" type="\FeedWriter\Item" variable="$feedItem">
+            <type by_reference="false">\FeedWriter\Item</type>
+          </tag>
+          <tag line="228" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="235">
+          <name>$feedItem</name>
+          <default></default>
+          <type>\FeedWriter\Item</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="253" package="UniversalFeedWriter">
+        <name>setTitle</name>
+        <full_name>setTitle</full_name>
+        <docblock line="246">
+          <description>Set the 'title' channel element</description>
+          <long-description></long-description>
+          <tag line="246" name="access" description="public"/>
+          <tag line="246" name="param" description="value of 'title' channel tag" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="246" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="253">
+          <name>$title</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="265" package="UniversalFeedWriter">
+        <name>setDate</name>
+        <full_name>setDate</full_name>
+        <docblock line="258">
+          <description>Set the 'updated' channel element of an ATOM feed</description>
+          <long-description></long-description>
+          <tag line="258" name="access" description="public"/>
+          <tag line="258" name="param" description="value of 'updated' channel tag" type="string" variable="$date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="258" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="265">
+          <name>$date</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="287" package="UniversalFeedWriter">
+        <name>setDescription</name>
+        <full_name>setDescription</full_name>
+        <docblock line="280">
+          <description>Set the 'description' channel element</description>
+          <long-description></long-description>
+          <tag line="280" name="access" description="public"/>
+          <tag line="280" name="param" description="value of 'description' channel tag" type="string" variable="$description">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="280" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="287">
+          <name>$description</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="300" package="UniversalFeedWriter">
+        <name>setLink</name>
+        <full_name>setLink</full_name>
+        <docblock line="293">
+          <description>Set the 'link' channel element</description>
+          <long-description></long-description>
+          <tag line="293" name="access" description="public"/>
+          <tag line="293" name="param" description="value of 'link' channel tag" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="293" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="300">
+          <name>$link</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="321" package="UniversalFeedWriter">
+        <name>setAtomLink</name>
+        <full_name>setAtomLink</full_name>
+        <docblock line="305">
+          <description>Set custom 'link' channel elements.</description>
+          <long-description>&lt;p&gt;In ATOM feeds, only one link with alternate relation and the same combination of
+type and hreflang values.&lt;/p&gt;</long-description>
+          <tag line="305" name="access" description="public"/>
+          <tag line="305" name="param" description="URI of this link" type="string" variable="$href">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="305" name="param" description="relation type of the resource" type="string" variable="$rel">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="305" name="param" description="media type of the target resource" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="305" name="param" description="language of the resource" type="string" variable="$hreflang">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="305" name="param" description="human-readable information about the resource" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="305" name="param" description="length of the resource in bytes" type="int" variable="$length">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="305" name="link" description="https://www.iana.org/assignments/link-relations/link-relations.xml" link="https://www.iana.org/assignments/link-relations/link-relations.xml"/>
+          <tag line="305" name="link" description="https://tools.ietf.org/html/rfc4287#section-4.1.1" link="https://tools.ietf.org/html/rfc4287#section-4.1.1"/>
+        </docblock>
+        <argument line="321">
+          <name>$href</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="321">
+          <name>$rel</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="321">
+          <name>$type</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="321">
+          <name>$hreflang</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="321">
+          <name>$title</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="321">
+          <name>$length</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="395" package="UniversalFeedWriter">
+        <name>setSelfLink</name>
+        <full_name>setSelfLink</full_name>
+        <docblock line="386">
+          <description>Set an 'atom:link' channel element with relation=self attribute.</description>
+          <long-description>&lt;p&gt;Needs the full URL to this feed.&lt;/p&gt;</long-description>
+          <tag line="386" name="link" description="http://www.rssboard.org/rss-profile#namespace-elements-atom-link" link="http://www.rssboard.org/rss-profile#namespace-elements-atom-link"/>
+          <tag line="386" name="access" description="public"/>
+          <tag line="386" name="param" description="URL to this feed" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="386" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="395">
+          <name>$url</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="409" package="UniversalFeedWriter">
+        <name>setImage</name>
+        <full_name>setImage</full_name>
+        <docblock line="400">
+          <description>Set the 'image' channel element</description>
+          <long-description></long-description>
+          <tag line="400" name="access" description="public"/>
+          <tag line="400" name="param" description="title of image" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="400" name="param" description="link url of the image" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="400" name="param" description="path url of the image" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="400" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="409">
+          <name>$title</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="409">
+          <name>$link</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="409">
+          <name>$url</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="421" package="UniversalFeedWriter">
+        <name>setChannelAbout</name>
+        <full_name>setChannelAbout</full_name>
+        <docblock line="414">
+          <description>Set the 'about' channel element.</description>
+          <long-description>&lt;p&gt;Only for RSS 1.0&lt;/p&gt;</long-description>
+          <tag line="414" name="access" description="public"/>
+          <tag line="414" name="param" description="value of 'about' channel tag" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="414" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="421">
+          <name>$url</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="FeedWriter" line="437" package="UniversalFeedWriter">
+        <name>uuid</name>
+        <full_name>uuid</full_name>
+        <docblock line="426">
+          <description>Generate an UUID.</description>
+          <long-description>&lt;p&gt;The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
+for the MD5 hash is generated.&lt;/p&gt;</long-description>
+          <tag line="426" name="author" description="Anis uddin Ahmad &lt;admin@ajaxray.com&gt;"/>
+          <tag line="426" name="param" description="optional key on which the UUID is generated" type="string" variable="$key">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="426" name="param" description="an optional prefix" type="string" variable="$prefix">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="426" name="return" description="the formated UUID" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="437">
+          <name>$key</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="437">
+          <name>$prefix</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="462" package="UniversalFeedWriter">
+        <name>getNamespacePrefixes</name>
+        <full_name>getNamespacePrefixes</full_name>
+        <docblock line="453">
+          <description>Returns all used XML namespace prefixes in this instance.</description>
+          <long-description>&lt;p&gt;This includes all channel elements and feed items.
+Unfortunately some namespace prefixes are not included,
+because they are hardcoded, e.g. rdf.&lt;/p&gt;</long-description>
+          <tag line="453" name="access" description="private"/>
+          <tag line="453" name="return" description="Array with namespace prefix as value." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="493" package="UniversalFeedWriter">
+        <name>makeHeader</name>
+        <full_name>makeHeader</full_name>
+        <docblock line="487">
+          <description>Returns the XML header and root element, depending on the feed type.</description>
+          <long-description></long-description>
+          <tag line="487" name="access" description="private"/>
+          <tag line="487" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="548" package="UniversalFeedWriter">
+        <name>makeFooter</name>
+        <full_name>makeFooter</full_name>
+        <docblock line="542">
+          <description>Closes the open tags at the end of file</description>
+          <long-description></long-description>
+          <tag line="542" name="access" description="private"/>
+          <tag line="542" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="574" package="UniversalFeedWriter">
+        <name>makeNode</name>
+        <full_name>makeNode</full_name>
+        <docblock line="564">
+          <description>Creates a single node in XML format</description>
+          <long-description></long-description>
+          <tag line="564" name="access" description="private"/>
+          <tag line="564" name="param" description="name of the tag" type="string" variable="$tagName">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="564" name="param" description="tag value as string or array of nested tags in 'tagName' =&gt; 'tagValue' format" type="mixed" variable="$tagContent">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="564" name="param" description="Attributes (if any) in 'attrName' =&gt; 'attrValue' format" type="array" variable="$attributes">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="564" name="param" description="True if the end tag should be omitted. Defaults to false." type="string" variable="$omitEndTag">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="564" name="return" description="formatted xml tag" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="574">
+          <name>$tagName</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="574">
+          <name>$tagContent</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="574">
+          <name>$attributes</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="574">
+          <name>$omitEndTag</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="625" package="UniversalFeedWriter">
+        <name>makeChannels</name>
+        <full_name>makeChannels</full_name>
+        <docblock line="619">
+          <description>Make the channels.</description>
+          <long-description></long-description>
+          <tag line="619" name="access" description="private"/>
+          <tag line="619" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="713" package="UniversalFeedWriter">
+        <name>makeItems</name>
+        <full_name>makeItems</full_name>
+        <docblock line="707">
+          <description>Prints formatted feed items</description>
+          <long-description></long-description>
+          <tag line="707" name="access" description="private"/>
+          <tag line="707" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="741" package="UniversalFeedWriter">
+        <name>startItem</name>
+        <full_name>startItem</full_name>
+        <docblock line="734">
+          <description>Make the starting tag of channels</description>
+          <long-description></long-description>
+          <tag line="734" name="access" description="private"/>
+          <tag line="734" name="param" description="The vale of about tag which is used for RSS 1.0 only." type="string" variable="$about">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="734" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="741">
+          <name>$about</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="774" package="UniversalFeedWriter">
+        <name>endItem</name>
+        <full_name>endItem</full_name>
+        <docblock line="768">
+          <description>Closes feed item tag</description>
+          <long-description></long-description>
+          <tag line="768" name="access" description="private"/>
+          <tag line="768" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="796" package="UniversalFeedWriter">
+        <name>sanitizeCDATA</name>
+        <full_name>sanitizeCDATA</full_name>
+        <docblock line="786">
+          <description>Sanitizes data which will be later on returned as CDATA in the feed.</description>
+          <long-description>&lt;p&gt;A "]]&gt;" respectively "&amp;lt;![CDATA" in the data would break the CDATA in the
+XML, so the brackets are converted to a HTML entity.&lt;/p&gt;</long-description>
+          <tag line="786" name="access" description="private"/>
+          <tag line="786" name="param" description="Data to be sanitized" type="string" variable="$text">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="786" name="return" description="Sanitized data" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="796">
+          <name>$text</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file Feed.php</error>
+    </parse_markers>
+  </file>
+  <file path="Item.php" hash="b5422a6a2aa544eec923a529dc179d90" package="Default">
+    <class final="false" abstract="false" namespace="FeedWriter" line="35" package="UniversalFeedWriter">
+      <extends/>
+      <name>Item</name>
+      <full_name>\FeedWriter\Item</full_name>
+      <docblock line="26">
+        <description>Universal Feed Writer</description>
+        <long-description>&lt;p&gt;Item class - Used as feed element in Feed class&lt;/p&gt;</long-description>
+        <tag line="26" name="package" description="UniversalFeedWriter"/>
+        <tag line="26" name="author" description="Anis uddin Ahmad &lt;anisniit@gmail.com&gt;"/>
+        <tag line="26" name="link" description="http://www.ajaxray.com/projects/rss" link="http://www.ajaxray.com/projects/rss"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="40" namespace="FeedWriter" package="Default">
+        <name>$elements</name>
+        <default>array()</default>
+        <docblock line="37">
+          <description>Collection of feed item elements</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="45" namespace="FeedWriter" package="Default">
+        <name>$version</name>
+        <default></default>
+        <docblock line="42">
+          <description>Contains the format of this feed.</description>
+          <long-description></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="52" package="UniversalFeedWriter">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="47">
+          <description>Constructor</description>
+          <long-description></long-description>
+          <tag line="47" name="param" description="(RSS1/RSS2/ATOM) RSS2 is default." type="\FeedWriter\constant" variable="$version">
+            <type by_reference="false">\FeedWriter\constant</type>
+          </tag>
+        </docblock>
+        <argument line="52">
+          <name>$version</name>
+          <default>\FeedWriter\Feed::RSS2</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="67" package="UniversalFeedWriter">
+        <name>addElement</name>
+        <full_name>addElement</full_name>
+        <docblock line="57">
+          <description>Add an element to elements array</description>
+          <long-description></long-description>
+          <tag line="57" name="access" description="public"/>
+          <tag line="57" name="param" description="The tag name of an element" type="string" variable="$elementName">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="57" name="param" description="The content of tag" type="string" variable="$content">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="57" name="param" description="Attributes(if any) in 'attrName' =&gt; 'attrValue' format" type="array" variable="$attributes">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="57" name="param" description="Specifies, if an already existing element is overwritten." type="boolean" variable="$overwrite">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="57" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="67">
+          <name>$elementName</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="67">
+          <name>$content</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="67">
+          <name>$attributes</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="67">
+          <name>$overwrite</name>
+          <default>FALSE</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="86" package="UniversalFeedWriter">
+        <name>addElementArray</name>
+        <full_name>addElementArray</full_name>
+        <docblock line="78">
+          <description>Set multiple feed elements from an array.</description>
+          <long-description>&lt;p&gt;Elements which have attributes cannot be added by this method&lt;/p&gt;</long-description>
+          <tag line="78" name="access" description="public"/>
+          <tag line="78" name="param" description="array of elements in 'tagName' =&gt; 'tagContent' format." type="array" variable="$elementArray">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="78" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="86">
+          <name>$elementArray</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="103" package="UniversalFeedWriter">
+        <name>getElements</name>
+        <full_name>getElements</full_name>
+        <docblock line="97">
+          <description>Return the collection of elements in this feed item</description>
+          <long-description></long-description>
+          <tag line="97" name="access" description="public"/>
+          <tag line="97" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="114" package="UniversalFeedWriter">
+        <name>getVersion</name>
+        <full_name>getVersion</full_name>
+        <docblock line="108">
+          <description>Return the type of this feed item</description>
+          <long-description></long-description>
+          <tag line="108" name="access" description="public"/>
+          <tag line="108" name="return" description="The feed type, as defined in Feed.php" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="128" package="UniversalFeedWriter">
+        <name>setDescription</name>
+        <full_name>setDescription</full_name>
+        <docblock line="121">
+          <description>Set the 'description' element of feed item</description>
+          <long-description></long-description>
+          <tag line="121" name="access" description="public"/>
+          <tag line="121" name="param" description="The content of 'description' or 'summary' element" type="string" variable="$description">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="121" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="128">
+          <name>$description</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="142" package="UniversalFeedWriter">
+        <name>setContent</name>
+        <full_name>setContent</full_name>
+        <docblock line="134">
+          <description>Set the 'content' element of the feed item
+For ATOM feeds only</description>
+          <long-description></long-description>
+          <tag line="134" name="access" description="public"/>
+          <tag line="134" name="param" description="Content for the item (i.e., the body of a blog post)." type="string" variable="$content">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="134" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="142">
+          <name>$content</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="158" package="UniversalFeedWriter">
+        <name>setTitle</name>
+        <full_name>setTitle</full_name>
+        <docblock line="151">
+          <description>Set the 'title' element of feed item</description>
+          <long-description></long-description>
+          <tag line="151" name="access" description="public"/>
+          <tag line="151" name="param" description="The content of 'title' element" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="151" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="158">
+          <name>$title</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="170" package="UniversalFeedWriter">
+        <name>setDate</name>
+        <full_name>setDate</full_name>
+        <docblock line="163">
+          <description>Set the 'date' element of feed item</description>
+          <long-description></long-description>
+          <tag line="163" name="access" description="public"/>
+          <tag line="163" name="param" description="The content of 'date' element" type="string" variable="$date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="163" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="170">
+          <name>$date</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="211" package="UniversalFeedWriter">
+        <name>setLink</name>
+        <full_name>setLink</full_name>
+        <docblock line="204">
+          <description>Set the 'link' element of feed item</description>
+          <long-description></long-description>
+          <tag line="204" name="access" description="public"/>
+          <tag line="204" name="param" description="The content of 'link' element" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="204" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="211">
+          <name>$link</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="234" package="UniversalFeedWriter">
+        <name>setEnclosure</name>
+        <full_name>setEnclosure</full_name>
+        <docblock line="224">
+          <description>Set the 'enclosure' element of feed item
+For RSS 2.0 only</description>
+          <long-description></long-description>
+          <tag line="224" name="access" description="public"/>
+          <tag line="224" name="param" description="The url attribute of enclosure tag" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="224" name="param" description="The length attribute of enclosure tag" type="string" variable="$length">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="224" name="param" description="The type attribute of enclosure tag" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="224" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="234">
+          <name>$url</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$length</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$type</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="257" package="UniversalFeedWriter">
+        <name>setAuthor</name>
+        <full_name>setAuthor</full_name>
+        <docblock line="247">
+          <description>Set the 'author' element of feed item.</description>
+          <long-description>&lt;p&gt;Not supported in RSS 1.0 feeds.&lt;/p&gt;</long-description>
+          <tag line="247" name="access" description="public"/>
+          <tag line="247" name="param" description="The author of this item" type="string" variable="$author">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="247" name="param" description="Optional email address of the author" type="string" variable="$email">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="247" name="param" description="Optional URI related to the author" type="string" variable="$uri">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="247" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="257">
+          <name>$author</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="257">
+          <name>$email</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="257">
+          <name>$uri</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="287" package="UniversalFeedWriter">
+        <name>setId</name>
+        <full_name>setId</full_name>
+        <docblock line="280">
+          <description>Set the unique identifier of the feed item</description>
+          <long-description></long-description>
+          <tag line="280" name="access" description="public"/>
+          <tag line="280" name="param" description="The unique identifier of this item" type="string" variable="$id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="280" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="287">
+          <name>$id</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file Item.php</error>
+    </parse_markers>
+  </file>
+  <file path="RSS1.php" hash="54d51fd71e5a4d8ecddae8d3966d210f" package="Default">
+    <class final="false" abstract="false" namespace="FeedWriter" line="28" package="UniversalFeedWriter">
+      <extends>\FeedWriter\Feed</extends>
+      <name>RSS1</name>
+      <full_name>\FeedWriter\RSS1</full_name>
+      <docblock line="23">
+        <description>Wrapper for creating RSS1 feeds</description>
+        <long-description></long-description>
+        <tag line="23" name="package" description="UniversalFeedWriter"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="33" package="UniversalFeedWriter">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="30">
+          <description>{@inheritdoc}</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file RSS1.php</error>
+    </parse_markers>
+  </file>
+  <file path="RSS2.php" hash="7f3ad57f0b666aa80cf0aebb57a00e8d" package="Default">
+    <class final="false" abstract="false" namespace="FeedWriter" line="28" package="UniversalFeedWriter">
+      <extends>\FeedWriter\Feed</extends>
+      <name>RSS2</name>
+      <full_name>\FeedWriter\RSS2</full_name>
+      <docblock line="23">
+        <description>Wrapper for creating RSS2 feeds</description>
+        <long-description></long-description>
+        <tag line="23" name="package" description="UniversalFeedWriter"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="FeedWriter" line="33" package="UniversalFeedWriter">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="30">
+          <description>{@inheritdoc}</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file RSS2.php</error>
+    </parse_markers>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="UniversalFeedWriter" full_name="UniversalFeedWriter"/>
+  <namespace name="FeedWriter" full_name="FeedWriter"/>
+  <marker count="0">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>
