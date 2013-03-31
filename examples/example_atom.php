@@ -57,6 +57,8 @@ $newItem = $TestFeed->createNewItem();
 $newItem->setTitle('The first feed');
 $newItem->setLink('http://www.yahoo.com');
 $newItem->setDate(time());
+$newItem->setAuthor('Anis uddin Ahmad', 'anis@example.invalid');
+
 //Internally changed to "summary" tag for ATOM feed
 $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
 $newItem->setContent('<h1>hi.</h1> <p>This is the content for the entry.</p>');

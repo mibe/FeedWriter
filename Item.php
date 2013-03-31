@@ -242,9 +242,11 @@ class Item
 	* 
 	* @access   public
 	* @param    string  The author of this item
+	* @param    string  Optional email address of the author
+	* @param    string  Optional URI related to the author
 	* @return   void
 	*/
-	public function setAuthor($author)
+	public function setAuthor($author, $email = null, $uri = null)
 	{
 		switch($this->version)
 		{
@@ -252,7 +254,17 @@ class Item
 				break;
 			case Feed::RSS2: $this->addElement('author', $author);
 				break;
-			case Feed::ATOM: $this->addElement('author', array('name' => $author));
+			case Feed::ATOM:
+				$elements = array('name' => $author);
+
+				// Regex from RFC 4287 page 41
+				if ($email != null && preg_match('/.+@.+/', $email) == 1)
+					$elements['email'] = $email;
+
+				if ($uri != null)
+					$elements['uri'] = $uri;
+
+				$this->addElement('author', $elements);
 				break;
 		}
 	}
