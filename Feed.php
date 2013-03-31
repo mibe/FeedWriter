@@ -288,6 +288,7 @@ abstract class Feed
 	* @param    string  human-readable information about the resource
 	* @param    int     length of the resource in bytes
 	* @link     https://www.iana.org/assignments/link-relations/link-relations.xml
+	* @link     https://tools.ietf.org/html/rfc4287#section-4.1.1
 	*/
 	public function setAtomLink($href, $rel = null, $type = null, $hreflang = null, $title = null, $length = null)
 	{
@@ -329,6 +330,26 @@ abstract class Feed
 				die('length parameter must be a positive integer.');
 
 			$data['length'] = (string)$length;
+		}
+
+		// ATOM spec. has some restrictions on atom:link usage
+		// See RFC 4287, page 12 (4.1.1)
+		if ($this->version == Feed::ATOM)
+		{
+			foreach($this->channels as $key => $value)
+			{
+				if ($key != 'atom:link')
+					continue;
+
+				// $value is an array , so check every element
+				foreach($value as $linkItem)
+				{
+					// Only one link with relation alternate and same hreflang & type is allowed.
+					if (@$linkItem['rel'] == 'alternate' && @$linkItem['hreflang'] == $hreflang && @$linkItem['type'] == $type)
+						die('The feed must not contain more than one link element with a relation of "alternate"'
+						. 'that has the same combination of type and hreflang attribute values.');
+				}
+			}
 		}
 
 		$this->setChannelElement('atom:link', $data, true);
