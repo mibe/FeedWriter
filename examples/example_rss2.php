@@ -67,7 +67,7 @@ $newItem->setDate(time());
 $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
 $newItem->setEnclosure('http://www.attrtest.com', '1283629', 'audio/mpeg');
 //Use core addElement() function for other supported optional elements
-$newItem->addElement('author', 'admin@ajaxray.com (Anis uddin Ahmad)');
+$newItem->setAuthor('admin@ajaxray.com (Anis uddin Ahmad)');
 //Attributes have to passed as array in 3rd parameter
 $newItem->addElement('guid', 'http://www.ajaxray.com',array('isPermaLink'=>'true'));
 

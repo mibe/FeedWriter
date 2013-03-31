@@ -237,8 +237,8 @@ class Item
 	}
 
 	/**
-	* Set the 'author' element of feed item
-	* For ATOM only
+	* Set the 'author' element of feed item.
+	* Not supported in RSS 1.0 feeds.
 	* 
 	* @access   public
 	* @param    string  The author of this item
@@ -246,10 +246,15 @@ class Item
 	*/
 	public function setAuthor($author)
 	{
-		if ($this->version != Feed::ATOM)
-			return;
-
-		$this->addElement('author', array('name' => $author));
+		switch($this->version)
+		{
+			case Feed::RSS1: die('The author element is not supported in RSS1 feeds.');
+				break;
+			case Feed::RSS2: $this->addElement('author', $author);
+				break;
+			case Feed::ATOM: $this->addElement('author', array('name' => $author));
+				break;
+		}
 	}
 
 	/**
@@ -271,4 +276,4 @@ class Item
 		}
 	}
 	
- } // end of class FeedItem
+ } // end of class Item

@@ -771,4 +771,4 @@ abstract class Feed
 	
 	// End # private functions ----------------------------------------------
 	
-} // end of class FeedWriter
+} // end of class Feed
