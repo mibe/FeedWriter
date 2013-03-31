@@ -131,8 +131,11 @@ class Item
 	 * @param string Content for the item (i.e., the body of a blog post).
 	 * @return void
 	 */
-	function setContent($content)
+	public function setContent($content)
 	{
+		if ($this->version != Feed::ATOM)
+			die('The content element is supported in ATOM feeds only.');
+
 		$this->addElement('content', $content, array('type' => 'html'));
 	}
 
