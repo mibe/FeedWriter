@@ -26,7 +26,7 @@ use \DateTime;
 /**
  * Universal Feed Writer
  *
- * FeedItem class - Used as feed element in FeedWriter class
+ * Item class - Used as feed element in Feed class
  *
  * @package         UniversalFeedWriter
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
@@ -34,7 +34,14 @@ use \DateTime;
  */
 class Item
 {
-	private $elements = array();    //Collection of feed elements
+	/**
+	* Collection of feed item elements
+	*/
+	private $elements = array();
+
+	/**
+	* Contains the format of this feed.
+	*/
 	private $version;
 	
 	/**
@@ -102,7 +109,7 @@ class Item
 	* Return the type of this feed item
 	* 
 	* @access   public
-	* @return   string  The feed type, as defined in FeedWriter.php
+	* @return   string  The feed type, as defined in Feed.php
 	*/
 	public function getVersion()
 	{
@@ -142,7 +149,8 @@ class Item
 
 	
 	/**
-	* @desc     Set the 'title' element of feed item
+	* Set the 'title' element of feed item
+	*
 	* @access   public
 	* @param    string  The content of 'title' element
 	* @return   void

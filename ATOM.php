@@ -27,6 +27,9 @@ namespace FeedWriter;
  */
 class Atom extends Feed
 {
+	/**
+	* {@inheritdoc}
+	*/
 	function __construct()
 	{
 		parent::__construct(Feed::ATOM);

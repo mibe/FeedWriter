@@ -42,16 +42,40 @@ abstract class Feed
 	const RSS2 = 'RSS 2.0';
 	const ATOM = 'ATOM';
 
-	private $channels      = array();  // Collection of channel elements
-	private $items         = array();  // Collection of items as object of \FeedWriter\Item class.
-	private $data          = array();  // Store some other version wise data
-	private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
-	private $namespaces    = array();  // Collection of XML namespaces
+	/**
+	* Collection of all channel elements
+	*/
+	private $channels      = array();
 
+	/**
+	* Collection of items as object of \FeedWriter\Item class.
+	*/
+	private $items         = array();
+
+	/**
+	* Store some other version wise data
+	*/
+	private $data          = array();
+
+	/**
+	* The tag names which have to encoded as CDATA
+	*/
+	private $CDATAEncoding = array();
+
+	/**
+	* Collection of XML namespaces
+	*/
+	private $namespaces    = array();
+
+	/**
+	* Contains the format of this feed.
+	*/
 	private $version   = null;
 	
 	/**
 	* Constructor
+	*
+	* If no version is given, a feed in RSS 2.0 format will be generated.
 	*
 	* @param    constant    the version constant (RSS1/RSS2/ATOM).
 	*/
@@ -94,7 +118,7 @@ abstract class Feed
 	}
 	
 	/**
-	* Adds a channel element to the feed.
+	* Add a channel element to the feed.
 	* 
 	* @access   public
 	* @param    string  name of the channel tag
@@ -179,7 +203,6 @@ abstract class Feed
 	* Generate the feed.
 	*
 	* @access public
-	* @param  bool
 	* @return string
 	*/
 	public function generateFeed()
@@ -206,7 +229,7 @@ abstract class Feed
 	* Add a FeedItem to the main class
 	* 
 	* @access   public
-	* @param    object  instance of Item class
+	* @param    Item  instance of Item class
 	* @return   void
 	*/
 	public function addItem(Item $feedItem)
@@ -280,6 +303,11 @@ abstract class Feed
 	}
 
 	/**
+	* Set custom 'link' channel elements.
+	* 
+	* In ATOM feeds, only one link with alternate relation and the same combination of
+	* type and hreflang values.
+	* 
 	* @access   public
 	* @param    string  URI of this link
 	* @param    string  relation type of the resource
@@ -347,7 +375,7 @@ abstract class Feed
 					// Only one link with relation alternate and same hreflang & type is allowed.
 					if (@$linkItem['rel'] == 'alternate' && @$linkItem['hreflang'] == $hreflang && @$linkItem['type'] == $type)
 						die('The feed must not contain more than one link element with a relation of "alternate"'
-						. 'that has the same combination of type and hreflang attribute values.');
+						. ' that has the same combination of type and hreflang attribute values.');
 				}
 			}
 		}
@@ -396,15 +424,19 @@ abstract class Feed
 	}
 	
 	/**
-	* Generates an UUID
+	* Generate an UUID.
+	* 
+	* The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
+	* for the MD5 hash is generated.
 	* 
 	* @author     Anis uddin Ahmad <admin@ajaxray.com>
+	* @param      string  optional key on which the UUID is generated
 	* @param      string  an optional prefix
-	* @return     string  the formated uuid
+	* @return     string  the formated UUID
 	*/
 	public static function uuid($key = null, $prefix = '')
 	{
-		$key = ($key == null)? uniqid(rand()) : $key;
+		$key = ($key == null) ? uniqid(rand()) : $key;
 		$chars = md5($key);
 		$uuid  = substr($chars,0,8) . '-';
 		$uuid .= substr($chars,8,4) . '-';
