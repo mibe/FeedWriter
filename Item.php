@@ -161,10 +161,14 @@ class Item
 	}
 	
 	/**
-	* Set the 'date' element of feed item
+	* Set the 'date' element of the feed item.
+	* 
+	* The value of the date parameter can be either an instance of the
+	* DateTime class, an integer containing a UNIX timestamp or a string
+	* which is parseable by PHP's 'strtotime' function.
 	* 
 	* @access   public
-	* @param    string  The content of 'date' element
+	* @param    DateTime|int|string  Date which should be used.
 	* @return   void
 	*/
 	public function setDate($date)
@@ -172,15 +176,12 @@ class Item
 		if(!is_numeric($date))
 		{
 			if ($date instanceof DateTime)
-			{
-				if (version_compare(\PHP_VERSION, '5.3.0', '>='))
-					$date = $date->getTimestamp();
-				else
-					$date = strtotime($date->format('r'));
-			}
+				$date = $date->getTimestamp();
 			else
 				$date = strtotime($date);
 		}
+		else if ($date < 0)
+			die('The given date is not an UNIX timestamp.');
 		
 		if($this->version == Feed::ATOM)
 		{

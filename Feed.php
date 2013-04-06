@@ -256,10 +256,16 @@ abstract class Feed
 	}
 
 	/**
-	* Set the 'updated' channel element of an ATOM feed
+	* Set the date when the ATOM feed was lastly updated.
+	* 
+	* This adds the 'updated' element to the feed. The value of the date parameter
+	* can be either an instance of the DateTime class, an integer containing a UNIX
+	* timestamp or a string which is parseable by PHP's 'strtotime' function.
+	* 
+	* For ATOM feeds only.
 	* 
 	* @access   public
-	* @param    string  value of 'updated' channel tag
+	* @param    DateTime|int|string  Date which should be used.
 	* @return   void
 	*/
 	public function setDate($date)
@@ -269,10 +275,12 @@ abstract class Feed
 
 		if ($date instanceof DateTime)
 			$date = $date->format(DateTime::ATOM);
-		else if(is_numeric($date))
+		else if(is_numeric($date) && $date >= 0)
 			$date = date(\DATE_ATOM, $date);
-		else
+		else if (is_string($date))
 			$date = date(\DATE_ATOM, strtotime($date));
+		else
+			die('The given date was not an instance of DateTime, a UNIX timestamp or a parsable date string.');
 
 		$this->setChannelElement('updated', $date);
 	}
@@ -341,7 +349,7 @@ abstract class Feed
 		{
 			// Regex used from RFC 4287, page 41
 			if (!is_string($hreflang) || preg_match('/[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*/', $hreflang) != 1)
-				die ('hreflang parameter must be a string and a valid language code.');
+				die('hreflang parameter must be a string and a valid language code.');
 
 			$data['hreflang'] = $hreflang;
 		}
