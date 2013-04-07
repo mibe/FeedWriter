@@ -103,6 +103,21 @@ abstract class Feed
 	// Start # public functions ---------------------------------------------
 
 	/**
+	* Adds a channel element indicating the program used to generate the feed.
+	* 
+	* @return   void
+	*/
+	public function addGenerator()
+	{
+		if ($this->version == Feed::ATOM)
+			$this->setChannelElement('atom:generator', 'FeedWriter', array('uri' => 'https://github.com/mibe/FeedWriter'));
+		else if ($this->version == Feed::RSS2)
+			$this->setChannelElement('generator', 'FeedWriter');
+		else
+			die('The generator element is not supported in RSS1 feeds.');
+	}
+
+	/**
 	* Add a XML namespace to the internal list of namespaces. After that,
 	* custom channel elements can be used properly to generate a valid feed.
 	* 
@@ -262,7 +277,7 @@ abstract class Feed
 	* can be either an instance of the DateTime class, an integer containing a UNIX
 	* timestamp or a string which is parseable by PHP's 'strtotime' function.
 	* 
-	* For ATOM feeds only.
+	* Not supported in RSS1 feeds.
 	* 
 	* @access   public
 	* @param    DateTime|int|string  Date which should be used.
@@ -270,19 +285,25 @@ abstract class Feed
 	*/
 	public function setDate($date)
 	{
-		if ($this->version != Feed::ATOM)
-			return;
+		if ($this->version == Feed::RSS1)
+			die('The publication date is not supported in RSS1 feeds.');
+
+		// The feeds have different date formats.
+		$format = $this->version == Feed::ATOM ? \DATE_ATOM : \DATE_RSS;
 
 		if ($date instanceof DateTime)
-			$date = $date->format(DateTime::ATOM);
+			$date = $date->format($format);
 		else if(is_numeric($date) && $date >= 0)
-			$date = date(\DATE_ATOM, $date);
+			$date = date($format, $date);
 		else if (is_string($date))
-			$date = date(\DATE_ATOM, strtotime($date));
+			$date = date($format, strtotime($date));
 		else
 			die('The given date was not an instance of DateTime, a UNIX timestamp or a parsable date string.');
 
-		$this->setChannelElement('updated', $date);
+		if ($this->version == Feed::ATOM)
+			$this->setChannelElement('updated', $date);
+		else
+			$this->setChannelElement('lastBuildDate', $date);
 	}
 	
 	/**
