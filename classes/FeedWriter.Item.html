@@ -65,11 +65,9 @@
 <li class="method public "><a href="#method_setContent" title="setContent :: Set the 'content' element of the feed item
 For ATOM feeds only"><span class="description">Set the 'content' element of the feed item
 For ATOM feeds only</span><pre>setContent()</pre></a></li>
-<li class="method public "><a href="#method_setDate" title="setDate :: Set the 'date' element of feed item"><span class="description">Set the 'date' element of feed item</span><pre>setDate()</pre></a></li>
+<li class="method public "><a href="#method_setDate" title="setDate :: Set the 'date' element of the feed item."><span class="description">Set the 'date' element of the feed item.</span><pre>setDate()</pre></a></li>
 <li class="method public "><a href="#method_setDescription" title="setDescription :: Set the 'description' element of feed item"><span class="description">Set the 'description' element of feed item</span><pre>setDescription()</pre></a></li>
-<li class="method public "><a href="#method_setEnclosure" title="setEnclosure :: Set the 'enclosure' element of feed item
-For RSS 2.0 only"><span class="description">Set the 'enclosure' element of feed item
-For RSS 2.0 only</span><pre>setEnclosure()</pre></a></li>
+<li class="method public "><a href="#method_setEnclosure" title="setEnclosure :: Attach a external media to the feed item."><span class="description">Attach a external media to the feed item.</span><pre>setEnclosure()</pre></a></li>
 <li class="method public "><a href="#method_setId" title="setId :: Set the unique identifier of the feed item"><span class="description">Set the unique identifier of the feed item</span><pre>setId()</pre></a></li>
 <li class="method public "><a href="#method_setLink" title="setLink :: Set the 'link' element of feed item"><span class="description">Set the 'link' element of feed item</span><pre>setLink()</pre></a></li>
 <li class="method public "><a href="#method_setTitle" title="setTitle :: Set the 'title' element of feed item"><span class="description">Set the 'title' element of feed item</span><pre>setTitle()</pre></a></li>
@@ -243,11 +241,13 @@ For ATOM feeds only</h2>
 </div></div>
 </div>
 <a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
-<h2>Set the 'date' element of feed item</h2>
-<pre>setDate(string $date) : void</pre>
+<h2>Set the 'date' element of the feed item.</h2>
+<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>The value of the date parameter can be either an instance of the
+DateTime class, an integer containing a UNIX timestamp or a string
+which is parseable by PHP's 'strtotime' function.</p></div>
 <table class="table table-bordered"><tr>
 <th>access</th>
 <td>public</td>
@@ -255,8 +255,7 @@ For ATOM feeds only</h2>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$date</h4>
-<code>string</code><p>The content of 'date' element</p>
-</div>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code>int</code><code>string</code><p>Date which should be used.</p></div>
 </div></div>
 </div>
 <a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
@@ -277,31 +276,38 @@ For ATOM feeds only</h2>
 </div></div>
 </div>
 <a id="method_setEnclosure"></a><div class="element clickable method public method_setEnclosure" data-toggle="collapse" data-target=".method_setEnclosure .collapse">
-<h2>Set the 'enclosure' element of feed item
-For RSS 2.0 only</h2>
-<pre>setEnclosure(string $url, string $length, string $type) : void</pre>
+<h2>Attach a external media to the feed item.</h2>
+<pre>setEnclosure(string $url, integer $length, string $type) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<div class="long_description"><p>Not supported in RSS 1.0 feeds.</p>
+
+<p>See RFC 4288 for syntactical correct MIME types.</p></div>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://tools.ietf.org/html/rfc4288">https://tools.ietf.org/html/rfc4288</a></td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$url</h4>
-<code>string</code><p>The url attribute of enclosure tag</p></div>
+<code>string</code><p>The URL of the media.</p></div>
 <div class="subelement argument">
 <h4>$length</h4>
-<code>string</code><p>The length attribute of enclosure tag</p></div>
+<code>integer</code><p>The length of the media.</p></div>
 <div class="subelement argument">
 <h4>$type</h4>
-<code>string</code><p>The type attribute of enclosure tag</p></div>
+<code>string</code><p>The MIME type attribute of the media.</p></div>
 </div></div>
 </div>
 <a id="method_setId"></a><div class="element clickable method public method_setId" data-toggle="collapse" data-target=".method_setId .collapse">
 <h2>Set the unique identifier of the feed item</h2>
-<pre>setId(string $id) : void</pre>
+<pre>setId(string $id, boolean $permaLink) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -313,6 +319,10 @@ For RSS 2.0 only</h2>
 <div class="subelement argument">
 <h4>$id</h4>
 <code>string</code><p>The unique identifier of this item</p></div>
+<div class="subelement argument">
+<h4>$permaLink</h4>
+<code>boolean</code><p>The value of the 'isPermaLink' attribute in RSS 2 feeds.</p>
+</div>
 </div></div>
 </div>
 <a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
@@ -370,7 +380,7 @@ For RSS 2.0 only</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-03-31T03:44:09+02:00.<br></footer></div>
+            generated on 2013-04-07T02:52:30+02:00.<br></footer></div>
 </div>
 </body>
 </html>

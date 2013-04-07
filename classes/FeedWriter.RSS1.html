@@ -57,6 +57,7 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method_addGenerator" title="addGenerator :: Adds a channel element indicating the program used to generate the feed."><span class="description">Adds a channel element indicating the program used to generate the feed.</span><pre>addGenerator()</pre></a></li>
 <li class="method public inherited"><a href="#method_addItem" title="addItem :: Add a FeedItem to the main class"><span class="description">Add a FeedItem to the main class</span><pre>addItem()</pre></a></li>
 <li class="method public inherited"><a href="#method_addNamespace" title="addNamespace :: Add a XML namespace to the internal list of namespaces."><span class="description">Add a XML namespace to the internal list of namespaces.</span><pre>addNamespace()</pre></a></li>
 <li class="method public inherited"><a href="#method_createNewItem" title="createNewItem :: Create a new Item."><span class="description">Create a new Item.</span><pre>createNewItem()</pre></a></li>
@@ -67,7 +68,7 @@
 <li class="method public inherited"><a href="#method_setChannelAbout" title="setChannelAbout :: Set the 'about' channel element."><span class="description">Set the 'about' channel element.</span><pre>setChannelAbout()</pre></a></li>
 <li class="method public inherited"><a href="#method_setChannelElement" title="setChannelElement :: Add a channel element to the feed."><span class="description">Add a channel element to the feed.</span><pre>setChannelElement()</pre></a></li>
 <li class="method public inherited"><a href="#method_setChannelElementsFromArray" title="setChannelElementsFromArray :: Set multiple channel elements from an array."><span class="description">Set multiple channel elements from an array.</span><pre>setChannelElementsFromArray()</pre></a></li>
-<li class="method public inherited"><a href="#method_setDate" title="setDate :: Set the 'updated' channel element of an ATOM feed"><span class="description">Set the 'updated' channel element of an ATOM feed</span><pre>setDate()</pre></a></li>
+<li class="method public inherited"><a href="#method_setDate" title="setDate :: Set the date when the ATOM feed was lastly updated."><span class="description">Set the date when the ATOM feed was lastly updated.</span><pre>setDate()</pre></a></li>
 <li class="method public inherited"><a href="#method_setDescription" title="setDescription :: Set the 'description' channel element"><span class="description">Set the 'description' channel element</span><pre>setDescription()</pre></a></li>
 <li class="method public inherited"><a href="#method_setImage" title="setImage :: Set the 'image' channel element"><span class="description">Set the 'image' channel element</span><pre>setImage()</pre></a></li>
 <li class="method public inherited"><a href="#method_setLink" title="setLink :: Set the 'link' channel element"><span class="description">Set the 'link' channel element</span><pre>setLink()</pre></a></li>
@@ -144,6 +145,18 @@
 <pre>__construct() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>If no version is given, a feed in RSS 2.0 format will be generated.</p></div></div></div>
+</div>
+<a id="method_addGenerator"></a><div class="element clickable method public method_addGenerator" data-toggle="collapse" data-target=".method_addGenerator .collapse">
+<h2>Adds a channel element indicating the program used to generate the feed.</h2>
+<pre>addGenerator() : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::addGenerator()</td>
+</tr></table>
+</div></div>
 </div>
 <a id="method_addItem"></a><div class="element clickable method public method_addItem" data-toggle="collapse" data-target=".method_addItem .collapse">
 <h2>Add a FeedItem to the main class</h2>
@@ -405,11 +418,15 @@ should be 'channelName' => 'channelContent' format.</p></div>
 </div></div>
 </div>
 <a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
-<h2>Set the 'updated' channel element of an ATOM feed</h2>
-<pre>setDate(string $date) : void</pre>
+<h2>Set the date when the ATOM feed was lastly updated.</h2>
+<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>This adds the 'updated' element to the feed. The value of the date parameter
+can be either an instance of the DateTime class, an integer containing a UNIX
+timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
+
+<p>Not supported in RSS1 feeds.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -423,8 +440,7 @@ should be 'channelName' => 'channelContent' format.</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$date</h4>
-<code>string</code><p>value of 'updated' channel tag</p>
-</div>
+<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code>int</code><code>string</code><p>Date which should be used.</p></div>
 </div></div>
 </div>
 <a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
@@ -897,7 +913,7 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-03-31T03:44:09+02:00.<br></footer></div>
+            generated on 2013-04-07T02:52:30+02:00.<br></footer></div>
 </div>
 </body>
 </html>
