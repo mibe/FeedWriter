@@ -223,26 +223,32 @@ class Item
 	}
 	
 	/**
-	* Set the 'enclosure' element of feed item
-	* For RSS 2.0 only
+	* Attach a external media to the feed item.
+	* For RSS 2.0 only.
+	* 
+	* See RFC 4288 for syntactical correct MIME types.
 	* 
 	* @access   public
-	* @param    string  The url attribute of enclosure tag
-	* @param    string  The length attribute of enclosure tag
-	* @param    string  The type attribute of enclosure tag
+	* @param    string  The URL of the media.
+	* @param    integer The length of the media.
+	* @param    string  The MIME type attribute of the media.
 	* @return   void
+	* @link     https://tools.ietf.org/html/rfc4288
 	*/
 	public function setEnclosure($url, $length, $type)
 	{
 		if ($this->version != Feed::RSS2)
 			die('The enclosure element is supported in RSS2 feeds only.');
 
+		if (!is_numeric($length) || $length <= 0)
+			die('The length parameter must be an integer and greater than zero.');
+
 		// Regex used from RFC 4287, page 41
 		if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
 			die('type parameter must be a string and a MIME type.');
 
-		$attributes = array('url'=>$url, 'length'=>$length, 'type'=>$type);
-		$this->addElement('enclosure','',$attributes);
+		$attributes = array('url' => $url, 'length' => $length, 'type' => $type);
+		$this->addElement('enclosure', '', $attributes);
 	}
 
 	/**
@@ -261,7 +267,11 @@ class Item
 		{
 			case Feed::RSS1: die('The author element is not supported in RSS1 feeds.');
 				break;
-			case Feed::RSS2: $this->addElement('author', $author);
+			case Feed::RSS2:
+				if ($email != null)
+					$author = $email . ' (' . $author . ')';
+
+				$this->addElement('author', $author);
 				break;
 			case Feed::ATOM:
 				$elements = array('name' => $author);
@@ -283,18 +293,26 @@ class Item
 	* 
 	* @access   public
 	* @param    string  The unique identifier of this item
+	* @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
 	* @return   void
 	*/
-	public function setId($id)
+	public function setId($id, $permaLink = false)
 	{
 		if ($this->version == Feed::RSS2)
 		{
-			$this->addElement('guid', $id, array('isPermaLink' => 'false'));
+			if (!is_bool($permaLink))
+				die('The permaLink parameter must be boolean.');
+
+			$permaLink = $permaLink ? 'true' : 'false';
+
+			$this->addElement('guid', $id, array('isPermaLink' => $permaLink));
 		}
 		else if ($this->version == Feed::ATOM)
 		{
 			$this->addElement('id', Feed::uuid($id,'urn:uuid:'), NULL, TRUE);
 		}
+		else
+			die('A unique ID is not supported in RSS1 feeds.');
 	}
 	
  } // end of class Item
