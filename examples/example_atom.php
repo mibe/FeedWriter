@@ -58,6 +58,7 @@ $newItem->setTitle('The first feed');
 $newItem->setLink('http://www.yahoo.com');
 $newItem->setDate(time());
 $newItem->setAuthor('Anis uddin Ahmad', 'anis@example.invalid');
+$newItem->setEnclosure('http://upload.wikimedia.org/wikipedia/commons/4/49/En-us-hello-1.ogg', 11779, 'audio/ogg');
 
 //Internally changed to "summary" tag for ATOM feed
 $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');

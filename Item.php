@@ -224,7 +224,7 @@ class Item
 	
 	/**
 	* Attach a external media to the feed item.
-	* For RSS 2.0 only.
+	* Not supported in RSS 1.0 feeds.
 	* 
 	* See RFC 4288 for syntactical correct MIME types.
 	* 
@@ -237,8 +237,8 @@ class Item
 	*/
 	public function setEnclosure($url, $length, $type)
 	{
-		if ($this->version != Feed::RSS2)
-			die('The enclosure element is supported in RSS2 feeds only.');
+		if ($this->version == Feed::RSS1)
+			die('Media attachment is not supported in RSS1 feeds.');
 
 		if (!is_numeric($length) || $length <= 0)
 			die('The length parameter must be an integer and greater than zero.');
@@ -247,8 +247,19 @@ class Item
 		if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
 			die('type parameter must be a string and a MIME type.');
 
-		$attributes = array('url' => $url, 'length' => $length, 'type' => $type);
-		$this->addElement('enclosure', '', $attributes);
+		$attributes = array('length' => $length, 'type' => $type);
+
+		if ($this->version == Feed::RSS2)
+		{
+			$attributes['url'] = $url;
+			$this->addElement('enclosure', '', $attributes);
+		}
+		else
+		{
+			$attributes['href'] = $url;
+			$attributes['rel'] = 'enclosure';
+			$this->addElement('atom:link', '', $attributes);
+		}
 	}
 
 	/**
