@@ -752,7 +752,14 @@ abstract class Feed
 			
 			foreach ($thisItems as $feedItem)
 			{
-				$out .= $this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']);
+				$name = $feedItem['name'];
+
+				// Strip all ATOM namespace prefixes from tags when feed is an ATOM feed.
+				// Not needed here, because the ATOM namespace name is used as default namespace.
+				if ($this->version == Feed::ATOM && strncmp($name, 'atom', 4) == 0)
+					$name = substr($name, 5);
+
+				$out .= $this->makeNode($name, $feedItem['content'], $feedItem['attributes']);
 			}
 			$out .= $this->endItem();
 		}
