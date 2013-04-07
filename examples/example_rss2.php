@@ -12,6 +12,7 @@ use \FeedWriter\RSS2;
 
 /* 
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
+ * Copyright (C) 2013 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -29,56 +30,90 @@ use \FeedWriter\RSS2;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Creating an instance of RSS2 class.
+// Creating an instance of RSS2 class.
 $TestFeed = new RSS2;
 
-//Setting the channel elements
-//Use wrapper functions for common channel elements
-$TestFeed->setTitle('Testing & Checking the RSS writer class');
-$TestFeed->setLink('http://www.ajaxray.com/projects/rss');
-$TestFeed->setDescription('This is a test of creating a RSS 2.0 feed with Universal Feed Writer');
+// Setting some basic channel elements. These three elements are mandatory.
+$TestFeed->setTitle('Testing & Checking the Feed Writer project');
+$TestFeed->setLink('https://github.com/mibe/FeedWriter');
+$TestFeed->setDescription('This is just an example how to use the Feed Writer project in your code.');
 
-//Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0
-$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
+// Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,
+// which were set above.
+$TestFeed->setImage('Testing & Checking the Feed Writer project', 'https://github.com/mibe/FeedWriter', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rss-feed.svg/256px-Rss-feed.svg.png');
 
-//Use core setChannelElement() function for other optional channel elements
-$TestFeed->setChannelElement('language', 'en-us');
-$TestFeed->setChannelElement('pubDate', date(DATE_RSS, time()));
+// Use core setChannelElement() function for other optional channel elements.
+// See http://www.rssboard.org/rss-specification#optionalChannelElements
+// for other optional channel elements. Here the language code for American English and
+$TestFeed->setChannelElement('language', 'en-US');
 
-//You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
+// The date when this feed was lastly updated. The publication date is also set.
+$TestFeed->setDate(date(DATE_RSS, time()));
+$TestFeed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
+
+// You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
+// It's recommended to provide a backlink to the feed URL.
 $TestFeed->setSelfLink('http://example.com/myfeed');
 $TestFeed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
-// You can add more XML namespaces for your custom channel elements
+// You can add more XML namespaces for more custom channel elements which are not defined
+// in the RSS 2 specification. Here the 'creativeCommons' element is used. There are much more
+// available. Have a look at this list: http://feedvalidator.org/docs/howto/declare_namespaces.html
 $TestFeed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
 $TestFeed->setChannelElement('creativeCommons:license', 'http://www.creativecommons.org/licenses/by/1.0');
 
-//Adding a feed. Genarally this portion will be in a loop and add all feeds.
+// If you want you can also add a line to publicly announce that you used
+// this fine piece of software to generate the feed. ;-)
+$TestFeed->addGenerator();
 
-//Create an empty FeedItem
+// Here we are done setting up the feed. What's next is adding some feed items.
+
+// Create a new feed item.
 $newItem = $TestFeed->createNewItem();
 
-//Add elements to the feed item
-//Use wrapper functions to add common feed elements
-$newItem->setTitle('The first feed');
-$newItem->setLink('http://www.yahoo.com');
-//The parameter is a timestamp for setDate() function
-$newItem->setDate(time());
-$newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
-$newItem->setEnclosure('http://www.attrtest.com', '1283629', 'audio/mpeg');
-//Use core addElement() function for other supported optional elements
-$newItem->setAuthor('admin@ajaxray.com (Anis uddin Ahmad)');
-//Attributes have to passed as array in 3rd parameter
-$newItem->addElement('guid', 'http://www.ajaxray.com',array('isPermaLink'=>'true'));
+// Add basic elements to the feed item
+// These are again mandatory for a valid feed.
+$newItem->setTitle('Hello World!');
+$newItem->setLink('http://www.example.com');
+$newItem->setDescription('This is a test of adding a description by the <b>Feed Writer</b> classes. It\'s automatically CDATA encoded.');
 
-//Now add the feed item
+// The following method calls add some optional elements to the feed item.
+
+// Let's set the publication date of this item. You could also use a UNIX timestamp or
+// an instance of PHP's DateTime class.
+$newItem->setDate('2013-04-07 00:50:30');
+
+// You can also attach a media object to a feed item. You just need the URL, the byte length
+// and the MIME type of the media. Here's a quirk: The RSS2 spec says "The url must be an http url.".
+// Other schemes like ftp, https, etc. produce an error in feed validators.
+$newItem->setEnclosure('http://upload.wikimedia.org/wikipedia/commons/4/49/En-us-hello-1.ogg', 11779, 'audio/ogg');
+
+// If you want you can set the name (and email address) of the author of this feed item.
+$newItem->setAuthor('Anis uddin Ahmad', 'admin@ajaxray.com');
+
+// You can set a globally unique identifier. This can be a URL or any other string.
+// If you set permaLink to true, the identifier must be an URL. The default of the
+// permaLink parameter is false.
+$newItem->setId('http://example.com/URL/to/article', true);
+
+// Use the addElement() method for other optional elements.
+// This here will add the 'source' element. The second parameter is the value of the element
+// and the third is an array containing the element attributes.
+$newItem->addElement('source', 'Mike\'s page', array('url' => 'http://www.example.com'));
+
+// Now add the feed item to the main feed.
 $TestFeed->addItem($newItem);
 
-//Another method to add feeds from array()
-//Elements which have attribute cannot be added by this way
+// Another method to add feeds items is by using an array which contains key-value pairs
+// of every item element. Elements which have attributes cannot be added by this way.
 $newItem = $TestFeed->createNewItem();
-$newItem->addElementArray(array('title'=>'The 2nd feed', 'link'=>'http://www.google.com', 'description'=>'This is a test of the FeedWriter class'));
+$newItem->addElementArray(array('title'=> 'The 2nd item', 'link' => 'http://www.google.com', 'description' => 'Just another test.'));
 $TestFeed->addItem($newItem);
 
-//OK. Everything is done. Now generate the feed.
-echo $TestFeed->generateFeed();
+// OK. Everything is done. Now generate the feed.
+// If you want to send the feed directly to the browser, use the printFeed() method.
+$myFeed = $TestFeed->generateFeed();
+
+// Do anything you want with the feed in $myFeed. Why not send it to the browser? ;-)
+// You could also save it to a file if you don't want to invoke your script every time.
+echo $myFeed;
