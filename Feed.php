@@ -3,7 +3,7 @@ namespace FeedWriter;
 
 use \DateTime;
 
-/* 
+/*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
  *
@@ -18,7 +18,7 @@ use \DateTime;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -71,7 +71,7 @@ abstract class Feed
 	* Contains the format of this feed.
 	*/
 	private $version   = null;
-	
+
 	/**
 	* Constructor
 	*
@@ -104,7 +104,7 @@ abstract class Feed
 
 	/**
 	* Adds a channel element indicating the program used to generate the feed.
-	* 
+	*
 	* @return   void
 	*/
 	public function addGenerator()
@@ -114,13 +114,15 @@ abstract class Feed
 		else if ($this->version == Feed::RSS2)
 			$this->setChannelElement('generator', 'FeedWriter');
 		else
-			die('The generator element is not supported in RSS1 feeds.');
+            die('The generator element is not supported in RSS1 feeds.');
+
+        return $this;
 	}
 
 	/**
 	* Add a XML namespace to the internal list of namespaces. After that,
 	* custom channel elements can be used properly to generate a valid feed.
-	* 
+	*
 	* @access   public
 	* @param    string  namespace prefix
 	* @param    string  namespace name (URI)
@@ -129,12 +131,13 @@ abstract class Feed
 	*/
 	public function addNamespace($prefix, $uri)
 	{
-		$this->namespaces[$prefix] = $uri;
+        $this->namespaces[$prefix] = $uri;
+        return $this;
 	}
-	
+
 	/**
 	* Add a channel element to the feed.
-	* 
+	*
 	* @access   public
 	* @param    string  name of the channel tag
 	* @param    string  content of the channel tag
@@ -146,9 +149,11 @@ abstract class Feed
 		if ($multiple === TRUE)
 			$this->channels[$elementName][] = $content;
 		else
-			$this->channels[$elementName] = $content;
+            $this->channels[$elementName] = $content;
+
+        return $this;
 	}
-	
+
 	/**
 	* Set multiple channel elements from an array. Array elements
 	* should be 'channelName' => 'channelContent' format.
@@ -166,6 +171,8 @@ abstract class Feed
 		{
 			$this->setChannelElement($elementName, $content);
 		}
+
+        return $this;
 	}
 
 	/**
@@ -189,7 +196,7 @@ abstract class Feed
 
 		return $mimeType;
 	}
-	
+
 	/**
 	* Print the actual RSS/ATOM file
 	*
@@ -227,10 +234,10 @@ abstract class Feed
 			. $this->makeItems()
 			. $this->makeFooter();
 	}
-	
+
 	/**
 	* Create a new Item.
-	* 
+	*
 	* @access   public
 	* @return   object  instance of Item class
 	*/
@@ -239,10 +246,10 @@ abstract class Feed
 		$Item = new Item($this->version);
 		return $Item;
 	}
-	
+
 	/**
 	* Add a FeedItem to the main class
-	* 
+	*
 	* @access   public
 	* @param    Item  instance of Item class
 	* @return   void
@@ -252,33 +259,35 @@ abstract class Feed
 		if ($feedItem->getVersion() != $this->version)
 			die('Feed type mismatch: This instance can handle ' . $this->version . ' feeds only, but item with type ' . $feedItem->getVersion() . ' given.');
 
-		$this->items[] = $feedItem;
+        $this->items[] = $feedItem;
+
+        return $this;
 	}
-	
-	
+
+
 	// Wrapper functions -------------------------------------------------------------------
-	
+
 	/**
 	* Set the 'title' channel element
-	* 
+	*
 	* @access   public
 	* @param    string  value of 'title' channel tag
 	* @return   void
 	*/
 	public function setTitle($title)
 	{
-		$this->setChannelElement('title', $title);
+		return $this->setChannelElement('title', $title);
 	}
 
 	/**
 	* Set the date when the ATOM feed was lastly updated.
-	* 
+	*
 	* This adds the 'updated' element to the feed. The value of the date parameter
 	* can be either an instance of the DateTime class, an integer containing a UNIX
 	* timestamp or a string which is parseable by PHP's 'strtotime' function.
-	* 
+	*
 	* Not supported in RSS1 feeds.
-	* 
+	*
 	* @access   public
 	* @param    DateTime|int|string  Date which should be used.
 	* @return   void
@@ -303,9 +312,10 @@ abstract class Feed
 		if ($this->version == Feed::ATOM)
 			$this->setChannelElement('updated', $date);
 		else
-			$this->setChannelElement('lastBuildDate', $date);
+            $this->setChannelElement('lastBuildDate', $date);
+        return $this;
 	}
-	
+
 	/**
 	* Set the 'description' channel element
 	*
@@ -316,27 +326,28 @@ abstract class Feed
 	public function setDescription($description)
 	{
 		if ($this->version != Feed::ATOM)
-			$this->setChannelElement('description', $description);
+            $this->setChannelElement('description', $description);
+        return $this;
 	}
-	
+
 	/**
 	* Set the 'link' channel element
-	* 
+	*
 	* @access   public
 	* @param    string  value of 'link' channel tag
 	* @return   void
 	*/
 	public function setLink($link)
 	{
-		$this->setChannelElement('link', $link);
+	    return $this->setChannelElement('link', $link);
 	}
 
 	/**
 	* Set custom 'link' channel elements.
-	* 
+	*
 	* In ATOM feeds, only one link with alternate relation and the same combination of
 	* type and hreflang values.
-	* 
+	*
 	* @access   public
 	* @param    string  URI of this link
 	* @param    string  relation type of the resource
@@ -409,13 +420,13 @@ abstract class Feed
 			}
 		}
 
-		$this->setChannelElement('atom:link', $data, true);
+		return $this->setChannelElement('atom:link', $data, true);
 	}
 
 	/**
 	* Set an 'atom:link' channel element with relation=self attribute.
 	* Needs the full URL to this feed.
-	* 
+	*
 	* @link     http://www.rssboard.org/rss-profile#namespace-elements-atom-link
 	* @access   public
 	* @param    string  URL to this feed
@@ -423,12 +434,12 @@ abstract class Feed
 	*/
 	public function setSelfLink($url)
 	{
-		$this->setAtomLink($url, 'self', $this->getMIMEType());
+		return $this->setAtomLink($url, 'self', $this->getMIMEType());
 	}
-	
+
 	/**
 	* Set the 'image' channel element
-	* 
+	*
 	* @access   public
 	* @param    string  title of image
 	* @param    string  link url of the image
@@ -437,27 +448,28 @@ abstract class Feed
 	*/
 	public function setImage($title, $link, $url)
 	{
-		$this->setChannelElement('image', array('title'=>$title, 'link'=>$link, 'url'=>$url));
+		return $this->setChannelElement('image', array('title'=>$title, 'link'=>$link, 'url'=>$url));
 	}
-	
+
 	/**
 	* Set the 'about' channel element. Only for RSS 1.0
-	* 
+	*
 	* @access   public
 	* @param    string  value of 'about' channel tag
 	* @return   void
 	*/
 	public function setChannelAbout($url)
 	{
-		$this->data['ChannelAbout'] = $url;
+        $this->data['ChannelAbout'] = $url;
+        return $this;
 	}
-	
+
 	/**
 	* Generate an UUID.
-	* 
+	*
 	* The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
 	* for the MD5 hash is generated.
-	* 
+	*
 	* @author     Anis uddin Ahmad <admin@ajaxray.com>
 	* @param      string  optional key on which the UUID is generated
 	* @param      string  an optional prefix
@@ -476,7 +488,7 @@ abstract class Feed
 		return $prefix . $uuid;
 	}
 	// End # public functions ----------------------------------------------
-	
+
 	// Start # private functions ----------------------------------------------
 
 	/**
@@ -484,7 +496,7 @@ abstract class Feed
 	* This includes all channel elements and feed items.
 	* Unfortunately some namespace prefixes are not included,
 	* because they are hardcoded, e.g. rdf.
-	* 
+	*
 	* @access   private
 	* @return   array    Array with namespace prefix as value.
 	*/
@@ -512,10 +524,10 @@ abstract class Feed
 
 		return array_unique($prefixes);
 	}
-	
+
 	/**
 	* Returns the XML header and root element, depending on the feed type.
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -567,10 +579,10 @@ abstract class Feed
 
 		return $out;
 	}
-	
+
 	/**
 	* Closes the open tags at the end of file
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -613,16 +625,16 @@ abstract class Feed
 				$attrText .= " $key=\"$value\"";
 			}
 		}
-		
+
 		if(is_array($tagContent) && $this->version == Feed::RSS1)
 		{
 			$attrText = ' rdf:parseType="Resource"';
 		}
-		
+
 		$attrText .= (in_array($tagName, $this->CDATAEncoding) && $this->version == Feed::ATOM) ? ' type="html"' : '';
 		$nodeText .= "<{$tagName}{$attrText}>";
 		$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? '<![CDATA[' : '';
-		
+
 		if(is_array($tagContent))
 		{
 			foreach ($tagContent as $key => $value)
@@ -634,7 +646,7 @@ abstract class Feed
 		{
 			$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
 		}
-		
+
 		$nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? ']]>' : '';
 
 		if (!$omitEndTag)
@@ -644,7 +656,7 @@ abstract class Feed
 
 		return $nodeText;
 	}
-	
+
 	/**
 	* Make the channels.
 	*
@@ -665,7 +677,7 @@ abstract class Feed
 				$out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">";
 				break;
 		}
-		
+
 		//Print Items of channel
 		foreach ($this->channels as $key => $value)
 		{
@@ -715,9 +727,9 @@ abstract class Feed
 					$out .= $this->makeNode($key, $value);
 				}
 			}
-			
+
 		}
-		
+
 		//RSS 1.0 have special tag <rdf:Seq> with channel
 		if($this->version == Feed::RSS1)
 		{
@@ -732,10 +744,10 @@ abstract class Feed
 
 		return $out;
 	}
-	
+
 	/**
 	* Prints formatted feed items
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -746,10 +758,10 @@ abstract class Feed
 		foreach ($this->items as $item)
 		{
 			$thisItems = $item->getElements();
-			
+
 			// the argument is printed as rdf:about attribute of item in rss 1.0
 			$out .= $this->startItem($thisItems['link']['content']);
-			
+
 			foreach ($thisItems as $feedItem)
 			{
 				$name = $feedItem['name'];
@@ -766,10 +778,10 @@ abstract class Feed
 
 		return $out;
 	}
-	
+
 	/**
 	* Make the starting tag of channels
-	* 
+	*
 	* @access   private
 	* @param    string  The vale of about tag which is used for RSS 1.0 only.
 	* @return   void
@@ -800,10 +812,10 @@ abstract class Feed
 
 		return $out;
 	}
-	
+
 	/**
 	* Closes feed item tag
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -818,13 +830,13 @@ abstract class Feed
 			return '</entry>' . PHP_EOL;
 		}
 	}
-	
+
 	/**
 	* Sanitizes data which will be later on returned as CDATA in the feed.
-	* 
+	*
 	* A "]]>" respectively "<![CDATA" in the data would break the CDATA in the
 	* XML, so the brackets are converted to a HTML entity.
-	* 
+	*
 	* @access   private
 	* @param    string  Data to be sanitized
 	* @return   string  Sanitized data
@@ -836,7 +848,7 @@ abstract class Feed
 
 		return $text;
 	}
-	
+
 	// End # private functions ----------------------------------------------
-	
+
 } // end of class Feed
