@@ -17,7 +17,11 @@
     "minimum-stability": "dev",
     "autoload": {
         "classmap": [
-            "ATOM.php", "Feed.php", "Item.php", "RSS1.php", "RSS2.php"
+            "ATOM.php",
+            "Feed.php",
+            "Item.php",
+            "RSS1.php",
+            "RSS2.php"
         ]
     }
 }
