@@ -3,7 +3,7 @@ namespace FeedWriter;
 
 use \DateTime;
 
-/* 
+/*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
  *
@@ -43,17 +43,17 @@ class Item
 	* Contains the format of this feed.
 	*/
 	private $version;
-	
+
 	/**
 	* Constructor
-	* 
+	*
 	* @param    constant     (RSS1/RSS2/ATOM) RSS2 is default.
-	*/ 
+	*/
 	function __construct($version = Feed::RSS2)
 	{
 		$this->version = $version;
 	}
-	
+
 	/**
 	* Add an element to elements array
 	*
@@ -73,8 +73,10 @@ class Item
 		$this->elements[$elementName]['name']       = $elementName;
 		$this->elements[$elementName]['content']    = $content;
 		$this->elements[$elementName]['attributes'] = $attributes;
+
+        return $this;
 	}
-	
+
 	/**
 	* Set multiple feed elements from an array.
 	* Elements which have attributes cannot be added by this method
@@ -92,8 +94,9 @@ class Item
 		{
 			$this->addElement($elementName, $content);
 		}
+        return $this;
 	}
-	
+
 	/**
 	* Return the collection of elements in this feed item
 	*
@@ -107,7 +110,7 @@ class Item
 
 	/**
 	* Return the type of this feed item
-	* 
+	*
 	* @access   public
 	* @return   string  The feed type, as defined in Feed.php
 	*/
@@ -115,12 +118,12 @@ class Item
 	{
 		return $this->version;
 	}
-	
+
 	// Wrapper functions ------------------------------------------------------
-	
+
 	/**
 	* Set the 'description' element of feed item
-	* 
+	*
 	* @access   public
 	* @param    string  The content of 'description' or 'summary' element
 	* @return   void
@@ -128,7 +131,7 @@ class Item
 	public function setDescription($description)
 	{
 		$tag = ($this->version == Feed::ATOM) ? 'summary' : 'description';
-		$this->addElement($tag, $description);
+		return $this->addElement($tag, $description);
 	}
 
 	/**
@@ -144,10 +147,10 @@ class Item
 		if ($this->version != Feed::ATOM)
 			die('The content element is supported in ATOM feeds only.');
 
-		$this->addElement('content', $content, array('type' => 'html'));
+		return $this->addElement('content', $content, array('type' => 'html'));
 	}
 
-	
+
 	/**
 	* Set the 'title' element of feed item
 	*
@@ -157,16 +160,16 @@ class Item
 	*/
 	public function setTitle($title)
 	{
-		$this->addElement('title', $title);
+		return $this->addElement('title', $title);
 	}
-	
+
 	/**
 	* Set the 'date' element of the feed item.
-	* 
+	*
 	* The value of the date parameter can be either an instance of the
 	* DateTime class, an integer containing a UNIX timestamp or a string
 	* which is parseable by PHP's 'strtotime' function.
-	* 
+	*
 	* @access   public
 	* @param    DateTime|int|string  Date which should be used.
 	* @return   void
@@ -182,7 +185,7 @@ class Item
 		}
 		else if ($date < 0)
 			die('The given date is not an UNIX timestamp.');
-		
+
 		if($this->version == Feed::ATOM)
 		{
 			$tag    = 'updated';
@@ -198,13 +201,13 @@ class Item
 			$tag    = 'dc:date';
 			$value  = date("Y-m-d", $date);
 		}
-		
-		$this->addElement($tag, $value);
+
+		return $this->addElement($tag, $value);
 	}
-	
+
 	/**
 	* Set the 'link' element of feed item
-	* 
+	*
 	* @access   public
 	* @param    string  The content of 'link' element
 	* @return   void
@@ -219,15 +222,16 @@ class Item
 		{
 			$this->addElement('link','',array('href'=>$link));
 			$this->addElement('id', Feed::uuid($link,'urn:uuid:'));
-		}
+        }
+        return $this;
 	}
-	
+
 	/**
 	* Attach a external media to the feed item.
 	* Not supported in RSS 1.0 feeds.
-	* 
+	*
 	* See RFC 4288 for syntactical correct MIME types.
-	* 
+	*
 	* @access   public
 	* @param    string  The URL of the media.
 	* @param    integer The length of the media.
@@ -259,13 +263,14 @@ class Item
 			$attributes['href'] = $url;
 			$attributes['rel'] = 'enclosure';
 			$this->addElement('atom:link', '', $attributes);
-		}
+        }
+        return $this;
 	}
 
 	/**
 	* Set the 'author' element of feed item.
 	* Not supported in RSS 1.0 feeds.
-	* 
+	*
 	* @access   public
 	* @param    string  The author of this item
 	* @param    string  Optional email address of the author
@@ -297,11 +302,12 @@ class Item
 				$this->addElement('author', $elements);
 				break;
 		}
+        return $this;
 	}
 
 	/**
 	* Set the unique identifier of the feed item
-	* 
+	*
 	* @access   public
 	* @param    string  The unique identifier of this item
 	* @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
@@ -323,7 +329,9 @@ class Item
 			$this->addElement('id', Feed::uuid($id,'urn:uuid:'), NULL, TRUE);
 		}
 		else
-			die('A unique ID is not supported in RSS1 feeds.');
+            die('A unique ID is not supported in RSS1 feeds.');
+
+        return $this;
 	}
-	
+
  } // end of class Item

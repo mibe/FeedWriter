@@ -10,7 +10,7 @@ date_default_timezone_set('UTC');
 
 use \FeedWriter\RSS2;
 
-/* 
+/**
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  * Copyright (C) 2013 Michael Bemmerl <mail@mx-server.de>
  *
@@ -25,7 +25,7 @@ use \FeedWriter\RSS2;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */

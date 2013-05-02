@@ -1,0 +1,28 @@
+{
+    "name": "mibe/FeedWriter",
+    "description": "Generate feeds in either RSS 1.0, RSS 2.0 or ATOM formats",
+    "keywords": ["RSS"],
+    "homepage": "https://github.com/mibe/FeedWriter",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael Bemmerl",
+            "email": ""
+        },
+        {
+            "name": "Michael Robinson",
+            "email": "mike@pagesofinterest.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap": [
+            "ATOM.php",
+            "Feed.php",
+            "Item.php",
+            "RSS1.php",
+            "RSS2.php"
+        ]
+    }
+}
+
