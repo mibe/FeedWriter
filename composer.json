@@ -4,10 +4,23 @@
     "keywords": ["RSS"],
     "homepage": "https://github.com/mibe/FeedWriter",
     "type": "library",
+    "license": "GPL-3.0",
     "authors": [
         {
+            "name": "Anis uddin Ahmad"
+        },
+        {
             "name": "Michael Bemmerl",
-            "email": ""
+            "email": "mail@mx-server.de"
+        },
+        {
+            "name": "Phil Freo"
+        },
+        {
+            "name": "Paul Ferrett"
+        },
+        {
+            "name": "Brennen Bearnes"
         },
         {
             "name": "Michael Robinson",
