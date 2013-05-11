@@ -74,7 +74,7 @@ class Item
 		$this->elements[$elementName]['content']    = $content;
 		$this->elements[$elementName]['attributes'] = $attributes;
 
-        return $this;
+		return $this;
 	}
 
 	/**
@@ -94,7 +94,8 @@ class Item
 		{
 			$this->addElement($elementName, $content);
 		}
-        return $this;
+
+		return $this;
 	}
 
 	/**
@@ -222,8 +223,9 @@ class Item
 		{
 			$this->addElement('link','',array('href'=>$link));
 			$this->addElement('id', Feed::uuid($link,'urn:uuid:'));
-        }
-        return $this;
+		}
+
+		return $this;
 	}
 
 	/**
@@ -263,8 +265,9 @@ class Item
 			$attributes['href'] = $url;
 			$attributes['rel'] = 'enclosure';
 			$this->addElement('atom:link', '', $attributes);
-        }
-        return $this;
+		}
+
+		return $this;
 	}
 
 	/**
@@ -302,7 +305,8 @@ class Item
 				$this->addElement('author', $elements);
 				break;
 		}
-        return $this;
+
+		return $this;
 	}
 
 	/**
@@ -329,9 +333,9 @@ class Item
 			$this->addElement('id', Feed::uuid($id,'urn:uuid:'), NULL, TRUE);
 		}
 		else
-            die('A unique ID is not supported in RSS1 feeds.');
+			die('A unique ID is not supported in RSS1 feeds.');
 
-        return $this;
+		return $this;
 	}
 
  } // end of class Item

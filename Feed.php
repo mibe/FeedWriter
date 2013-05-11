@@ -114,9 +114,9 @@ abstract class Feed
 		else if ($this->version == Feed::RSS2)
 			$this->setChannelElement('generator', 'FeedWriter');
 		else
-            die('The generator element is not supported in RSS1 feeds.');
+			die('The generator element is not supported in RSS1 feeds.');
 
-        return $this;
+		return $this;
 	}
 
 	/**
@@ -131,8 +131,8 @@ abstract class Feed
 	*/
 	public function addNamespace($prefix, $uri)
 	{
-        $this->namespaces[$prefix] = $uri;
-        return $this;
+		$this->namespaces[$prefix] = $uri;
+		return $this;
 	}
 
 	/**
@@ -149,9 +149,9 @@ abstract class Feed
 		if ($multiple === TRUE)
 			$this->channels[$elementName][] = $content;
 		else
-            $this->channels[$elementName] = $content;
+			$this->channels[$elementName] = $content;
 
-        return $this;
+		return $this;
 	}
 
 	/**
@@ -172,7 +172,7 @@ abstract class Feed
 			$this->setChannelElement($elementName, $content);
 		}
 
-        return $this;
+		return $this;
 	}
 
 	/**
@@ -259,9 +259,9 @@ abstract class Feed
 		if ($feedItem->getVersion() != $this->version)
 			die('Feed type mismatch: This instance can handle ' . $this->version . ' feeds only, but item with type ' . $feedItem->getVersion() . ' given.');
 
-        $this->items[] = $feedItem;
+		$this->items[] = $feedItem;
 
-        return $this;
+		return $this;
 	}
 
 
@@ -312,8 +312,9 @@ abstract class Feed
 		if ($this->version == Feed::ATOM)
 			$this->setChannelElement('updated', $date);
 		else
-            $this->setChannelElement('lastBuildDate', $date);
-        return $this;
+			$this->setChannelElement('lastBuildDate', $date);
+
+		return $this;
 	}
 
 	/**
@@ -326,8 +327,8 @@ abstract class Feed
 	public function setDescription($description)
 	{
 		if ($this->version != Feed::ATOM)
-            $this->setChannelElement('description', $description);
-        return $this;
+			$this->setChannelElement('description', $description);
+		return $this;
 	}
 
 	/**
@@ -339,7 +340,7 @@ abstract class Feed
 	*/
 	public function setLink($link)
 	{
-	    return $this->setChannelElement('link', $link);
+		return $this->setChannelElement('link', $link);
 	}
 
 	/**
@@ -460,8 +461,8 @@ abstract class Feed
 	*/
 	public function setChannelAbout($url)
 	{
-        $this->data['ChannelAbout'] = $url;
-        return $this;
+		$this->data['ChannelAbout'] = $url;
+		return $this;
 	}
 
 	/**
