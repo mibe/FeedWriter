@@ -182,7 +182,12 @@ class Item
 			if ($date instanceof DateTime)
 				$date = $date->getTimestamp();
 			else
+			{
 				$date = strtotime($date);
+
+				if ($date === FALSE)
+					die('The given date string was not parseable.');
+			}
 		}
 		else if ($date < 0)
 			die('The given date is not an UNIX timestamp.');

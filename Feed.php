@@ -307,7 +307,7 @@ abstract class Feed
 		else if (is_string($date))
 			$date = date($format, strtotime($date));
 		else
-			die('The given date was not an instance of DateTime, a UNIX timestamp or a parsable date string.');
+			die('The given date was not an instance of DateTime, a UNIX timestamp or a date string.');
 
 		if ($this->version == Feed::ATOM)
 			$this->setChannelElement('updated', $date);
