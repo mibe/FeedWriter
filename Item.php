@@ -45,6 +45,11 @@ class Item
 	private $version;
 
 	/**
+	 * Is used as a suffix when multiple elements have the same name.
+	 **/
+	private $_cpt = 0;
+
+	/**
 	* Constructor
 	*
 	* @param    constant     (RSS1/RSS2/ATOM) RSS2 is default.
@@ -52,6 +57,15 @@ class Item
 	function __construct($version = Feed::RSS2)
 	{
 		$this->version = $version;
+	}
+
+	/**
+	 * Return an unique number
+	 * @access private
+	 * @return int
+	 **/
+	private function cpt() {
+		return $this->_cpt++;
 	}
 
 	/**
@@ -64,15 +78,24 @@ class Item
 	* @param    boolean Specifies, if an already existing element is overwritten.
 	* @return   void
 	*/
-	public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE)
+	public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
 	{
-		// return if element already exists & if overwriting is disabled.
-		if (isset($this->elements[$elementName]) && !$overwrite)
-			return;
 
-		$this->elements[$elementName]['name']       = $elementName;
-		$this->elements[$elementName]['content']    = $content;
-		$this->elements[$elementName]['attributes'] = $attributes;
+		$key = $elementName;
+
+		// return if element already exists & if overwriting is disabled
+		// & if multiple elements are not allowed.
+		if (isset($this->elements[$elementName]) && !$overwrite) {
+			if (!$allowMultiple)
+				return;
+
+			$key .= '-' . $this->cpt();
+		}
+
+
+		$this->elements[$key]['name']       = $elementName;
+		$this->elements[$key]['content']    = $content;
+		$this->elements[$key]['attributes'] = $attributes;
 
 		return $this;
 	}
@@ -239,20 +262,26 @@ class Item
 	*
 	* See RFC 4288 for syntactical correct MIME types.
 	*
+	* Note that you should avoid the use of more than one enclosure in one item,
+	* since some RSS aggregators don't support it.
+	*
 	* @access   public
 	* @param    string  The URL of the media.
 	* @param    integer The length of the media.
 	* @param    string  The MIME type attribute of the media.
+	* @param    boolean Specifies, if multiple enclosures are allowed
 	* @return   void
 	* @link     https://tools.ietf.org/html/rfc4288
 	*/
-	public function setEnclosure($url, $length, $type)
+	public function addEnclosure($url, $length, $type, $multiple = TRUE)
 	{
 		if ($this->version == Feed::RSS1)
 			die('Media attachment is not supported in RSS1 feeds.');
 
-		if (!is_numeric($length) || $length <= 0)
-			die('The length parameter must be an integer and greater than zero.');
+		// the length parameter should be set to 0 if it can't be determined
+		// see http://www.rssboard.org/rss-profile#element-channel-item-enclosure
+		if (!is_numeric($length) || $length < 0)
+			die('The length parameter must be an integer and greater or equals to zero.');
 
 		// Regex used from RFC 4287, page 41
 		if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
@@ -263,16 +292,32 @@ class Item
 		if ($this->version == Feed::RSS2)
 		{
 			$attributes['url'] = $url;
-			$this->addElement('enclosure', '', $attributes);
+			$this->addElement('enclosure', '', $attributes, FALSE, $multiple);
 		}
 		else
 		{
 			$attributes['href'] = $url;
 			$attributes['rel'] = 'enclosure';
-			$this->addElement('atom:link', '', $attributes);
+			$this->addElement('atom:link', '', $attributes, FALSE, $multiple);
 		}
 
 		return $this;
+	}
+
+	/**
+	* Alias of addEnclosure, for backward compatibility. Using only this
+	* method ensure that the 'enclosure' element will be present only once.
+	*
+	* @access   public
+	* @param    string  The URL of the media.
+	* @param    integer The length of the media.
+	* @param    string  The MIME type attribute of the media.
+	* @return   void
+	* @link     https://tools.ietf.org/html/rfc4288
+	*
+	**/
+	public function setEnclosure($url, $length, $type) {
+		return $this->addEnclosure($url, $length, $type, false);
 	}
 
 	/**
