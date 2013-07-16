@@ -270,7 +270,7 @@ class Item
 	* @return   void
 	* @link     https://tools.ietf.org/html/rfc4288
 	*/
-	public function addEnclosure($url, $length, $type, $multiple = FALSE)
+	public function addEnclosure($url, $length, $type, $multiple = TRUE)
 	{
 		if ($this->version == Feed::RSS1)
 			die('Media attachment is not supported in RSS1 feeds.');
@@ -300,9 +300,9 @@ class Item
 	}
 
 	/**
-	* Alias of addEnclosure, for backward compatibility
+    * Alias of addEnclosure, for backward compatibility. Using only this
+    * method ensure that the 'enclosure' element will be present only once.
 	*
-	* @deprecated
 	* @access   public
 	* @param    string  The URL of the media.
 	* @param    integer The length of the media.
@@ -312,7 +312,7 @@ class Item
 	*
 	**/
 	public function setEnclosure($url, $length, $type) {
-	    return $this->addEnclosure($url, $length, $type);
+	    return $this->addEnclosure($url, $length, $type, false);
 	}
 
 	/**
