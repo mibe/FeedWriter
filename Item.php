@@ -262,6 +262,9 @@ class Item
 	*
 	* See RFC 4288 for syntactical correct MIME types.
 	*
+	* Note that you should avoid the use of more than one enclosure in one item,
+	* since some RSS aggregators don't support it.
+	*
 	* @access   public
 	* @param    string  The URL of the media.
 	* @param    integer The length of the media.
@@ -275,8 +278,10 @@ class Item
 		if ($this->version == Feed::RSS1)
 			die('Media attachment is not supported in RSS1 feeds.');
 
-		if (!is_numeric($length) || $length <= 0)
-			die('The length parameter must be an integer and greater than zero.');
+		// the length parameter should be set to 0 if it can't be determined
+		// see http://www.rssboard.org/rss-profile#element-channel-item-enclosure
+		if (!is_numeric($length) || $length < 0)
+			die('The length parameter must be an integer and greater or equals to zero.');
 
 		// Regex used from RFC 4287, page 41
 		if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
@@ -300,8 +305,8 @@ class Item
 	}
 
 	/**
-    * Alias of addEnclosure, for backward compatibility. Using only this
-    * method ensure that the 'enclosure' element will be present only once.
+	* Alias of addEnclosure, for backward compatibility. Using only this
+	* method ensure that the 'enclosure' element will be present only once.
 	*
 	* @access   public
 	* @param    string  The URL of the media.
@@ -312,7 +317,7 @@ class Item
 	*
 	**/
 	public function setEnclosure($url, $length, $type) {
-	    return $this->addEnclosure($url, $length, $type, false);
+		return $this->addEnclosure($url, $length, $type, false);
 	}
 
 	/**
