@@ -123,7 +123,7 @@ abstract class FeedWriter
 			}
 		}
 
-		header("Content-Type: " . $contentType);
+		header("Content-Type: " . $contentType . "; charset=UTF-8");
 		
 		$this->printHeader();
 		$this->printChannels();
