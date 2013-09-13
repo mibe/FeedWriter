@@ -59,6 +59,7 @@
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#method_addElement" title="addElement :: Add an element to elements array"><span class="description">Add an element to elements array</span><pre>addElement()</pre></a></li>
 <li class="method public "><a href="#method_addElementArray" title="addElementArray :: Set multiple feed elements from an array."><span class="description">Set multiple feed elements from an array.</span><pre>addElementArray()</pre></a></li>
+<li class="method public "><a href="#method_addEnclosure" title="addEnclosure :: Attach a external media to the feed item."><span class="description">Attach a external media to the feed item.</span><pre>addEnclosure()</pre></a></li>
 <li class="method public "><a href="#method_getElements" title="getElements :: Return the collection of elements in this feed item"><span class="description">Return the collection of elements in this feed item</span><pre>getElements()</pre></a></li>
 <li class="method public "><a href="#method_getVersion" title="getVersion :: Return the type of this feed item"><span class="description">Return the type of this feed item</span><pre>getVersion()</pre></a></li>
 <li class="method public "><a href="#method_setAuthor" title="setAuthor :: Set the 'author' element of feed item."><span class="description">Set the 'author' element of feed item.</span><pre>setAuthor()</pre></a></li>
@@ -67,11 +68,14 @@ For ATOM feeds only"><span class="description">Set the 'content' element of the 
 For ATOM feeds only</span><pre>setContent()</pre></a></li>
 <li class="method public "><a href="#method_setDate" title="setDate :: Set the 'date' element of the feed item."><span class="description">Set the 'date' element of the feed item.</span><pre>setDate()</pre></a></li>
 <li class="method public "><a href="#method_setDescription" title="setDescription :: Set the 'description' element of feed item"><span class="description">Set the 'description' element of feed item</span><pre>setDescription()</pre></a></li>
-<li class="method public "><a href="#method_setEnclosure" title="setEnclosure :: Attach a external media to the feed item."><span class="description">Attach a external media to the feed item.</span><pre>setEnclosure()</pre></a></li>
+<li class="method public "><a href="#method_setEnclosure" title="setEnclosure :: Alias of addEnclosure, for backward compatibility."><span class="description">Alias of addEnclosure, for backward compatibility.</span><pre>setEnclosure()</pre></a></li>
 <li class="method public "><a href="#method_setId" title="setId :: Set the unique identifier of the feed item"><span class="description">Set the unique identifier of the feed item</span><pre>setId()</pre></a></li>
 <li class="method public "><a href="#method_setLink" title="setLink :: Set the 'link' element of feed item"><span class="description">Set the 'link' element of feed item</span><pre>setLink()</pre></a></li>
 <li class="method public "><a href="#method_setTitle" title="setTitle :: Set the 'title' element of feed item"><span class="description">Set the 'title' element of feed item</span><pre>setTitle()</pre></a></li>
 </ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_cpt" title="cpt :: Return an unique number"><span class="description">Return an unique number</span><pre>cpt()</pre></a></li></ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
@@ -79,6 +83,7 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 </li>
 <li class="nav-header private">» Private
                     <ul>
+<li class="property private "><a href="#property__cpt" title="$_cpt :: Is used as a suffix when multiple elements have the same name."><span class="description"></span><pre>$_cpt</pre></a></li>
 <li class="property private "><a href="#property_elements" title="$elements :: Collection of feed item elements"><span class="description"></span><pre>$elements</pre></a></li>
 <li class="property private "><a href="#property_version" title="$version :: Contains the format of this feed."><span class="description"></span><pre>$version</pre></a></li>
 </ul>
@@ -130,7 +135,7 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 </div>
 <a id="method_addElement"></a><div class="element clickable method public method_addElement" data-toggle="collapse" data-target=".method_addElement .collapse">
 <h2>Add an element to elements array</h2>
-<pre>addElement(string $elementName, string $content, array $attributes, boolean $overwrite) : void</pre>
+<pre>addElement(string $elementName, string $content, array $attributes, boolean $overwrite, boolean $allowMultiple) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -151,7 +156,10 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 </div>
 <div class="subelement argument">
 <h4>$overwrite</h4>
-<code>boolean</code><p>Specifies, if an already existing element is overwritten.</p></div>
+<code>boolean</code><p>Specifies if an already existing element is overwritten.</p></div>
+<div class="subelement argument">
+<h4>$allowMultiple</h4>
+<code>boolean</code><p>Specifies if multiple elements of the same name are allowed.</p></div>
 </div></div>
 </div>
 <a id="method_addElementArray"></a><div class="element clickable method public method_addElementArray" data-toggle="collapse" data-target=".method_addElementArray .collapse">
@@ -169,6 +177,42 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 <h4>$elementArray</h4>
 <code>array</code><p>array of elements in 'tagName' => 'tagContent' format.</p>
 </div>
+</div></div>
+</div>
+<a id="method_addEnclosure"></a><div class="element clickable method public method_addEnclosure" data-toggle="collapse" data-target=".method_addEnclosure .collapse">
+<h2>Attach a external media to the feed item.</h2>
+<pre>addEnclosure(string $url, integer $length, string $type, boolean $multiple) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Not supported in RSS 1.0 feeds.</p>
+
+<p>See RFC 4288 for syntactical correct MIME types.</p>
+
+<p>Note that you should avoid the use of more than one enclosure in one item,
+since some RSS aggregators don't support it.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://tools.ietf.org/html/rfc4288">https://tools.ietf.org/html/rfc4288</a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The URL of the media.</p></div>
+<div class="subelement argument">
+<h4>$length</h4>
+<code>integer</code><p>The length of the media.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The MIME type attribute of the media.</p></div>
+<div class="subelement argument">
+<h4>$multiple</h4>
+<code>boolean</code><p>Specifies, if multiple enclosures are allowed</p></div>
 </div></div>
 </div>
 <a id="method_getElements"></a><div class="element clickable method public method_getElements" data-toggle="collapse" data-target=".method_getElements .collapse">
@@ -276,13 +320,12 @@ which is parseable by PHP's 'strtotime' function.</p></div>
 </div></div>
 </div>
 <a id="method_setEnclosure"></a><div class="element clickable method public method_setEnclosure" data-toggle="collapse" data-target=".method_setEnclosure .collapse">
-<h2>Attach a external media to the feed item.</h2>
+<h2>Alias of addEnclosure, for backward compatibility.</h2>
 <pre>setEnclosure(string $url, integer $length, string $type) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Not supported in RSS 1.0 feeds.</p>
-
-<p>See RFC 4288 for syntactical correct MIME types.</p></div>
+<div class="long_description"><p>Using only this
+method ensure that the 'enclosure' element will be present only once.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -359,8 +402,28 @@ which is parseable by PHP's 'strtotime' function.</p></div>
 </div>
 </div></div>
 </div>
+<a id="method_cpt"></a><div class="element clickable method private method_cpt" data-toggle="collapse" data-target=".method_cpt .collapse">
+<h2>Return an unique number</h2>
+<pre>cpt() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__cpt"> </a><div class="element clickable property private property__cpt" data-toggle="collapse" data-target=".property__cpt .collapse">
+<h2></h2>
+<pre>$_cpt </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="property_elements"> </a><div class="element clickable property private property_elements" data-toggle="collapse" data-target=".property_elements .collapse">
 <h2></h2>
 <pre>$elements </pre>
@@ -380,7 +443,7 @@ which is parseable by PHP's 'strtotime' function.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-07T02:52:30+02:00.<br></footer></div>
+            generated on 2013-09-13T23:16:20+02:00.<br></footer></div>
 </div>
 </body>
 </html>
