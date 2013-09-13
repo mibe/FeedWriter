@@ -83,6 +83,9 @@ abstract class Feed
 	{
 		$this->version = $version;
 
+        // Setting default encoding
+        $this->encoding = 'utf-8';
+
 		// Setting default value for essential channel elements
 		$this->channels['title'] = $version . ' Feed';
 		$this->channels['link']  = 'http://www.ajaxray.com/blog';
@@ -266,6 +269,17 @@ abstract class Feed
 
 
 	// Wrapper functions -------------------------------------------------------------------
+
+    /** Set the 'encoding' feed attribute
+    * @access  public
+    * @param   string value of 'encoding' feed attribute
+    * @return  void
+    */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
 
 	/**
 	* Set the 'title' channel element
@@ -534,7 +548,7 @@ abstract class Feed
 	*/
 	private function makeHeader()
 	{
-		$out = '<?xml version="1.0" encoding="utf-8"?>' . PHP_EOL;
+		$out = '<?xml version="1.0" encoding="'.$this->encoding.'" ?>' . PHP_EOL;
 
 		$prefixes = $this->getNamespacePrefixes();
 		$attributes = array();
