@@ -75,7 +75,8 @@ class Item
 	* @param    string  The tag name of an element
 	* @param    string  The content of tag
 	* @param    array   Attributes(if any) in 'attrName' => 'attrValue' format
-	* @param    boolean Specifies, if an already existing element is overwritten.
+	* @param    boolean Specifies if an already existing element is overwritten.
+	* @param    boolean Specifies if multiple elements of the same name are allowed.
 	* @return   void
 	*/
 	public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
