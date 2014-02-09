@@ -79,7 +79,7 @@ abstract class Feed
     *
     * @param    constant    the version constant (RSS1/RSS2/ATOM).
     */
-    protected function __construct($version = FeedWriter::RSS2)
+    protected function __construct($version = Feed::RSS2)
     {
         $this->version = $version;
 
