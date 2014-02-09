@@ -766,7 +766,7 @@ abstract class Feed
             if ($about) {
                 $out .= "<item rdf:about=\"$about\">" . PHP_EOL;
             } else {
-                throw new Exception("link element is not set - It's required for RSS 1.0 to be used as the about attribute of the item tag.");
+                throw new \Exception("link element is not set - It's required for RSS 1.0 to be used as the about attribute of the item tag.");
             }
         } elseif ($this->version == Feed::ATOM) {
             $out .= "<entry>" . PHP_EOL;
