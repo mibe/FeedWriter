@@ -2,9 +2,9 @@
 
 // You should use an autoloader instead of including the files directly.
 // This is done here only to make the examples work out of the box.
-include('../Item.php');
-include('../Feed.php');
-include('../ATOM.php');
+include '../Item.php';
+include '../Feed.php';
+include '../ATOM.php';
 
 date_default_timezone_set('UTC');
 
@@ -64,7 +64,7 @@ $newItem->setEnclosure('http://upload.wikimedia.org/wikipedia/commons/4/49/En-us
 $newItem->setDescription('This is a test of adding CDATA encoded description by the php <b>Universal Feed Writer</b> class');
 $newItem->setContent('<h1>hi.</h1> <p>This is the content for the entry.</p>');
 
-//Now add the feed item	
+//Now add the feed item
 $TestFeed->addItem($newItem);
 
 //OK. Everything is done. Now generate the feed.

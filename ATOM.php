@@ -25,14 +25,14 @@ namespace FeedWriter;
  *
  * @package     UniversalFeedWriter
  */
-class Atom extends Feed
+class ATOM extends Feed
 {
-	/**
-	* {@inheritdoc}
-	*/
-	function __construct()
-	{
-		parent::__construct(Feed::ATOM);
-	}
+    /**
+    * {@inheritdoc}
+    */
+    public function __construct()
+    {
+        parent::__construct(Feed::ATOM);
+    }
 
 }

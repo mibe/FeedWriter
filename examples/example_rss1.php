@@ -2,15 +2,15 @@
 
 // You should use an autoloader instead of including the files directly.
 // This is done here only to make the examples work out of the box.
-include('../Item.php');
-include('../Feed.php');
-include('../RSS1.php');
+include '../Item.php';
+include '../Feed.php';
+include '../RSS1.php';
 
 date_default_timezone_set('UTC');
 
 use \FeedWriter\RSS1;
 
-/* 
+/*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  *
  * This file is part of the "Universal Feed Writer" project.
@@ -24,7 +24,7 @@ use \FeedWriter\RSS1;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,7 +39,7 @@ $TestFeed->setTitle('Testing the RSS writer class');
 $TestFeed->setLink('http://www.ajaxray.com/rss2/channel/about');
 $TestFeed->setDescription('This is test of creating a RSS 1.0 feed by Universal Feed Writer');
 
-//It's important for RSS 1.0 
+//It's important for RSS 1.0
 $TestFeed->setChannelAbout('http://www.ajaxray.com/rss2/channel/about');
 
 //Adding a feed. Generally this portion will be in a loop and add all feeds.

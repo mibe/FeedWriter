@@ -2,15 +2,15 @@
 
 // You should use an autoloader instead of including the files directly.
 // This is done here only to make the examples work out of the box.
-include('../Item.php');
-include('../Feed.php');
-include('../RSS2.php');
+include '../Item.php';
+include '../Feed.php';
+include '../RSS2.php';
 
 date_default_timezone_set('UTC');
 
 use \FeedWriter\RSS2;
 
-/* 
+/*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  *
  * This file is part of the "Universal Feed Writer" project.
@@ -24,7 +24,7 @@ use \FeedWriter\RSS2;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
