@@ -99,8 +99,8 @@ abstract class Feed
         $this->namespaces['dc'] = 'http://purl.org/dc/elements/1.1/';
         $this->namespaces['sy'] = 'http://purl.org/rss/1.0/modules/syndication/';
 
-        //Tag names to encode in CDATA
-        $this->CDATAEncoding = array('description', 'content:encoded', 'summary');
+        // Tag names to encode in CDATA
+        $this->addCDATAEncoding(array('description', 'content:encoded', 'summary'));
     }
 
     // Start # public functions ---------------------------------------------
@@ -247,6 +247,31 @@ abstract class Feed
         $Item = new Item($this->version);
 
         return $Item;
+    }
+
+    /**
+     * Add a properties to be CDATA encoded
+     *
+     * @access  public
+     * @param   array   An array of properties that are merged into the list of properties should be encoded as CDATA
+     * @return  void
+     */
+    public function addCDATAEncoding(Array $property_list)
+    {
+        $this->CDATAEncoding = array_merge($this->CDATAEncoding, $property_list);
+
+        return $this;
+    }
+
+    /**
+     * Get list of CDATA encoded properties
+     *
+     * @access  public
+     * @return  array   Return an array of CDATA properties that are to be encoded as CDATA
+     */
+    public function getCDATAEncoding()
+    {
+        return $this->CDATAEncoding;
     }
 
     /**
