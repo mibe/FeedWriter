@@ -640,7 +640,10 @@ abstract class Feed
       $out = '';
       foreach($this->pagination as $rel=>$url)
       {
-        $out .= $this->makeNode('link', '', array('rel' => $rel, 'href' => $url));
+        if ($url && !empty($url))
+        {
+          $out .= $this->makeNode('link', '', array('rel' => $rel, 'href' => $url));
+        }
       }
       
       return $out;
