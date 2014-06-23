@@ -71,6 +71,11 @@ abstract class Feed
     * Contains the format of this feed.
     */
     private $version   = null;
+    
+    /**
+     * Pagination information
+     */
+    private $pagination = null;
 
     /**
     * Constructor
@@ -104,6 +109,23 @@ abstract class Feed
     }
 
     // Start # public functions ---------------------------------------------
+    
+    /**
+     * Sets pagination data (URL)
+     * @param string $selfURL
+     * @param string $nextURL
+     * @param string $previousURL
+     * @param string $firstURL
+     * @param string $lastURL
+     */
+    public function setPagination($selfURL, $nextURL = false, $previousURL = false, $firstURL = false, $lastURL = false)
+    {
+      $this->pagination['self'] = $selfURL;
+      $this->pagination['next'] = $nextURL;
+      $this->pagination['previous'] = $previousURL;
+      $this->pagination['first'] = $firstURL;
+      $this->pagination['last'] = $lastURL;
+    }
 
     /**
     * Adds a channel element indicating the program used to generate the feed.
@@ -231,6 +253,7 @@ abstract class Feed
     public function generateFeed()
     {
         return $this->makeHeader()
+            . $this->makePagination()
             . $this->makeChannels()
             . $this->makeItems()
             . $this->makeFooter();
@@ -604,6 +627,26 @@ abstract class Feed
         $out .= $this->makeNode($tagName, '', $attributes, true);
 
         return $out;
+    }
+    
+    private function makePagination()
+    {
+      if (!$this->pagination || empty($this->pagination))
+      {
+        return;
+      }
+      
+      
+      $out = '';
+      foreach($this->pagination as $rel=>$url)
+      {
+        if ($url && !empty($url))
+        {
+          $out .= $this->makeNode('link', '', array('rel' => $rel, 'href' => $url));
+        }
+      }
+      
+      return $out;
     }
 
     /**
