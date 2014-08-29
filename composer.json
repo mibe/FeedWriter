@@ -25,6 +25,18 @@
         {
             "name": "Michael Robinson",
             "email": "mike@pagesofinterest.net"
+        },
+        {
+            "name": "Baptiste Fontaine"
+        },
+        {
+            "name": "Kristián Valentín"
+        },
+        {
+            "name": "Brandtley McMinn"
+        },
+        {
+            "name": "Julian Bogdani"
         }
     ],
     "minimum-stability": "dev",
