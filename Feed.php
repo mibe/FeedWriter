@@ -111,20 +111,27 @@ abstract class Feed
     // Start # public functions ---------------------------------------------
     
     /**
-     * Sets pagination data (URL)
-     * @param string $selfURL
-     * @param string $nextURL
-     * @param string $previousURL
-     * @param string $firstURL
-     * @param string $lastURL
+     * Sets pagination data (URL).
+     *
+     * See RFC 5005, chapter 3. At least one page URL must be specified.
+     *
+     * @param   string  The full URL to this feed.
+     * @param   string  The URL to the next page of this feed. Optional.
+     * @param   string  The URL to the previous page of this feed. Optional.
+     * @param   string  The URL to the first page of this feed. Optional.
+     * @param   string  The URL to the last page of this feed. Optional.
+     * @link    http://tools.ietf.org/html/rfc5005#section-3
      */
     public function setPagination($selfURL, $nextURL = false, $previousURL = false, $firstURL = false, $lastURL = false)
     {
-      $this->pagination['self'] = $selfURL;
-      $this->pagination['next'] = $nextURL;
-      $this->pagination['previous'] = $previousURL;
-      $this->pagination['first'] = $firstURL;
-      $this->pagination['last'] = $lastURL;
+        if (empty($nextURL) && empty($previousURL) && empty($firstURL) && empty($lastURL))
+            die('At least one URL must be specified for pagination to work.');
+ 
+        $this->pagination['self'] = $selfURL;
+        $this->pagination['next'] = $nextURL;
+        $this->pagination['previous'] = $previousURL;
+        $this->pagination['first'] = $firstURL;
+        $this->pagination['last'] = $lastURL;
     }
 
     /**
@@ -629,6 +636,12 @@ abstract class Feed
         return $out;
     }
     
+    /**
+    * Returns the XML elements for pagination.
+    *
+    * @access   private
+    * @return   string
+    */
     private function makePagination()
     {
       if (!$this->pagination || empty($this->pagination))
