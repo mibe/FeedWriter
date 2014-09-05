@@ -167,6 +167,7 @@ abstract class Feed
     * @access   public
     * @param    string  name of the channel tag
     * @param    string  content of the channel tag
+	* @param    array   array of element attributes with attribute name as array key
     * @param    bool    TRUE if this element can appear multiple times
     * @return   void
     */
