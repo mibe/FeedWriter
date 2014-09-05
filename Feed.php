@@ -170,12 +170,15 @@ abstract class Feed
     * @param    bool    TRUE if this element can appear multiple times
     * @return   void
     */
-    public function setChannelElement($elementName, $content, $multiple = false)
+    public function setChannelElement($elementName, $content, $attributes = null, $multiple = false)
     {
+        $entity['content'] = $content;
+        $entity['attributes'] = $attributes;
+
         if ($multiple === TRUE)
-            $this->channels[$elementName][] = $content;
+            $this->channels[$elementName][] = $entity;
         else
-            $this->channels[$elementName] = $content;
+            $this->channels[$elementName] = $entity;
 
         return $this;
     }
@@ -402,7 +405,12 @@ abstract class Feed
     */
     public function setLink($link)
     {
-        return $this->setChannelElement('link', $link);
+        if ($this->version == Feed::ATOM)
+            $this->setChannelElement('link', '', array('href' => $link));
+        else
+            $this->setChannelElement('link', $link);
+
+        return $this;
     }
 
     /**
@@ -475,7 +483,7 @@ abstract class Feed
             }
         }
 
-        return $this->setChannelElement('atom:link', $data, true);
+        return $this->setChannelElement('atom:link', '', $data, true);
     }
 
     /**
@@ -736,50 +744,34 @@ abstract class Feed
 
         //Print Items of channel
         foreach ($this->channels as $key => $value) {
-            // ATOM feed needs some special handling
-            if ($this->version == Feed::ATOM) {
-                // Strip all ATOM namespace prefixes from tags. Not needed here, because the ATOM namespace name is
-                // used as default namespace.
-                if (strncmp($key, 'atom', 4) == 0)
-                    $key = substr($key, 5);
-
-                if ($key == 'link') {
-                    if (is_array($value)) {
-                        // $value is an array containing multiple atom:link element attributes
-                        foreach ($value as $attributes) {
-                            // $attributes contains actually the node attributes, not the value.
-                            $out .= $this->makeNode($key, '', $attributes);
-                        }
-                    } else {
-                        // ATOM prints link element as href attribute
-                        $out .= $this->makeNode($key, '', array('href' => $value));
-                        //Add the id for ATOM
-                        $out .= $this->makeNode('id', Feed::uuid($value, 'urn:uuid:'));
-                    }
-                } else
-                    $out .= $this->makeNode($key, $value);
-            } else {
-                if ($key == 'atom:link') {
-                    // $value is an array containing multiple atom:link element attributes
-                    foreach ($value as $attributes) {
-                        // $attributes contains actually the node attributes, not the value.
-                        $out .= $this->makeNode($key, '', $attributes);
-                    }
-                } else {
-                    $out .= $this->makeNode($key, $value);
-                }
+            // In ATOM feeds, strip all ATOM namespace prefixes from the tag name. They are not needed here,
+            // because the ATOM namespace name is set as default namespace.
+            if ($this->version == Feed::ATOM && strncmp($key, 'atom', 4) == 0) {
+                $key = substr($key, 5);
             }
-
+            
+            // The channel element can occur multiple times, when the key 'content' is not in the array.
+            if (!isset($value['content'])) {
+                // If this is the case, iterate through the array with the multiple elements.
+                foreach ($value as $singleElement) {
+                    $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
+                }
+            } else {
+                $out .= $this->makeNode($key, $value['content'], $value['attributes']);
+            }
         }
 
-        //RSS 1.0 have special tag <rdf:Seq> with channel
         if ($this->version == Feed::RSS1) {
+            //RSS 1.0 have special tag <rdf:Seq> with channel
             $out .= "<items>" . PHP_EOL . "<rdf:Seq>" . PHP_EOL;
             foreach ($this->items as $item) {
                 $thisItems = $item->getElements();
                 $out .= "<rdf:li resource=\"{$thisItems['link']['content']}\"/>" . PHP_EOL;
             }
             $out .= "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
+        } else if ($this->version == Feed::ATOM) {
+            // ATOM feeds have a unique feed ID. This is generated from the 'link' channel element.
+            $out .= $this->makeNode('id', Feed::uuid($this->channels['link']['attributes']['href'], 'urn:uuid:'));
         }
 
         return $out;
