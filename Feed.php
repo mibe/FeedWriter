@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2014 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -73,11 +73,6 @@ abstract class Feed
     private $version   = null;
     
     /**
-     * Pagination information
-     */
-    private $pagination = null;
-
-    /**
     * Constructor
     *
     * If no version is given, a feed in RSS 2.0 format will be generated.
@@ -115,23 +110,28 @@ abstract class Feed
      *
      * See RFC 5005, chapter 3. At least one page URL must be specified.
      *
-     * @param   string  The full URL to this feed.
      * @param   string  The URL to the next page of this feed. Optional.
      * @param   string  The URL to the previous page of this feed. Optional.
      * @param   string  The URL to the first page of this feed. Optional.
      * @param   string  The URL to the last page of this feed. Optional.
      * @link    http://tools.ietf.org/html/rfc5005#section-3
      */
-    public function setPagination($selfURL, $nextURL = false, $previousURL = false, $firstURL = false, $lastURL = false)
+    public function setPagination($nextURL = null, $previousURL = null, $firstURL = null, $lastURL = null)
     {
         if (empty($nextURL) && empty($previousURL) && empty($firstURL) && empty($lastURL))
             die('At least one URL must be specified for pagination to work.');
- 
-        $this->pagination['self'] = $selfURL;
-        $this->pagination['next'] = $nextURL;
-        $this->pagination['previous'] = $previousURL;
-        $this->pagination['first'] = $firstURL;
-        $this->pagination['last'] = $lastURL;
+
+        if (!empty($nextURL))
+            $this->setAtomLink($nextURL, 'next');
+
+        if (!empty($previousURL))
+            $this->setAtomLink($previousURL, 'previous');
+
+        if (!empty($firstURL))
+            $this->setAtomLink($firstURL, 'first');
+
+        if (!empty($lastURL))
+            $this->setAtomLink($lastURL, 'last');
     }
 
     /**
@@ -174,7 +174,7 @@ abstract class Feed
     * @access   public
     * @param    string  name of the channel tag
     * @param    string  content of the channel tag
-	* @param    array   array of element attributes with attribute name as array key
+    * @param    array   array of element attributes with attribute name as array key
     * @param    bool    TRUE if this element can appear multiple times
     * @return   void
     */
@@ -264,7 +264,6 @@ abstract class Feed
     public function generateFeed()
     {
         return $this->makeHeader()
-            . $this->makePagination()
             . $this->makeChannels()
             . $this->makeItems()
             . $this->makeFooter();
@@ -645,32 +644,6 @@ abstract class Feed
         return $out;
     }
     
-    /**
-    * Returns the XML elements for pagination.
-    *
-    * @access   private
-    * @return   string
-    */
-    private function makePagination()
-    {
-      if (!$this->pagination || empty($this->pagination))
-      {
-        return;
-      }
-      
-      
-      $out = '';
-      foreach($this->pagination as $rel=>$url)
-      {
-        if ($url && !empty($url))
-        {
-          $out .= $this->makeNode('link', '', array('rel' => $rel, 'href' => $url));
-        }
-      }
-      
-      return $out;
-    }
-
     /**
     * Closes the open tags at the end of file
     *
