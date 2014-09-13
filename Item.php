@@ -45,14 +45,14 @@ class Item
     private $version;
 
     /**
-     * Is used as a suffix when multiple elements have the same name.
-     **/
+    * Is used as a suffix when multiple elements have the same name.
+    **/
     private $_cpt = 0;
 
     /**
     * Constructor
     *
-    * @param    constant     (RSS1/RSS2/ATOM) RSS2 is default.
+    * @param    constant  (RSS1/RSS2/ATOM) RSS2 is default.
     */
     public function __construct($version = Feed::RSS2)
     {
@@ -60,10 +60,11 @@ class Item
     }
 
     /**
-     * Return an unique number
-     * @access private
-     * @return int
-     **/
+    * Return an unique number
+    *
+    * @access   private
+    * @return   int
+    **/
     private function cpt()
     {
         return $this->_cpt++;
@@ -75,14 +76,13 @@ class Item
     * @access   public
     * @param    string  The tag name of an element
     * @param    string  The content of tag
-    * @param    array   Attributes(if any) in 'attrName' => 'attrValue' format
+    * @param    array   Attributes (if any) in 'attrName' => 'attrValue' format
     * @param    boolean Specifies if an already existing element is overwritten.
     * @param    boolean Specifies if multiple elements of the same name are allowed.
-    * @return   void
+    * @return   self
     */
     public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
     {
-
         $key = $elementName;
 
         // return if element already exists & if overwriting is disabled
@@ -107,7 +107,7 @@ class Item
     *
     * @access   public
     * @param    array   array of elements in 'tagName' => 'tagContent' format.
-    * @return   void
+    * @return   self
     */
     public function addElementArray($elementArray)
     {
@@ -125,7 +125,7 @@ class Item
     * Return the collection of elements in this feed item
     *
     * @access   public
-    * @return   array
+    * @return   array   All elements of this item.
     */
     public function getElements()
     {
@@ -150,7 +150,7 @@ class Item
     *
     * @access   public
     * @param    string  The content of 'description' or 'summary' element
-    * @return   void
+    * @return   self
     */
     public function setDescription($description)
     {
@@ -163,9 +163,9 @@ class Item
      * Set the 'content' element of the feed item
      * For ATOM feeds only
      *
-     * @access public
-     * @param string Content for the item (i.e., the body of a blog post).
-     * @return void
+     * @access  public
+     * @param   string  Content for the item (i.e., the body of a blog post).
+     * @return  self
      */
     public function setContent($content)
     {
@@ -180,7 +180,7 @@ class Item
     *
     * @access   public
     * @param    string  The content of 'title' element
-    * @return   void
+    * @return   self
     */
     public function setTitle($title)
     {
@@ -196,7 +196,7 @@ class Item
     *
     * @access   public
     * @param    DateTime|int|string  Date which should be used.
-    * @return   void
+    * @return   self
     */
     public function setDate($date)
     {
@@ -259,7 +259,7 @@ class Item
     * @param    integer The length of the media.
     * @param    string  The MIME type attribute of the media.
     * @param    boolean Specifies, if multiple enclosures are allowed
-    * @return   void
+    * @return   self
     * @link     https://tools.ietf.org/html/rfc4288
     */
     public function addEnclosure($url, $length, $type, $multiple = TRUE)
@@ -292,14 +292,15 @@ class Item
 
     /**
     * Alias of addEnclosure, for backward compatibility. Using only this
-    * method ensure that the 'enclosure' element will be present only once.
+    * method ensures that the 'enclosure' element will be present only once.
     *
     * @access   public
     * @param    string  The URL of the media.
     * @param    integer The length of the media.
     * @param    string  The MIME type attribute of the media.
-    * @return   void
+    * @return   self
     * @link     https://tools.ietf.org/html/rfc4288
+    * @deprecated Use the addEnclosure method instead.
     *
     **/
     public function setEnclosure($url, $length, $type)
@@ -315,7 +316,7 @@ class Item
     * @param    string  The author of this item
     * @param    string  Optional email address of the author
     * @param    string  Optional URI related to the author
-    * @return   void
+    * @return   self
     */
     public function setAuthor($author, $email = null, $uri = null)
     {
@@ -351,7 +352,7 @@ class Item
     * @access   public
     * @param    string  The unique identifier of this item
     * @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
-    * @return   void
+    * @return   self
     */
     public function setId($id, $permaLink = false)
     {
