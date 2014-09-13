@@ -132,6 +132,8 @@ abstract class Feed
 
         if (!empty($lastURL))
             $this->setAtomLink($lastURL, 'last');
+
+        return $this;
     }
 
     /**
