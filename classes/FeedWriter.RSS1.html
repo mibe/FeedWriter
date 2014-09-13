@@ -35,7 +35,7 @@
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">1</span></a></li>
 </ul>
 </li>
 </ul></div>
@@ -57,11 +57,13 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
-<li class="method public inherited"><a href="#method_addGenerator" title="addGenerator :: Adds a channel element indicating the program used to generate the feed."><span class="description">Adds a channel element indicating the program used to generate the feed.</span><pre>addGenerator()</pre></a></li>
+<li class="method public inherited"><a href="#method_addCDATAEncoding" title="addCDATAEncoding :: Add a properties to be CDATA encoded"><span class="description">Add a properties to be CDATA encoded</span><pre>addCDATAEncoding()</pre></a></li>
+<li class="method public inherited"><a href="#method_addGenerator" title="addGenerator :: Add a channel element indicating the program used to generate the feed."><span class="description">Add a channel element indicating the program used to generate the feed.</span><pre>addGenerator()</pre></a></li>
 <li class="method public inherited"><a href="#method_addItem" title="addItem :: Add a FeedItem to the main class"><span class="description">Add a FeedItem to the main class</span><pre>addItem()</pre></a></li>
 <li class="method public inherited"><a href="#method_addNamespace" title="addNamespace :: Add a XML namespace to the internal list of namespaces."><span class="description">Add a XML namespace to the internal list of namespaces.</span><pre>addNamespace()</pre></a></li>
 <li class="method public inherited"><a href="#method_createNewItem" title="createNewItem :: Create a new Item."><span class="description">Create a new Item.</span><pre>createNewItem()</pre></a></li>
 <li class="method public inherited"><a href="#method_generateFeed" title="generateFeed :: Generate the feed."><span class="description">Generate the feed.</span><pre>generateFeed()</pre></a></li>
+<li class="method public inherited"><a href="#method_getCDATAEncoding" title="getCDATAEncoding :: Get list of CDATA encoded properties"><span class="description">Get list of CDATA encoded properties</span><pre>getCDATAEncoding()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMIMEType" title="getMIMEType :: Get the appropriate MIME type string for the current feed."><span class="description">Get the appropriate MIME type string for the current feed.</span><pre>getMIMEType()</pre></a></li>
 <li class="method public inherited"><a href="#method_printFeed" title="printFeed :: Print the actual RSS/ATOM file"><span class="description">Print the actual RSS/ATOM file</span><pre>printFeed()</pre></a></li>
 <li class="method public inherited"><a href="#method_setAtomLink" title="setAtomLink :: Set custom 'link' channel elements."><span class="description">Set custom 'link' channel elements.</span><pre>setAtomLink()</pre></a></li>
@@ -70,9 +72,10 @@
 <li class="method public inherited"><a href="#method_setChannelElementsFromArray" title="setChannelElementsFromArray :: Set multiple channel elements from an array."><span class="description">Set multiple channel elements from an array.</span><pre>setChannelElementsFromArray()</pre></a></li>
 <li class="method public inherited"><a href="#method_setDate" title="setDate :: Set the date when the ATOM feed was lastly updated."><span class="description">Set the date when the ATOM feed was lastly updated.</span><pre>setDate()</pre></a></li>
 <li class="method public inherited"><a href="#method_setDescription" title="setDescription :: Set the 'description' channel element"><span class="description">Set the 'description' channel element</span><pre>setDescription()</pre></a></li>
-<li class="method public inherited"><a href="#method_setEncoding" title="setEncoding :: Set the 'encoding' feed attribute"><span class="description">Set the 'encoding' feed attribute</span><pre>setEncoding()</pre></a></li>
+<li class="method public inherited"><a href="#method_setEncoding" title="setEncoding :: Set the 'encoding' attribute in the XML prolog."><span class="description">Set the 'encoding' attribute in the XML prolog.</span><pre>setEncoding()</pre></a></li>
 <li class="method public inherited"><a href="#method_setImage" title="setImage :: Set the 'image' channel element"><span class="description">Set the 'image' channel element</span><pre>setImage()</pre></a></li>
 <li class="method public inherited"><a href="#method_setLink" title="setLink :: Set the 'link' channel element"><span class="description">Set the 'link' channel element</span><pre>setLink()</pre></a></li>
+<li class="method public inherited"><a href="#method_setPagination" title="setPagination :: Set the URLs for feed pagination."><span class="description">Set the URLs for feed pagination.</span><pre>setPagination()</pre></a></li>
 <li class="method public inherited"><a href="#method_setSelfLink" title="setSelfLink :: Set an 'atom:link' channel element with relation=self attribute."><span class="description">Set an 'atom:link' channel element with relation=self attribute.</span><pre>setSelfLink()</pre></a></li>
 <li class="method public inherited"><a href="#method_setTitle" title="setTitle :: Set the 'title' channel element"><span class="description">Set the 'title' channel element</span><pre>setTitle()</pre></a></li>
 <li class="method public inherited"><a href="#method_uuid" title="uuid :: Generate an UUID."><span class="description">Generate an UUID.</span><pre>uuid()</pre></a></li>
@@ -147,21 +150,57 @@
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>If no version is given, a feed in RSS 2.0 format will be generated.</p></div></div></div>
 </div>
-<a id="method_addGenerator"></a><div class="element clickable method public method_addGenerator" data-toggle="collapse" data-target=".method_addGenerator .collapse">
-<h2>Adds a channel element indicating the program used to generate the feed.</h2>
-<pre>addGenerator() : void</pre>
+<a id="method_addCDATAEncoding"></a><div class="element clickable method public method_addCDATAEncoding" data-toggle="collapse" data-target=".method_addCDATAEncoding .collapse">
+<h2>Add a properties to be CDATA encoded</h2>
+<pre>addCDATAEncoding(array $property_list) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::addCDATAEncoding()</td>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$property_list</h4>
+<code>array</code><p>An array of properties that are merged into the list of properties should be encoded as CDATA</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
+</div></div>
+</div>
+<a id="method_addGenerator"></a><div class="element clickable method public method_addGenerator" data-toggle="collapse" data-target=".method_addGenerator .collapse">
+<h2>Add a channel element indicating the program used to generate the feed.</h2>
+<pre>addGenerator() : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::addGenerator()</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_addItem"></a><div class="element clickable method public method_addItem" data-toggle="collapse" data-target=".method_addItem .collapse">
 <h2>Add a FeedItem to the main class</h2>
-<pre>addItem(\FeedWriter\Item $feedItem) : void</pre>
+<pre>addItem(\FeedWriter\Item $feedItem) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -174,16 +213,22 @@
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::addItem()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$feedItem</h4>
 <code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code><p>instance of Item class</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_addNamespace"></a><div class="element clickable method public method_addNamespace" data-toggle="collapse" data-target=".method_addNamespace .collapse">
 <h2>Add a XML namespace to the internal list of namespaces.</h2>
-<pre>addNamespace(string $prefix, string $uri) : void</pre>
+<pre>addNamespace(string $prefix, string $uri) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>After that,
@@ -201,6 +246,10 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::addNamespace()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -210,6 +259,8 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 <h4>$uri</h4>
 <code>string</code><p>namespace name (URI)</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_createNewItem"></a><div class="element clickable method public method_createNewItem" data-toggle="collapse" data-target=".method_createNewItem .collapse">
@@ -250,7 +301,29 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 </tr>
 </table>
 <h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
+<div class="subelement response">
+<code>string</code>The complete feed XML.</div>
+</div></div>
+</div>
+<a id="method_getCDATAEncoding"></a><div class="element clickable method public method_getCDATAEncoding" data-toggle="collapse" data-target=".method_getCDATAEncoding .collapse">
+<h2>Get list of CDATA encoded properties</h2>
+<pre>getCDATAEncoding() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::getCDATAEncoding()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Return an array of CDATA properties that are to be encoded as CDATA</div>
 </div></div>
 </div>
 <a id="method_getMIMEType"></a><div class="element clickable method public method_getMIMEType" data-toggle="collapse" data-target=".method_getMIMEType .collapse">
@@ -270,7 +343,8 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 </tr>
 </table>
 <h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
+<div class="subelement response">
+<code>string</code>The MIME type string.</div>
 </div></div>
 </div>
 <a id="method_printFeed"></a><div class="element clickable method public method_printFeed" data-toggle="collapse" data-target=".method_printFeed .collapse">
@@ -299,7 +373,7 @@ if you need to pass a string around, use generateFeed() instead.</p></div>
 </div>
 <a id="method_setAtomLink"></a><div class="element clickable method public method_setAtomLink" data-toggle="collapse" data-target=".method_setAtomLink .collapse">
 <h2>Set custom 'link' channel elements.</h2>
-<pre>setAtomLink(string $href, string $rel, string $type, string $hreflang, string $title, int $length) </pre>
+<pre>setAtomLink(string $href, string $rel, string $type, string $hreflang, string $title, int $length) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>In ATOM feeds, only one link with alternate relation and the same combination of
@@ -315,11 +389,15 @@ type and hreflang values.</p></div>
 </tr>
 <tr>
 <th>link</th>
-<td><a href="https://tools.ietf.org/html/rfc4287#section-4.1.1">https://tools.ietf.org/html/rfc4287#section-4.1.1</a></td>
+<td><a href="https://tools.ietf.org/html/rfc4287#section-4.2.7">https://tools.ietf.org/html/rfc4287#section-4.2.7</a></td>
 </tr>
 <tr>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setAtomLink()</td>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
 </tr>
 </table>
 <h3>Parameters</h3>
@@ -331,7 +409,7 @@ type and hreflang values.</p></div>
 <code>string</code><p>relation type of the resource</p></div>
 <div class="subelement argument">
 <h4>$type</h4>
-<code>string</code><p>media type of the target resource</p></div>
+<code>string</code><p>MIME type of the target resource</p></div>
 <div class="subelement argument">
 <h4>$hreflang</h4>
 <code>string</code><p>language of the resource</p></div>
@@ -342,11 +420,13 @@ type and hreflang values.</p></div>
 <div class="subelement argument">
 <h4>$length</h4>
 <code>int</code><p>length of the resource in bytes</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setChannelAbout"></a><div class="element clickable method public method_setChannelAbout" data-toggle="collapse" data-target=".method_setChannelAbout .collapse">
 <h2>Set the 'about' channel element.</h2>
-<pre>setChannelAbout(string $url) : void</pre>
+<pre>setChannelAbout(string $url) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Only for RSS 1.0</p></div>
@@ -359,17 +439,23 @@ type and hreflang values.</p></div>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setChannelAbout()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$url</h4>
 <code>string</code><p>value of 'about' channel tag</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setChannelElement"></a><div class="element clickable method public method_setChannelElement" data-toggle="collapse" data-target=".method_setChannelElement .collapse">
 <h2>Add a channel element to the feed.</h2>
-<pre>setChannelElement(string $elementName, string $content, bool $multiple) : void</pre>
+<pre>setChannelElement(string $elementName, string $content, array $attributes, bool $multiple) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -382,6 +468,10 @@ type and hreflang values.</p></div>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setChannelElement()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -391,13 +481,18 @@ type and hreflang values.</p></div>
 <h4>$content</h4>
 <code>string</code><p>content of the channel tag</p></div>
 <div class="subelement argument">
+<h4>$attributes</h4>
+<code>array</code><p>array of element attributes with attribute name as array key</p></div>
+<div class="subelement argument">
 <h4>$multiple</h4>
 <code>bool</code><p>TRUE if this element can appear multiple times</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setChannelElementsFromArray"></a><div class="element clickable method public method_setChannelElementsFromArray" data-toggle="collapse" data-target=".method_setChannelElementsFromArray .collapse">
 <h2>Set multiple channel elements from an array.</h2>
-<pre>setChannelElementsFromArray(array $elementArray) : void</pre>
+<pre>setChannelElementsFromArray(array $elementArray) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Array elements
@@ -411,16 +506,22 @@ should be 'channelName' => 'channelContent' format.</p></div>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setChannelElementsFromArray()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$elementArray</h4>
 <code>array</code><p>array of channels</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
 <h2>Set the date when the ATOM feed was lastly updated.</h2>
-<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : void</pre>
+<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>This adds the 'updated' element to the feed. The value of the date parameter
@@ -437,16 +538,22 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setDate()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$date</h4>
 <code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code>int</code><code>string</code><p>Date which should be used.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
 <h2>Set the 'description' channel element</h2>
-<pre>setDescription(string $description) : void</pre>
+<pre>setDescription(string $description) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -459,17 +566,23 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setDescription()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$description</h4>
 <code>string</code><p>value of 'description' channel tag</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setEncoding"></a><div class="element clickable method public method_setEncoding" data-toggle="collapse" data-target=".method_setEncoding .collapse">
-<h2>Set the 'encoding' feed attribute</h2>
-<pre>setEncoding(string $encoding) : void</pre>
+<h2>Set the 'encoding' attribute in the XML prolog.</h2>
+<pre>setEncoding(string $encoding) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -482,17 +595,23 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setEncoding()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$encoding</h4>
-<code>string</code><p>value of 'encoding' feed attribute</p>
+<code>string</code><p>value of 'encoding' attribute</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setImage"></a><div class="element clickable method public method_setImage" data-toggle="collapse" data-target=".method_setImage .collapse">
 <h2>Set the 'image' channel element</h2>
-<pre>setImage(string $title, string $link, string $url) : void</pre>
+<pre>setImage(string $title, string $link, string $url) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -505,6 +624,10 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setImage()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -516,11 +639,13 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <div class="subelement argument">
 <h4>$url</h4>
 <code>string</code><p>path url of the image</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
 <h2>Set the 'link' channel element</h2>
-<pre>setLink(string $link) : void</pre>
+<pre>setLink(string $link) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -533,17 +658,60 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setLink()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$link</h4>
 <code>string</code><p>value of 'link' channel tag</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
+</div></div>
+</div>
+<a id="method_setPagination"></a><div class="element clickable method public method_setPagination" data-toggle="collapse" data-target=".method_setPagination .collapse">
+<h2>Set the URLs for feed pagination.</h2>
+<pre>setPagination(string $nextURL, string $previousURL, string $firstURL, string $lastURL) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>See RFC 5005, chapter 3. At least one page URL must be specified.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://tools.ietf.org/html/rfc5005#section-3">http://tools.ietf.org/html/rfc5005#section-3</a></td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::setPagination()</td>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$nextURL</h4>
+<code>string</code><p>The URL to the next page of this feed. Optional.</p></div>
+<div class="subelement argument">
+<h4>$previousURL</h4>
+<code>string</code><p>The URL to the previous page of this feed. Optional.</p></div>
+<div class="subelement argument">
+<h4>$firstURL</h4>
+<code>string</code><p>The URL to the first page of this feed. Optional.</p></div>
+<div class="subelement argument">
+<h4>$lastURL</h4>
+<code>string</code><p>The URL to the last page of this feed. Optional.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setSelfLink"></a><div class="element clickable method public method_setSelfLink" data-toggle="collapse" data-target=".method_setSelfLink .collapse">
 <h2>Set an 'atom:link' channel element with relation=self attribute.</h2>
-<pre>setSelfLink(string $url) : void</pre>
+<pre>setSelfLink(string $url) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Needs the full URL to this feed.</p></div>
@@ -560,16 +728,22 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setSelfLink()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$url</h4>
 <code>string</code><p>URL to this feed</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_setTitle"></a><div class="element clickable method public method_setTitle" data-toggle="collapse" data-target=".method_setTitle .collapse">
 <h2>Set the 'title' channel element</h2>
-<pre>setTitle(string $title) : void</pre>
+<pre>setTitle(string $title) : <a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -582,12 +756,18 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <th>inherited_from</th>
 <td>\FeedWriter\Feed::setTitle()</td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$title</h4>
 <code>string</code><p>value of 'title' channel tag</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.RSS1.html">\FeedWriter\RSS1</a></code></div>
 </div></div>
 </div>
 <a id="method_uuid"></a><div class="element clickable method public method_uuid" data-toggle="collapse" data-target=".method_uuid .collapse">
@@ -623,7 +803,7 @@ for the MD5 hash is generated.</p></div>
 </div>
 <a id="method_endItem"></a><div class="element clickable method private method_endItem" data-toggle="collapse" data-target=".method_endItem .collapse">
 <h2>Closes feed item tag</h2>
-<pre>endItem() : void</pre>
+<pre>endItem() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -637,6 +817,9 @@ for the MD5 hash is generated.</p></div>
 <td>\FeedWriter\Feed::endItem()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The ending XML tag of an feed item.</div>
 </div></div>
 </div>
 <a id="method_getNamespacePrefixes"></a><div class="element clickable method private method_getNamespacePrefixes" data-toggle="collapse" data-target=".method_getNamespacePrefixes .collapse">
@@ -664,7 +847,7 @@ because they are hardcoded, e.g. rdf.</p></div>
 </div>
 <a id="method_makeChannels"></a><div class="element clickable method private method_makeChannels" data-toggle="collapse" data-target=".method_makeChannels .collapse">
 <h2>Make the channels.</h2>
-<pre>makeChannels() : void</pre>
+<pre>makeChannels() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -678,11 +861,14 @@ because they are hardcoded, e.g. rdf.</p></div>
 <td>\FeedWriter\Feed::makeChannels()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The feed header as XML containing all the feed metadata.</div>
 </div></div>
 </div>
 <a id="method_makeFooter"></a><div class="element clickable method private method_makeFooter" data-toggle="collapse" data-target=".method_makeFooter .collapse">
 <h2>Closes the open tags at the end of file</h2>
-<pre>makeFooter() : void</pre>
+<pre>makeFooter() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -696,11 +882,14 @@ because they are hardcoded, e.g. rdf.</p></div>
 <td>\FeedWriter\Feed::makeFooter()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The XML footer of the feed.</div>
 </div></div>
 </div>
 <a id="method_makeHeader"></a><div class="element clickable method private method_makeHeader" data-toggle="collapse" data-target=".method_makeHeader .collapse">
 <h2>Returns the XML header and root element, depending on the feed type.</h2>
-<pre>makeHeader() : void</pre>
+<pre>makeHeader() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -714,11 +903,14 @@ because they are hardcoded, e.g. rdf.</p></div>
 <td>\FeedWriter\Feed::makeHeader()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The XML header of the feed.</div>
 </div></div>
 </div>
 <a id="method_makeItems"></a><div class="element clickable method private method_makeItems" data-toggle="collapse" data-target=".method_makeItems .collapse">
 <h2>Prints formatted feed items</h2>
-<pre>makeItems() : void</pre>
+<pre>makeItems() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -732,6 +924,9 @@ because they are hardcoded, e.g. rdf.</p></div>
 <td>\FeedWriter\Feed::makeItems()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The XML of every feed item.</div>
 </div></div>
 </div>
 <a id="method_makeNode"></a><div class="element clickable method private method_makeNode" data-toggle="collapse" data-target=".method_makeNode .collapse">
@@ -798,7 +993,7 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 </div>
 <a id="method_startItem"></a><div class="element clickable method private method_startItem" data-toggle="collapse" data-target=".method_startItem .collapse">
 <h2>Make the starting tag of channels</h2>
-<pre>startItem(string $about) : void</pre>
+<pre>startItem(string $about) : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -816,6 +1011,9 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 <div class="subelement argument">
 <h4>$about</h4>
 <code>string</code><p>The vale of about tag which is used for RSS 1.0 only.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The starting XML tag of an feed item.</div>
 </div></div>
 </div>
 <h3>
@@ -937,7 +1135,7 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-09-13T23:16:20+02:00.<br></footer></div>
+            generated on 2014-09-14T01:14:09+02:00.<br></footer></div>
 </div>
 </body>
 </html>

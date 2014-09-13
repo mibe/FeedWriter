@@ -35,7 +35,7 @@
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">1</span></a></li>
 </ul>
 </li>
 </ul></div>
@@ -135,14 +135,20 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 </div>
 <a id="method_addElement"></a><div class="element clickable method public method_addElement" data-toggle="collapse" data-target=".method_addElement .collapse">
 <h2>Add an element to elements array</h2>
-<pre>addElement(string $elementName, string $content, array $attributes, boolean $overwrite, boolean $allowMultiple) : void</pre>
+<pre>addElement(string $elementName, string $content, array $attributes, boolean $overwrite, boolean $allowMultiple) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$elementName</h4>
@@ -152,7 +158,7 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 <code>string</code><p>The content of tag</p></div>
 <div class="subelement argument">
 <h4>$attributes</h4>
-<code>array</code><p>Attributes(if any) in 'attrName' => 'attrValue' format</p>
+<code>array</code><p>Attributes (if any) in 'attrName' => 'attrValue' format</p>
 </div>
 <div class="subelement argument">
 <h4>$overwrite</h4>
@@ -160,28 +166,38 @@ For ATOM feeds only</span><pre>setContent()</pre></a></li>
 <div class="subelement argument">
 <h4>$allowMultiple</h4>
 <code>boolean</code><p>Specifies if multiple elements of the same name are allowed.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_addElementArray"></a><div class="element clickable method public method_addElementArray" data-toggle="collapse" data-target=".method_addElementArray .collapse">
 <h2>Set multiple feed elements from an array.</h2>
-<pre>addElementArray(array $elementArray) : void</pre>
+<pre>addElementArray(array $elementArray) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Elements which have attributes cannot be added by this method</p></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$elementArray</h4>
 <code>array</code><p>array of elements in 'tagName' => 'tagContent' format.</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_addEnclosure"></a><div class="element clickable method public method_addEnclosure" data-toggle="collapse" data-target=".method_addEnclosure .collapse">
 <h2>Attach a external media to the feed item.</h2>
-<pre>addEnclosure(string $url, integer $length, string $type, boolean $multiple) : void</pre>
+<pre>addEnclosure(string $url, integer $length, string $type, boolean $multiple) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Not supported in RSS 1.0 feeds.</p>
@@ -199,6 +215,10 @@ since some RSS aggregators don't support it.</p></div>
 <th>link</th>
 <td><a href="https://tools.ietf.org/html/rfc4288">https://tools.ietf.org/html/rfc4288</a></td>
 </tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -213,6 +233,8 @@ since some RSS aggregators don't support it.</p></div>
 <div class="subelement argument">
 <h4>$multiple</h4>
 <code>boolean</code><p>Specifies, if multiple enclosures are allowed</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_getElements"></a><div class="element clickable method public method_getElements" data-toggle="collapse" data-target=".method_getElements .collapse">
@@ -226,7 +248,8 @@ since some RSS aggregators don't support it.</p></div>
 <td>public</td>
 </tr></table>
 <h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
+<div class="subelement response">
+<code>array</code>All elements of this item.</div>
 </div></div>
 </div>
 <a id="method_getVersion"></a><div class="element clickable method public method_getVersion" data-toggle="collapse" data-target=".method_getVersion .collapse">
@@ -246,14 +269,20 @@ since some RSS aggregators don't support it.</p></div>
 </div>
 <a id="method_setAuthor"></a><div class="element clickable method public method_setAuthor" data-toggle="collapse" data-target=".method_setAuthor .collapse">
 <h2>Set the 'author' element of feed item.</h2>
-<pre>setAuthor(string $author, string $email, string $uri) : void</pre>
+<pre>setAuthor(string $author, string $email, string $uri) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Not supported in RSS 1.0 feeds.</p></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$author</h4>
@@ -264,68 +293,94 @@ since some RSS aggregators don't support it.</p></div>
 <div class="subelement argument">
 <h4>$uri</h4>
 <code>string</code><p>Optional URI related to the author</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setContent"></a><div class="element clickable method public method_setContent" data-toggle="collapse" data-target=".method_setContent .collapse">
 <h2>Set the 'content' element of the feed item
 For ATOM feeds only</h2>
-<pre>setContent(string $content) : void</pre>
+<pre>setContent(string $content) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$content</h4>
 <code>string</code><p>Content for the item (i.e., the body of a blog post).</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
 <h2>Set the 'date' element of the feed item.</h2>
-<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : void</pre>
+<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>The value of the date parameter can be either an instance of the
 DateTime class, an integer containing a UNIX timestamp or a string
 which is parseable by PHP's 'strtotime' function.</p></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$date</h4>
 <code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code>int</code><code>string</code><p>Date which should be used.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
 <h2>Set the 'description' element of feed item</h2>
-<pre>setDescription(string $description) : void</pre>
+<pre>setDescription(string $description) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$description</h4>
 <code>string</code><p>The content of 'description' or 'summary' element</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setEnclosure"></a><div class="element clickable method public method_setEnclosure" data-toggle="collapse" data-target=".method_setEnclosure .collapse">
 <h2>Alias of addEnclosure, for backward compatibility.</h2>
-<pre>setEnclosure(string $url, integer $length, string $type) : void</pre>
+<pre>setEnclosure(string $url, integer $length, string $type) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Using only this
-method ensure that the 'enclosure' element will be present only once.</p></div>
+method ensures that the 'enclosure' element will be present only once.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>access</th>
@@ -334,6 +389,14 @@ method ensure that the 'enclosure' element will be present only once.</p></div>
 <tr>
 <th>link</th>
 <td><a href="https://tools.ietf.org/html/rfc4288">https://tools.ietf.org/html/rfc4288</a></td>
+</tr>
+<tr>
+<th>deprecated</th>
+<td>Use the addEnclosure method instead.</td>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
 </tr>
 </table>
 <h3>Parameters</h3>
@@ -346,18 +409,26 @@ method ensure that the 'enclosure' element will be present only once.</p></div>
 <div class="subelement argument">
 <h4>$type</h4>
 <code>string</code><p>The MIME type attribute of the media.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setId"></a><div class="element clickable method public method_setId" data-toggle="collapse" data-target=".method_setId .collapse">
 <h2>Set the unique identifier of the feed item</h2>
-<pre>setId(string $id, boolean $permaLink) : void</pre>
+<pre>setId(string $id, boolean $permaLink) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$id</h4>
@@ -366,6 +437,8 @@ method ensure that the 'enclosure' element will be present only once.</p></div>
 <h4>$permaLink</h4>
 <code>boolean</code><p>The value of the 'isPermaLink' attribute in RSS 2 feeds.</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
@@ -387,19 +460,27 @@ method ensure that the 'enclosure' element will be present only once.</p></div>
 </div>
 <a id="method_setTitle"></a><div class="element clickable method public method_setTitle" data-toggle="collapse" data-target=".method_setTitle .collapse">
 <h2>Set the 'title' element of feed item</h2>
-<pre>setTitle(string $title) : void</pre>
+<pre>setTitle(string $title) : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
 <th>access</th>
 <td>public</td>
-</tr></table>
+</tr>
+<tr>
+<th>fluent</th>
+<td>This method is part of a fluent interface and will return the same instance</td>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$title</h4>
 <code>string</code><p>The content of 'title' element</p>
 </div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code></div>
 </div></div>
 </div>
 <a id="method_cpt"></a><div class="element clickable method private method_cpt" data-toggle="collapse" data-target=".method_cpt .collapse">
@@ -443,7 +524,7 @@ method ensure that the 'enclosure' element will be present only once.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-09-13T23:16:20+02:00.<br></footer></div>
+            generated on 2014-09-14T01:14:09+02:00.<br></footer></div>
 </div>
 </body>
 </html>
