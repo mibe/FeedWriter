@@ -183,7 +183,7 @@ abstract class Feed
     */
     public function setChannelElement($elementName, $content, $attributes = null, $multiple = false)
     {
-        $entity['content'] = $content;
+        $entity['content'] = self::utf8_for_xml($content);
         $entity['attributes'] = $attributes;
 
         if ($multiple === TRUE)
@@ -563,6 +563,21 @@ abstract class Feed
         $uuid .= substr($chars,20,12);
 
         return $prefix . $uuid;
+    }
+
+    /**
+    * Replace invalid xml utf-8 chars.
+    *
+    * See utf8_for_xml() function at
+    * http://www.phpwact.org/php/i18n/charsets#xml and
+    * http://www.w3.org/TR/REC-xml/#charsets
+    *
+    * @param    string
+    * @return   string
+    */
+    public static function utf8_for_xml($string)
+    {
+        return preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
     }
     // End # public functions ----------------------------------------------
 

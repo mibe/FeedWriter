@@ -95,7 +95,7 @@ class Item
         }
 
         $this->elements[$key]['name']       = $elementName;
-        $this->elements[$key]['content']    = $content;
+        $this->elements[$key]['content']    = Feed::utf8_for_xml($content);
         $this->elements[$key]['attributes'] = $attributes;
 
         return $this;
