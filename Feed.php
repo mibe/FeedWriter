@@ -183,7 +183,7 @@ abstract class Feed
     */
     public function setChannelElement($elementName, $content, $attributes = null, $multiple = false)
     {
-        $entity['content'] = self::utf8_for_xml($content);
+        $entity['content'] = $content;
         $entity['attributes'] = $attributes;
 
         if ($multiple === TRUE)
@@ -699,6 +699,7 @@ abstract class Feed
 
         if (is_array($attributes) && count($attributes) > 0) {
             foreach ($attributes as $key => $value) {
+                $value = self::utf8_for_xml($value);
                 $value = htmlspecialchars($value);
                 $attrText .= " $key=\"$value\"";
             }
@@ -717,6 +718,7 @@ abstract class Feed
                 $nodeText .= $this->makeNode($key, $value);
             }
         } else {
+            $tagContent = self::utf8_for_xml($tagContent);
             $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
         }
 
