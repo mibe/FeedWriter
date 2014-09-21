@@ -564,6 +564,21 @@ abstract class Feed
 
         return $prefix . $uuid;
     }
+
+    /**
+    * Replace invalid xml utf-8 chars.
+    *
+    * See utf8_for_xml() function at
+    * http://www.phpwact.org/php/i18n/charsets#xml and
+    * http://www.w3.org/TR/REC-xml/#charsets
+    *
+    * @param    string
+    * @return   string
+    */
+    public static function utf8_for_xml($string)
+    {
+        return preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
+    }
     // End # public functions ----------------------------------------------
 
     // Start # private functions ----------------------------------------------
@@ -684,6 +699,7 @@ abstract class Feed
 
         if (is_array($attributes) && count($attributes) > 0) {
             foreach ($attributes as $key => $value) {
+                $value = self::utf8_for_xml($value);
                 $value = htmlspecialchars($value);
                 $attrText .= " $key=\"$value\"";
             }
@@ -702,6 +718,7 @@ abstract class Feed
                 $nodeText .= $this->makeNode($key, $value);
             }
         } else {
+            $tagContent = self::utf8_for_xml($tagContent);
             $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
         }
 
