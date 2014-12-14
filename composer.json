@@ -1,7 +1,7 @@
 {
     "name": "mibe/feedwriter",
     "description": "Generate feeds in either RSS 1.0, RSS 2.0 or ATOM formats",
-    "keywords": ["RSS"],
+    "keywords": ["RSS", "ATOM", "feed"],
     "homepage": "https://github.com/mibe/FeedWriter",
     "type": "library",
     "license": "GPL-3.0",
