@@ -276,7 +276,7 @@ abstract class Feed
     * Create a new Item.
     *
     * @access   public
-    * @return   object  instance of Item class
+    * @return   Item  instance of Item class
     */
     public function createNewItem()
     {
