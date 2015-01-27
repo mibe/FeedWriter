@@ -79,7 +79,7 @@
       <error line="0" code="50007">No page-level DocBlock was found in file examples/example_rss2.php</error>
     </parse_markers>
   </file>
-  <file path="Feed.php" hash="cc7d12d630dc23d7d86dfa5754374e38" package="Default">
+  <file path="Feed.php" hash="4512b1c43b0b109d861a0bab4c267725" package="Default">
     <class final="false" abstract="true" namespace="FeedWriter" line="39" package="UniversalFeedWriter">
       <extends/>
       <name>Feed</name>
@@ -373,8 +373,8 @@ if you need to pass a string around, use generateFeed() instead.&lt;/p&gt;</long
           <description>Create a new Item.</description>
           <long-description></long-description>
           <tag line="275" name="access" description="public"/>
-          <tag line="275" name="return" description="instance of Item class" type="object">
-            <type by_reference="false">object</type>
+          <tag line="275" name="return" description="instance of Item class" type="\FeedWriter\Item">
+            <type by_reference="false">\FeedWriter\Item</type>
           </tag>
         </docblock>
       </method>
@@ -705,160 +705,181 @@ for the MD5 hash is generated.&lt;/p&gt;</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="580" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="FeedWriter" line="578" package="UniversalFeedWriter">
+        <name>utf8_for_xml</name>
+        <full_name>utf8_for_xml</full_name>
+        <docblock line="568">
+          <description>Replace invalid xml utf-8 chars.</description>
+          <long-description>&lt;p&gt;See utf8_for_xml() function at
+http://www.phpwact.org/php/i18n/charsets#xml and
+http://www.w3.org/TR/REC-xml/#charsets&lt;/p&gt;</long-description>
+          <tag line="568" name="param" description="" type="string" variable="$string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="568" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="578">
+          <name>$string</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="595" package="UniversalFeedWriter">
         <name>getNamespacePrefixes</name>
         <full_name>getNamespacePrefixes</full_name>
-        <docblock line="571">
+        <docblock line="586">
           <description>Returns all used XML namespace prefixes in this instance.</description>
           <long-description>&lt;p&gt;This includes all channel elements and feed items.
 Unfortunately some namespace prefixes are not included,
 because they are hardcoded, e.g. rdf.&lt;/p&gt;</long-description>
-          <tag line="571" name="access" description="private"/>
-          <tag line="571" name="return" description="Array with namespace prefix as value." type="array">
+          <tag line="586" name="access" description="private"/>
+          <tag line="586" name="return" description="Array with namespace prefix as value." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="610" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="625" package="UniversalFeedWriter">
         <name>makeHeader</name>
         <full_name>makeHeader</full_name>
-        <docblock line="604">
+        <docblock line="619">
           <description>Returns the XML header and root element, depending on the feed type.</description>
           <long-description></long-description>
-          <tag line="604" name="access" description="private"/>
-          <tag line="604" name="return" description="The XML header of the feed." type="string">
+          <tag line="619" name="access" description="private"/>
+          <tag line="619" name="return" description="The XML header of the feed." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="659" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="674" package="UniversalFeedWriter">
         <name>makeFooter</name>
         <full_name>makeFooter</full_name>
-        <docblock line="653">
+        <docblock line="668">
           <description>Closes the open tags at the end of file</description>
           <long-description></long-description>
-          <tag line="653" name="access" description="private"/>
-          <tag line="653" name="return" description="The XML footer of the feed." type="string">
+          <tag line="668" name="access" description="private"/>
+          <tag line="668" name="return" description="The XML footer of the feed." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="680" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="695" package="UniversalFeedWriter">
         <name>makeNode</name>
         <full_name>makeNode</full_name>
-        <docblock line="670">
+        <docblock line="685">
           <description>Creates a single node in XML format</description>
           <long-description></long-description>
-          <tag line="670" name="access" description="private"/>
-          <tag line="670" name="param" description="name of the tag" type="string" variable="$tagName">
+          <tag line="685" name="access" description="private"/>
+          <tag line="685" name="param" description="name of the tag" type="string" variable="$tagName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="670" name="param" description="tag value as string or array of nested tags in 'tagName' =&gt; 'tagValue' format" type="mixed" variable="$tagContent">
+          <tag line="685" name="param" description="tag value as string or array of nested tags in 'tagName' =&gt; 'tagValue' format" type="mixed" variable="$tagContent">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="670" name="param" description="Attributes (if any) in 'attrName' =&gt; 'attrValue' format" type="array" variable="$attributes">
+          <tag line="685" name="param" description="Attributes (if any) in 'attrName' =&gt; 'attrValue' format" type="array" variable="$attributes">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="670" name="param" description="True if the end tag should be omitted. Defaults to false." type="string" variable="$omitEndTag">
+          <tag line="685" name="param" description="True if the end tag should be omitted. Defaults to false." type="string" variable="$omitEndTag">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="670" name="return" description="formatted xml tag" type="string">
+          <tag line="685" name="return" description="formatted xml tag" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="680">
+        <argument line="695">
           <name>$tagName</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="680">
+        <argument line="695">
           <name>$tagContent</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="680">
+        <argument line="695">
           <name>$attributes</name>
           <default>null</default>
           <type/>
         </argument>
-        <argument line="680">
+        <argument line="695">
           <name>$omitEndTag</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="724" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="741" package="UniversalFeedWriter">
         <name>makeChannels</name>
         <full_name>makeChannels</full_name>
-        <docblock line="718">
+        <docblock line="735">
           <description>Make the channels.</description>
           <long-description></long-description>
-          <tag line="718" name="access" description="private"/>
-          <tag line="718" name="return" description="The feed header as XML containing all the feed metadata." type="string">
+          <tag line="735" name="access" description="private"/>
+          <tag line="735" name="return" description="The feed header as XML containing all the feed metadata." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="779" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="796" package="UniversalFeedWriter">
         <name>makeItems</name>
         <full_name>makeItems</full_name>
-        <docblock line="773">
+        <docblock line="790">
           <description>Prints formatted feed items</description>
           <long-description></long-description>
-          <tag line="773" name="access" description="private"/>
-          <tag line="773" name="return" description="The XML of every feed item." type="string">
+          <tag line="790" name="access" description="private"/>
+          <tag line="790" name="return" description="The XML of every feed item." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="812" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="829" package="UniversalFeedWriter">
         <name>startItem</name>
         <full_name>startItem</full_name>
-        <docblock line="805">
+        <docblock line="822">
           <description>Make the starting tag of channels</description>
           <long-description></long-description>
-          <tag line="805" name="access" description="private"/>
-          <tag line="805" name="param" description="The vale of about tag which is used for RSS 1.0 only." type="string" variable="$about">
+          <tag line="822" name="access" description="private"/>
+          <tag line="822" name="param" description="The vale of about tag which is used for RSS 1.0 only." type="string" variable="$about">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="805" name="return" description="The starting XML tag of an feed item." type="string">
+          <tag line="822" name="return" description="The starting XML tag of an feed item." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="812">
+        <argument line="829">
           <name>$about</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="837" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="854" package="UniversalFeedWriter">
         <name>endItem</name>
         <full_name>endItem</full_name>
-        <docblock line="831">
+        <docblock line="848">
           <description>Closes feed item tag</description>
           <long-description></long-description>
-          <tag line="831" name="access" description="private"/>
-          <tag line="831" name="return" description="The ending XML tag of an feed item." type="string">
+          <tag line="848" name="access" description="private"/>
+          <tag line="848" name="return" description="The ending XML tag of an feed item." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="856" package="UniversalFeedWriter">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="FeedWriter" line="873" package="UniversalFeedWriter">
         <name>sanitizeCDATA</name>
         <full_name>sanitizeCDATA</full_name>
-        <docblock line="846">
+        <docblock line="863">
           <description>Sanitizes data which will be later on returned as CDATA in the feed.</description>
           <long-description>&lt;p&gt;A "]]&gt;" respectively "&amp;lt;![CDATA" in the data would break the CDATA in the
 XML, so the brackets are converted to a HTML entity.&lt;/p&gt;</long-description>
-          <tag line="846" name="access" description="private"/>
-          <tag line="846" name="param" description="Data to be sanitized" type="string" variable="$text">
+          <tag line="863" name="access" description="private"/>
+          <tag line="863" name="param" description="Data to be sanitized" type="string" variable="$text">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="846" name="return" description="Sanitized data" type="string">
+          <tag line="863" name="return" description="Sanitized data" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="856">
+        <argument line="873">
           <name>$text</name>
           <default></default>
           <type/>

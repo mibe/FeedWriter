@@ -78,6 +78,7 @@
 <li class="method public inherited"><a href="#method_setPagination" title="setPagination :: Set the URLs for feed pagination."><span class="description">Set the URLs for feed pagination.</span><pre>setPagination()</pre></a></li>
 <li class="method public inherited"><a href="#method_setSelfLink" title="setSelfLink :: Set an 'atom:link' channel element with relation=self attribute."><span class="description">Set an 'atom:link' channel element with relation=self attribute.</span><pre>setSelfLink()</pre></a></li>
 <li class="method public inherited"><a href="#method_setTitle" title="setTitle :: Set the 'title' channel element"><span class="description">Set the 'title' channel element</span><pre>setTitle()</pre></a></li>
+<li class="method public inherited"><a href="#method_utf8_for_xml" title="utf8_for_xml :: Replace invalid xml utf-8 chars."><span class="description">Replace invalid xml utf-8 chars.</span><pre>utf8_for_xml()</pre></a></li>
 <li class="method public inherited"><a href="#method_uuid" title="uuid :: Generate an UUID."><span class="description">Generate an UUID.</span><pre>uuid()</pre></a></li>
 </ul>
 </li>
@@ -265,7 +266,7 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 </div>
 <a id="method_createNewItem"></a><div class="element clickable method public method_createNewItem" data-toggle="collapse" data-target=".method_createNewItem .collapse">
 <h2>Create a new Item.</h2>
-<pre>createNewItem() : object</pre>
+<pre>createNewItem() : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -281,7 +282,7 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 </table>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>object</code>instance of Item class</div>
+<code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code>instance of Item class</div>
 </div></div>
 </div>
 <a id="method_generateFeed"></a><div class="element clickable method public method_generateFeed" data-toggle="collapse" data-target=".method_generateFeed .collapse">
@@ -770,6 +771,29 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
 </div></div>
 </div>
+<a id="method_utf8_for_xml"></a><div class="element clickable method public method_utf8_for_xml" data-toggle="collapse" data-target=".method_utf8_for_xml .collapse">
+<h2>Replace invalid xml utf-8 chars.</h2>
+<pre>utf8_for_xml(string $string) : string</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>See utf8_for_xml() function at
+http://www.phpwact.org/php/i18n/charsets#xml and
+http://www.w3.org/TR/REC-xml/#charsets</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::utf8_for_xml()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
 <a id="method_uuid"></a><div class="element clickable method public method_uuid" data-toggle="collapse" data-target=".method_uuid .collapse">
 <h2>Generate an UUID.</h2>
 <pre>uuid(string $key, string $prefix) : string</pre>
@@ -1135,7 +1159,7 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2014-09-14T01:14:09+02:00.<br></footer></div>
+            generated on 2015-01-27T20:49:34+01:00.<br></footer></div>
 </div>
 </body>
 </html>
