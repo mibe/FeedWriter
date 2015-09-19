@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2014 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2015 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -566,18 +566,29 @@ abstract class Feed
     }
 
     /**
-    * Replace invalid xml utf-8 chars.
+    * Replace invalid XML characters.
     *
-    * See utf8_for_xml() function at
-    * http://www.phpwact.org/php/i18n/charsets#xml and
-    * http://www.w3.org/TR/REC-xml/#charsets
+    * @link http://www.phpwact.org/php/i18n/charsets#xml See utf8_for_xml() function
+    * @link http://www.w3.org/TR/REC-xml/#charsets
+    * @link https://github.com/mibe/FeedWriter/issues/30
     *
-    * @param    string
-    * @return   string
+    * @param    string  string which should be filtered
+    * @return   string  replace invalid characters with this string
     */
-    public static function utf8_for_xml($string)
+    public static function filterInvalidXMLChars($string, $replacement = '_')
     {
-        return preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
+        $result = preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', $replacement, $string);
+        
+        // Did the PCRE replace failed because of bad UTF-8 data?
+        // If yes, try a non-multibyte regex and without the UTF-8 mode enabled.
+        if ($result == NULL && preg_last_error() == PREG_BAD_UTF8_ERROR)
+            $result = preg_replace('/[^\x09\x0a\x0d\x20-\xFF]+/', $replacement, $string);
+
+        // In case the regex replacing failed completely, return the whole unfiltered string.
+        if ($result == NULL)
+            $result = $string;
+        
+        return $result;
     }
     // End # public functions ----------------------------------------------
 
@@ -699,7 +710,7 @@ abstract class Feed
 
         if (is_array($attributes) && count($attributes) > 0) {
             foreach ($attributes as $key => $value) {
-                $value = self::utf8_for_xml($value);
+                $value = self::filterInvalidXMLChars($value);
                 $value = htmlspecialchars($value);
                 $attrText .= " $key=\"$value\"";
             }
@@ -718,7 +729,7 @@ abstract class Feed
                 $nodeText .= $this->makeNode($key, $value);
             }
         } else {
-            $tagContent = self::utf8_for_xml($tagContent);
+            $tagContent = self::filterInvalidXMLChars($tagContent);
             $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
         }
 
