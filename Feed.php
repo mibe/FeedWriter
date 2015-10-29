@@ -78,8 +78,9 @@ abstract class Feed
     * If no version is given, a feed in RSS 2.0 format will be generated.
     *
     * @param    constant  the version constant (RSS1/RSS2/ATOM).
+    * @param    boolean  enable CDATA encoding.
     */
-    protected function __construct($version = Feed::RSS2)
+    protected function __construct($version = Feed::RSS2, $enabledCDATAEncoding = true)
     {
         $this->version = $version;
 
@@ -99,8 +100,10 @@ abstract class Feed
         $this->namespaces['dc'] = 'http://purl.org/dc/elements/1.1/';
         $this->namespaces['sy'] = 'http://purl.org/rss/1.0/modules/syndication/';
 
-        // Tag names to encode in CDATA
-        $this->addCDATAEncoding(array('description', 'content:encoded', 'summary'));
+        if ($enabledCDATAEncoding) {
+            // Tag names to encode in CDATA
+            $this->addCDATAEncoding(array('description', 'content:encoded', 'summary'));
+        }
     }
 
     // Start # public functions ---------------------------------------------
