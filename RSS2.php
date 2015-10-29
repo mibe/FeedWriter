@@ -30,8 +30,8 @@ class RSS2 extends Feed
     /**
     * {@inheritdoc}
     */
-    public function __construct()
+    public function __construct($enabledCDATAEncoding = true)
     {
-        parent::__construct(Feed::RSS2);
+        parent::__construct(Feed::RSS2, $enabledCDATAEncoding);
     }
 }
