@@ -561,6 +561,7 @@ abstract class Feed
     * for the MD5 hash is generated.
     *
     * @author   Anis uddin Ahmad <admin@ajaxray.com>
+    * @access   public
     * @param    string  optional key on which the UUID is generated
     * @param    string  an optional prefix
     * @return   string  the formated UUID
@@ -585,8 +586,10 @@ abstract class Feed
     * @link http://www.w3.org/TR/REC-xml/#charsets
     * @link https://github.com/mibe/FeedWriter/issues/30
     *
+    * @access   public
     * @param    string  string which should be filtered
-    * @return   string  replace invalid characters with this string
+    * @param    string  replace invalid characters with this string
+    * @return   string  the filtered string
     */
     public static function filterInvalidXMLChars($string, $replacement = '_')
     {
