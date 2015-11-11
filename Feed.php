@@ -309,6 +309,19 @@ abstract class Feed
     {
         return $this->CDATAEncoding;
     }
+    
+    /**
+     * Remove tags from the list of CDATA encoded tags
+     *
+     * @access  public
+     * @param   array   An array of tag names that should be removed.
+     * @return  void
+     */
+    public function removeCDATAEncoding(array $tags)
+    {
+        // Call array_values to re-index the array.
+        $this->CDATAEncoding = array_values(array_diff($this->CDATAEncoding, $tags));
+    }
 
     /**
     * Add a FeedItem to the main class
