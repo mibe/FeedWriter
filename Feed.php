@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2014 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2015 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -286,15 +286,15 @@ abstract class Feed
     }
 
     /**
-     * Add a properties to be CDATA encoded
+     * Add one or more tags to the list of CDATA encoded tags
      *
      * @access  public
-     * @param   array   An array of properties that are merged into the list of properties should be encoded as CDATA
+     * @param   array   An array of tag names that are merged into the list of tags which should be encoded as CDATA
      * @return  self
      */
-    public function addCDATAEncoding(Array $property_list)
+    public function addCDATAEncoding(array $tags)
     {
-        $this->CDATAEncoding = array_merge($this->CDATAEncoding, $property_list);
+        $this->CDATAEncoding = array_merge($this->CDATAEncoding, $tags);
 
         return $this;
     }
