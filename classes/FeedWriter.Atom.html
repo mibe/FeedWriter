@@ -57,15 +57,17 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
-<li class="method public inherited"><a href="#method_addCDATAEncoding" title="addCDATAEncoding :: Add a properties to be CDATA encoded"><span class="description">Add a properties to be CDATA encoded</span><pre>addCDATAEncoding()</pre></a></li>
+<li class="method public inherited"><a href="#method_addCDATAEncoding" title="addCDATAEncoding :: Add one or more tags to the list of CDATA encoded tags"><span class="description">Add one or more tags to the list of CDATA encoded tags</span><pre>addCDATAEncoding()</pre></a></li>
 <li class="method public inherited"><a href="#method_addGenerator" title="addGenerator :: Add a channel element indicating the program used to generate the feed."><span class="description">Add a channel element indicating the program used to generate the feed.</span><pre>addGenerator()</pre></a></li>
 <li class="method public inherited"><a href="#method_addItem" title="addItem :: Add a FeedItem to the main class"><span class="description">Add a FeedItem to the main class</span><pre>addItem()</pre></a></li>
 <li class="method public inherited"><a href="#method_addNamespace" title="addNamespace :: Add a XML namespace to the internal list of namespaces."><span class="description">Add a XML namespace to the internal list of namespaces.</span><pre>addNamespace()</pre></a></li>
 <li class="method public inherited"><a href="#method_createNewItem" title="createNewItem :: Create a new Item."><span class="description">Create a new Item.</span><pre>createNewItem()</pre></a></li>
+<li class="method public inherited"><a href="#method_filterInvalidXMLChars" title="filterInvalidXMLChars :: Replace invalid XML characters."><span class="description">Replace invalid XML characters.</span><pre>filterInvalidXMLChars()</pre></a></li>
 <li class="method public inherited"><a href="#method_generateFeed" title="generateFeed :: Generate the feed."><span class="description">Generate the feed.</span><pre>generateFeed()</pre></a></li>
 <li class="method public inherited"><a href="#method_getCDATAEncoding" title="getCDATAEncoding :: Get list of CDATA encoded properties"><span class="description">Get list of CDATA encoded properties</span><pre>getCDATAEncoding()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMIMEType" title="getMIMEType :: Get the appropriate MIME type string for the current feed."><span class="description">Get the appropriate MIME type string for the current feed.</span><pre>getMIMEType()</pre></a></li>
 <li class="method public inherited"><a href="#method_printFeed" title="printFeed :: Print the actual RSS/ATOM file"><span class="description">Print the actual RSS/ATOM file</span><pre>printFeed()</pre></a></li>
+<li class="method public inherited"><a href="#method_removeCDATAEncoding" title="removeCDATAEncoding :: Remove tags from the list of CDATA encoded tags"><span class="description">Remove tags from the list of CDATA encoded tags</span><pre>removeCDATAEncoding()</pre></a></li>
 <li class="method public inherited"><a href="#method_setAtomLink" title="setAtomLink :: Set custom 'link' channel elements."><span class="description">Set custom 'link' channel elements.</span><pre>setAtomLink()</pre></a></li>
 <li class="method public inherited"><a href="#method_setChannelAbout" title="setChannelAbout :: Set the 'about' channel element."><span class="description">Set the 'about' channel element.</span><pre>setChannelAbout()</pre></a></li>
 <li class="method public inherited"><a href="#method_setChannelElement" title="setChannelElement :: Add a channel element to the feed."><span class="description">Add a channel element to the feed.</span><pre>setChannelElement()</pre></a></li>
@@ -78,7 +80,6 @@
 <li class="method public inherited"><a href="#method_setPagination" title="setPagination :: Set the URLs for feed pagination."><span class="description">Set the URLs for feed pagination.</span><pre>setPagination()</pre></a></li>
 <li class="method public inherited"><a href="#method_setSelfLink" title="setSelfLink :: Set an 'atom:link' channel element with relation=self attribute."><span class="description">Set an 'atom:link' channel element with relation=self attribute.</span><pre>setSelfLink()</pre></a></li>
 <li class="method public inherited"><a href="#method_setTitle" title="setTitle :: Set the 'title' channel element"><span class="description">Set the 'title' channel element</span><pre>setTitle()</pre></a></li>
-<li class="method public inherited"><a href="#method_utf8_for_xml" title="utf8_for_xml :: Replace invalid xml utf-8 chars."><span class="description">Replace invalid xml utf-8 chars.</span><pre>utf8_for_xml()</pre></a></li>
 <li class="method public inherited"><a href="#method_uuid" title="uuid :: Generate an UUID."><span class="description">Generate an UUID.</span><pre>uuid()</pre></a></li>
 </ul>
 </li>
@@ -152,8 +153,8 @@
 <div class="row collapse"><div class="detail-description"><div class="long_description"><p>If no version is given, a feed in RSS 2.0 format will be generated.</p></div></div></div>
 </div>
 <a id="method_addCDATAEncoding"></a><div class="element clickable method public method_addCDATAEncoding" data-toggle="collapse" data-target=".method_addCDATAEncoding .collapse">
-<h2>Add a properties to be CDATA encoded</h2>
-<pre>addCDATAEncoding(array $property_list) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
+<h2>Add one or more tags to the list of CDATA encoded tags</h2>
+<pre>addCDATAEncoding(array $tags) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -173,8 +174,8 @@
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$property_list</h4>
-<code>array</code><p>An array of properties that are merged into the list of properties should be encoded as CDATA</p></div>
+<h4>$tags</h4>
+<code>array</code><p>An array of tag names that are merged into the list of tags which should be encoded as CDATA</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
 </div></div>
@@ -285,6 +286,48 @@ custom channel elements can be used properly to generate a valid feed.</p></div>
 <code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code>instance of Item class</div>
 </div></div>
 </div>
+<a id="method_filterInvalidXMLChars"></a><div class="element clickable method public method_filterInvalidXMLChars" data-toggle="collapse" data-target=".method_filterInvalidXMLChars .collapse">
+<h2>Replace invalid XML characters.</h2>
+<pre>filterInvalidXMLChars(string $string, string $replacement) : string</pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://www.phpwact.org/php/i18n/charsets#xml">See utf8_for_xml() function</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.w3.org/TR/REC-xml/#charsets">http://www.w3.org/TR/REC-xml/#charsets</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/mibe/FeedWriter/issues/30">https://github.com/mibe/FeedWriter/issues/30</a></td>
+</tr>
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::filterInvalidXMLChars()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>string which should be filtered</p></div>
+<div class="subelement argument">
+<h4>$replacement</h4>
+<code>string</code><p>replace invalid characters with this string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the filtered string</div>
+</div></div>
+</div>
 <a id="method_generateFeed"></a><div class="element clickable method public method_generateFeed" data-toggle="collapse" data-target=".method_generateFeed .collapse">
 <h2>Generate the feed.</h2>
 <pre>generateFeed() : string</pre>
@@ -370,6 +413,28 @@ if you need to pass a string around, use generateFeed() instead.</p></div>
 <div class="subelement argument">
 <h4>$useGenericContentType</h4>
 <code>bool</code><p>FALSE if the specific feed media type should be sent.</p></div>
+</div></div>
+</div>
+<a id="method_removeCDATAEncoding"></a><div class="element clickable method public method_removeCDATAEncoding" data-toggle="collapse" data-target=".method_removeCDATAEncoding .collapse">
+<h2>Remove tags from the list of CDATA encoded tags</h2>
+<pre>removeCDATAEncoding(array $tags) : void</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>public</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\FeedWriter\Feed::removeCDATAEncoding()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tags</h4>
+<code>array</code><p>An array of tag names that should be removed.</p></div>
 </div></div>
 </div>
 <a id="method_setAtomLink"></a><div class="element clickable method public method_setAtomLink" data-toggle="collapse" data-target=".method_setAtomLink .collapse">
@@ -771,29 +836,6 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
 <div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
 </div></div>
 </div>
-<a id="method_utf8_for_xml"></a><div class="element clickable method public method_utf8_for_xml" data-toggle="collapse" data-target=".method_utf8_for_xml .collapse">
-<h2>Replace invalid xml utf-8 chars.</h2>
-<pre>utf8_for_xml(string $string) : string</pre>
-<div class="labels">
-<span class="label">Inherited</span><span class="label">Static</span>
-</div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>See utf8_for_xml() function at
-http://www.phpwact.org/php/i18n/charsets#xml and
-http://www.w3.org/TR/REC-xml/#charsets</p></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::utf8_for_xml()</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$string</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
 <a id="method_uuid"></a><div class="element clickable method public method_uuid" data-toggle="collapse" data-target=".method_uuid .collapse">
 <h2>Generate an UUID.</h2>
 <pre>uuid(string $key, string $prefix) : string</pre>
@@ -807,6 +849,10 @@ for the MD5 hash is generated.</p></div>
 <tr>
 <th>author</th>
 <td><a href="mailto:admin@ajaxray.com">Anis uddin Ahmad</a></td>
+</tr>
+<tr>
+<th>access</th>
+<td>public</td>
 </tr>
 <tr>
 <th>inherited_from</th>
@@ -1159,7 +1205,7 @@ XML, so the brackets are converted to a HTML entity.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2015-01-27T20:49:34+01:00.<br></footer></div>
+            generated on 2015-11-11T23:56:42+01:00.<br></footer></div>
 </div>
 </body>
 </html>
