@@ -364,7 +364,7 @@ class Item
 
             $this->addElement('guid', $id, array('isPermaLink' => $permaLink));
         } elseif ($this->version == Feed::ATOM) {
-            $this->addElement('id', Feed::uuid($id,'urn:uuid:'), NULL, TRUE);
+            $this->addElement('id', $id, NULL, TRUE);
         } else
             die('A unique ID is not supported in RSS1 feeds.');
 
