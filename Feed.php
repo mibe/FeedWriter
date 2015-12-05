@@ -254,7 +254,7 @@ abstract class Feed
             $contentType = $this->getMIMEType();
         }
 
-        header("Content-Type: " . $contentType);
+        header("Content-Type: " . $contentType . "; charset=" . $this->encoding);
         echo $this->generateFeed();
     }
 
@@ -591,9 +591,9 @@ abstract class Feed
     * @param    string  replace invalid characters with this string
     * @return   string  the filtered string
     */
-    public static function filterInvalidXMLChars($string, $replacement = '_')
+    public static function filterInvalidXMLChars($string, $replacement = '_') // default to '\x{FFFD}' ???
     {
-        $result = preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', $replacement, $string);
+        $result = preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', $replacement, $string);
         
         // Did the PCRE replace failed because of bad UTF-8 data?
         // If yes, try a non-multibyte regex and without the UTF-8 mode enabled.
