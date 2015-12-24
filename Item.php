@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2013 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2013, 2015 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -349,6 +349,8 @@ class Item
     /**
     * Set the unique identifier of the feed item
     *
+    * On ATOM feeds, the identifier must begin with an valid URI scheme.
+    *
     * @access   public
     * @param    string  The unique identifier of this item
     * @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
@@ -364,6 +366,23 @@ class Item
 
             $this->addElement('guid', $id, array('isPermaLink' => $permaLink));
         } elseif ($this->version == Feed::ATOM) {
+            // Check if the given ID is an valid URI scheme (see RFC 4287 4.2.6)
+            // The list of valid schemes was generated from http://www.iana.org/assignments/uri-schemes
+            // by using only permanent or historical schemes.
+            $validSchemes = array('aaa', 'aaas', 'about', 'acap', 'acct', 'afs', 'cap', 'cid', 'coap', 'coaps', 'crid', 'data', 'dav', 'dict', 'dns', 'dtn', 'dvb', 'example', 'fax', 'file', 'filesystem', 'ftp', 'geo', 'go', 'gopher', 'h323', 'ham', 'http', 'https', 'iax', 'icap', 'icon', 'im', 'imap', 'info', 'ipn', 'ipp', 'ipps', 'iris', 'iris.beep', 'iris.lwz', 'iris.xpc', 'iris.xpcs', 'jabber', 'jms', 'ldap', 'mailserver', 'mailto', 'mid', 'modem', 'msrp', 'msrps', 'mtqp', 'mupdate', 'news', 'nfs', 'ni', 'nih', 'nntp', 'opaquelocktoken', 'pack', 'pkcs11', 'pop', 'pres', 'prospero', 'reload', 'rsync', 'rtsp', 'rtsps', 'rtspu', 'service', 'session', 'shttp', 'sieve', 'sip', 'sips', 'sms', 'snews', 'snmp', 'soap.beep', 'soap.beeps', 'stun', 'stuns', 'tag', 'tel', 'telnet', 'tftp', 'thismessage', 'tip', 'tn3270', 'turn', 'turns', 'tv', 'urn', 'vemmi', 'videotex', 'wais', 'ws', 'wss', 'xcon', 'xcon-userid', 'xmlrpc.beep', 'xmlrpc.beeps', 'xmpp', 'z39.50', 'z39.50r', 'z39.50s');
+            $found = FALSE;
+            $checkId = strtolower($id);
+            
+            foreach($validSchemes as $scheme)
+                if (strrpos($checkId, $scheme . ':', -strlen($checkId)) !== FALSE)
+                {
+                    $found = TRUE;
+                    break;
+                }
+            
+            if (!$found)
+                die("The ID must begin with an IANA-registered URI scheme.");
+            
             $this->addElement('id', $id, NULL, TRUE);
         } else
             die('A unique ID is not supported in RSS1 feeds.');
