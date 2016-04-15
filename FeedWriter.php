@@ -47,8 +47,10 @@ abstract class FeedWriter
 	private $data          = array();  // Store some other version wise data
 	private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
 
-	private $version   = null;
+	private $version       = null;
 	
+	private $outputBuffer  = false;
+
 	/**
 	* Constructor
 	* 
@@ -100,7 +102,7 @@ abstract class FeedWriter
 	}
 	
 	/**
-	* Genarate the actual RSS/ATOM file
+	* Generate the actual RSS/ATOM file
 	* 
 	* @access   public
 	* @param    bool  FALSE if the specific feed media type should be send.
@@ -108,29 +110,43 @@ abstract class FeedWriter
 	*/
 	public function generateFeed($useGenericContentType = FALSE)
 	{
-		$contentType = "text/xml";
-
-		if (!$useGenericContentType)
-		{
-			switch($this->version)
-			{
-				case RSS2 : $contentType = "application/rss+xml";
-					break;
-				case RSS1 : $contentType = "application/rdf+xml";
-					break;
-				case ATOM : $contentType = "application/atom+xml";
-					break;
-			}
-		}
-
-		header("Content-Type: " . $contentType . "; charset=UTF-8");
+		$contentType = $this->getContentType($useGenericContentType);
+		$headers = $this->getHttpHeaders($contentType);
+		foreach($headers as $header) header($header);
 		
 		$this->printHeader();
 		$this->printChannels();
 		$this->printItems();
 		$this->printFooter();
 	}
-	
+
+	/**
+	 * Generate the actual RSS/ATOM and return the data instead of sending it directly to the browser
+	 *
+	 * @access   public
+	 * @param    bool   FALSE if the specific feed media type should be send.
+	 * @return   array  feed preview: 
+	 *           'feed' => string with generated RSS/ATOM data
+	 *           'contentType' => string with mime type
+	 *           'httpHeaders' => array of HTTP headers that should be sent with the header() function
+	 */
+	public function generateFeedPreview($useGenericContentType = FALSE) {
+		$out = array();
+		$contentType = $this->getContentType($useGenericContentType);
+		$out['contentType'] = $contentType;
+		$out['httpHeaders'] = $this->getHttpHeaders($contentType);
+
+		$this->enableOutputBuffering();
+		$this->printHeader();
+		$this->printChannels();
+		$this->printItems();
+		$this->printFooter();
+		$out['feed'] = $this->getOutputBuffer();
+		$this->disableOutputBuffering();
+
+		return $out;
+	}
+
 	/**
 	* Create a new FeedItem.
 	* 
@@ -153,7 +169,7 @@ abstract class FeedWriter
 	public function addItem(FeedItem $feedItem)
 	{
 		if ($feedItem->getVersion() != $this->version)
-			die('Feed type mismatch: This instance can handle ' . $this->version . ' feeds only, but item with type ' . $feedItem->getVersion() . ' given.');
+			throw new Exception('Feed type mismatch: This instance can handle ' . $this->version . ' feeds only, but item with type ' . $feedItem->getVersion() . ' given.');
 
 		$this->items[] = $feedItem;
 	}
@@ -269,6 +285,81 @@ abstract class FeedWriter
 	// Start # private functions ----------------------------------------------
 	
 	/**
+	 * Echoes a string or appends it to the object buffer if defined
+	 *
+	 * @access private
+	 */
+	private function write($str) {
+		if ($this->outputBuffer === false) echo $str;
+		else $this->outputBuffer .= $str;
+	}
+
+	/**
+	 * Enables output buffering instead of directly echoing the feed
+	 *
+	 * @access private
+	 */
+	private function enableOutputBuffering() {
+		$this->outputBuffer = '';
+	}
+
+	/**
+	 * Disables output buffering so the feed is directly echoed
+	 *
+	 * @access private
+	 */
+	private function disableOutputBuffering() {
+		$this->outputBuffer = false;
+	}
+
+	/**
+	 * Gets output buffer contents
+	 *
+	 * @access private
+	 * @return string  contents of output buffer
+	 */
+	private function getOutputBuffer() {
+		return $this->outputBuffer !== false ? $this->outputBuffer : '';
+	}
+
+	/**
+	 * Get content mime type
+	 *
+	 * @access private
+	 * @param  bool    if TRUE, it forces the content type to generic 'text/xml'
+	 * @return string  content mime type
+	 */
+	private function getContentType($useGenericContentType = FALSE) {
+		$contentType = "text/xml";
+
+		if (!$useGenericContentType)
+		{
+			switch($this->version)
+			{
+				case RSS2 : $contentType = "application/rss+xml";
+					break;
+				case RSS1 : $contentType = "application/rdf+xml";
+					break;
+				case ATOM : $contentType = "application/atom+xml";
+					break;
+			}
+		}
+
+		return $contentType;
+	}
+
+	/**
+	 * Get HTTP headers that should be sent for this feed
+	 *
+	 * @access  private
+	 * @param   string  content mime type for the feed
+	 * @return  array   strings to be sent with header()
+	 */
+	private function getHttpHeaders($contentType) {
+		return array("Content-Type: $contentType; charset=UTF-8");
+	}
+
+	/**
 	* Prints the xml and rss namespace
 	* 
 	* @access   private
@@ -293,7 +384,7 @@ abstract class FeedWriter
 
 		$out .= PHP_EOL;
 
-		echo $out;
+		$this->write($out);
 	}
 	
 	/**
@@ -306,15 +397,15 @@ abstract class FeedWriter
 	{
 		if($this->version == RSS2)
 		{
-			echo '</channel>' . PHP_EOL . '</rss>';
+			$this->write('</channel>' . PHP_EOL . '</rss>');
 		}
 		elseif($this->version == RSS1)
 		{
-			echo '</rdf:RDF>';
+			$this->write('</rdf:RDF>');
 		}
 		else if($this->version == ATOM)
 		{
-			echo '</feed>';
+			$this->write('</feed>');
 		}
 	}
 
@@ -382,10 +473,10 @@ abstract class FeedWriter
 		switch ($this->version)
 		{
 			case RSS2:
-				echo '<channel>' . PHP_EOL;
+				$this->write('<channel>' . PHP_EOL);
 				break;
 			case RSS1:
-				echo (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">";
+				$this->write((isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">");
 				break;
 		}
 		
@@ -395,13 +486,13 @@ abstract class FeedWriter
 			if($this->version == ATOM && $key == 'link')
 			{
 				// ATOM prints link element as href attribute
-				echo $this->makeNode($key,'', array('href' => $value));
+				$this->write($this->makeNode($key,'', array('href' => $value)));
 				//Add the id for ATOM
-				echo $this->makeNode('id', FeedWriter::uuid($value, 'urn:uuid:'));
+				$this->write($this->makeNode('id', FeedWriter::uuid($value, 'urn:uuid:')));
 			}
 			else
 			{
-				echo $this->makeNode($key, $value);
+				$this->write($this->makeNode($key, $value));
 			}
 			
 		}
@@ -409,13 +500,13 @@ abstract class FeedWriter
 		//RSS 1.0 have special tag <rdf:Seq> with channel
 		if($this->version == RSS1)
 		{
-			echo "<items>" . PHP_EOL . "<rdf:Seq>" . PHP_EOL;
+			$this->write("<items>" . PHP_EOL . "<rdf:Seq>" . PHP_EOL);
 			foreach ($this->items as $item)
 			{
 				$thisItems = $item->getElements();
-				echo "<rdf:li resource=\"{$thisItems['link']['content']}\"/>" . PHP_EOL;
+				$this->write("<rdf:li resource=\"{$thisItems['link']['content']}\"/>" . PHP_EOL);
 			}
-			echo "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
+			$this->write("</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL);
 		}
 	}
 	
@@ -432,13 +523,13 @@ abstract class FeedWriter
 			$thisItems = $item->getElements();
 			
 			//the argument is printed as rdf:about attribute of item in rss 1.0
-			echo $this->startItem($thisItems['link']['content']);
+			$this->write($this->startItem($thisItems['link']['content']));
 			
 			foreach ($thisItems as $feedItem)
 			{
-				echo $this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']);
+				$this->write($this->makeNode($feedItem['name'], $feedItem['content'], $feedItem['attributes']));
 			}
-			echo $this->endItem();
+			$this->write($this->endItem());
 		}
 	}
 	
@@ -453,22 +544,22 @@ abstract class FeedWriter
 	{
 		if($this->version == RSS2)
 		{
-			echo '<item>' . PHP_EOL;
+			$this->write('<item>' . PHP_EOL);
 		}
 		else if($this->version == RSS1)
 		{
 			if($about)
 			{
-				echo "<item rdf:about=\"$about\">" . PHP_EOL;
+				$this->write("<item rdf:about=\"$about\">" . PHP_EOL);
 			}
 			else
 			{
-				die("link element is not set." . PHP_EOL . "It's required for RSS 1.0 to be used as the about attribute of the item tag.");
+				throw new Exception("link element is not set." . PHP_EOL . "It's required for RSS 1.0 to be used as the about attribute of the item tag.");
 			}
 		}
 		else if($this->version == ATOM)
 		{
-			echo "<entry>" . PHP_EOL;
+			$this->write("<entry>" . PHP_EOL);
 		}
 	}
 	
@@ -482,11 +573,11 @@ abstract class FeedWriter
 	{
 		if($this->version == RSS2 || $this->version == RSS1)
 		{
-			echo '</item>' . PHP_EOL;
+			$this->write('</item>' . PHP_EOL);
 		}
 		else if($this->version == ATOM)
 		{
-			echo "</entry>" . PHP_EOL;
+			$this->write("</entry>" . PHP_EOL);
 		}
 	}
 	
