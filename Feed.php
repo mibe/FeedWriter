@@ -743,6 +743,15 @@ abstract class Feed
         if (is_array($tagContent)) {
             foreach ($tagContent as $key => $value) {
                 $nodeText .= $this->makeNode($key, $value);
+                if (is_array($value)) {
+                    foreach ($value as $subValue) {
+                        $nodeText .= $this->makeNode($key, $subValue);
+                    }
+                } else if (is_string($value)) {
+                    $nodeText .= $this->makeNode($key, $value);
+                } else {
+                    throw new \RuntimeException("Unknown node-value type for $key");
+                }
             }
         } else {
             $tagContent = self::filterInvalidXMLChars($tagContent);
