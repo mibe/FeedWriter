@@ -1,13 +1,14 @@
 {
     "name": "mibe/feedwriter",
     "description": "Generate feeds in either RSS 1.0, RSS 2.0 or ATOM formats",
-    "keywords": ["RSS", "ATOM", "feed"],
+    "keywords": ["RSS", "RSS 1.0", "RSS 2.0", "RSS2", "ATOM", "feed"],
     "homepage": "https://github.com/mibe/FeedWriter",
     "type": "library",
     "license": "GPL-3.0",
     "authors": [
         {
-            "name": "Anis uddin Ahmad"
+            "name": "Anis uddin Ahmad",
+            "email": "anis.programmer@gmail.com"
         },
         {
             "name": "Michael Bemmerl",
