@@ -248,7 +248,7 @@ abstract class Feed
     */
     public function printFeed($useGenericContentType = false)
     {
-        $contentType = "text/xml";
+        $contentType = "application/rss+xml";
 
         if (!$useGenericContentType) {
             $contentType = $this->getMIMEType();
@@ -742,8 +742,8 @@ abstract class Feed
 
         if (is_array($tagContent)) {
             foreach ($tagContent as $key => $value) {
-                $nodeText .= $this->makeNode($key, $value);
                 if (is_array($value)) {
+                    $nodeText .= PHP_EOL;
                     foreach ($value as $subValue) {
                         $nodeText .= $this->makeNode($key, $subValue);
                     }
