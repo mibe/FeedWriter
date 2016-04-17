@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2015 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2016 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -202,11 +202,8 @@ abstract class Feed
     * @param    array   array of channels
     * @return   self
     */
-    public function setChannelElementsFromArray($elementArray)
+    public function setChannelElementsFromArray(array $elementArray)
     {
-        if (!is_array($elementArray))
-            return;
-
         foreach ($elementArray as $elementName => $content) {
             $this->setChannelElement($elementName, $content);
         }
@@ -719,12 +716,12 @@ abstract class Feed
     * @param    string  True if the end tag should be omitted. Defaults to false.
     * @return   string  formatted xml tag
     */
-    private function makeNode($tagName, $tagContent, $attributes = null, $omitEndTag = false)
+    private function makeNode($tagName, $tagContent, array $attributes = null, $omitEndTag = false)
     {
         $nodeText = '';
         $attrText = '';
 
-        if (is_array($attributes) && count($attributes) > 0) {
+        if ($attributes != null) {
             foreach ($attributes as $key => $value) {
                 $value = self::filterInvalidXMLChars($value);
                 $value = htmlspecialchars($value);

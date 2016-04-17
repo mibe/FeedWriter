@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2013, 2015 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2013, 2015-2016 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -109,11 +109,8 @@ class Item
     * @param    array   array of elements in 'tagName' => 'tagContent' format.
     * @return   self
     */
-    public function addElementArray($elementArray)
+    public function addElementArray(array $elementArray)
     {
-        if (!is_array($elementArray))
-            return;
-
         foreach ($elementArray as $elementName => $content) {
             $this->addElement($elementName, $content);
         }
