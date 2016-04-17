@@ -87,8 +87,8 @@ abstract class Feed
         $this->encoding = 'utf-8';
 
         // Setting default value for essential channel elements
-        $this->channels['title'] = $version . ' Feed';
-        $this->channels['link']  = 'http://www.ajaxray.com/blog';
+        $this->setChannelElement('title', $version .' Feed');
+        $this->setChannelElement('link', 'http://www.ajaxray.com/blog');
 
         // Add some default XML namespaces
         $this->namespaces['content'] = 'http://purl.org/rss/1.0/modules/content/';
