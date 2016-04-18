@@ -10,7 +10,7 @@ date_default_timezone_set('UTC');
 
 use \FeedWriter\RSS2;
 
-/*
+/**
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
  *
  * This file is part of the "Universal Feed Writer" project.
@@ -35,11 +35,11 @@ $TestFeed = new RSS2;
 //Setting the channel elements
 //Use wrapper functions for common channel elements
 $TestFeed->setTitle('Testing & Checking the RSS writer class');
-$TestFeed->setLink('http://www.ajaxray.com/projects/rss');
+$TestFeed->setLink('http://www.ajaxray.com');
 $TestFeed->setDescription('This is a test of creating a RSS 2.0 feed Universal Feed Writer');
 
 //Image title and link must match with the 'title' and 'link' channel elements for valid RSS 2.0
-$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com/projects/rss','http://www.rightbrainsolution.com/_resources/img/logo.png');
+$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com','http://www.rightbrainsolution.com/_resources/img/logo.png');
 
 //Let's add some feed items: Create two empty Item instances
 $itemOne = $TestFeed->createNewItem();

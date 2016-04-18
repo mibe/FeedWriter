@@ -51,6 +51,14 @@ $TestFeed->setChannelElement('language', 'en-US');
 $TestFeed->setDate(date(DATE_RSS, time()));
 $TestFeed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
 
+// By using arrays as channelElement values, can be set element like this
+//  <skipDays>
+//      <day>Saturday</day>
+//      <day>Sunday</day>
+// </skipDays>
+// Thanks to - Peter Fargaš <peter.fargas.work@googlemail.com>
+$TestFeed->setChannelElement("skipDays", array('day'=>['Saturday','Sunday']));
+
 // You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
 // It's recommended to provide a backlink to the feed URL.
 $TestFeed->setSelfLink('http://example.com/myfeed');
@@ -111,9 +119,8 @@ $newItem->addElementArray(array('title'=> 'The 2nd item', 'link' => 'http://www.
 $TestFeed->addItem($newItem);
 
 // OK. Everything is done. Now generate the feed.
-// If you want to send the feed directly to the browser, use the printFeed() method.
+// Then do anything (e,g cache, save, attach, print) you want with the feed in $myFeed.
 $myFeed = $TestFeed->generateFeed();
 
-// Do anything you want with the feed in $myFeed. Why not send it to the browser? ;-)
-// You could also save it to a file if you don't want to invoke your script every time.
-echo $myFeed;
+// If you want to send the feed directly to the browser, use the printFeed() method.
+$TestFeed->printFeed();
