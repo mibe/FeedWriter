@@ -2,15 +2,15 @@ Generate RSS 1.0, RSS 2.0 or ATOM formatted feeds
 ====================================================
 
 This package can be used to generate feeds in either RSS 1.0, RSS 2.0 or ATOM
-formats.
+format.
 
-Applications can create feed writer object, several feed item objects, set
-several types of properties of either feeds and feed items, and add items to
+Applications can create a feed object, several feed item objects, set
+several types of properties of either feed and feed items, and add items to
 the feed.
 
-Once a feed is fully composed with its items, the feed writer class can generate
-the necessary XML structure to describe the feed in the RSS or ATOM formats.
-The feed is generated as part of the current feed output.
+Once a feed is fully composed with its items, the feed class can generate
+the necessary XML structure to describe the feed in RSS or ATOM format. This
+structure can be directly sent to the browser, or just returned as string.
 
 
 Requirements
@@ -26,9 +26,9 @@ Documentation
 --------------
 
 The documentation can be found in the "gh-pages" branch or on GitHub Pages:
-http://mibe.github.io/FeedWriter/
+https://mibe.github.io/FeedWriter/
 
-Check **/examples** directory for usages examples.
+Check the **/examples** directory for usages examples.
 
 
 Authors
@@ -45,3 +45,6 @@ Authors
 - Kristián Valentín
 - Brandtley McMinn
 - Julian Bogdani
+- Cedric Gampert
+- Yamek
+- thielj
