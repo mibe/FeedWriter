@@ -624,8 +624,13 @@ abstract class Feed
         $tags = array_keys($this->channels);
 
         // ... and now all names from feed items
-        foreach ($this->items as $item)
-            $tags = array_merge($tags, array_keys($item->getElements()));
+        foreach ($this->items as $item) {
+            foreach (array_keys($item->getElements()) as $key) {
+                if (!in_array($key, $tags)) {
+                    $tags[] = $key;
+                }
+            }
+        }
 
         // Look for prefixes in those tag names
         foreach ($tags as $tag) {
