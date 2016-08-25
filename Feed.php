@@ -786,7 +786,7 @@ abstract class Feed
                 $out .= '<channel>' . PHP_EOL;
                 break;
             case Feed::RSS1:
-                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']}\">";
+                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']['content']}\">";
                 break;
         }
 
