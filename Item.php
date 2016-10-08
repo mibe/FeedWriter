@@ -317,27 +317,31 @@ class Item
     */
     public function setAuthor($author, $email = null, $uri = null)
     {
-        switch ($this->version) {
-            case Feed::RSS1: die('The author element is not supported in RSS1 feeds.');
-                break;
-            case Feed::RSS2:
-                if ($email != null)
-                    $author = $email . ' (' . $author . ')';
+        if ($this->version == Feed::RSS1)
+            die('The author element is not supported in RSS1 feeds.');
+        
+        // Regex from RFC 4287 page 41
+        if ($email != null && preg_match('/.+@.+/', $email) != 1)
+            die('The email address is syntactically incorrect.');
+        
+        if ($this->version == Feed::RSS2)
+        {
+            if ($email != null)
+                $author = $email . ' (' . $author . ')';
 
-                $this->addElement('author', $author);
-                break;
-            case Feed::ATOM:
-                $elements = array('name' => $author);
+            $this->addElement('author', $author);
+        }
+        else
+        {
+            $elements = array('name' => $author);
 
-                // Regex from RFC 4287 page 41
-                if ($email != null && preg_match('/.+@.+/', $email) == 1)
-                    $elements['email'] = $email;
+            if ($email != null)
+                $elements['email'] = $email;
 
-                if ($uri != null)
-                    $elements['uri'] = $uri;
+            if ($uri != null)
+                $elements['uri'] = $uri;
 
-                $this->addElement('author', $elements);
-                break;
+            $this->addElement('author', $elements);
         }
 
         return $this;
