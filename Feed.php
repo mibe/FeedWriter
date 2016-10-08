@@ -245,7 +245,7 @@ abstract class Feed
     */
     public function printFeed($useGenericContentType = false)
     {
-        $contentType = "application/rss+xml";
+        $contentType = "text/xml";
 
         if (!$useGenericContentType) {
             $contentType = $this->getMIMEType();
