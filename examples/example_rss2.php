@@ -94,7 +94,7 @@ $newItem->setDate('2013-04-07 00:50:30');
 // You can also attach a media object to a feed item. You just need the URL, the byte length
 // and the MIME type of the media. Here's a quirk: The RSS2 spec says "The url must be an http url.".
 // Other schemes like ftp, https, etc. produce an error in feed validators.
-$newItem->setEnclosure('http://upload.wikimedia.org/wikipedia/commons/4/49/En-us-hello-1.ogg', 11779, 'audio/ogg');
+$newItem->addEnclosure('http://upload.wikimedia.org/wikipedia/commons/4/49/En-us-hello-1.ogg', 11779, 'audio/ogg');
 
 // If you want you can set the name (and email address) of the author of this feed item.
 $newItem->setAuthor('Anis uddin Ahmad', 'admin@ajaxray.com');

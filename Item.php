@@ -288,24 +288,6 @@ class Item
     }
 
     /**
-    * Alias of addEnclosure, for backward compatibility. Using only this
-    * method ensures that the 'enclosure' element will be present only once.
-    *
-    * @access   public
-    * @param    string  The URL of the media.
-    * @param    integer The length of the media.
-    * @param    string  The MIME type attribute of the media.
-    * @return   self
-    * @link     https://tools.ietf.org/html/rfc4288
-    * @deprecated Use the addEnclosure method instead.
-    *
-    **/
-    public function setEnclosure($url, $length, $type)
-    {
-        return $this->addEnclosure($url, $length, $type, false);
-    }
-
-    /**
     * Set the 'author' element of feed item.
     * Not supported in RSS 1.0 feeds.
     *
