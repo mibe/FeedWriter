@@ -366,7 +366,7 @@ abstract class Feed
     }
 
     /**
-    * Set the date when the ATOM feed was lastly updated.
+    * Set the date when the feed was lastly updated.
     *
     * This adds the 'updated' element to the feed. The value of the date parameter
     * can be either an instance of the DateTime class, an integer containing a UNIX
@@ -404,16 +404,18 @@ abstract class Feed
     }
 
     /**
-    * Set the 'description' channel element
+    * Set a phrase or sentence describing the feed.
     *
     * @access   public
-    * @param    string  value of 'description' channel tag
+    * @param    string  Description of the feed.
     * @return   self
     */
     public function setDescription($description)
     {
         if ($this->version != Feed::ATOM)
             $this->setChannelElement('description', $description);
+        else
+            $this->setChannelElement('subtitle', $description);
 
         return $this;
     }

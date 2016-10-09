@@ -37,6 +37,7 @@ $TestFeed = new ATOM;
 //Setting the channel elements
 //Use wrapper functions for common elements
 $TestFeed->setTitle('Testing the RSS writer class');
+$TestFeed->setDescription('This is just a short example for using the FeedWriter classes...');
 $TestFeed->setLink('http://www.ajaxray.com/rss2/channel/about');
 $TestFeed->setDate(new DateTime());
 
