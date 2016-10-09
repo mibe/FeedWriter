@@ -500,8 +500,9 @@ abstract class Feed
 
                 // $value is an array , so check every element
                 foreach ($value as $linkItem) {
+                    $attrib = $linkItem['attributes'];
                     // Only one link with relation alternate and same hreflang & type is allowed.
-                    if (@$linkItem['rel'] == 'alternate' && @$linkItem['hreflang'] == $hreflang && @$linkItem['type'] == $type)
+                    if (@$attrib['rel'] == 'alternate' && @$attrib['hreflang'] == $hreflang && @$attrib['type'] == $type)
                         die('The feed must not contain more than one link element with a relation of "alternate"'
                         . ' that has the same combination of type and hreflang attribute values.');
                 }
