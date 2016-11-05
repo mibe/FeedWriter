@@ -135,7 +135,7 @@ class Item
         // Add an 'id' element, if it was not added by calling the setLink method.
         // Use the value of the title element as key, since no link element was specified.
         if ($this->version == Feed::ATOM && !array_key_exists('id', $this->elements))
-            $this->addElement('id', Feed::uuid($this->elements['title']['content'], 'urn:uuid:'));
+            $this->setId(Feed::uuid($this->elements['title']['content'], 'urn:uuid:'));
         
         return $this->elements;
     }
@@ -249,7 +249,7 @@ class Item
             $this->addElement('link', $link);
         } else {
             $this->addElement('link','',array('href'=>$link));
-            $this->addElement('id', Feed::uuid($link,'urn:uuid:'));
+            $this->setId(Feed::uuid($link,'urn:uuid:'));
         }
 
         return $this;
