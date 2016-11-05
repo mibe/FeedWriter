@@ -53,7 +53,9 @@ abstract class Feed
     private $items         = array();
 
     /**
-    * Store some other version wise data
+    * Collection of other version wise data.
+    *
+    * Currently used to store the 'rdf:about' attribute of the channel (RSS1 only).
     */
     private $data          = array();
 
@@ -876,8 +878,8 @@ abstract class Feed
             }
             $out .= "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
         } else if ($this->version == Feed::ATOM) {
-            // ATOM feeds have a unique feed ID.
-            $out .= $this->makeNode('id', Feed::uuid(null, 'urn:uuid:'));
+            // ATOM feeds have a unique feed ID. Use the title channel element as key.
+            $out .= $this->makeNode('id', Feed::uuid($this->channels['title']['content'], 'urn:uuid:'));
         }
 
         return $out;
