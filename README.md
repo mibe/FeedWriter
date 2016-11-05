@@ -48,3 +48,5 @@ Authors
 - Cedric Gampert
 - Yamek
 - thielj
+- Pavel Khakhlou
+- Daniel
