@@ -5,6 +5,7 @@
 include '../Item.php';
 include '../Feed.php';
 include '../RSS2.php';
+include '../InvalidOperationException.php';
 
 date_default_timezone_set('UTC');
 
@@ -31,7 +32,7 @@ use \FeedWriter\RSS2;
  */
 
 // Creating an instance of RSS2 class.
-$TestFeed = new RSS2;
+$TestFeed = new RSS2();
 
 // Setting some basic channel elements. These three elements are mandatory.
 $TestFeed->setTitle('Testing & Checking the Feed Writer project');
@@ -48,7 +49,7 @@ $TestFeed->setImage('Testing & Checking the Feed Writer project', 'https://githu
 $TestFeed->setChannelElement('language', 'en-US');
 
 // The date when this feed was lastly updated. The publication date is also set.
-$TestFeed->setDate(date(DATE_RSS, time()));
+$TestFeed->setDate(time());
 $TestFeed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06')));
 
 // By using arrays as channelElement values, can be set element like this

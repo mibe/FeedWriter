@@ -5,6 +5,7 @@
 include '../Item.php';
 include '../Feed.php';
 include '../RSS2.php';
+include '../InvalidOperationException.php';
 
 date_default_timezone_set('UTC');
 
@@ -30,7 +31,7 @@ use \FeedWriter\RSS2;
  */
 
 //Creating an instance of RSS2 class.
-$TestFeed = new RSS2;
+$TestFeed = new RSS2();
 
 //Setting the channel elements
 //Use wrapper functions for common channel elements

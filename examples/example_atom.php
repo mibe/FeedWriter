@@ -5,6 +5,7 @@
 include '../Item.php';
 include '../Feed.php';
 include '../ATOM.php';
+include '../InvalidOperationException.php';
 
 date_default_timezone_set('UTC');
 
@@ -32,7 +33,7 @@ use \FeedWriter\ATOM;
 // IMPORTANT : No need to add id for feed or channel. It will be automatically created from link.
 
 //Creating an instance of ATOM class.
-$TestFeed = new ATOM;
+$TestFeed = new ATOM();
 
 //Setting the channel elements
 //Use wrapper functions for common elements

@@ -80,9 +80,15 @@ class Item
     * @param    boolean Specifies if an already existing element is overwritten.
     * @param    boolean Specifies if multiple elements of the same name are allowed.
     * @return   self
+    * @throws   InvalidArgumentException if the element name is not a string, empty or NULL.
     */
-    public function addElement($elementName, $content, $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
+    public function addElement($elementName, $content, array $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
     {
+        if (empty($elementName))
+            throw new \InvalidArgumentException('The element name may not be empty or NULL.');
+        if (!is_string($elementName))
+            throw new \InvalidArgumentException('The element name must be a string.');
+
         $key = $elementName;
 
         // return if element already exists & if overwriting is disabled
@@ -146,7 +152,7 @@ class Item
     * Set the 'description' element of feed item
     *
     * @access   public
-    * @param    string  The content of 'description' or 'summary' element
+    * @param    string  The content of the 'description' or 'summary' element
     * @return   self
     */
     public function setDescription($description)
@@ -157,17 +163,18 @@ class Item
     }
 
     /**
-     * Set the 'content' element of the feed item
-     * For ATOM feeds only
-     *
-     * @access  public
-     * @param   string  Content for the item (i.e., the body of a blog post).
-     * @return  self
-     */
+    * Set the 'content' element of the feed item
+    * For ATOM feeds only
+    *
+    * @access   public
+    * @param    string  Content for the item (i.e., the body of a blog post).
+    * @return   self
+    * @throws   InvalidOperationException if this method is called on non-ATOM feeds.
+    */
     public function setContent($content)
     {
         if ($this->version != Feed::ATOM)
-            die('The content element is supported in ATOM feeds only.');
+            throw new InvalidOperationException('The content element is supported in ATOM feeds only.');
 
         return $this->addElement('content', $content, array('type' => 'html'));
     }
@@ -194,6 +201,7 @@ class Item
     * @access   public
     * @param    DateTime|int|string  Date which should be used.
     * @return   self
+    * @throws   InvalidArgumentException if the given date was not parseable.
     */
     public function setDate($date)
     {
@@ -204,10 +212,10 @@ class Item
                 $date = strtotime($date);
 
                 if ($date === FALSE)
-                    die('The given date string was not parseable.');
+                    throw new \InvalidArgumentException('The given date string was not parseable.');
             }
         } elseif ($date < 0)
-            die('The given date is not an UNIX timestamp.');
+            throw new \InvalidArgumentException('The given date is not an UNIX timestamp.');
 
         if ($this->version == Feed::ATOM) {
             $tag    = 'updated';
@@ -255,23 +263,25 @@ class Item
     * @param    string  The URL of the media.
     * @param    integer The length of the media.
     * @param    string  The MIME type attribute of the media.
-    * @param    boolean Specifies, if multiple enclosures are allowed
+    * @param    boolean Specifies if multiple enclosures are allowed
     * @return   self
     * @link     https://tools.ietf.org/html/rfc4288
+    * @throws   InvalidArgumentException if the length or type parameter is invalid.
+    * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function addEnclosure($url, $length, $type, $multiple = TRUE)
     {
         if ($this->version == Feed::RSS1)
-            die('Media attachment is not supported in RSS1 feeds.');
+            throw new InvalidOperationException('Media attachment is not supported in RSS1 feeds.');
 
         // the length parameter should be set to 0 if it can't be determined
         // see http://www.rssboard.org/rss-profile#element-channel-item-enclosure
         if (!is_numeric($length) || $length < 0)
-            die('The length parameter must be an integer and greater or equals to zero.');
+            throw new \InvalidArgumentException('The length parameter must be an integer and greater or equals to zero.');
 
         // Regex used from RFC 4287, page 41
         if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
-            die('type parameter must be a string and a MIME type.');
+            throw new \InvalidArgumentException('type parameter must be a string and a MIME type.');
 
         $attributes = array('length' => $length, 'type' => $type);
 
@@ -296,15 +306,17 @@ class Item
     * @param    string  Optional email address of the author
     * @param    string  Optional URI related to the author
     * @return   self
+    * @throws   InvalidArgumentException if the provided email address is syntactically incorrect.
+    * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function setAuthor($author, $email = null, $uri = null)
     {
         if ($this->version == Feed::RSS1)
-            die('The author element is not supported in RSS1 feeds.');
+            throw new InvalidOperationException('The author element is not supported in RSS1 feeds.');
         
         // Regex from RFC 4287 page 41
         if ($email != null && preg_match('/.+@.+/', $email) != 1)
-            die('The email address is syntactically incorrect.');
+            throw new \InvalidArgumentException('The email address is syntactically incorrect.');
         
         if ($this->version == Feed::RSS2)
         {
@@ -338,12 +350,14 @@ class Item
     * @param    string  The unique identifier of this item
     * @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
     * @return   self
+    * @throws   InvalidArgumentException if the permaLink parameter is not boolean.
+    * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function setId($id, $permaLink = false)
     {
         if ($this->version == Feed::RSS2) {
             if (!is_bool($permaLink))
-                die('The permaLink parameter must be boolean.');
+                throw new \InvalidArgumentException('The permaLink parameter must be boolean.');
 
             $permaLink = $permaLink ? 'true' : 'false';
 
@@ -364,11 +378,11 @@ class Item
                 }
             
             if (!$found)
-                die("The ID must begin with an IANA-registered URI scheme.");
+                throw new \InvalidArgumentException("The ID must begin with an IANA-registered URI scheme.");
             
             $this->addElement('id', $id, NULL, TRUE);
         } else
-            die('A unique ID is not supported in RSS1 feeds.');
+            throw new InvalidOperationException('A unique ID is not supported in RSS1 feeds.');
 
         return $this;
     }
