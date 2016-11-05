@@ -896,8 +896,12 @@ abstract class Feed
         foreach ($this->items as $item) {
             $thisItems = $item->getElements();
 
-            // the argument is printed as rdf:about attribute of item in rss 1.0
-            $out .= $this->startItem($thisItems['link']['content']);
+            // The argument is printed as rdf:about attribute of item in RSS 1.0
+            // We're using the link set in the item (which is mandatory) as the about attribute.
+            if ($this->version == Feed::RSS1)
+                $out .= $this->startItem($thisItems['link']['content']);
+            else
+                $out .= $this->startItem();
 
             foreach ($thisItems as $feedItem) {
                 $name = $feedItem['name'];

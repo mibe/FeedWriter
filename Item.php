@@ -132,6 +132,10 @@ class Item
     */
     public function getElements()
     {
+        // Add an 'id' element, if it was not added by calling the setLink method.
+        if ($this->version == Feed::ATOM && !array_key_exists('id', $this->elements))
+            $this->addElement('id', Feed::uuid(null, 'urn:uuid:'));
+        
         return $this->elements;
     }
 
