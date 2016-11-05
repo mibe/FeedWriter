@@ -129,10 +129,12 @@ class Item
     *
     * @access   public
     * @return   array   All elements of this item.
+    * @throws   InvalidOperationException on ATOM feeds if either a content or link element is missing.
+    * @throws   InvalidOperationException on RSS1 feeds if a title or link element is missing.
     */
     public function getElements()
     {
-        // ATOM feeds have some specific requirements
+        // ATOM feeds have some specific requirements...
         if ($this->version == Feed::ATOM)
         {
             // Add an 'id' element, if it was not added by calling the setLink method.
@@ -143,6 +145,14 @@ class Item
             // Either a 'link' or 'content' element is needed.
             if (!array_key_exists('content', $this->elements) && !array_key_exists('link', $this->elements))
                 throw new InvalidOperationException('ATOM feed entries need a link or a content element. Call the setLink or setContent method.');
+        }
+        // ...same with RSS1 feeds.
+        else if ($this->version == Feed::RSS1)
+        {
+            if (!array_key_exists('title', $this->elements))
+                throw new InvalidOperationException('RSS1 feed entries need a title element. Call the setTitle method.');
+            if (!array_key_exists('link', $this->elements))
+                throw new InvalidOperationException('RSS1 feed entries need a link element. Call the setLink method.');
         }
 
         return $this->elements;
