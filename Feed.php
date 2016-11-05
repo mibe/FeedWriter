@@ -70,7 +70,7 @@ abstract class Feed
     /**
     * Contains the format of this feed.
     */
-    private $version   = null;
+    private $version       = null;
     
     /**
     * Constructor
@@ -86,9 +86,8 @@ abstract class Feed
         // Setting default encoding
         $this->encoding = 'utf-8';
 
-        // Setting default value for essential channel elements
-        $this->setChannelElement('title', $version .' Feed');
-        $this->setChannelElement('link', 'http://www.ajaxray.com/blog');
+        // Setting default value for essential channel element
+        $this->setTitle($version . ' Feed');
 
         // Add some default XML namespaces
         $this->namespaces['content'] = 'http://purl.org/rss/1.0/modules/content/';
@@ -269,8 +268,10 @@ abstract class Feed
             $contentType = $this->getMIMEType();
         }
 
+        // Generate the feed before setting the header, so Exceptions will be nicely visible.
+        $feed = $this->generateFeed();
         header("Content-Type: " . $contentType . "; charset=" . $this->encoding);
-        echo $this->generateFeed();
+        echo $feed;
     }
 
     /**
@@ -278,9 +279,13 @@ abstract class Feed
     *
     * @access   public
     * @return   string  The complete feed XML.
+	* @throws   InvalidOperationException if the link element of the feed is not set.
     */
     public function generateFeed()
     {
+        if ($this->version != Feed::ATOM && !array_key_exists('link', $this->channels))
+            throw new InvalidOperationException('RSS1 & RSS2 feeds need a link element. Call the setLink method before this method.');
+        
         return $this->makeHeader()
             . $this->makeChannels()
             . $this->makeItems()
@@ -871,8 +876,8 @@ abstract class Feed
             }
             $out .= "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
         } else if ($this->version == Feed::ATOM) {
-            // ATOM feeds have a unique feed ID. This is generated from the 'link' channel element.
-            $out .= $this->makeNode('id', Feed::uuid($this->channels['link']['attributes']['href'], 'urn:uuid:'));
+            // ATOM feeds have a unique feed ID.
+            $out .= $this->makeNode('id', Feed::uuid(null, 'urn:uuid:'));
         }
 
         return $out;

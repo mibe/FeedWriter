@@ -43,9 +43,10 @@ $TestFeed->setDescription('This is just an example how to use the Feed Writer pr
 // which were set above.
 $TestFeed->setImage('Testing & Checking the Feed Writer project', 'https://github.com/mibe/FeedWriter', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rss-feed.svg/256px-Rss-feed.svg.png');
 
-// Use core setChannelElement() function for other optional channel elements.
+// Use the setChannelElement() function for other optional channel elements.
 // See http://www.rssboard.org/rss-specification#optionalChannelElements
-// for other optional channel elements. Here the language code for American English and
+// for other optional channel elements. Here the language code for American English is used for the
+// optional "language" channel element.
 $TestFeed->setChannelElement('language', 'en-US');
 
 // The date when this feed was lastly updated. The publication date is also set.
