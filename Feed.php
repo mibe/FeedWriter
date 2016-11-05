@@ -279,7 +279,7 @@ abstract class Feed
     *
     * @access   public
     * @return   string  The complete feed XML.
-	* @throws   InvalidOperationException if the link element of the feed is not set.
+    * @throws   InvalidOperationException if the link element of the feed is not set.
     */
     public function generateFeed()
     {
@@ -471,7 +471,7 @@ abstract class Feed
     public function setLink($link)
     {
         if ($this->version == Feed::ATOM)
-            $this->setChannelElement('link', '', array('href' => $link));
+            $this->setAtomLink($link);
         else
             $this->setChannelElement('link', $link);
 
