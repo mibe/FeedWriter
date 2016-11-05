@@ -132,11 +132,19 @@ class Item
     */
     public function getElements()
     {
-        // Add an 'id' element, if it was not added by calling the setLink method.
-        // Use the value of the title element as key, since no link element was specified.
-        if ($this->version == Feed::ATOM && !array_key_exists('id', $this->elements))
-            $this->setId(Feed::uuid($this->elements['title']['content'], 'urn:uuid:'));
-        
+        // ATOM feeds have some specific requirements
+        if ($this->version == Feed::ATOM)
+        {
+            // Add an 'id' element, if it was not added by calling the setLink method.
+            // Use the value of the title element as key, since no link element was specified.
+            if (!array_key_exists('id', $this->elements))
+                $this->setId(Feed::uuid($this->elements['title']['content'], 'urn:uuid:'));
+
+            // Either a 'link' or 'content' element is needed.
+            if (!array_key_exists('content', $this->elements) && !array_key_exists('link', $this->elements))
+                throw new InvalidOperationException('ATOM feed entries need a link or a content element. Call the setLink or setContent method.');
+        }
+
         return $this->elements;
     }
 
