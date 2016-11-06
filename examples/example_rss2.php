@@ -41,7 +41,7 @@ $TestFeed->setDescription('This is just an example how to use the Feed Writer pr
 
 // Image title and link must match with the 'title' and 'link' channel elements for RSS 2.0,
 // which were set above.
-$TestFeed->setImage('Testing & Checking the Feed Writer project', 'https://github.com/mibe/FeedWriter', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rss-feed.svg/256px-Rss-feed.svg.png');
+$TestFeed->setImage('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rss-feed.svg/256px-Rss-feed.svg.png', 'Testing & Checking the Feed Writer project', 'https://github.com/mibe/FeedWriter');
 
 // Use the setChannelElement() function for other optional channel elements.
 // See http://www.rssboard.org/rss-specification#optionalChannelElements

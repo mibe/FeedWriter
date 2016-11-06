@@ -55,7 +55,7 @@ abstract class Feed
     /**
     * Collection of other version wise data.
     *
-    * Currently used to store the 'rdf:about' attribute of the channel (RSS1 only).
+    * Currently used to store the 'rdf:about' attribute and image element of the channel (both RSS1 only).
     */
     private $data          = array();
 
@@ -575,14 +575,43 @@ abstract class Feed
     * Set the 'image' channel element
     *
     * @access   public
-    * @param    string  title of image
-    * @param    string  link url of the image
-    * @param    string  path url of the image
+    * @param    string  URL of the image
+    * @param    string  Title of the image. RSS only.
+    * @param    string  Link target URL of the image. RSS only.
     * @return   self
+    * @throws   InvalidArgumentException if the url is invalid.
+    * @throws   InvalidArgumentException if the title and link parameter are not a string or empty.
     */
-    public function setImage($title, $link, $url)
+    public function setImage($url, $title = null, $link = null)
     {
-        return $this->setChannelElement('image', array('title'=>$title, 'link'=>$link, 'url'=>$url));
+        if (!is_string($url) || empty($url))
+            throw new \InvalidArgumentException('url parameter must be a string and may not be empty or NULL.');
+
+        // RSS feeds have support for a title & link element.
+        if ($this->version != Feed::ATOM)
+        {
+            if (!is_string($title) || empty($title))
+                throw new \InvalidArgumentException('title parameter must be a string and may not be empty or NULL.');
+            if (!is_string($link) || empty($link))
+                throw new \InvalidArgumentException('link parameter must be a string and may not be empty or NULL.');
+
+            $data = array('title'=>$title, 'link'=>$link, 'url'=>$url);
+            $name = 'image';
+        }
+        else
+        {
+            $name = 'logo';
+            $data = $url;
+        }
+        
+        // Special handling for RSS1 again (since RSS1 is a bit strange...)
+        if ($this->version == Feed::RSS1)
+        {
+            $this->data['Image'] = $data;
+            return $this->setChannelElement($name, '', array('rdf:resource' => $url), false);
+        }
+        else
+            return $this->setChannelElement($name, $data);
     }
 
     /**
@@ -873,6 +902,10 @@ abstract class Feed
                 $out .= "<rdf:li resource=\"{$thisItems['link']['content']}\"/>" . PHP_EOL;
             }
             $out .= "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
+
+            // An image has its own element after the channel elements.
+            if (array_key_exists('image', $this->data))
+                $out .= $this->makeNode('image', $this->data['Image'], array('rdf:about' => $this->data['Image']['url']));
         } else if ($this->version == Feed::ATOM) {
             // ATOM feeds have a unique feed ID. Use the title channel element as key.
             $out .= $this->makeNode('id', Feed::uuid($this->channels['title']['content'], 'urn:uuid:'));

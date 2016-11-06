@@ -39,9 +39,6 @@ $TestFeed->setTitle('Testing & Checking the RSS writer class');
 $TestFeed->setLink('http://www.ajaxray.com');
 $TestFeed->setDescription('This is a test of creating a RSS 2.0 feed Universal Feed Writer');
 
-//Image title and link must match with the 'title' and 'link' channel elements for valid RSS 2.0
-$TestFeed->setImage('Testing & Checking the RSS writer class','http://www.ajaxray.com','http://www.rightbrainsolution.com/_resources/img/logo.png');
-
 //Let's add some feed items: Create two empty Item instances
 $itemOne = $TestFeed->createNewItem();
 $itemTwo = $TestFeed->createNewItem();

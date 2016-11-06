@@ -41,6 +41,7 @@ $TestFeed->setTitle('Testing the RSS writer class');
 $TestFeed->setDescription('This is just a short example for using the FeedWriter classes...');
 $TestFeed->setLink('http://www.ajaxray.com/rss2/channel/about');
 $TestFeed->setDate(new DateTime());
+$TestFeed->setImage('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/CommaFeed.svg/256px-CommaFeed.svg.png');
 
 //For other channel elements, use setChannelElement() function
 $TestFeed->setChannelElement('author', array('name'=>'Anis uddin Ahmad'));

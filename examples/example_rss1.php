@@ -43,6 +43,9 @@ $TestFeed->setDescription('This is test of creating a RSS 1.0 feed by Universal 
 //It's important for RSS 1.0
 $TestFeed->setChannelAbout('http://www.ajaxray.com/rss2/channel/about');
 
+// An image is optional.
+$TestFeed->setImage('https://upload.wikimedia.org/wikipedia/commons/0/07/Rss.jpg', 'You can add an image, if you want', 'http://www.ajaxray.com/rss2/channel/about');
+
 //Adding a feed. Generally this portion will be in a loop and add all feeds.
 
 //Create an empty FeedItem
