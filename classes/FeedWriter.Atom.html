@@ -1,1211 +1,2036 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-<meta charset="utf-8">
-<title>phpDocumentor » \FeedWriter\ATOM</title>
-<meta name="author" content="Mike van Riel">
-<meta name="description" content="">
-<link href="../css/template.css" rel="stylesheet" media="all">
-<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
-<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
 </head>
 <body>
+
 <div class="navbar navbar-fixed-top">
-<div class="navbar-inner"><div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
-<li class="dropdown">
-<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
-                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
-<li><a>Packages</a></li>
-<li><a href="../packages/UniversalFeedWriter.html"><i class="icon-folder-open"></i> UniversalFeedWriter</a></li>
-</ul>
-</li>
-<li class="dropdown" id="charts-menu">
-<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
-                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
-</li>
-<li class="dropdown" id="reports-menu">
-<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
-                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
-<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">9</span></a></li>
-<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
-                <ul></ul></a></li>
-<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
-                <span class="label label-info">1</span></a></li>
-</ul>
-</li>
-</ul></div>
-</div></div>
-<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/FeedWriter.html">\FeedWriter</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">10</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
 </div>
-<div id="___" class="container">
-<noscript><div class="alert alert-warning">
-                            Javascript is disabled; several features are only available
-                            if Javascript is enabled.
-                        </div></noscript>
-<div class="row">
-<div class="span4">
-<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
-<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
-</div>
-<ul class="side-nav nav nav-list">
-<li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1750027728"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1750027728" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-303576425"></a>
+                                <a href="../namespaces/FeedWriter.html" style="margin-left: 30px; padding-left: 0">FeedWriter</a>
+            </div>
+            <div id="namespace-303576425" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
                     <ul>
-<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
-<li class="method public inherited"><a href="#method_addCDATAEncoding" title="addCDATAEncoding :: Add one or more tags to the list of CDATA encoded tags"><span class="description">Add one or more tags to the list of CDATA encoded tags</span><pre>addCDATAEncoding()</pre></a></li>
-<li class="method public inherited"><a href="#method_addGenerator" title="addGenerator :: Add a channel element indicating the program used to generate the feed."><span class="description">Add a channel element indicating the program used to generate the feed.</span><pre>addGenerator()</pre></a></li>
-<li class="method public inherited"><a href="#method_addItem" title="addItem :: Add a FeedItem to the main class"><span class="description">Add a FeedItem to the main class</span><pre>addItem()</pre></a></li>
-<li class="method public inherited"><a href="#method_addNamespace" title="addNamespace :: Add a XML namespace to the internal list of namespaces."><span class="description">Add a XML namespace to the internal list of namespaces.</span><pre>addNamespace()</pre></a></li>
-<li class="method public inherited"><a href="#method_createNewItem" title="createNewItem :: Create a new Item."><span class="description">Create a new Item.</span><pre>createNewItem()</pre></a></li>
-<li class="method public inherited"><a href="#method_filterInvalidXMLChars" title="filterInvalidXMLChars :: Replace invalid XML characters."><span class="description">Replace invalid XML characters.</span><pre>filterInvalidXMLChars()</pre></a></li>
-<li class="method public inherited"><a href="#method_generateFeed" title="generateFeed :: Generate the feed."><span class="description">Generate the feed.</span><pre>generateFeed()</pre></a></li>
-<li class="method public inherited"><a href="#method_getCDATAEncoding" title="getCDATAEncoding :: Get list of CDATA encoded properties"><span class="description">Get list of CDATA encoded properties</span><pre>getCDATAEncoding()</pre></a></li>
-<li class="method public inherited"><a href="#method_getMIMEType" title="getMIMEType :: Get the appropriate MIME type string for the current feed."><span class="description">Get the appropriate MIME type string for the current feed.</span><pre>getMIMEType()</pre></a></li>
-<li class="method public inherited"><a href="#method_printFeed" title="printFeed :: Print the actual RSS/ATOM file"><span class="description">Print the actual RSS/ATOM file</span><pre>printFeed()</pre></a></li>
-<li class="method public inherited"><a href="#method_removeCDATAEncoding" title="removeCDATAEncoding :: Remove tags from the list of CDATA encoded tags"><span class="description">Remove tags from the list of CDATA encoded tags</span><pre>removeCDATAEncoding()</pre></a></li>
-<li class="method public inherited"><a href="#method_setAtomLink" title="setAtomLink :: Set custom 'link' channel elements."><span class="description">Set custom 'link' channel elements.</span><pre>setAtomLink()</pre></a></li>
-<li class="method public inherited"><a href="#method_setChannelAbout" title="setChannelAbout :: Set the 'about' channel element."><span class="description">Set the 'about' channel element.</span><pre>setChannelAbout()</pre></a></li>
-<li class="method public inherited"><a href="#method_setChannelElement" title="setChannelElement :: Add a channel element to the feed."><span class="description">Add a channel element to the feed.</span><pre>setChannelElement()</pre></a></li>
-<li class="method public inherited"><a href="#method_setChannelElementsFromArray" title="setChannelElementsFromArray :: Set multiple channel elements from an array."><span class="description">Set multiple channel elements from an array.</span><pre>setChannelElementsFromArray()</pre></a></li>
-<li class="method public inherited"><a href="#method_setDate" title="setDate :: Set the date when the ATOM feed was lastly updated."><span class="description">Set the date when the ATOM feed was lastly updated.</span><pre>setDate()</pre></a></li>
-<li class="method public inherited"><a href="#method_setDescription" title="setDescription :: Set the 'description' channel element"><span class="description">Set the 'description' channel element</span><pre>setDescription()</pre></a></li>
-<li class="method public inherited"><a href="#method_setEncoding" title="setEncoding :: Set the 'encoding' attribute in the XML prolog."><span class="description">Set the 'encoding' attribute in the XML prolog.</span><pre>setEncoding()</pre></a></li>
-<li class="method public inherited"><a href="#method_setImage" title="setImage :: Set the 'image' channel element"><span class="description">Set the 'image' channel element</span><pre>setImage()</pre></a></li>
-<li class="method public inherited"><a href="#method_setLink" title="setLink :: Set the 'link' channel element"><span class="description">Set the 'link' channel element</span><pre>setLink()</pre></a></li>
-<li class="method public inherited"><a href="#method_setPagination" title="setPagination :: Set the URLs for feed pagination."><span class="description">Set the URLs for feed pagination.</span><pre>setPagination()</pre></a></li>
-<li class="method public inherited"><a href="#method_setSelfLink" title="setSelfLink :: Set an 'atom:link' channel element with relation=self attribute."><span class="description">Set an 'atom:link' channel element with relation=self attribute.</span><pre>setSelfLink()</pre></a></li>
-<li class="method public inherited"><a href="#method_setTitle" title="setTitle :: Set the 'title' channel element"><span class="description">Set the 'title' channel element</span><pre>setTitle()</pre></a></li>
-<li class="method public inherited"><a href="#method_uuid" title="uuid :: Generate an UUID."><span class="description">Generate an UUID.</span><pre>uuid()</pre></a></li>
-</ul>
-</li>
-<li class="nav-header private">» Private
+                                                                                                    <li class="class"><a href="../classes/FeedWriter.ATOM.html">ATOM</a></li>
+                                                    <li class="class"><a href="../classes/FeedWriter.Feed.html">Feed</a></li>
+                                                    <li class="class"><a href="../classes/FeedWriter.InvalidOperationException.html">InvalidOperationException</a></li>
+                                                    <li class="class"><a href="../classes/FeedWriter.Item.html">Item</a></li>
+                                                    <li class="class"><a href="../classes/FeedWriter.RSS1.html">RSS1</a></li>
+                                                    <li class="class"><a href="../classes/FeedWriter.RSS2.html">RSS2</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
                     <ul>
-<li class="method private inherited"><a href="#method_endItem" title="endItem :: Closes feed item tag"><span class="description">Closes feed item tag</span><pre>endItem()</pre></a></li>
-<li class="method private inherited"><a href="#method_getNamespacePrefixes" title="getNamespacePrefixes :: Returns all used XML namespace prefixes in this instance."><span class="description">Returns all used XML namespace prefixes in this instance.</span><pre>getNamespacePrefixes()</pre></a></li>
-<li class="method private inherited"><a href="#method_makeChannels" title="makeChannels :: Make the channels."><span class="description">Make the channels.</span><pre>makeChannels()</pre></a></li>
-<li class="method private inherited"><a href="#method_makeFooter" title="makeFooter :: Closes the open tags at the end of file"><span class="description">Closes the open tags at the end of file</span><pre>makeFooter()</pre></a></li>
-<li class="method private inherited"><a href="#method_makeHeader" title="makeHeader :: Returns the XML header and root element, depending on the feed type."><span class="description">Returns the XML header and root element, depending on the feed type.</span><pre>makeHeader()</pre></a></li>
-<li class="method private inherited"><a href="#method_makeItems" title="makeItems :: Prints formatted feed items"><span class="description">Prints formatted feed items</span><pre>makeItems()</pre></a></li>
-<li class="method private inherited"><a href="#method_makeNode" title="makeNode :: Creates a single node in XML format"><span class="description">Creates a single node in XML format</span><pre>makeNode()</pre></a></li>
-<li class="method private inherited"><a href="#method_sanitizeCDATA" title="sanitizeCDATA :: Sanitizes data which will be later on returned as CDATA in the feed."><span class="description">Sanitizes data which will be later on returned as CDATA in the feed.</span><pre>sanitizeCDATA()</pre></a></li>
-<li class="method private inherited"><a href="#method_startItem" title="startItem :: Make the starting tag of channels"><span class="description">Make the starting tag of channels</span><pre>startItem()</pre></a></li>
-</ul>
-</li>
-<li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties
-                    <ul></ul>
-</li>
-<li class="nav-header private">» Private
-                    <ul>
-<li class="property private inherited"><a href="#property_CDATAEncoding" title="$CDATAEncoding :: The tag names which have to encoded as CDATA"><span class="description"></span><pre>$CDATAEncoding</pre></a></li>
-<li class="property private inherited"><a href="#property_channels" title="$channels :: Collection of all channel elements"><span class="description"></span><pre>$channels</pre></a></li>
-<li class="property private inherited"><a href="#property_data" title="$data :: Store some other version wise data"><span class="description"></span><pre>$data</pre></a></li>
-<li class="property private inherited"><a href="#property_items" title="$items :: Collection of items as object of \FeedWriter\Item class."><span class="description"></span><pre>$items</pre></a></li>
-<li class="property private inherited"><a href="#property_namespaces" title="$namespaces :: Collection of XML namespaces"><span class="description"></span><pre>$namespaces</pre></a></li>
-<li class="property private inherited"><a href="#property_version" title="$version :: Contains the format of this feed."><span class="description"></span><pre>$version</pre></a></li>
-</ul>
-</li>
-<li class="nav-header">
-<i class="icon-custom icon-constant"></i> Constants
-                    <ul>
-<li class="constant  inherited"><a href="#constant_ATOM" title="ATOM :: "><span class="description">ATOM</span><pre>ATOM</pre></a></li>
-<li class="constant  inherited"><a href="#constant_RSS1" title="RSS1 :: "><span class="description">RSS1</span><pre>RSS1</pre></a></li>
-<li class="constant  inherited"><a href="#constant_RSS2" title="RSS2 :: "><span class="description">RSS2</span><pre>RSS2</pre></a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="span8">
-<a id="\FeedWriter\ATOM"></a><ul class="breadcrumb">
-<li>
-<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
-</li>
-<li><a href="../namespaces/FeedWriter.html">FeedWriter</a></li>
-<li class="active">
-<span class="divider">\</span><a href="../classes/FeedWriter.ATOM.html">ATOM</a>
-</li>
-</ul>
-<div class="element class">
-<p class="short_description">Wrapper for creating ATOM feeds</p>
-<div class="details">
-<div class="long_description"><p>Generate RSS 1.0, RSS2.0 and ATOM Feeds</p></div>
-<table class="table table-bordered">
-<tr>
-<th>package</th>
-<td><a href="../packages/UniversalFeedWriter.html">UniversalFeedWriter</a></td>
-</tr>
-<tr>
-<th>author</th>
-<td><a href="mailto:anisniit@gmail.com">Anis uddin Ahmad</a></td>
-</tr>
-</table>
-<h3>
-<i class="icon-custom icon-method"></i> Methods</h3>
-<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>Constructor</h2>
-<pre>__construct() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"><p>If no version is given, a feed in RSS 2.0 format will be generated.</p></div></div></div>
-</div>
-<a id="method_addCDATAEncoding"></a><div class="element clickable method public method_addCDATAEncoding" data-toggle="collapse" data-target=".method_addCDATAEncoding .collapse">
-<h2>Add one or more tags to the list of CDATA encoded tags</h2>
-<pre>addCDATAEncoding(array $tags) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::addCDATAEncoding()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tags</h4>
-<code>array</code><p>An array of tag names that are merged into the list of tags which should be encoded as CDATA</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_addGenerator"></a><div class="element clickable method public method_addGenerator" data-toggle="collapse" data-target=".method_addGenerator .collapse">
-<h2>Add a channel element indicating the program used to generate the feed.</h2>
-<pre>addGenerator() : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::addGenerator()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_addItem"></a><div class="element clickable method public method_addItem" data-toggle="collapse" data-target=".method_addItem .collapse">
-<h2>Add a FeedItem to the main class</h2>
-<pre>addItem(\FeedWriter\Item $feedItem) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::addItem()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$feedItem</h4>
-<code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code><p>instance of Item class</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_addNamespace"></a><div class="element clickable method public method_addNamespace" data-toggle="collapse" data-target=".method_addNamespace .collapse">
-<h2>Add a XML namespace to the internal list of namespaces.</h2>
-<pre>addNamespace(string $prefix, string $uri) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>After that,
-custom channel elements can be used properly to generate a valid feed.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="http://www.w3.org/TR/REC-xml-names/">http://www.w3.org/TR/REC-xml-names/</a></td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::addNamespace()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$prefix</h4>
-<code>string</code><p>namespace prefix</p></div>
-<div class="subelement argument">
-<h4>$uri</h4>
-<code>string</code><p>namespace name (URI)</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_createNewItem"></a><div class="element clickable method public method_createNewItem" data-toggle="collapse" data-target=".method_createNewItem .collapse">
-<h2>Create a new Item.</h2>
-<pre>createNewItem() : <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::createNewItem()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></code>instance of Item class</div>
-</div></div>
-</div>
-<a id="method_filterInvalidXMLChars"></a><div class="element clickable method public method_filterInvalidXMLChars" data-toggle="collapse" data-target=".method_filterInvalidXMLChars .collapse">
-<h2>Replace invalid XML characters.</h2>
-<pre>filterInvalidXMLChars(string $string, string $replacement) : string</pre>
-<div class="labels">
-<span class="label">Inherited</span><span class="label">Static</span>
-</div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>link</th>
-<td><a href="http://www.phpwact.org/php/i18n/charsets#xml">See utf8_for_xml() function</a></td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="http://www.w3.org/TR/REC-xml/#charsets">http://www.w3.org/TR/REC-xml/#charsets</a></td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="https://github.com/mibe/FeedWriter/issues/30">https://github.com/mibe/FeedWriter/issues/30</a></td>
-</tr>
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::filterInvalidXMLChars()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$string</h4>
-<code>string</code><p>string which should be filtered</p></div>
-<div class="subelement argument">
-<h4>$replacement</h4>
-<code>string</code><p>replace invalid characters with this string</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>the filtered string</div>
-</div></div>
-</div>
-<a id="method_generateFeed"></a><div class="element clickable method public method_generateFeed" data-toggle="collapse" data-target=".method_generateFeed .collapse">
-<h2>Generate the feed.</h2>
-<pre>generateFeed() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::generateFeed()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The complete feed XML.</div>
-</div></div>
-</div>
-<a id="method_getCDATAEncoding"></a><div class="element clickable method public method_getCDATAEncoding" data-toggle="collapse" data-target=".method_getCDATAEncoding .collapse">
-<h2>Get list of CDATA encoded properties</h2>
-<pre>getCDATAEncoding() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::getCDATAEncoding()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code>Return an array of CDATA properties that are to be encoded as CDATA</div>
-</div></div>
-</div>
-<a id="method_getMIMEType"></a><div class="element clickable method public method_getMIMEType" data-toggle="collapse" data-target=".method_getMIMEType .collapse">
-<h2>Get the appropriate MIME type string for the current feed.</h2>
-<pre>getMIMEType() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::getMIMEType()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The MIME type string.</div>
-</div></div>
-</div>
-<a id="method_printFeed"></a><div class="element clickable method public method_printFeed" data-toggle="collapse" data-target=".method_printFeed .collapse">
-<h2>Print the actual RSS/ATOM file</h2>
-<pre>printFeed(bool $useGenericContentType) : void</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Sets a Content-Type header and echoes the contents of the feed.
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/FeedWriter.html">\FeedWriter</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\FeedWriter</small>ATOM</h1>
+                    <p><em>Wrapper for creating ATOM feeds</em></p>
+                    <p>Generate RSS 1.0, RSS2.0 and ATOM Feeds</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/FeedWriter.ATOM.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setPagination" class="">setPagination()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_addGenerator" class="">addGenerator()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_addNamespace" class="">addNamespace()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setChannelElement" class="">setChannelElement()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setChannelElementsFromArray" class="">setChannelElementsFromArray()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_getMIMEType" class="">getMIMEType()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_printFeed" class="">printFeed()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_generateFeed" class="">generateFeed()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_createNewItem" class="">createNewItem()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_addCDATAEncoding" class="">addCDATAEncoding()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_getCDATAEncoding" class="">getCDATAEncoding()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_removeCDATAEncoding" class="">removeCDATAEncoding()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_addItem" class="">addItem()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setEncoding" class="">setEncoding()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setTitle" class="">setTitle()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setDate" class="">setDate()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setDescription" class="">setDescription()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setLink" class="">setLink()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setAtomLink" class="">setAtomLink()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setSelfLink" class="">setSelfLink()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setImage" class="">setImage()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_setChannelAbout" class="">setChannelAbout()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_uuid" class="">uuid()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_filterInvalidXMLChars" class="">filterInvalidXMLChars()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/FeedWriter.Feed.html#constant_RSS1" class="">RSS1</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#constant_RSS2" class="">RSS2</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#constant_ATOM" class="">ATOM</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_getNamespacePrefixes" class="">getNamespacePrefixes()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_makeHeader" class="">makeHeader()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_makeFooter" class="">makeFooter()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_makeNode" class="">makeNode()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_makeChannels" class="">makeChannels()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_makeItems" class="">makeItems()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_startItem" class="">startItem()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_endItem" class="">endItem()</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#method_sanitizeCDATA" class="">sanitizeCDATA()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_channels" class="">$channels</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_items" class="">$items</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_data" class="">$data</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_CDATAEncoding" class="">$CDATAEncoding</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_namespaces" class="">$namespaces</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#property_version" class="">$version</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/ATOM.html"><div class="path-wrapper">ATOM.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">UniversalFeedWriter</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper"><a href="../classes/FeedWriter.Feed.html">\FeedWriter\Feed</a></div>
+                                                                                                    <div class="namespace-wrapper">\FeedWriter\ATOM</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_RSS1" name="constant_RSS1" class="anchor"></a>
+            <article id="constant_RSS1" class="constant">
+                <h3 class="">RSS1</h3>
+                <pre class="signature">RSS1</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_RSS2" name="constant_RSS2" class="anchor"></a>
+            <article id="constant_RSS2" class="constant">
+                <h3 class="">RSS2</h3>
+                <pre class="signature">RSS2</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_ATOM" name="constant_ATOM" class="anchor"></a>
+            <article id="constant_ATOM" class="constant">
+                <h3 class="">ATOM</h3>
+                <pre class="signature">ATOM</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_channels" name="property_channels" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$channels</h3>
+                <pre class="signature">$channels : </pre>
+                <p><em>Collection of all channel elements</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_items" name="property_items" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$items</h3>
+                <pre class="signature">$items : </pre>
+                <p><em>Collection of items as object of \FeedWriter\Item class.</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_data" name="property_data" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$data</h3>
+                <pre class="signature">$data : </pre>
+                <p><em>Collection of other version wise data.</em></p>
+                <p>Currently used to store the 'rdf:about' attribute and image element of the channel (both RSS1 only).</p>
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_CDATAEncoding" name="property_CDATAEncoding" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$CDATAEncoding</h3>
+                <pre class="signature">$CDATAEncoding : </pre>
+                <p><em>The tag names which have to encoded as CDATA</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_namespaces" name="property_namespaces" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$namespaces</h3>
+                <pre class="signature">$namespaces : </pre>
+                <p><em>Collection of XML namespaces</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_version" name="property_version" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$version</h3>
+                <pre class="signature">$version : </pre>
+                <p><em>Contains the format of this feed.</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct() </pre>
+                <p><em>Constructor</em></p>
+                <p>If no version is given, a feed in RSS 2.0 format will be generated.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setPagination" name="method_setPagination" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setPagination()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setPagination(  <span class="argument">$nextURL = null</span>,   <span class="argument">$previousURL = null</span>,   <span class="argument">$firstURL = null</span>,   <span class="argument">$lastURL = null</span>) : self</pre>
+                <p><em>Set the URLs for feed pagination.</em></p>
+                <p>See RFC 5005, chapter 3. At least one page URL must be specified.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$nextURL </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$previousURL </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$firstURL </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$lastURL </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\LogicException</dt>
+                            <dd><p>if none of the parameters are set.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://tools.ietf.org/html/rfc5005#section-3"><span class="namespace-wrapper">http://tools.ietf.org/html/rfc5005#section-3</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addGenerator" name="method_addGenerator" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addGenerator()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addGenerator() : self</pre>
+                <p><em>Add a channel element indicating the program used to generate the feed.</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if this method is called on an RSS1 feed.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addNamespace" name="method_addNamespace" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addNamespace()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addNamespace(  <span class="argument">$prefix</span>,   <span class="argument">$uri</span>) : self</pre>
+                <p><em>Add a XML namespace to the internal list of namespaces. After that,
+custom channel elements can be used properly to generate a valid feed.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$prefix </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$uri </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the prefix or uri is empty or NULL.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.w3.org/TR/REC-xml-names/"><span class="namespace-wrapper">http://www.w3.org/TR/REC-xml-names/</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setChannelElement" name="method_setChannelElement" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setChannelElement()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setChannelElement(  <span class="argument">$elementName</span>,   <span class="argument">$content</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$multiple = false</span>) : self</pre>
+                <p><em>Add a channel element to the feed.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$elementName </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$content </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$multiple </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the element name is not a string, empty or NULL.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setChannelElementsFromArray" name="method_setChannelElementsFromArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setChannelElementsFromArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setChannelElementsFromArray(array  <span class="argument">$elementArray</span>) : self</pre>
+                <p><em>Set multiple channel elements from an array. Array elements
+should be &#039;channelName&#039; =&gt; &#039;channelContent&#039; format.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$elementArray </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMIMEType" name="method_getMIMEType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMIMEType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMIMEType() : string</pre>
+                <p><em>Get the appropriate MIME type string for the current feed.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The MIME type string.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_printFeed" name="method_printFeed" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">printFeed()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">printFeed(  <span class="argument">$useGenericContentType = false</span>) : void</pre>
+                <p><em>Print the actual RSS/ATOM file</em></p>
+                <p>Sets a Content-Type header and echoes the contents of the feed.
 Should only be used in situations where direct output is desired;
-if you need to pass a string around, use generateFeed() instead.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::printFeed()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$useGenericContentType</h4>
-<code>bool</code><p>FALSE if the specific feed media type should be sent.</p></div>
-</div></div>
-</div>
-<a id="method_removeCDATAEncoding"></a><div class="element clickable method public method_removeCDATAEncoding" data-toggle="collapse" data-target=".method_removeCDATAEncoding .collapse">
-<h2>Remove tags from the list of CDATA encoded tags</h2>
-<pre>removeCDATAEncoding(array $tags) : void</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::removeCDATAEncoding()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tags</h4>
-<code>array</code><p>An array of tag names that should be removed.</p></div>
-</div></div>
-</div>
-<a id="method_setAtomLink"></a><div class="element clickable method public method_setAtomLink" data-toggle="collapse" data-target=".method_setAtomLink .collapse">
-<h2>Set custom 'link' channel elements.</h2>
-<pre>setAtomLink(string $href, string $rel, string $type, string $hreflang, string $title, int $length) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>In ATOM feeds, only one link with alternate relation and the same combination of
-type and hreflang values.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="https://www.iana.org/assignments/link-relations/link-relations.xml">https://www.iana.org/assignments/link-relations/link-relations.xml</a></td>
-</tr>
-<tr>
-<th>link</th>
-<td><a href="https://tools.ietf.org/html/rfc4287#section-4.2.7">https://tools.ietf.org/html/rfc4287#section-4.2.7</a></td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setAtomLink()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$href</h4>
-<code>string</code><p>URI of this link</p></div>
-<div class="subelement argument">
-<h4>$rel</h4>
-<code>string</code><p>relation type of the resource</p></div>
-<div class="subelement argument">
-<h4>$type</h4>
-<code>string</code><p>MIME type of the target resource</p></div>
-<div class="subelement argument">
-<h4>$hreflang</h4>
-<code>string</code><p>language of the resource</p></div>
-<div class="subelement argument">
-<h4>$title</h4>
-<code>string</code><p>human-readable information about the resource</p>
-</div>
-<div class="subelement argument">
-<h4>$length</h4>
-<code>int</code><p>length of the resource in bytes</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setChannelAbout"></a><div class="element clickable method public method_setChannelAbout" data-toggle="collapse" data-target=".method_setChannelAbout .collapse">
-<h2>Set the 'about' channel element.</h2>
-<pre>setChannelAbout(string $url) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Only for RSS 1.0</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setChannelAbout()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$url</h4>
-<code>string</code><p>value of 'about' channel tag</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setChannelElement"></a><div class="element clickable method public method_setChannelElement" data-toggle="collapse" data-target=".method_setChannelElement .collapse">
-<h2>Add a channel element to the feed.</h2>
-<pre>setChannelElement(string $elementName, string $content, array $attributes, bool $multiple) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setChannelElement()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$elementName</h4>
-<code>string</code><p>name of the channel tag</p></div>
-<div class="subelement argument">
-<h4>$content</h4>
-<code>string</code><p>content of the channel tag</p></div>
-<div class="subelement argument">
-<h4>$attributes</h4>
-<code>array</code><p>array of element attributes with attribute name as array key</p></div>
-<div class="subelement argument">
-<h4>$multiple</h4>
-<code>bool</code><p>TRUE if this element can appear multiple times</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setChannelElementsFromArray"></a><div class="element clickable method public method_setChannelElementsFromArray" data-toggle="collapse" data-target=".method_setChannelElementsFromArray .collapse">
-<h2>Set multiple channel elements from an array.</h2>
-<pre>setChannelElementsFromArray(array $elementArray) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Array elements
-should be 'channelName' => 'channelContent' format.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setChannelElementsFromArray()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$elementArray</h4>
-<code>array</code><p>array of channels</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setDate"></a><div class="element clickable method public method_setDate" data-toggle="collapse" data-target=".method_setDate .collapse">
-<h2>Set the date when the ATOM feed was lastly updated.</h2>
-<pre>setDate(<a href="http://php.net/manual/en/class.datetime.php">\DateTime</a> | int | string $date) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>This adds the 'updated' element to the feed. The value of the date parameter
+if you need to pass a string around, use generateFeed() instead.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$useGenericContentType </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the useGenericContentType parameter is not boolean.</p></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateFeed" name="method_generateFeed" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">generateFeed()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateFeed() : string</pre>
+                <p><em>Generate the feed.</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if the link element of the feed is not set.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The complete feed XML.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createNewItem" name="method_createNewItem" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createNewItem()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createNewItem() : \FeedWriter\Item</pre>
+                <p><em>Create a new Item.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a>
+                                            &mdash; <p>instance of Item class</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addCDATAEncoding" name="method_addCDATAEncoding" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addCDATAEncoding()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addCDATAEncoding(array  <span class="argument">$tags</span>) : self</pre>
+                <p><em>Add one or more tags to the list of CDATA encoded tags</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tags </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCDATAEncoding" name="method_getCDATAEncoding" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCDATAEncoding()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCDATAEncoding() : array</pre>
+                <p><em>Get list of CDATA encoded properties</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Return an array of CDATA properties that are to be encoded as CDATA</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeCDATAEncoding" name="method_removeCDATAEncoding" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeCDATAEncoding()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeCDATAEncoding(array  <span class="argument">$tags</span>) : void</pre>
+                <p><em>Remove tags from the list of CDATA encoded tags</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tags </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addItem" name="method_addItem" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addItem()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addItem(\FeedWriter\Item  <span class="argument">$feedItem</span>) : self</pre>
+                <p><em>Add a FeedItem to the main class</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></td>
+                                <td>$feedItem </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the given item version mismatches.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setEncoding" name="method_setEncoding" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setEncoding()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setEncoding(  <span class="argument">$encoding</span>) : self</pre>
+                <p><em>Set the &#039;encoding&#039; attribute in the XML prolog.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$encoding </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the encoding is not a string, empty or NULL.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setTitle" name="method_setTitle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setTitle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setTitle(  <span class="argument">$title</span>) : self</pre>
+                <p><em>Set the &#039;title&#039; channel element</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$title </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setDate" name="method_setDate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setDate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setDate(  <span class="argument">$date</span>) : self</pre>
+                <p><em>Set the date when the feed was lastly updated.</em></p>
+                <p>This adds the 'updated' element to the feed. The value of the date parameter
 can be either an instance of the DateTime class, an integer containing a UNIX
 timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
+<p>Not supported in RSS1 feeds.</p>
 
-<p>Not supported in RSS1 feeds.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setDate()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$date</h4>
-<code><a href="http://php.net/manual/en/class.datetime.php">\DateTime</a></code><code>int</code><code>string</code><p>Date which should be used.</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setDescription"></a><div class="element clickable method public method_setDescription" data-toggle="collapse" data-target=".method_setDescription .collapse">
-<h2>Set the 'description' channel element</h2>
-<pre>setDescription(string $description) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setDescription()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$description</h4>
-<code>string</code><p>value of 'description' channel tag</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setEncoding"></a><div class="element clickable method public method_setEncoding" data-toggle="collapse" data-target=".method_setEncoding .collapse">
-<h2>Set the 'encoding' attribute in the XML prolog.</h2>
-<pre>setEncoding(string $encoding) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setEncoding()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$encoding</h4>
-<code>string</code><p>value of 'encoding' attribute</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setImage"></a><div class="element clickable method public method_setImage" data-toggle="collapse" data-target=".method_setImage .collapse">
-<h2>Set the 'image' channel element</h2>
-<pre>setImage(string $title, string $link, string $url) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setImage()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$title</h4>
-<code>string</code><p>title of image</p></div>
-<div class="subelement argument">
-<h4>$link</h4>
-<code>string</code><p>link url of the image</p></div>
-<div class="subelement argument">
-<h4>$url</h4>
-<code>string</code><p>path url of the image</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setLink"></a><div class="element clickable method public method_setLink" data-toggle="collapse" data-target=".method_setLink .collapse">
-<h2>Set the 'link' channel element</h2>
-<pre>setLink(string $link) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setLink()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$link</h4>
-<code>string</code><p>value of 'link' channel tag</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setPagination"></a><div class="element clickable method public method_setPagination" data-toggle="collapse" data-target=".method_setPagination .collapse">
-<h2>Set the URLs for feed pagination.</h2>
-<pre>setPagination(string $nextURL, string $previousURL, string $firstURL, string $lastURL) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>See RFC 5005, chapter 3. At least one page URL must be specified.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>link</th>
-<td><a href="http://tools.ietf.org/html/rfc5005#section-3">http://tools.ietf.org/html/rfc5005#section-3</a></td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setPagination()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$nextURL</h4>
-<code>string</code><p>The URL to the next page of this feed. Optional.</p></div>
-<div class="subelement argument">
-<h4>$previousURL</h4>
-<code>string</code><p>The URL to the previous page of this feed. Optional.</p></div>
-<div class="subelement argument">
-<h4>$firstURL</h4>
-<code>string</code><p>The URL to the first page of this feed. Optional.</p></div>
-<div class="subelement argument">
-<h4>$lastURL</h4>
-<code>string</code><p>The URL to the last page of this feed. Optional.</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setSelfLink"></a><div class="element clickable method public method_setSelfLink" data-toggle="collapse" data-target=".method_setSelfLink .collapse">
-<h2>Set an 'atom:link' channel element with relation=self attribute.</h2>
-<pre>setSelfLink(string $url) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Needs the full URL to this feed.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>link</th>
-<td><a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">http://www.rssboard.org/rss-profile#namespace-elements-atom-link</a></td>
-</tr>
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setSelfLink()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$url</h4>
-<code>string</code><p>URL to this feed</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_setTitle"></a><div class="element clickable method public method_setTitle" data-toggle="collapse" data-target=".method_setTitle .collapse">
-<h2>Set the 'title' channel element</h2>
-<pre>setTitle(string $title) : <a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::setTitle()</td>
-</tr>
-<tr>
-<th>fluent</th>
-<td>This method is part of a fluent interface and will return the same instance</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$title</h4>
-<code>string</code><p>value of 'title' channel tag</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/FeedWriter.ATOM.html">\FeedWriter\ATOM</a></code></div>
-</div></div>
-</div>
-<a id="method_uuid"></a><div class="element clickable method public method_uuid" data-toggle="collapse" data-target=".method_uuid .collapse">
-<h2>Generate an UUID.</h2>
-<pre>uuid(string $key, string $prefix) : string</pre>
-<div class="labels">
-<span class="label">Inherited</span><span class="label">Static</span>
-</div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
-for the MD5 hash is generated.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>author</th>
-<td><a href="mailto:admin@ajaxray.com">Anis uddin Ahmad</a></td>
-</tr>
-<tr>
-<th>access</th>
-<td>public</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::uuid()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code><p>optional key on which the UUID is generated</p></div>
-<div class="subelement argument">
-<h4>$prefix</h4>
-<code>string</code><p>an optional prefix</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>the formated UUID</div>
-</div></div>
-</div>
-<a id="method_endItem"></a><div class="element clickable method private method_endItem" data-toggle="collapse" data-target=".method_endItem .collapse">
-<h2>Closes feed item tag</h2>
-<pre>endItem() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::endItem()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The ending XML tag of an feed item.</div>
-</div></div>
-</div>
-<a id="method_getNamespacePrefixes"></a><div class="element clickable method private method_getNamespacePrefixes" data-toggle="collapse" data-target=".method_getNamespacePrefixes .collapse">
-<h2>Returns all used XML namespace prefixes in this instance.</h2>
-<pre>getNamespacePrefixes() : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>This includes all channel elements and feed items.
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the given date is not an instance of DateTime, a UNIX timestamp or a date string.</p></dd>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if this method is called on an RSS1 feed.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setDescription" name="method_setDescription" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setDescription()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setDescription(  <span class="argument">$description</span>) : self</pre>
+                <p><em>Set a phrase or sentence describing the feed.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$description </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setLink" name="method_setLink" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setLink()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setLink(  <span class="argument">$link</span>) : self</pre>
+                <p><em>Set the &#039;link&#039; channel element</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$link </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setAtomLink" name="method_setAtomLink" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setAtomLink()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setAtomLink(  <span class="argument">$href</span>,   <span class="argument">$rel = null</span>,   <span class="argument">$type = null</span>,   <span class="argument">$hreflang = null</span>,   <span class="argument">$title = null</span>,   <span class="argument">$length = null</span>) : self</pre>
+                <p><em>Set custom &#039;link&#039; channel elements.</em></p>
+                <p>In ATOM feeds, only one link with alternate relation and the same combination of
+type and hreflang values.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$href </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$rel </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$type </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$hreflang </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$title </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$length </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>on multiple occasions.</p></dd>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if the same link with the same attributes was already added to the feed.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="https://www.iana.org/assignments/link-relations/link-relations.xml"><span class="namespace-wrapper">https://www.iana.org/assignments/link-relations/link-relations.xml</span></a></dd>
+                                            <dd><a href="https://tools.ietf.org/html/rfc4287#section-4.2.7"><span class="namespace-wrapper">https://tools.ietf.org/html/rfc4287#section-4.2.7</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSelfLink" name="method_setSelfLink" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSelfLink()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSelfLink(  <span class="argument">$url</span>) : self</pre>
+                <p><em>Set an &#039;atom:link&#039; channel element with relation=self attribute.</em></p>
+                <p>Needs the full URL to this feed.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$url </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link"><span class="namespace-wrapper">http://www.rssboard.org/rss-profile#namespace-elements-atom-link</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setImage" name="method_setImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setImage(  <span class="argument">$url</span>,   <span class="argument">$title = null</span>,   <span class="argument">$link = null</span>) : self</pre>
+                <p><em>Set the &#039;image&#039; channel element</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$url </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$title </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$link </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the url is invalid.</p></dd>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the title and link parameter are not a string or empty.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setChannelAbout" name="method_setChannelAbout" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setChannelAbout()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setChannelAbout(  <span class="argument">$url</span>) : self</pre>
+                <p><em>Set the channel &#039;rdf:about&#039; attribute, which is used in RSS1 feeds only.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$url </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if this method is called and the feed is not of type RSS1.</p></dd>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the given URL is invalid.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    self
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_uuid" name="method_uuid" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">uuid()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">uuid(  <span class="argument">$key = null</span>,   <span class="argument">$prefix = &#039;&#039;</span>) : string</pre>
+                <p><em>Generate an UUID.</em></p>
+                <p>The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
+for the MD5 hash is generated.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$key </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$prefix </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>the formated UUID</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Anis uddin Ahmad <a href="mailto:admin@ajaxray.com">admin@ajaxray.com</a></p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterInvalidXMLChars" name="method_filterInvalidXMLChars" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterInvalidXMLChars()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterInvalidXMLChars(  <span class="argument">$string</span>,   <span class="argument">$replacement = &#039;_&#039;</span>) : string</pre>
+                <p><em>Replace invalid XML characters.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$string </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$replacement </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>the filtered string</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.phpwact.org/php/i18n/charsets#xml"><span class="namespace-wrapper">See utf8_for_xml() function</span></a></dd>
+                                            <dd><a href="http://www.w3.org/TR/REC-xml/#charsets"><span class="namespace-wrapper">http://www.w3.org/TR/REC-xml/#charsets</span></a></dd>
+                                            <dd><a href="https://github.com/mibe/FeedWriter/issues/30"><span class="namespace-wrapper">https://github.com/mibe/FeedWriter/issues/30</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getNamespacePrefixes" name="method_getNamespacePrefixes" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">getNamespacePrefixes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getNamespacePrefixes() : array</pre>
+                <p><em>Returns all used XML namespace prefixes in this instance.</em></p>
+                <p>This includes all channel elements and feed items.
 Unfortunately some namespace prefixes are not included,
-because they are hardcoded, e.g. rdf.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::getNamespacePrefixes()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code>Array with namespace prefix as value.</div>
-</div></div>
+because they are hardcoded, e.g. rdf.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Array with namespace prefix as value.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_makeHeader" name="method_makeHeader" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">makeHeader()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">makeHeader() : string</pre>
+                <p><em>Returns the XML header and root element, depending on the feed type.</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if an unkown XML namespace prefix is encountered.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The XML header of the feed.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_makeFooter" name="method_makeFooter" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">makeFooter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">makeFooter() : string</pre>
+                <p><em>Closes the open tags at the end of file</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The XML footer of the feed.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_makeNode" name="method_makeNode" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">makeNode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">makeNode(  <span class="argument">$tagName</span>,   <span class="argument">$tagContent</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$omitEndTag = false</span>) : string</pre>
+                <p><em>Creates a single node in XML format</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$tagName </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$tagContent </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$omitEndTag </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                            <dd><p>if the tagContent is not an array and not a string.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>formatted xml tag</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_makeChannels" name="method_makeChannels" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">makeChannels()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">makeChannels() : string</pre>
+                <p><em>Make the channels.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The feed header as XML containing all the feed metadata.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_makeItems" name="method_makeItems" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">makeItems()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">makeItems() : string</pre>
+                <p><em>Prints formatted feed items</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The XML of every feed item.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_startItem" name="method_startItem" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">startItem()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">startItem(  <span class="argument">$about = false</span>) : string</pre>
+                <p><em>Make the starting tag of channels</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$about </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\FeedWriter\InvalidOperationException</dt>
+                            <dd><p>if this object misses the data for the about attribute.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The starting XML tag of an feed item.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_endItem" name="method_endItem" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">endItem()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">endItem() : string</pre>
+                <p><em>Closes feed item tag</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The ending XML tag of an feed item.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_sanitizeCDATA" name="method_sanitizeCDATA" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">sanitizeCDATA()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">sanitizeCDATA(  <span class="argument">$text</span>) : string</pre>
+                <p><em>Sanitizes data which will be later on returned as CDATA in the feed.</em></p>
+                <p>A &quot;]]&gt;&quot; respectively &quot;&lt;![CDATA&quot; in the data would break the CDATA in the
+XML, so the brackets are converted to a HTML entity.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$text </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Sanitized data</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ATOM.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/ATOM.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/FeedWriter.html">\FeedWriter</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on November 6th, 2016 at 23:05.
+                </section>
+            </section>
+        </section>
+    </footer>
 </div>
-<a id="method_makeChannels"></a><div class="element clickable method private method_makeChannels" data-toggle="collapse" data-target=".method_makeChannels .collapse">
-<h2>Make the channels.</h2>
-<pre>makeChannels() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::makeChannels()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The feed header as XML containing all the feed metadata.</div>
-</div></div>
-</div>
-<a id="method_makeFooter"></a><div class="element clickable method private method_makeFooter" data-toggle="collapse" data-target=".method_makeFooter .collapse">
-<h2>Closes the open tags at the end of file</h2>
-<pre>makeFooter() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::makeFooter()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The XML footer of the feed.</div>
-</div></div>
-</div>
-<a id="method_makeHeader"></a><div class="element clickable method private method_makeHeader" data-toggle="collapse" data-target=".method_makeHeader .collapse">
-<h2>Returns the XML header and root element, depending on the feed type.</h2>
-<pre>makeHeader() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::makeHeader()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The XML header of the feed.</div>
-</div></div>
-</div>
-<a id="method_makeItems"></a><div class="element clickable method private method_makeItems" data-toggle="collapse" data-target=".method_makeItems .collapse">
-<h2>Prints formatted feed items</h2>
-<pre>makeItems() : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::makeItems()</td>
-</tr>
-</table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The XML of every feed item.</div>
-</div></div>
-</div>
-<a id="method_makeNode"></a><div class="element clickable method private method_makeNode" data-toggle="collapse" data-target=".method_makeNode .collapse">
-<h2>Creates a single node in XML format</h2>
-<pre>makeNode(string $tagName, mixed $tagContent, array $attributes, string $omitEndTag) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::makeNode()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tagName</h4>
-<code>string</code><p>name of the tag</p></div>
-<div class="subelement argument">
-<h4>$tagContent</h4>
-<code>mixed</code><p>tag value as string or array of nested tags in 'tagName' => 'tagValue' format</p>
-</div>
-<div class="subelement argument">
-<h4>$attributes</h4>
-<code>array</code><p>Attributes (if any) in 'attrName' => 'attrValue' format</p>
-</div>
-<div class="subelement argument">
-<h4>$omitEndTag</h4>
-<code>string</code><p>True if the end tag should be omitted. Defaults to false.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>formatted xml tag</div>
-</div></div>
-</div>
-<a id="method_sanitizeCDATA"></a><div class="element clickable method private method_sanitizeCDATA" data-toggle="collapse" data-target=".method_sanitizeCDATA .collapse">
-<h2>Sanitizes data which will be later on returned as CDATA in the feed.</h2>
-<pre>sanitizeCDATA(string $text) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>A "]]>" respectively "&lt;![CDATA" in the data would break the CDATA in the
-XML, so the brackets are converted to a HTML entity.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::sanitizeCDATA()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$text</h4>
-<code>string</code><p>Data to be sanitized</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>Sanitized data</div>
-</div></div>
-</div>
-<a id="method_startItem"></a><div class="element clickable method private method_startItem" data-toggle="collapse" data-target=".method_startItem .collapse">
-<h2>Make the starting tag of channels</h2>
-<pre>startItem(string $about) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>access</th>
-<td>private</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::startItem()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$about</h4>
-<code>string</code><p>The vale of about tag which is used for RSS 1.0 only.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>The starting XML tag of an feed item.</div>
-</div></div>
-</div>
-<h3>
-<i class="icon-custom icon-property"></i> Properties</h3>
-<a id="property_CDATAEncoding"> </a><div class="element clickable property private property_CDATAEncoding" data-toggle="collapse" data-target=".property_CDATAEncoding .collapse">
-<h2></h2>
-<pre>$CDATAEncoding </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$CDATAEncoding</td>
-</tr></table>
-</div></div>
-</div>
-<a id="property_channels"> </a><div class="element clickable property private property_channels" data-toggle="collapse" data-target=".property_channels .collapse">
-<h2></h2>
-<pre>$channels </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$channels</td>
-</tr></table>
-</div></div>
-</div>
-<a id="property_data"> </a><div class="element clickable property private property_data" data-toggle="collapse" data-target=".property_data .collapse">
-<h2></h2>
-<pre>$data </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$data</td>
-</tr></table>
-</div></div>
-</div>
-<a id="property_items"> </a><div class="element clickable property private property_items" data-toggle="collapse" data-target=".property_items .collapse">
-<h2></h2>
-<pre>$items </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$items</td>
-</tr></table>
-</div></div>
-</div>
-<a id="property_namespaces"> </a><div class="element clickable property private property_namespaces" data-toggle="collapse" data-target=".property_namespaces .collapse">
-<h2></h2>
-<pre>$namespaces </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$namespaces</td>
-</tr></table>
-</div></div>
-</div>
-<a id="property_version"> </a><div class="element clickable property private property_version" data-toggle="collapse" data-target=".property_version .collapse">
-<h2></h2>
-<pre>$version </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::$$version</td>
-</tr></table>
-</div></div>
-</div>
-<h3>
-<i class="icon-custom icon-constant"></i> Constants</h3>
-<a id="constant_ATOM"> </a><div class="element clickable constant  constant_ATOM" data-toggle="collapse" data-target=".constant_ATOM .collapse">
-<h2>ATOM</h2>
-<pre>ATOM </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::ATOM</td>
-</tr></table>
-</div></div>
-</div>
-<a id="constant_RSS1"> </a><div class="element clickable constant  constant_RSS1" data-toggle="collapse" data-target=".constant_RSS1 .collapse">
-<h2>RSS1</h2>
-<pre>RSS1 </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::RSS1</td>
-</tr></table>
-</div></div>
-</div>
-<a id="constant_RSS2"> </a><div class="element clickable constant  constant_RSS2" data-toggle="collapse" data-target=".constant_RSS2 .collapse">
-<h2>RSS2</h2>
-<pre>RSS2 </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\FeedWriter\Feed::RSS2</td>
-</tr></table>
-</div></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row"><footer class="span12">
-            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2015-11-11T23:56:42+01:00.<br></footer></div>
-</div>
+
 </body>
 </html>

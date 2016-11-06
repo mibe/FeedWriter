@@ -21,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -96,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1284588116"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2081928153"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1284588116" class="accordion-body collapse in">
+            <div id="namespace-2081928153" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1790027562"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1795800063"></a>
                                 <a href="../namespaces/FeedWriter.html" style="margin-left: 30px; padding-left: 0">FeedWriter</a>
             </div>
-            <div id="namespace-1790027562" class="accordion-body collapse ">
+            <div id="namespace-1795800063" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -138,54 +186,31 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content namespace">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/default.html">\</a>
-                                            </nav>
-                    <h1><small>\</small>FeedWriter</h1>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>examples</small>example_rss2.php</h1>
+                    <p><em></em></p>
+                    
 
                     
                     
-                    
-                                        <h2>Classes</h2>
-                    <table class="table table-hover">
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.ATOM.html">ATOM</a></td>
-                            <td><em>Wrapper for creating ATOM feeds</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.Feed.html">Feed</a></td>
-                            <td><em>Universal Feed Writer class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.InvalidOperationException.html">InvalidOperationException</a></td>
-                            <td><em>The exception that is thrown when an invalid operation is performed on
-the object.</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.Item.html">Item</a></td>
-                            <td><em>Universal Feed Writer</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.RSS1.html">RSS1</a></td>
-                            <td><em>Wrapper for creating RSS1 feeds</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FeedWriter.RSS2.html">RSS2</a></td>
-                            <td><em>Wrapper for creating RSS2 feeds</em></td>
-                        </tr>
-                                        </table>
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                        <dt>Namespace hierarchy</dt>
-                        <dd class="hierarchy">
-                                                                                                                                                                                                                                                                
-                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
-                                                                                        <div class="namespace-wrapper">\FeedWriter</div>
-                        </dd>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
                     </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                            </table>
+
                 </aside>
             </div>
 
@@ -193,6 +218,16 @@ the object.</em></td>
             
         </div>
     </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/examples/example_rss2.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
