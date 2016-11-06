@@ -794,10 +794,6 @@ abstract class Feed
             }
         }
 
-        if (is_array($tagContent) && $this->version == Feed::RSS1) {
-            $attrText = ' rdf:parseType="Resource"';
-        }
-
         $attrText .= (in_array($tagName, $this->CDATAEncoding) && $this->version == Feed::ATOM) ? ' type="html"' : '';
         $nodeText .= "<{$tagName}{$attrText}>";
         $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? '<![CDATA[' : '';
