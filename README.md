@@ -30,6 +30,7 @@ https://mibe.github.io/FeedWriter/
 
 Check the **/examples** directory for usages examples.
 
+See the CHANGELOG.md file for changes between the different versions.
 
 Authors
 ----------
