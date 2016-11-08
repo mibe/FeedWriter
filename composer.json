@@ -62,7 +62,8 @@
             "Feed.php",
             "Item.php",
             "RSS1.php",
-            "RSS2.php"
+            "RSS2.php",
+            "InvalidOperationException.php"
         ]
     },
     "require" : {
@@ -70,7 +71,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }

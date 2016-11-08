@@ -41,6 +41,8 @@ abstract class Feed
     const RSS1 = 'RSS 1.0';
     const RSS2 = 'RSS 2.0';
     const ATOM = 'ATOM';
+    
+    const VERSION = '1.1.0';
 
     /**
     * Collection of all channel elements
