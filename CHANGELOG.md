@@ -49,7 +49,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) .
 ### Fixed
 - Filter invalid XML chars.
 
-## 1.0.0 - 2014-09-14
+## v1.0 - 2014-09-14
 
 
 [Unreleased]: https://github.com/mibe/FeedWriter/compare/v1.1.0...HEAD
