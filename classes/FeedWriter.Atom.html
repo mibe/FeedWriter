@@ -144,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1750027728"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1812361950"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1750027728" class="accordion-body collapse in">
+            <div id="namespace-1812361950" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-303576425"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1719159368"></a>
                                 <a href="../namespaces/FeedWriter.html" style="margin-left: 30px; padding-left: 0">FeedWriter</a>
             </div>
-            <div id="namespace-303576425" class="accordion-body collapse ">
+            <div id="namespace-1719159368" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -245,6 +245,7 @@
                                                                     <a href="../classes/FeedWriter.Feed.html#constant_RSS1" class="">RSS1</a><br />
                                                                     <a href="../classes/FeedWriter.Feed.html#constant_RSS2" class="">RSS2</a><br />
                                                                     <a href="../classes/FeedWriter.Feed.html#constant_ATOM" class="">ATOM</a><br />
+                                                                    <a href="../classes/FeedWriter.Feed.html#constant_VERSION" class="">VERSION</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -371,6 +372,29 @@
             <article id="constant_ATOM" class="constant">
                 <h3 class="">ATOM</h3>
                 <pre class="signature">ATOM</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/FeedWriter.Feed.html"><div class="path-wrapper">\FeedWriter\Feed</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_VERSION" name="constant_VERSION" class="anchor"></a>
+            <article id="constant_VERSION" class="constant">
+                <h3 class="">VERSION</h3>
+                <pre class="signature">VERSION</pre>
                 <p><em></em></p>
                 
             </article>
@@ -592,37 +616,37 @@
             <article class="method">
                 <h3 class="public ">setPagination()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setPagination(  <span class="argument">$nextURL = null</span>,   <span class="argument">$previousURL = null</span>,   <span class="argument">$firstURL = null</span>,   <span class="argument">$lastURL = null</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setPagination(string  <span class="argument">$nextURL = null</span>, string  <span class="argument">$previousURL = null</span>, string  <span class="argument">$firstURL = null</span>, string  <span class="argument">$lastURL = null</span>) : self</pre>
                 <p><em>Set the URLs for feed pagination.</em></p>
                 <p>See RFC 5005, chapter 3. At least one page URL must be specified.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$nextURL </td>
-                                <td></td>
+                                <td><p>The URL to the next page of this feed. Optional.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$previousURL </td>
-                                <td></td>
+                                <td><p>The URL to the previous page of this feed. Optional.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$firstURL </td>
-                                <td></td>
+                                <td><p>The URL to the first page of this feed. Optional.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$lastURL </td>
-                                <td></td>
+                                <td><p>The URL to the last page of this feed. Optional.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\LogicException</dt>
+                                                    <dt>\LogicException</dt>
                             <dd><p>if none of the parameters are set.</p></dd>
                                                                     </dl>
                 
@@ -687,7 +711,7 @@
             <article class="method">
                 <h3 class="public ">addNamespace()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addNamespace(  <span class="argument">$prefix</span>,   <span class="argument">$uri</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">addNamespace(string  <span class="argument">$prefix</span>, string  <span class="argument">$uri</span>) : self</pre>
                 <p><em>Add a XML namespace to the internal list of namespaces. After that,
 custom channel elements can be used properly to generate a valid feed.</em></p>
                 
@@ -695,20 +719,20 @@ custom channel elements can be used properly to generate a valid feed.</em></p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$prefix </td>
-                                <td></td>
+                                <td><p>namespace prefix</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$uri </td>
-                                <td></td>
+                                <td><p>namespace name (URI)</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the prefix or uri is empty or NULL.</p></dd>
                                                                     </dl>
                 
@@ -738,21 +762,21 @@ custom channel elements can be used properly to generate a valid feed.</em></p>
             <article class="method">
                 <h3 class="public ">setChannelElement()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setChannelElement(  <span class="argument">$elementName</span>,   <span class="argument">$content</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$multiple = false</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setChannelElement(string  <span class="argument">$elementName</span>, string  <span class="argument">$content</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$multiple = false</span>) : self</pre>
                 <p><em>Add a channel element to the feed.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$elementName </td>
-                                <td></td>
+                                <td><p>name of the channel tag</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$content </td>
-                                <td></td>
+                                <td><p>content of the channel tag</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -768,7 +792,7 @@ custom channel elements can be used properly to generate a valid feed.</em></p>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the element name is not a string, empty or NULL.</p></dd>
                                                                     </dl>
                 
@@ -883,7 +907,7 @@ if you need to pass a string around, use generateFeed() instead.</p>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the useGenericContentType parameter is not boolean.</p></dd>
                                                                     </dl>
                 
@@ -985,7 +1009,7 @@ if you need to pass a string around, use generateFeed() instead.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$tags </td>
-                                <td></td>
+                                <td><p>An array of tag names that are merged into the list of tags which should be encoded as CDATA</p></td>
                             </tr>
                                             </table>
                 
@@ -1054,7 +1078,7 @@ if you need to pass a string around, use generateFeed() instead.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$tags </td>
-                                <td></td>
+                                <td><p>An array of tag names that should be removed.</p></td>
                             </tr>
                                             </table>
                 
@@ -1090,13 +1114,13 @@ if you need to pass a string around, use generateFeed() instead.</p>
                                                     <tr>
                                 <td><a href="../classes/FeedWriter.Item.html">\FeedWriter\Item</a></td>
                                 <td>$feedItem </td>
-                                <td></td>
+                                <td><p>instance of Item class</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the given item version mismatches.</p></dd>
                                                                     </dl>
                 
@@ -1124,22 +1148,22 @@ if you need to pass a string around, use generateFeed() instead.</p>
             <article class="method">
                 <h3 class="public ">setEncoding()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setEncoding(  <span class="argument">$encoding</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setEncoding(string  <span class="argument">$encoding</span>) : self</pre>
                 <p><em>Set the &#039;encoding&#039; attribute in the XML prolog.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$encoding </td>
-                                <td></td>
+                                <td><p>value of 'encoding' attribute</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the encoding is not a string, empty or NULL.</p></dd>
                                                                     </dl>
                 
@@ -1167,16 +1191,16 @@ if you need to pass a string around, use generateFeed() instead.</p>
             <article class="method">
                 <h3 class="public ">setTitle()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setTitle(  <span class="argument">$title</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setTitle(string  <span class="argument">$title</span>) : self</pre>
                 <p><em>Set the &#039;title&#039; channel element</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$title </td>
-                                <td></td>
+                                <td><p>value of 'title' channel tag</p></td>
                             </tr>
                                             </table>
                 
@@ -1223,7 +1247,7 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the given date is not an instance of DateTime, a UNIX timestamp or a date string.</p></dd>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if this method is called on an RSS1 feed.</p></dd>
@@ -1253,16 +1277,16 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
             <article class="method">
                 <h3 class="public ">setDescription()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setDescription(  <span class="argument">$description</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setDescription(string  <span class="argument">$description</span>) : self</pre>
                 <p><em>Set a phrase or sentence describing the feed.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$description </td>
-                                <td></td>
+                                <td><p>Description of the feed.</p></td>
                             </tr>
                                             </table>
                 
@@ -1291,16 +1315,16 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
             <article class="method">
                 <h3 class="public ">setLink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setLink(  <span class="argument">$link</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setLink(string  <span class="argument">$link</span>) : self</pre>
                 <p><em>Set the &#039;link&#039; channel element</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$link </td>
-                                <td></td>
+                                <td><p>value of 'link' channel tag</p></td>
                             </tr>
                                             </table>
                 
@@ -1329,7 +1353,7 @@ timestamp or a string which is parseable by PHP's 'strtotime' function.</p>
             <article class="method">
                 <h3 class="public ">setAtomLink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setAtomLink(  <span class="argument">$href</span>,   <span class="argument">$rel = null</span>,   <span class="argument">$type = null</span>,   <span class="argument">$hreflang = null</span>,   <span class="argument">$title = null</span>,   <span class="argument">$length = null</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setAtomLink(string  <span class="argument">$href</span>, string  <span class="argument">$rel = null</span>, string  <span class="argument">$type = null</span>, string  <span class="argument">$hreflang = null</span>, string  <span class="argument">$title = null</span>, integer  <span class="argument">$length = null</span>) : self</pre>
                 <p><em>Set custom &#039;link&#039; channel elements.</em></p>
                 <p>In ATOM feeds, only one link with alternate relation and the same combination of
 type and hreflang values.</p>
@@ -1337,40 +1361,40 @@ type and hreflang values.</p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$href </td>
-                                <td></td>
+                                <td><p>URI of this link</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$rel </td>
-                                <td></td>
+                                <td><p>relation type of the resource</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$type </td>
-                                <td></td>
+                                <td><p>MIME type of the target resource</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$hreflang </td>
-                                <td></td>
+                                <td><p>language of the resource</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$title </td>
-                                <td></td>
+                                <td><p>human-readable information about the resource</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$length </td>
-                                <td></td>
+                                <td><p>length of the resource in bytes</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>on multiple occasions.</p></dd>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if the same link with the same attributes was already added to the feed.</p></dd>
@@ -1403,16 +1427,16 @@ type and hreflang values.</p>
             <article class="method">
                 <h3 class="public ">setSelfLink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setSelfLink(  <span class="argument">$url</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setSelfLink(string  <span class="argument">$url</span>) : self</pre>
                 <p><em>Set an &#039;atom:link&#039; channel element with relation=self attribute.</em></p>
                 <p>Needs the full URL to this feed.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$url </td>
-                                <td></td>
+                                <td><p>URL to this feed</p></td>
                             </tr>
                                             </table>
                 
@@ -1443,34 +1467,34 @@ type and hreflang values.</p>
             <article class="method">
                 <h3 class="public ">setImage()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setImage(  <span class="argument">$url</span>,   <span class="argument">$title = null</span>,   <span class="argument">$link = null</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setImage(string  <span class="argument">$url</span>, string  <span class="argument">$title = null</span>, string  <span class="argument">$link = null</span>) : self</pre>
                 <p><em>Set the &#039;image&#039; channel element</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$url </td>
-                                <td></td>
+                                <td><p>URL of the image</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$title </td>
-                                <td></td>
+                                <td><p>Title of the image. RSS only.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$link </td>
-                                <td></td>
+                                <td><p>Link target URL of the image. RSS only.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the url is invalid.</p></dd>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the title and link parameter are not a string or empty.</p></dd>
                                                                     </dl>
                 
@@ -1498,16 +1522,16 @@ type and hreflang values.</p>
             <article class="method">
                 <h3 class="public ">setChannelAbout()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setChannelAbout(  <span class="argument">$url</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setChannelAbout(string  <span class="argument">$url</span>) : self</pre>
                 <p><em>Set the channel &#039;rdf:about&#039; attribute, which is used in RSS1 feeds only.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$url </td>
-                                <td></td>
+                                <td><p>value of 'rdf:about' attribute of the channel element</p></td>
                             </tr>
                                             </table>
                 
@@ -1515,7 +1539,7 @@ type and hreflang values.</p>
                     <dl>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if this method is called and the feed is not of type RSS1.</p></dd>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the given URL is invalid.</p></dd>
                                                                     </dl>
                 
@@ -1543,7 +1567,7 @@ type and hreflang values.</p>
             <article class="method">
                 <h3 class="public ">uuid()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">uuid(  <span class="argument">$key = null</span>,   <span class="argument">$prefix = &#039;&#039;</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">uuid(string  <span class="argument">$key = null</span>, string  <span class="argument">$prefix = &#039;&#039;</span>) : string</pre>
                 <p><em>Generate an UUID.</em></p>
                 <p>The UUID is based on an MD5 hash. If no key is given, a unique ID as the input
 for the MD5 hash is generated.</p>
@@ -1551,21 +1575,21 @@ for the MD5 hash is generated.</p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$key </td>
-                                <td></td>
+                                <td><p>optional key on which the UUID is generated</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$prefix </td>
-                                <td></td>
+                                <td><p>an optional prefix</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>the formated UUID</p>
+                                            &mdash; <p>the formatted UUID</p>
                                     				
                             </article>
         </div>
@@ -1596,21 +1620,21 @@ for the MD5 hash is generated.</p>
             <article class="method">
                 <h3 class="public ">filterInvalidXMLChars()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">filterInvalidXMLChars(  <span class="argument">$string</span>,   <span class="argument">$replacement = &#039;_&#039;</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">filterInvalidXMLChars(string  <span class="argument">$string</span>, string  <span class="argument">$replacement = &#039;_&#039;</span>) : string</pre>
                 <p><em>Replace invalid XML characters.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$string </td>
-                                <td></td>
+                                <td><p>string which should be filtered</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$replacement </td>
-                                <td></td>
+                                <td><p>replace invalid characters with this string</p></td>
                             </tr>
                                             </table>
                 
@@ -1686,7 +1710,7 @@ because they are hardcoded, e.g. rdf.</p>
                                     <h4>Throws</h4>
                     <dl>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
-                            <dd><p>if an unkown XML namespace prefix is encountered.</p></dd>
+                            <dd><p>if an unknown XML namespace prefix is encountered.</p></dd>
                                                                     </dl>
                 
                                     <h4>Returns</h4>
@@ -1745,37 +1769,37 @@ because they are hardcoded, e.g. rdf.</p>
             <article class="method">
                 <h3 class="private ">makeNode()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">makeNode(  <span class="argument">$tagName</span>,   <span class="argument">$tagContent</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$omitEndTag = false</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">makeNode(string  <span class="argument">$tagName</span>, mixed  <span class="argument">$tagContent</span>, array  <span class="argument">$attributes = null</span>, boolean  <span class="argument">$omitEndTag = false</span>) : string</pre>
                 <p><em>Creates a single node in XML format</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$tagName </td>
-                                <td></td>
+                                <td><p>name of the tag</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>mixed</td>
                                 <td>$tagContent </td>
-                                <td></td>
+                                <td><p>tag value as string or array of nested tags in 'tagName' =&gt; 'tagValue' format</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$attributes </td>
-                                <td></td>
+                                <td><p>Attributes (if any) in 'attrName' =&gt; 'attrValue' format</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$omitEndTag </td>
-                                <td></td>
+                                <td><p>True if the end tag should be omitted. Defaults to false.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the tagContent is not an array and not a string.</p></dd>
                                                                     </dl>
                 
@@ -1866,16 +1890,16 @@ because they are hardcoded, e.g. rdf.</p>
             <article class="method">
                 <h3 class="private ">startItem()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">startItem(  <span class="argument">$about = false</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">startItem(string  <span class="argument">$about = false</span>) : string</pre>
                 <p><em>Make the starting tag of channels</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$about </td>
-                                <td></td>
+                                <td><p>The value of about attribute which is used for RSS 1.0 only.</p></td>
                             </tr>
                                             </table>
                 
@@ -1941,7 +1965,7 @@ because they are hardcoded, e.g. rdf.</p>
             <article class="method">
                 <h3 class="private ">sanitizeCDATA()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sanitizeCDATA(  <span class="argument">$text</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">sanitizeCDATA(string  <span class="argument">$text</span>) : string</pre>
                 <p><em>Sanitizes data which will be later on returned as CDATA in the feed.</em></p>
                 <p>A &quot;]]&gt;&quot; respectively &quot;&lt;![CDATA&quot; in the data would break the CDATA in the
 XML, so the brackets are converted to a HTML entity.</p>
@@ -1949,9 +1973,9 @@ XML, so the brackets are converted to a HTML entity.</p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$text </td>
-                                <td></td>
+                                <td><p>Data to be sanitized</p></td>
                             </tr>
                                             </table>
                 
@@ -2025,7 +2049,7 @@ XML, so the brackets are converted to a HTML entity.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 6th, 2016 at 23:05.
+                    on November 12th, 2016 at 22:17.
                 </section>
             </section>
         </section>

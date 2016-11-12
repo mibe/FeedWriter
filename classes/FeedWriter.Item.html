@@ -144,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1778036305"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-79928120"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1778036305" class="accordion-body collapse in">
+            <div id="namespace-79928120" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1174938094"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-122769890"></a>
                                 <a href="../namespaces/FeedWriter.html" style="margin-left: 30px; padding-left: 0">FeedWriter</a>
             </div>
-            <div id="namespace-1174938094" class="accordion-body collapse ">
+            <div id="namespace-122769890" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -387,16 +387,16 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$version = \FeedWriter\Feed::RSS2</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(string  <span class="argument">$version = \FeedWriter\Feed::RSS2</span>) </pre>
                 <p><em>Constructor</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$version </td>
-                                <td></td>
+                                <td><p>constant (RSS1/RSS2/ATOM) RSS2 is default.</p></td>
                             </tr>
                                             </table>
                 
@@ -421,42 +421,42 @@
             <article class="method">
                 <h3 class="public ">addElement()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addElement(  <span class="argument">$elementName</span>,   <span class="argument">$content</span>, array  <span class="argument">$attributes = null</span>,   <span class="argument">$overwrite = FALSE</span>,   <span class="argument">$allowMultiple = FALSE</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">addElement(string  <span class="argument">$elementName</span>, string  <span class="argument">$content</span>, array  <span class="argument">$attributes = null</span>, boolean  <span class="argument">$overwrite = FALSE</span>, boolean  <span class="argument">$allowMultiple = FALSE</span>) : self</pre>
                 <p><em>Add an element to elements array</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$elementName </td>
-                                <td></td>
+                                <td><p>The tag name of an element</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$content </td>
-                                <td></td>
+                                <td><p>The content of tag</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$attributes </td>
-                                <td></td>
+                                <td><p>Attributes (if any) in 'attrName' =&gt; 'attrValue' format</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$overwrite </td>
-                                <td></td>
+                                <td><p>Specifies if an already existing element is overwritten.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$allowMultiple </td>
-                                <td></td>
+                                <td><p>Specifies if multiple elements of the same name are allowed.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the element name is not a string, empty or NULL.</p></dd>
                                                                     </dl>
                 
@@ -583,16 +583,16 @@
             <article class="method">
                 <h3 class="public ">setDescription()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setDescription(  <span class="argument">$description</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setDescription(string  <span class="argument">$description</span>) : self</pre>
                 <p><em>Set the &#039;description&#039; element of feed item</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$description </td>
-                                <td></td>
+                                <td><p>The content of the 'description' or 'summary' element</p></td>
                             </tr>
                                             </table>
                 
@@ -619,7 +619,7 @@
             <article class="method">
                 <h3 class="public ">setContent()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setContent(  <span class="argument">$content</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setContent(string  <span class="argument">$content</span>) : self</pre>
                 <p><em>Set the &#039;content&#039; element of the feed item
 For ATOM feeds only</em></p>
                 
@@ -627,9 +627,9 @@ For ATOM feeds only</em></p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$content </td>
-                                <td></td>
+                                <td><p>Content for the item (i.e., the body of a blog post).</p></td>
                             </tr>
                                             </table>
                 
@@ -661,16 +661,16 @@ For ATOM feeds only</em></p>
             <article class="method">
                 <h3 class="public ">setTitle()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setTitle(  <span class="argument">$title</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setTitle(string  <span class="argument">$title</span>) : self</pre>
                 <p><em>Set the &#039;title&#039; element of feed item</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$title </td>
-                                <td></td>
+                                <td><p>The content of 'title' element</p></td>
                             </tr>
                                             </table>
                 
@@ -697,7 +697,7 @@ For ATOM feeds only</em></p>
             <article class="method">
                 <h3 class="public ">setDate()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setDate(  <span class="argument">$date</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setDate(\DateTime|integer|string  <span class="argument">$date</span>) : self</pre>
                 <p><em>Set the &#039;date&#039; element of the feed item.</em></p>
                 <p>The value of the date parameter can be either an instance of the
 DateTime class, an integer containing a UNIX timestamp or a string
@@ -706,15 +706,15 @@ which is parseable by PHP's 'strtotime' function.</p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\DateTime|integer|string</td>
                                 <td>$date </td>
-                                <td></td>
+                                <td><p>Date which should be used.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the given date was not parseable.</p></dd>
                                                                     </dl>
                 
@@ -740,21 +740,23 @@ which is parseable by PHP's 'strtotime' function.</p>
             <article class="method">
                 <h3 class="public ">setLink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setLink(  <span class="argument">$link</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">setLink(string  <span class="argument">$link</span>) : self</pre>
                 <p><em>Set the &#039;link&#039; element of feed item</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$link </td>
-                                <td></td>
+                                <td><p>The content of 'link' element</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    self
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -774,7 +776,7 @@ which is parseable by PHP's 'strtotime' function.</p>
             <article class="method">
                 <h3 class="public ">addEnclosure()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addEnclosure(  <span class="argument">$url</span>,   <span class="argument">$length</span>,   <span class="argument">$type</span>,   <span class="argument">$multiple = TRUE</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">addEnclosure(string  <span class="argument">$url</span>, integer  <span class="argument">$length</span>, string  <span class="argument">$type</span>, boolean  <span class="argument">$multiple = TRUE</span>) : self</pre>
                 <p><em>Attach a external media to the feed item.</em></p>
                 <p>Not supported in RSS 1.0 feeds.</p>
 <p>See RFC 4288 for syntactical correct MIME types.</p>
@@ -784,30 +786,30 @@ since some RSS aggregators don't support it.</p>
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$url </td>
-                                <td></td>
+                                <td><p>The URL of the media.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$length </td>
-                                <td></td>
+                                <td><p>The length of the media.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$type </td>
-                                <td></td>
+                                <td><p>The MIME type attribute of the media.</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$multiple </td>
-                                <td></td>
+                                <td><p>Specifies if multiple enclosures are allowed</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the length or type parameter is invalid.</p></dd>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if this method is called on RSS1 feeds.</p></dd>
@@ -837,32 +839,32 @@ since some RSS aggregators don't support it.</p>
             <article class="method">
                 <h3 class="public ">setAuthor()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setAuthor(  <span class="argument">$author</span>,   <span class="argument">$email = null</span>,   <span class="argument">$uri = null</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setAuthor(string  <span class="argument">$author</span>, string|null  <span class="argument">$email = null</span>, string|null  <span class="argument">$uri = null</span>) : self</pre>
                 <p><em>Set the &#039;author&#039; element of feed item.</em></p>
                 <p>Not supported in RSS 1.0 feeds.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$author </td>
-                                <td></td>
+                                <td><p>The author of this item</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string|null</td>
                                 <td>$email </td>
-                                <td></td>
+                                <td><p>Optional email address of the author</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string|null</td>
                                 <td>$uri </td>
-                                <td></td>
+                                <td><p>Optional URI related to the author</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the provided email address is syntactically incorrect.</p></dd>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if this method is called on RSS1 feeds.</p></dd>
@@ -890,27 +892,27 @@ since some RSS aggregators don't support it.</p>
             <article class="method">
                 <h3 class="public ">setId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setId(  <span class="argument">$id</span>,   <span class="argument">$permaLink = false</span>) : self</pre>
+                <pre class="signature" style="margin-right: 54px;">setId(string  <span class="argument">$id</span>, boolean  <span class="argument">$permaLink = false</span>) : self</pre>
                 <p><em>Set the unique identifier of the feed item</em></p>
                 <p>On ATOM feeds, the identifier must begin with an valid URI scheme.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$id </td>
-                                <td></td>
+                                <td><p>The unique identifier of this item</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$permaLink </td>
-                                <td></td>
+                                <td><p>The value of the 'isPermaLink' attribute in RSS 2 feeds.</p></td>
                             </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
                     <dl>
-                                                    <dt>\FeedWriter\InvalidArgumentException</dt>
+                                                    <dt>\InvalidArgumentException</dt>
                             <dd><p>if the permaLink parameter is not boolean.</p></dd>
                                                     <dt>\FeedWriter\InvalidOperationException</dt>
                             <dd><p>if this method is called on RSS1 feeds.</p></dd>
@@ -1010,7 +1012,7 @@ since some RSS aggregators don't support it.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 6th, 2016 at 23:05.
+                    on November 12th, 2016 at 22:17.
                 </section>
             </section>
         </section>
