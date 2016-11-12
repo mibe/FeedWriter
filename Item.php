@@ -52,7 +52,7 @@ class Item
     /**
     * Constructor
     *
-    * @param    constant  (RSS1/RSS2/ATOM) RSS2 is default.
+    * @param string $version constant (RSS1/RSS2/ATOM) RSS2 is default.
     */
     public function __construct($version = Feed::RSS2)
     {
@@ -74,13 +74,13 @@ class Item
     * Add an element to elements array
     *
     * @access   public
-    * @param    string  The tag name of an element
-    * @param    string  The content of tag
-    * @param    array   Attributes (if any) in 'attrName' => 'attrValue' format
-    * @param    boolean Specifies if an already existing element is overwritten.
-    * @param    boolean Specifies if multiple elements of the same name are allowed.
+    * @param    string $elementName    The tag name of an element
+    * @param    string $content        The content of tag
+    * @param    array  $attributes     Attributes (if any) in 'attrName' => 'attrValue' format
+    * @param    boolean $overwrite     Specifies if an already existing element is overwritten.
+    * @param    boolean $allowMultiple Specifies if multiple elements of the same name are allowed.
     * @return   self
-    * @throws   InvalidArgumentException if the element name is not a string, empty or NULL.
+    * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
     public function addElement($elementName, $content, array $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
     {
@@ -95,7 +95,7 @@ class Item
         // & if multiple elements are not allowed.
         if (isset($this->elements[$elementName]) && !$overwrite) {
             if (!$allowMultiple)
-                return;
+                return $this;
 
             $key .= '-' . $this->cpt();
         }
@@ -175,7 +175,7 @@ class Item
     * Set the 'description' element of feed item
     *
     * @access   public
-    * @param    string  The content of the 'description' or 'summary' element
+    * @param    string $description The content of the 'description' or 'summary' element
     * @return   self
     */
     public function setDescription($description)
@@ -190,7 +190,7 @@ class Item
     * For ATOM feeds only
     *
     * @access   public
-    * @param    string  Content for the item (i.e., the body of a blog post).
+    * @param    string $content Content for the item (i.e., the body of a blog post).
     * @return   self
     * @throws   InvalidOperationException if this method is called on non-ATOM feeds.
     */
@@ -206,7 +206,7 @@ class Item
     * Set the 'title' element of feed item
     *
     * @access   public
-    * @param    string  The content of 'title' element
+    * @param    string $title The content of 'title' element
     * @return   self
     */
     public function setTitle($title)
@@ -222,9 +222,9 @@ class Item
     * which is parseable by PHP's 'strtotime' function.
     *
     * @access   public
-    * @param    DateTime|int|string  Date which should be used.
+    * @param    DateTime|int|string $date Date which should be used.
     * @return   self
-    * @throws   InvalidArgumentException if the given date was not parseable.
+    * @throws   \InvalidArgumentException if the given date was not parseable.
     */
     public function setDate($date)
     {
@@ -258,8 +258,8 @@ class Item
     * Set the 'link' element of feed item
     *
     * @access   public
-    * @param    string  The content of 'link' element
-    * @return   void
+    * @param    string $link The content of 'link' element
+    * @return   self
     */
     public function setLink($link)
     {
@@ -283,13 +283,13 @@ class Item
     * since some RSS aggregators don't support it.
     *
     * @access   public
-    * @param    string  The URL of the media.
-    * @param    integer The length of the media.
-    * @param    string  The MIME type attribute of the media.
-    * @param    boolean Specifies if multiple enclosures are allowed
+    * @param    string $url       The URL of the media.
+    * @param    integer $length   The length of the media.
+    * @param    string  $type     The MIME type attribute of the media.
+    * @param    boolean $multiple Specifies if multiple enclosures are allowed
     * @return   self
     * @link     https://tools.ietf.org/html/rfc4288
-    * @throws   InvalidArgumentException if the length or type parameter is invalid.
+    * @throws   \InvalidArgumentException if the length or type parameter is invalid.
     * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function addEnclosure($url, $length, $type, $multiple = TRUE)
@@ -325,22 +325,22 @@ class Item
     * Not supported in RSS 1.0 feeds.
     *
     * @access   public
-    * @param    string  The author of this item
-    * @param    string  Optional email address of the author
-    * @param    string  Optional URI related to the author
+    * @param    string $author The author of this item
+    * @param    string|null $email Optional email address of the author
+    * @param    string|null $uri Optional URI related to the author
     * @return   self
-    * @throws   InvalidArgumentException if the provided email address is syntactically incorrect.
+    * @throws   \InvalidArgumentException if the provided email address is syntactically incorrect.
     * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function setAuthor($author, $email = null, $uri = null)
     {
         if ($this->version == Feed::RSS1)
             throw new InvalidOperationException('The author element is not supported in RSS1 feeds.');
-        
+
         // Regex from RFC 4287 page 41
         if ($email != null && preg_match('/.+@.+/', $email) != 1)
             throw new \InvalidArgumentException('The email address is syntactically incorrect.');
-        
+
         if ($this->version == Feed::RSS2)
         {
             if ($email != null)
@@ -370,10 +370,10 @@ class Item
     * On ATOM feeds, the identifier must begin with an valid URI scheme.
     *
     * @access   public
-    * @param    string  The unique identifier of this item
-    * @param    boolean The value of the 'isPermaLink' attribute in RSS 2 feeds.
+    * @param    string $id         The unique identifier of this item
+    * @param    boolean $permaLink The value of the 'isPermaLink' attribute in RSS 2 feeds.
     * @return   self
-    * @throws   InvalidArgumentException if the permaLink parameter is not boolean.
+    * @throws   \InvalidArgumentException if the permaLink parameter is not boolean.
     * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
     public function setId($id, $permaLink = false)
@@ -392,17 +392,17 @@ class Item
             $validSchemes = array('aaa', 'aaas', 'about', 'acap', 'acct', 'cap', 'cid', 'coap', 'coaps', 'crid', 'data', 'dav', 'dict', 'dns', 'example', 'fax', 'file', 'filesystem', 'ftp', 'geo', 'go', 'gopher', 'h323', 'http', 'https', 'iax', 'icap', 'im', 'imap', 'info', 'ipp', 'ipps', 'iris', 'iris.beep', 'iris.lwz', 'iris.xpc', 'iris.xpcs', 'jabber', 'ldap', 'mailserver', 'mailto', 'mid', 'modem', 'msrp', 'msrps', 'mtqp', 'mupdate', 'news', 'nfs', 'ni', 'nih', 'nntp', 'opaquelocktoken', 'pack', 'pkcs11', 'pop', 'pres', 'prospero', 'reload', 'rtsp', 'rtsps', 'rtspu', 'service', 'session', 'shttp', 'sieve', 'sip', 'sips', 'sms', 'snews', 'snmp', 'soap.beep', 'soap.beeps', 'stun', 'stuns', 'tag', 'tel', 'telnet', 'tftp', 'thismessage', 'tip', 'tn3270', 'turn', 'turns', 'tv', 'urn', 'vemmi', 'videotex', 'vnc', 'wais', 'ws', 'wss', 'xcon', 'xcon-userid', 'xmlrpc.beep', 'xmlrpc.beeps', 'xmpp', 'z39.50', 'z39.50r', 'z39.50s');
             $found = FALSE;
             $checkId = strtolower($id);
-            
+
             foreach($validSchemes as $scheme)
                 if (strrpos($checkId, $scheme . ':', -strlen($checkId)) !== FALSE)
                 {
                     $found = TRUE;
                     break;
                 }
-            
+
             if (!$found)
                 throw new \InvalidArgumentException("The ID must begin with an IANA-registered URI scheme.");
-            
+
             $this->addElement('id', $id, NULL, TRUE);
         } else
             throw new InvalidOperationException('A unique ID is not supported in RSS1 feeds.');
