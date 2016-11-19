@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) .
 
+## [v1.1.1] - 2016-11-19
+### Changed
+- Improved the documentation.
+- Changed to PSR-4 autoloader in composer.json.
+
+### Fixed
+- Item::addElement did not method chain in error conditions.
+
 ## [v1.1.0] - 2016-11-08
 ### Added
 - Support for multiple element values.
@@ -52,7 +60,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) .
 ## v1.0 - 2014-09-14
 
 
-[Unreleased]: https://github.com/mibe/FeedWriter/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/mibe/FeedWriter/compare/v1.1.1...HEAD
+[v1.1.1]: https://github.com/mibe/FeedWriter/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/mibe/FeedWriter/compare/v1.0.4...v1.1.0
 [v1.0.4]: https://github.com/mibe/FeedWriter/compare/v1.0.3...v1.0.4
 [v1.0.3]: https://github.com/mibe/FeedWriter/compare/v1.0.2...v1.0.3

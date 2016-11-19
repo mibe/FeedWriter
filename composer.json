@@ -53,6 +53,9 @@
         },
         {
             "name": "Daniel"
+        },
+        {
+            "name": "Tino Goratsch"
         }
     ],
     "minimum-stability": "dev",

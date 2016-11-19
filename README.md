@@ -51,3 +51,4 @@ Authors
 - thielj
 - Pavel Khakhlou
 - Daniel
+- Tino Goratsch
