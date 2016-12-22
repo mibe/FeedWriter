@@ -888,7 +888,7 @@ abstract class Feed
             // The channel element can occur multiple times, when the key 'content' is not in the array.
             if (!array_key_exists('content', $value)) {
                 // If this is the case, iterate through the array with the multiple elements.
-                foreach ($value as $singleElement) {
+                if (is_array($value)) foreach ($value as $singleElement) {
                     $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
                 }
             } else {
