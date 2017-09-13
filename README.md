@@ -28,7 +28,7 @@ Documentation
 The documentation can be found in the "gh-pages" branch or on GitHub Pages:
 https://mibe.github.io/FeedWriter/
 
-Check the **/examples** directory for usages examples.
+Check the **/examples** directory for usage examples.
 
 See the CHANGELOG.md file for changes between the different versions.
 
