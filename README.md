@@ -12,6 +12,11 @@ Once a feed is fully composed with its items, the feed class can generate the ne
 
 If you don't have **PHP 5.3** available on your system there is a version supporting **PHP 5.0** and above. See the `legacy-php-5.0` branch.
 
+## Installation  
+You can install via [Composer](https://getcomposer.org/).  
+
+    composer require mibe/feedwriter
+
 ## Documentation
 
 The documentation can be found in the `gh-pages` branch, or on [GitHub Pages](https://mibe.github.io/FeedWriter/).
