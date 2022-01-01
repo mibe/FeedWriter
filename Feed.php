@@ -678,6 +678,11 @@ abstract class Feed
     */
     public static function filterInvalidXMLChars($string, $replacement = '_') // default to '\x{FFFD}' ???
     {
+        // Convert $string to string if not string (ex:NULL).
+        // Avoid `preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated` error from PHP>=8.1.
+        if (!is_string($string))
+            $string = (string)$string;
+
         $result = preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', $replacement, $string);
 
         // Did the PCRE replace failed because of bad UTF-8 data?
