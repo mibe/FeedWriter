@@ -59,7 +59,7 @@ $TestFeed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06'))
 //      <day>Sunday</day>
 // </skipDays>
 // Thanks to - Peter Fargaš <peter.fargas.work@googlemail.com>
-$TestFeed->setChannelElement("skipDays", array('day'=>['Saturday','Sunday']));
+$TestFeed->setChannelElement('skipDays', array('day'=>['Saturday','Sunday']));
 
 // You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
 // It's recommended to provide a backlink to the feed URL.
@@ -68,7 +68,7 @@ $TestFeed->setAtomLink('http://pubsubhubbub.appspot.com', 'hub');
 
 // You can add more XML namespaces for more custom channel elements which are not defined
 // in the RSS 2 specification. Here the 'creativeCommons' element is used. There are much more
-// available. Have a look at this list: http://feedvalidator.org/docs/howto/declare_namespaces.html
+// available. Have a look at this list: https://web.archive.org/web/20200618033402/http://feedvalidator.org/docs/howto/declare_namespaces.html
 $TestFeed->addNamespace('creativeCommons', 'http://backend.userland.com/creativeCommonsRssModule');
 $TestFeed->setChannelElement('creativeCommons:license', 'http://www.creativecommons.org/licenses/by/1.0');
 
@@ -114,14 +114,14 @@ $newItem->addElement('source', 'Mike\'s page', array('url' => 'http://www.exampl
 // Now add the feed item to the main feed.
 $TestFeed->addItem($newItem);
 
-// Another method to add feeds items is by using an array which contains key-value pairs
+// Another method to add feed items is by using an array which contains key-value pairs
 // of every item element. Elements which have attributes cannot be added by this way.
 $newItem = $TestFeed->createNewItem();
 $newItem->addElementArray(array('title'=> 'The 2nd item', 'link' => 'http://www.google.com', 'description' => 'Just another test.'));
 $TestFeed->addItem($newItem);
 
 // OK. Everything is done. Now generate the feed.
-// Then do anything (e,g cache, save, attach, print) you want with the feed in $myFeed.
+// Then do anything (e.g. cache, save, attach, print) you want with the feed in $myFeed.
 $myFeed = $TestFeed->generateFeed();
 
 // If you want to send the feed directly to the browser, use the printFeed() method.
