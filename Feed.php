@@ -5,7 +5,7 @@ use \DateTime;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2010-2016 Michael Bemmerl <mail@mx-server.de>
+ * Copyright (C) 2010-2016, 2022 Michael Bemmerl <mail@mx-server.de>
  *
  * This file is part of the "Universal Feed Writer" project.
  *
@@ -396,9 +396,13 @@ abstract class Feed
     * @access   public
     * @param    string $title value of 'title' channel tag
     * @return   self
+    * @throws   \InvalidArgumentException if the title is empty or NULL.
     */
     public function setTitle($title)
     {
+        if (empty($title))
+            throw new \InvalidArgumentException('The title may not be empty or NULL.');
+
         return $this->setChannelElement('title', $title);
     }
 
@@ -454,9 +458,13 @@ abstract class Feed
     * @access   public
     * @param    string  $description Description of the feed.
     * @return   self
+    * @throws   \InvalidArgumentException if the description is empty or NULL.
     */
     public function setDescription($description)
     {
+        if (empty($description))
+            throw new \InvalidArgumentException('The description may not be empty or NULL.');
+
         if ($this->version != Feed::ATOM)
             $this->setChannelElement('description', $description);
         else
@@ -471,9 +479,13 @@ abstract class Feed
     * @access   public
     * @param    string $link value of 'link' channel tag
     * @return   self
+    * @throws   \InvalidArgumentException if the link is empty or NULL.
     */
     public function setLink($link)
     {
+        if (empty($link))
+            throw new \InvalidArgumentException('The link may not be empty or NULL.');
+
         if ($this->version == Feed::ATOM)
             $this->setAtomLink($link);
         else
