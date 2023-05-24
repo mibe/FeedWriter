@@ -277,7 +277,7 @@ class Item
     * Attach a external media to the feed item.
     * Not supported in RSS 1.0 feeds.
     *
-    * See RFC 4288 for syntactical correct MIME types.
+    * See RFC 6838 for syntactical correct MIME types.
     *
     * Note that you should avoid the use of more than one enclosure in one item,
     * since some RSS aggregators don't support it.
@@ -288,7 +288,8 @@ class Item
     * @param    string  $type     The MIME type attribute of the media.
     * @param    boolean $multiple Specifies if multiple enclosures are allowed
     * @return   self
-    * @link     https://tools.ietf.org/html/rfc4288
+    * @link     https://tools.ietf.org/html/rfc6838
+    * @link     http://www.iana.org/assignments/media-types/media-types.xhtml
     * @throws   \InvalidArgumentException if the length or type parameter is invalid.
     * @throws   InvalidOperationException if this method is called on RSS1 feeds.
     */
