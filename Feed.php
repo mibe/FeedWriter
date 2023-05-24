@@ -679,7 +679,7 @@ abstract class Feed
     /**
     * Replace invalid XML characters.
     *
-    * @link http://www.phpwact.org/php/i18n/charsets#xml See utf8_for_xml() function
+    * @link https://web.archive.org/web/20160608013721/http://www.phpwact.org:80/php/i18n/charsets#xml See utf8_for_xml() function
     * @link http://www.w3.org/TR/REC-xml/#charsets
     * @link https://github.com/mibe/FeedWriter/issues/30
     *
