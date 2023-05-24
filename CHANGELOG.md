@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) .
 
+## [v1.1.2] - 2023-05-25
+### Changed
+- Throw an exception if required feed elements are set with ```NULL``` value. See issue #46.
+
 ## [v1.1.1] - 2016-11-19
 ### Changed
 - Improved the documentation.
@@ -60,7 +64,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) .
 ## v1.0 - 2014-09-14
 
 
-[Unreleased]: https://github.com/mibe/FeedWriter/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/mibe/FeedWriter/compare/v1.1.2...HEAD
+[v1.1.2]: https://github.com/mibe/FeedWriter/compare/v1.1.1...v1.1.2
 [v1.1.1]: https://github.com/mibe/FeedWriter/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/mibe/FeedWriter/compare/v1.0.4...v1.1.0
 [v1.0.4]: https://github.com/mibe/FeedWriter/compare/v1.0.3...v1.0.4
