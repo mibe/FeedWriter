@@ -2,6 +2,7 @@
 namespace FeedWriter;
 
 use \DateTime;
+use \DateTimeInterface;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
@@ -217,19 +218,19 @@ class Item
     /**
     * Set the 'date' element of the feed item.
     *
-    * The value of the date parameter can be either an instance of the
-    * DateTime class, an integer containing a UNIX timestamp or a string
+    * The value of the date parameter can be either a class implementing
+    * DateTimeInterface, an integer containing a UNIX timestamp or a string
     * which is parseable by PHP's 'strtotime' function.
     *
     * @access   public
-    * @param    DateTime|int|string $date Date which should be used.
+    * @param    DateTimeInterface|int|string $date Date which should be used.
     * @return   self
     * @throws   \InvalidArgumentException if the given date was not parseable.
     */
     public function setDate($date)
     {
         if (!is_numeric($date)) {
-            if ($date instanceof DateTime)
+            if ($date instanceof DateTimeInterface || $date instanceof DateTime)
                 $date = $date->getTimestamp();
             else {
                 $date = strtotime($date);

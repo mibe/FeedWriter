@@ -2,6 +2,7 @@
 namespace FeedWriter;
 
 use \DateTime;
+use \DateTimeInterface;
 
 /*
  * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
@@ -410,15 +411,15 @@ abstract class Feed
     * Set the date when the feed was lastly updated.
     *
     * This adds the 'updated' element to the feed. The value of the date parameter
-    * can be either an instance of the DateTime class, an integer containing a UNIX
+    * can be either a class implementing DateTimeInterface, an integer containing a UNIX
     * timestamp or a string which is parseable by PHP's 'strtotime' function.
     *
     * Not supported in RSS1 feeds.
     *
     * @access   public
-    * @param    DateTime|int|string  Date which should be used.
+    * @param    DateTimeInterface|int|string  Date which should be used.
     * @return   self
-    * @throws   \InvalidArgumentException if the given date is not an instance of DateTime, a UNIX timestamp or a date string.
+    * @throws   \InvalidArgumentException if the given date is not an implementation of DateTimeInterface, a UNIX timestamp or a date string.
     * @throws   InvalidOperationException if this method is called on an RSS1 feed.
     */
     public function setDate($date)
@@ -429,7 +430,7 @@ abstract class Feed
         // The feeds have different date formats.
         $format = $this->version == Feed::ATOM ? \DATE_ATOM : \DATE_RSS;
 
-        if ($date instanceof DateTime)
+        if ($date instanceof DateTimeInterface || $date instanceof DateTime)
             $date = $date->format($format);
         else if(is_numeric($date) && $date >= 0)
             $date = date($format, $date);
@@ -442,7 +443,7 @@ abstract class Feed
             $date = date($format, $timestamp);
         }
         else
-            throw new \InvalidArgumentException('The given date is not an instance of DateTime, a UNIX timestamp or a date string.');
+            throw new \InvalidArgumentException('The given date is not an implementation of DateTimeInterface, a UNIX timestamp or a date string.');
 
         if ($this->version == Feed::ATOM)
             $this->setChannelElement('updated', $date);
