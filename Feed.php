@@ -78,6 +78,13 @@ abstract class Feed
     private $version       = null;
 
     /**
+    * Contains the encoding of this feed.
+    *
+    * @var string
+    */
+    private $encoding      = 'utf-8';
+
+    /**
      * Constructor
      *
      * If no version is given, a feed in RSS 2.0 format will be generated.
@@ -87,9 +94,6 @@ abstract class Feed
     protected function __construct($version = Feed::RSS2)
     {
         $this->version = $version;
-
-        // Setting default encoding
-        $this->encoding = 'utf-8';
 
         // Setting default value for essential channel element
         $this->setTitle($version . ' Feed');
