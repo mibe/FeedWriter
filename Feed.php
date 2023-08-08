@@ -32,6 +32,20 @@ use \DateTimeInterface;
  * @package     UniversalFeedWriter
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
+ *
+ * PHPStan does not support recursive type aliases
+ * https://github.com/phpstan/phpstan/issues/4637
+ * so we are manually approximating the fixed point
+ * to a depth that should be sufficient in practice.
+ * Feel free to add more layers if you need them.
+ * @_phpstan-recursive-type TagContent string|array<TagContent>|array<string, TagContent>
+ * @phpstan-type TagContentFix0 string
+ * @phpstan-type TagContentFix1 string|array<TagContentFix0>|array<string, TagContentFix0>
+ * @phpstan-type TagContentFix2 string|array<TagContentFix1>|array<string, TagContentFix1>
+ * @phpstan-type TagContentFix3 string|array<TagContentFix2>|array<string, TagContentFix2>
+ * @phpstan-type TagContentFix TagContentFix3
+ *
+ * @phpstan-type Element array{content: TagContentFix, attributes: array<string, string>}
  */
 abstract class Feed
 {
@@ -47,11 +61,15 @@ abstract class Feed
 
     /**
     * Collection of all channel elements
+    *
+    * @var array<string, Element|array<Element>>
     */
     private $channels      = array();
 
     /**
     * Collection of items as object of \FeedWriter\Item class.
+    *
+    * @var Item[]
     */
     private $items         = array();
 
@@ -59,21 +77,29 @@ abstract class Feed
     * Collection of other version wise data.
     *
     * Currently used to store the 'rdf:about' attribute and image element of the channel (both RSS1 only).
+    *
+    * @var array{Image?: string|array{title: string, link: string, url: string}, ChannelAbout?: string}
     */
     private $data          = array();
 
     /**
     * The tag names which have to encoded as CDATA
+    *
+    * @var string[]
     */
     private $CDATAEncoding = array();
 
     /**
     * Collection of XML namespaces
+    *
+    * @var array<string, string>
     */
     private $namespaces    = array();
 
     /**
     * Contains the format of this feed.
+    *
+    * @var Feed::RSS1|Feed::RSS2|Feed::ATOM
     */
     private $version       = null;
 
@@ -89,7 +115,7 @@ abstract class Feed
      *
      * If no version is given, a feed in RSS 2.0 format will be generated.
      *
-     * @param string $version the version constant (RSS1/RSS2/ATOM).
+     * @param Feed::RSS1|Feed::RSS2|Feed::ATOM $version the version constant (RSS1/RSS2/ATOM).
      */
     protected function __construct($version = Feed::RSS2)
     {
@@ -192,9 +218,9 @@ abstract class Feed
     *
     * @access   public
     * @param    string $elementName name of the channel tag
-    * @param    string $content content of the channel tag
-    * @param    array   array of element attributes with attribute name as array key
-    * @param    bool    TRUE if this element can appear multiple times
+    * @param    TagContentFix $content content of the channel tag
+    * @param    array<string, string> $attributes array of element attributes with attribute name as array key
+    * @param    bool $multiple TRUE if this element can appear multiple times
     * @return   self
     * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
@@ -221,7 +247,7 @@ abstract class Feed
     * should be 'channelName' => 'channelContent' format.
     *
     * @access   public
-    * @param    array   array of channels
+    * @param    array<string, TagContentFix> $elementArray array of channels
     * @return   self
     */
     public function setChannelElementsFromArray(array $elementArray)
@@ -262,7 +288,7 @@ abstract class Feed
     * if you need to pass a string around, use generateFeed() instead.
     *
     * @access   public
-    * @param    bool    FALSE if the specific feed media type should be sent.
+    * @param    bool $useGenericContentType FALSE if the specific feed media type should be sent.
     * @return   void
     * @throws   \InvalidArgumentException if the useGenericContentType parameter is not boolean.
     */
@@ -318,7 +344,7 @@ abstract class Feed
      * Add one or more tags to the list of CDATA encoded tags
      *
      * @access  public
-     * @param   array  $tags An array of tag names that are merged into the list of tags which should be encoded as CDATA
+     * @param   array<string> $tags An array of tag names that are merged into the list of tags which should be encoded as CDATA
      * @return  self
      */
     public function addCDATAEncoding(array $tags)
@@ -332,7 +358,7 @@ abstract class Feed
      * Get list of CDATA encoded properties
      *
      * @access  public
-     * @return  array   Return an array of CDATA properties that are to be encoded as CDATA
+     * @return  array<string> Return an array of CDATA properties that are to be encoded as CDATA
      */
     public function getCDATAEncoding()
     {
@@ -343,7 +369,7 @@ abstract class Feed
      * Remove tags from the list of CDATA encoded tags
      *
      * @access  public
-     * @param   array  $tags An array of tag names that should be removed.
+     * @param   array<string> $tags An array of tag names that should be removed.
      * @return  void
      */
     public function removeCDATAEncoding(array $tags)
@@ -421,7 +447,7 @@ abstract class Feed
     * Not supported in RSS1 feeds.
     *
     * @access   public
-    * @param    DateTimeInterface|int|string  Date which should be used.
+    * @param    DateTimeInterface|int|string $date  Date which should be used.
     * @return   self
     * @throws   \InvalidArgumentException if the given date is not an implementation of DateTimeInterface, a UNIX timestamp or a date string.
     * @throws   InvalidOperationException if this method is called on an RSS1 feed.
@@ -719,7 +745,7 @@ abstract class Feed
     * because they are hardcoded, e.g. rdf.
     *
     * @access   private
-    * @return   array   Array with namespace prefix as value.
+    * @return   array<string> Array with namespace prefix as value.
     */
     private function getNamespacePrefixes()
     {
@@ -823,8 +849,8 @@ abstract class Feed
     *
     * @access   private
     * @param    string $tagName    name of the tag
-    * @param    mixed  $tagContent tag value as string or array of nested tags in 'tagName' => 'tagValue' format
-    * @param    array  $attributes Attributes (if any) in 'attrName' => 'attrValue' format
+    * @param    TagContentFix $tagContent tag value as string or array of nested tags in 'tagName' => 'tagValue' format
+    * @param    array<string, string> $attributes Attributes (if any) in 'attrName' => 'attrValue' format
     * @param    bool $omitEndTag True if the end tag should be omitted. Defaults to false.
     * @return   string  formatted xml tag
     * @throws   \InvalidArgumentException if the tagContent is not an array and not a string.

@@ -32,28 +32,37 @@ use \DateTimeInterface;
  * @package         UniversalFeedWriter
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
  * @link            http://www.ajaxray.com/projects/rss
+ *
+ * @phpstan-import-type TagContentFix from Feed
+ * @phpstan-import-type Element from Feed
  */
 class Item
 {
     /**
     * Collection of feed item elements
+    *
+    * @var array<string, Element>
     */
     private $elements = array();
 
     /**
     * Contains the format of this feed.
+    *
+    * @var Feed::RSS1|Feed::RSS2|Feed::ATOM
     */
     private $version;
 
     /**
     * Is used as a suffix when multiple elements have the same name.
+    *
+    * @var int
     **/
     private $_cpt = 0;
 
     /**
     * Constructor
     *
-    * @param string $version constant (RSS1/RSS2/ATOM) RSS2 is default.
+    * @param Feed::RSS1|Feed::RSS2|Feed::ATOM $version constant (RSS1/RSS2/ATOM) RSS2 is default.
     */
     public function __construct($version = Feed::RSS2)
     {
@@ -76,8 +85,8 @@ class Item
     *
     * @access   public
     * @param    string $elementName    The tag name of an element
-    * @param    string $content        The content of tag
-    * @param    array  $attributes     Attributes (if any) in 'attrName' => 'attrValue' format
+    * @param    TagContentFix $content        The content of tag
+    * @param    array<string, string> $attributes Attributes (if any) in 'attrName' => 'attrValue' format
     * @param    boolean $overwrite     Specifies if an already existing element is overwritten.
     * @param    boolean $allowMultiple Specifies if multiple elements of the same name are allowed.
     * @return   self
@@ -113,7 +122,7 @@ class Item
     * Elements which have attributes cannot be added by this method
     *
     * @access   public
-    * @param    array   array of elements in 'tagName' => 'tagContent' format.
+    * @param    array<string, TagContentFix> $elementArray array of elements in 'tagName' => 'tagContent' format.
     * @return   self
     */
     public function addElementArray(array $elementArray)
@@ -129,7 +138,7 @@ class Item
     * Return the collection of elements in this feed item
     *
     * @access   public
-    * @return   array   All elements of this item.
+    * @return   array<string, Element> All elements of this item.
     * @throws   InvalidOperationException on ATOM feeds if either a content or link element is missing.
     * @throws   InvalidOperationException on RSS1 feeds if a title or link element is missing.
     */
