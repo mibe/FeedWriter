@@ -45,3 +45,6 @@ In chronological order:
 - Pavel Khakhlou
 - Daniel
 - Tino Goratsch
+- John
+- Özgür Görgülü
+- Jan Tojnar
