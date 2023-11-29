@@ -923,7 +923,7 @@ abstract class Feed
             $out .= "</rdf:Seq>" . PHP_EOL . "</items>" . PHP_EOL . "</channel>" . PHP_EOL;
 
             // An image has its own element after the channel elements.
-            if (array_key_exists('image', $this->data))
+            if (array_key_exists('Image', $this->data))
                 $out .= $this->makeNode('image', $this->data['Image'], array('rdf:about' => $this->data['Image']['url']));
         } else if ($this->version == Feed::ATOM) {
             // ATOM feeds have a unique feed ID. Use the title channel element as key.
