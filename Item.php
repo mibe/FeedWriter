@@ -32,28 +32,37 @@ use \DateTimeInterface;
  * @package         UniversalFeedWriter
  * @author          Anis uddin Ahmad <anisniit@gmail.com>
  * @link            http://www.ajaxray.com/projects/rss
+ *
+ * @phpstan-import-type TagContentFix from Feed
+ * @phpstan-import-type Element from Feed
  */
 class Item
 {
     /**
     * Collection of feed item elements
+    *
+    * @var array<string, Element>
     */
     private $elements = array();
 
     /**
     * Contains the format of this feed.
+    *
+    * @var Feed::RSS1|Feed::RSS2|Feed::ATOM
     */
     private $version;
 
     /**
     * Is used as a suffix when multiple elements have the same name.
+    *
+    * @var int
     **/
     private $_cpt = 0;
 
     /**
     * Constructor
     *
-    * @param string $version constant (RSS1/RSS2/ATOM) RSS2 is default.
+    * @param Feed::RSS1|Feed::RSS2|Feed::ATOM $version constant (RSS1/RSS2/ATOM) RSS2 is default.
     */
     public function __construct($version = Feed::RSS2)
     {
@@ -76,14 +85,14 @@ class Item
     *
     * @access   public
     * @param    string $elementName    The tag name of an element
-    * @param    string $content        The content of tag
-    * @param    array  $attributes     Attributes (if any) in 'attrName' => 'attrValue' format
+    * @param    TagContentFix $content        The content of tag
+    * @param    array<string, string> $attributes Attributes (if any) in 'attrName' => 'attrValue' format
     * @param    boolean $overwrite     Specifies if an already existing element is overwritten.
     * @param    boolean $allowMultiple Specifies if multiple elements of the same name are allowed.
     * @return   self
     * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
-    public function addElement($elementName, $content, array $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
+    public function addElement($elementName, $content, array $attributes = [], $overwrite = FALSE, $allowMultiple = FALSE)
     {
         if (empty($elementName))
             throw new \InvalidArgumentException('The element name may not be empty or NULL.');
@@ -113,7 +122,7 @@ class Item
     * Elements which have attributes cannot be added by this method
     *
     * @access   public
-    * @param    array   array of elements in 'tagName' => 'tagContent' format.
+    * @param    array<string, TagContentFix> $elementArray array of elements in 'tagName' => 'tagContent' format.
     * @return   self
     */
     public function addElementArray(array $elementArray)
@@ -129,7 +138,7 @@ class Item
     * Return the collection of elements in this feed item
     *
     * @access   public
-    * @return   array   All elements of this item.
+    * @return   array<string, Element> All elements of this item.
     * @throws   InvalidOperationException on ATOM feeds if either a content or link element is missing.
     * @throws   InvalidOperationException on RSS1 feeds if a title or link element is missing.
     */
@@ -308,7 +317,7 @@ class Item
         if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
             throw new \InvalidArgumentException('type parameter must be a string and a MIME type.');
 
-        $attributes = array('length' => $length, 'type' => $type);
+        $attributes = array('length' => (string) $length, 'type' => $type);
 
         if ($this->version == Feed::RSS2) {
             $attributes['url'] = $url;
@@ -405,7 +414,7 @@ class Item
             if (!$found)
                 throw new \InvalidArgumentException("The ID must begin with an IANA-registered URI scheme.");
 
-            $this->addElement('id', $id, NULL, TRUE);
+            $this->addElement('id', $id, [], TRUE);
         } else
             throw new InvalidOperationException('A unique ID is not supported in RSS1 feeds.');
 

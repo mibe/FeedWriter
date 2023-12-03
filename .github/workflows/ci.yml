@@ -1,0 +1,36 @@
+name: "CI"
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  check:
+    name: "PHPStan"
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        php:
+          - "7.4"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php }}"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
+
+      - name: "Run PHPStan"
+        run: "vendor/bin/phpstan analyse --no-progress --error-format=github"
