@@ -62,7 +62,7 @@ abstract class Feed
     /**
     * Collection of all channel elements
     *
-    * @var array<string, Element|array<Element>>
+    * @var array<string, array<Element>>
     */
     private $channels      = array();
 
@@ -237,7 +237,7 @@ abstract class Feed
         if ($multiple === TRUE)
             $this->channels[$elementName][] = $entity;
         else
-            $this->channels[$elementName] = $entity;
+            $this->channels[$elementName] = [$entity];
 
         return $this;
     }
@@ -916,7 +916,7 @@ abstract class Feed
                 $out .= '<channel>' . PHP_EOL;
                 break;
             case Feed::RSS1:
-                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']['content']}\">";
+                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link'][0]['content']}\">";
                 break;
         }
 
@@ -928,14 +928,9 @@ abstract class Feed
                 $key = substr($key, 5);
             }
 
-            // The channel element can occur multiple times, when the key 'content' is not in the array.
-            if (!array_key_exists('content', $value)) {
-                // If this is the case, iterate through the array with the multiple elements.
-                foreach ($value as $singleElement) {
-                    $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
-                }
-            } else {
-                $out .= $this->makeNode($key, $value['content'], $value['attributes']);
+            // The channel element can occur multiple times.
+            foreach ($value as $singleElement) {
+                $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
             }
         }
 
@@ -953,7 +948,7 @@ abstract class Feed
                 $out .= $this->makeNode('image', $this->data['Image'], array('rdf:about' => $this->data['Image']['url']));
         } else if ($this->version == Feed::ATOM) {
             // ATOM feeds have a unique feed ID. Use the title channel element as key.
-            $out .= $this->makeNode('id', Feed::uuid($this->channels['title']['content'], 'urn:uuid:'));
+            $out .= $this->makeNode('id', Feed::uuid($this->channels['title'][0]['content'], 'urn:uuid:'));
         }
 
         return $out;
