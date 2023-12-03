@@ -83,7 +83,7 @@ class Item
     * @return   self
     * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
-    public function addElement($elementName, $content, array $attributes = null, $overwrite = FALSE, $allowMultiple = FALSE)
+    public function addElement($elementName, $content, array $attributes = [], $overwrite = FALSE, $allowMultiple = FALSE)
     {
         if (empty($elementName))
             throw new \InvalidArgumentException('The element name may not be empty or NULL.');
@@ -308,7 +308,7 @@ class Item
         if (!is_string($type) || preg_match('/.+\/.+/', $type) != 1)
             throw new \InvalidArgumentException('type parameter must be a string and a MIME type.');
 
-        $attributes = array('length' => $length, 'type' => $type);
+        $attributes = array('length' => (string) $length, 'type' => $type);
 
         if ($this->version == Feed::RSS2) {
             $attributes['url'] = $url;
@@ -405,7 +405,7 @@ class Item
             if (!$found)
                 throw new \InvalidArgumentException("The ID must begin with an IANA-registered URI scheme.");
 
-            $this->addElement('id', $id, NULL, TRUE);
+            $this->addElement('id', $id, [], TRUE);
         } else
             throw new InvalidOperationException('A unique ID is not supported in RSS1 feeds.');
 

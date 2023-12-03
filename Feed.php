@@ -198,7 +198,7 @@ abstract class Feed
     * @return   self
     * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
-    public function setChannelElement($elementName, $content, array $attributes = null, $multiple = false)
+    public function setChannelElement($elementName, $content, array $attributes = [], $multiple = false)
     {
         if (empty($elementName))
             throw new \InvalidArgumentException('The element name may not be empty or NULL.');
@@ -670,7 +670,7 @@ abstract class Feed
     */
     public static function uuid($key = null, $prefix = '')
     {
-        $key = ($key == null) ? uniqid(rand()) : $key;
+        $key = ($key == null) ? uniqid((string) rand()) : $key;
         $chars = md5($key);
         $uuid  = substr($chars,0,8) . '-';
         $uuid .= substr($chars,8,4) . '-';
@@ -977,7 +977,7 @@ abstract class Feed
     * @return   string        The starting XML tag of an feed item.
     * @throws   InvalidOperationException if this object misses the data for the about attribute.
     */
-    private function startItem($about = false)
+    private function startItem($about = '')
     {
         $out = '';
 
