@@ -8,9 +8,7 @@ Once a feed is fully composed with its items, the feed class can generate the ne
 
 ## Requirements
 
-- PHP 5.3 or higher
-
-If you don't have **PHP 5.3** available on your system there is a version supporting **PHP 5.0** and above. See the `legacy-php-5.0` branch.
+- PHP 7.4 or higher
 
 ## Installation  
 You can install via [Composer](https://getcomposer.org/).  
