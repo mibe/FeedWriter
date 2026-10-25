@@ -32,6 +32,20 @@ use \DateTimeInterface;
  * @package     UniversalFeedWriter
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
+ *
+ * PHPStan does not support recursive type aliases
+ * https://github.com/phpstan/phpstan/issues/4637
+ * so we are manually approximating the fixed point
+ * to a depth that should be sufficient in practice.
+ * Feel free to add more layers if you need them.
+ * @_phpstan-recursive-type TagContent string|array<TagContent>|array<string, TagContent>
+ * @phpstan-type TagContentFix0 string
+ * @phpstan-type TagContentFix1 string|array<TagContentFix0>|array<string, TagContentFix0>
+ * @phpstan-type TagContentFix2 string|array<TagContentFix1>|array<string, TagContentFix1>
+ * @phpstan-type TagContentFix3 string|array<TagContentFix2>|array<string, TagContentFix2>
+ * @phpstan-type TagContentFix TagContentFix3
+ *
+ * @phpstan-type Element array{content: TagContentFix, attributes: array<string, string>}
  */
 abstract class Feed
 {
@@ -47,11 +61,15 @@ abstract class Feed
 
     /**
     * Collection of all channel elements
+    *
+    * @var array<string, array<Element>>
     */
     private $channels      = array();
 
     /**
     * Collection of items as object of \FeedWriter\Item class.
+    *
+    * @var Item[]
     */
     private $items         = array();
 
@@ -59,21 +77,29 @@ abstract class Feed
     * Collection of other version wise data.
     *
     * Currently used to store the 'rdf:about' attribute and image element of the channel (both RSS1 only).
+    *
+    * @var array{Image?: string|array{title: string, link: string, url: string}, ChannelAbout?: string}
     */
     private $data          = array();
 
     /**
     * The tag names which have to encoded as CDATA
+    *
+    * @var string[]
     */
     private $CDATAEncoding = array();
 
     /**
     * Collection of XML namespaces
+    *
+    * @var array<string, string>
     */
     private $namespaces    = array();
 
     /**
     * Contains the format of this feed.
+    *
+    * @var Feed::RSS1|Feed::RSS2|Feed::ATOM
     */
     private $version       = null;
 
@@ -89,7 +115,7 @@ abstract class Feed
      *
      * If no version is given, a feed in RSS 2.0 format will be generated.
      *
-     * @param string $version the version constant (RSS1/RSS2/ATOM).
+     * @param Feed::RSS1|Feed::RSS2|Feed::ATOM $version the version constant (RSS1/RSS2/ATOM).
      */
     protected function __construct($version = Feed::RSS2)
     {
@@ -118,10 +144,10 @@ abstract class Feed
     *
     * See RFC 5005, chapter 3. At least one page URL must be specified.
     *
-    * @param   string $nextURL The URL to the next page of this feed. Optional.
-    * @param   string $previousURL The URL to the previous page of this feed. Optional.
-    * @param   string $firstURL The URL to the first page of this feed. Optional.
-    * @param   string $lastURL The URL to the last page of this feed. Optional.
+    * @param   ?string $nextURL The URL to the next page of this feed. Optional.
+    * @param   ?string $previousURL The URL to the previous page of this feed. Optional.
+    * @param   ?string $firstURL The URL to the first page of this feed. Optional.
+    * @param   ?string $lastURL The URL to the last page of this feed. Optional.
     * @link    http://tools.ietf.org/html/rfc5005#section-3
     * @return  self
     * @throws  \LogicException if none of the parameters are set.
@@ -192,13 +218,13 @@ abstract class Feed
     *
     * @access   public
     * @param    string $elementName name of the channel tag
-    * @param    string $content content of the channel tag
-    * @param    array   array of element attributes with attribute name as array key
-    * @param    bool    TRUE if this element can appear multiple times
+    * @param    TagContentFix $content content of the channel tag
+    * @param    array<string, string> $attributes array of element attributes with attribute name as array key
+    * @param    bool $multiple TRUE if this element can appear multiple times
     * @return   self
     * @throws   \InvalidArgumentException if the element name is not a string, empty or NULL.
     */
-    public function setChannelElement($elementName, $content, array $attributes = null, $multiple = false)
+    public function setChannelElement($elementName, $content, array $attributes = [], $multiple = false)
     {
         if (empty($elementName))
             throw new \InvalidArgumentException('The element name may not be empty or NULL.');
@@ -211,7 +237,7 @@ abstract class Feed
         if ($multiple === TRUE)
             $this->channels[$elementName][] = $entity;
         else
-            $this->channels[$elementName] = $entity;
+            $this->channels[$elementName] = [$entity];
 
         return $this;
     }
@@ -221,7 +247,7 @@ abstract class Feed
     * should be 'channelName' => 'channelContent' format.
     *
     * @access   public
-    * @param    array   array of channels
+    * @param    array<string, TagContentFix> $elementArray array of channels
     * @return   self
     */
     public function setChannelElementsFromArray(array $elementArray)
@@ -262,7 +288,7 @@ abstract class Feed
     * if you need to pass a string around, use generateFeed() instead.
     *
     * @access   public
-    * @param    bool    FALSE if the specific feed media type should be sent.
+    * @param    bool $useGenericContentType FALSE if the specific feed media type should be sent.
     * @return   void
     * @throws   \InvalidArgumentException if the useGenericContentType parameter is not boolean.
     */
@@ -318,7 +344,7 @@ abstract class Feed
      * Add one or more tags to the list of CDATA encoded tags
      *
      * @access  public
-     * @param   array  $tags An array of tag names that are merged into the list of tags which should be encoded as CDATA
+     * @param   array<string> $tags An array of tag names that are merged into the list of tags which should be encoded as CDATA
      * @return  self
      */
     public function addCDATAEncoding(array $tags)
@@ -332,7 +358,7 @@ abstract class Feed
      * Get list of CDATA encoded properties
      *
      * @access  public
-     * @return  array   Return an array of CDATA properties that are to be encoded as CDATA
+     * @return  array<string> Return an array of CDATA properties that are to be encoded as CDATA
      */
     public function getCDATAEncoding()
     {
@@ -343,7 +369,7 @@ abstract class Feed
      * Remove tags from the list of CDATA encoded tags
      *
      * @access  public
-     * @param   array  $tags An array of tag names that should be removed.
+     * @param   array<string> $tags An array of tag names that should be removed.
      * @return  void
      */
     public function removeCDATAEncoding(array $tags)
@@ -421,7 +447,7 @@ abstract class Feed
     * Not supported in RSS1 feeds.
     *
     * @access   public
-    * @param    DateTimeInterface|int|string  Date which should be used.
+    * @param    DateTimeInterface|int|string $date  Date which should be used.
     * @return   self
     * @throws   \InvalidArgumentException if the given date is not an implementation of DateTimeInterface, a UNIX timestamp or a date string.
     * @throws   InvalidOperationException if this method is called on an RSS1 feed.
@@ -434,7 +460,7 @@ abstract class Feed
         // The feeds have different date formats.
         $format = $this->version == Feed::ATOM ? \DATE_ATOM : \DATE_RSS;
 
-        if ($date instanceof DateTimeInterface || $date instanceof DateTime)
+        if ($date instanceof DateTime || $date instanceof DateTimeInterface)
             $date = $date->format($format);
         else if(is_numeric($date) && $date >= 0)
             $date = date($format, $date);
@@ -506,12 +532,12 @@ abstract class Feed
     * type and hreflang values.
     *
     * @access   public
-    * @param    string $href     URI of this link
-    * @param    string $rel      relation type of the resource
-    * @param    string $type     MIME type of the target resource
-    * @param    string $hreflang language of the resource
-    * @param    string $title    human-readable information about the resource
-    * @param    int    $length   length of the resource in bytes
+    * @param    ?string $href     URI of this link
+    * @param    ?string $rel      relation type of the resource
+    * @param    ?string $type     MIME type of the target resource
+    * @param    ?string $hreflang language of the resource
+    * @param    ?string $title    human-readable information about the resource
+    * @param    ?int    $length   length of the resource in bytes
     * @link     https://www.iana.org/assignments/link-relations/link-relations.xml
     * @link     https://tools.ietf.org/html/rfc4287#section-4.2.7
     * @return   self
@@ -595,8 +621,8 @@ abstract class Feed
     *
     * @access   public
     * @param    string $url URL of the image
-    * @param    string $title Title of the image. RSS only.
-    * @param    string $link Link target URL of the image. RSS only.
+    * @param    ?string $title Title of the image. RSS only.
+    * @param    ?string $link Link target URL of the image. RSS only.
     * @return   self
     * @throws   \InvalidArgumentException if the url is invalid.
     * @throws   \InvalidArgumentException if the title and link parameter are not a string or empty.
@@ -664,13 +690,13 @@ abstract class Feed
     *
     * @author   Anis uddin Ahmad <admin@ajaxray.com>
     * @access   public
-    * @param    string $key    optional key on which the UUID is generated
+    * @param    ?string $key    optional key on which the UUID is generated
     * @param    string $prefix an optional prefix
     * @return   string         the formatted UUID
     */
     public static function uuid($key = null, $prefix = '')
     {
-        $key = ($key == null) ? uniqid(rand()) : $key;
+        $key = ($key == null) ? uniqid((string) rand()) : $key;
         $chars = md5($key);
         $uuid  = substr($chars,0,8) . '-';
         $uuid .= substr($chars,8,4) . '-';
@@ -719,7 +745,7 @@ abstract class Feed
     * because they are hardcoded, e.g. rdf.
     *
     * @access   private
-    * @return   array   Array with namespace prefix as value.
+    * @return   array<string> Array with namespace prefix as value.
     */
     private function getNamespacePrefixes()
     {
@@ -816,6 +842,9 @@ abstract class Feed
         } elseif ($this->version == Feed::ATOM) {
             return '</feed>';
         }
+
+        // For PHPStan.
+        throw new \Exception('Unreachable version ' . $this->version);
     }
 
     /**
@@ -823,13 +852,13 @@ abstract class Feed
     *
     * @access   private
     * @param    string $tagName    name of the tag
-    * @param    mixed  $tagContent tag value as string or array of nested tags in 'tagName' => 'tagValue' format
-    * @param    array  $attributes Attributes (if any) in 'attrName' => 'attrValue' format
+    * @param    TagContentFix $tagContent tag value as string or array of nested tags in 'tagName' => 'tagValue' format
+    * @param    ?array<string, string> $attributes Attributes (if any) in 'attrName' => 'attrValue' format
     * @param    bool $omitEndTag True if the end tag should be omitted. Defaults to false.
     * @return   string  formatted xml tag
     * @throws   \InvalidArgumentException if the tagContent is not an array and not a string.
     */
-    private function makeNode($tagName, $tagContent, array $attributes = null, $omitEndTag = false)
+    private function makeNode($tagName, $tagContent, $attributes = null, $omitEndTag = false)
     {
         $nodeText = '';
         $attrText = '';
@@ -890,7 +919,7 @@ abstract class Feed
                 $out .= '<channel>' . PHP_EOL;
                 break;
             case Feed::RSS1:
-                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link']['content']}\">";
+                $out .= (isset($this->data['ChannelAbout']))? "<channel rdf:about=\"{$this->data['ChannelAbout']}\">" : "<channel rdf:about=\"{$this->channels['link'][0]['content']}\">";
                 break;
         }
 
@@ -902,14 +931,9 @@ abstract class Feed
                 $key = substr($key, 5);
             }
 
-            // The channel element can occur multiple times, when the key 'content' is not in the array.
-            if (!array_key_exists('content', $value)) {
-                // If this is the case, iterate through the array with the multiple elements.
-                foreach ($value as $singleElement) {
-                    $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
-                }
-            } else {
-                $out .= $this->makeNode($key, $value['content'], $value['attributes']);
+            // The channel element can occur multiple times.
+            foreach ($value as $singleElement) {
+                $out .= $this->makeNode($key, $singleElement['content'], $singleElement['attributes']);
             }
         }
 
@@ -927,7 +951,7 @@ abstract class Feed
                 $out .= $this->makeNode('image', $this->data['Image'], array('rdf:about' => $this->data['Image']['url']));
         } else if ($this->version == Feed::ATOM) {
             // ATOM feeds have a unique feed ID. Use the title channel element as key.
-            $out .= $this->makeNode('id', Feed::uuid($this->channels['title']['content'], 'urn:uuid:'));
+            $out .= $this->makeNode('id', Feed::uuid($this->channels['title'][0]['content'], 'urn:uuid:'));
         }
 
         return $out;
@@ -977,7 +1001,7 @@ abstract class Feed
     * @return   string        The starting XML tag of an feed item.
     * @throws   InvalidOperationException if this object misses the data for the about attribute.
     */
-    private function startItem($about = false)
+    private function startItem($about = '')
     {
         $out = '';
 
@@ -1009,6 +1033,9 @@ abstract class Feed
         } elseif ($this->version == Feed::ATOM) {
             return '</entry>' . PHP_EOL;
         }
+
+        // For PHPStan.
+        throw new \Exception('Unreachable version ' . $this->version);
     }
 
     /**

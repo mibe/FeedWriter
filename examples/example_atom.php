@@ -2,10 +2,10 @@
 
 // You should use an autoloader instead of including the files directly.
 // This is done here only to make the examples work out of the box.
-require_once __DIR__ . '/../Item.php';
-require_once __DIR__ . '/../Feed.php';
-require_once __DIR__ . '/../ATOM.php';
-require_once __DIR__ . '/../InvalidOperationException.php';
+require_once __DIR__ . '/../src/Item.php';
+require_once __DIR__ . '/../src/Feed.php';
+require_once __DIR__ . '/../src/ATOM.php';
+require_once __DIR__ . '/../src/InvalidOperationException.php';
 
 date_default_timezone_set('UTC');
 
