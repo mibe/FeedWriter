@@ -1,35 +1,19 @@
 <?php
 
+// SPDX-FileCopyrightText: 2008 Anis uddin Ahmad <anisniit@gmail.com>
+// SPDX-FileCopyrightText: 2013 Michael Bemmerl <mail@mx-server.de>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 // You should use an autoloader instead of including the files directly.
 // This is done here only to make the examples work out of the box.
-require_once __DIR__ . '/../Item.php';
-require_once __DIR__ . '/../Feed.php';
-require_once __DIR__ . '/../RSS2.php';
-require_once __DIR__ . '/../InvalidOperationException.php';
+require_once __DIR__ . '/../src/Item.php';
+require_once __DIR__ . '/../src/Feed.php';
+require_once __DIR__ . '/../src/RSS2.php';
+require_once __DIR__ . '/../src/InvalidOperationException.php';
 
 date_default_timezone_set('UTC');
 
-use \FeedWriter\RSS2;
-
-/**
- * Copyright (C) 2008 Anis uddin Ahmad <anisniit@gmail.com>
- * Copyright (C) 2013 Michael Bemmerl <mail@mx-server.de>
- *
- * This file is part of the "Universal Feed Writer" project.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+use FeedWriter\RSS2;
 
 // Creating an instance of RSS2 class.
 $TestFeed = new RSS2();
@@ -59,7 +43,7 @@ $TestFeed->setChannelElement('pubDate', date(\DATE_RSS, strtotime('2013-04-06'))
 //      <day>Sunday</day>
 // </skipDays>
 // Thanks to - Peter Fargaš <peter.fargas.work@googlemail.com>
-$TestFeed->setChannelElement('skipDays', array('day'=>['Saturday','Sunday']));
+$TestFeed->setChannelElement('skipDays', ['day' => ['Saturday', 'Sunday']]);
 
 // You can add additional link elements, e.g. to a PubSubHubbub server with custom relations.
 // It's recommended to provide a backlink to the feed URL.
@@ -109,7 +93,7 @@ $newItem->setId('http://example.com/URL/to/article', true);
 // Use the addElement() method for other optional elements.
 // This here will add the 'source' element. The second parameter is the value of the element
 // and the third is an array containing the element attributes.
-$newItem->addElement('source', 'Mike\'s page', array('url' => 'http://www.example.com'));
+$newItem->addElement('source', 'Mike\'s page', ['url' => 'http://www.example.com']);
 
 // Now add the feed item to the main feed.
 $TestFeed->addItem($newItem);
@@ -117,7 +101,7 @@ $TestFeed->addItem($newItem);
 // Another method to add feed items is by using an array which contains key-value pairs
 // of every item element. Elements which have attributes cannot be added by this way.
 $newItem = $TestFeed->createNewItem();
-$newItem->addElementArray(array('title'=> 'The 2nd item', 'link' => 'http://www.google.com', 'description' => 'Just another test.'));
+$newItem->addElementArray(['title' => 'The 2nd item', 'link' => 'http://www.google.com', 'description' => 'Just another test.']);
 $TestFeed->addItem($newItem);
 
 // OK. Everything is done. Now generate the feed.
